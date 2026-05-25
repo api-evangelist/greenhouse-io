@@ -1,0 +1,136 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "greenhouse": "https://harvest.greenhouse.io/v1/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "hydra": "http://www.w3.org/ns/hydra/core#",
+
+    "Candidate": {
+      "@id": "greenhouse:Candidate",
+      "@context": {
+        "id":           { "@id": "greenhouse:Candidate/id", "@type": "xsd:integer" },
+        "first_name":   { "@id": "schema:givenName", "@type": "xsd:string" },
+        "last_name":    { "@id": "schema:familyName", "@type": "xsd:string" },
+        "company":      { "@id": "schema:worksFor", "@type": "xsd:string" },
+        "title":        { "@id": "schema:jobTitle", "@type": "xsd:string" },
+        "created_at":   { "@id": "schema:dateCreated", "@type": "xsd:dateTime" },
+        "updated_at":   { "@id": "schema:dateModified", "@type": "xsd:dateTime" },
+        "emails":       { "@id": "schema:email", "@container": "@list" },
+        "phone_numbers":{ "@id": "schema:telephone", "@container": "@list" },
+        "addresses":    { "@id": "schema:address", "@container": "@list" },
+        "applications": { "@id": "greenhouse:Candidate/applications", "@container": "@list" },
+        "tags":         { "@id": "greenhouse:Candidate/tags", "@container": "@list" }
+      }
+    },
+
+    "Application": {
+      "@id": "greenhouse:Application",
+      "@context": {
+        "id":              { "@id": "greenhouse:Application/id", "@type": "xsd:integer" },
+        "candidate_id":    { "@id": "greenhouse:Application/candidateId", "@type": "xsd:integer" },
+        "applied_at":      { "@id": "schema:dateCreated", "@type": "xsd:dateTime" },
+        "status":          { "@id": "schema:applicationStatus", "@type": "xsd:string" },
+        "current_stage":   { "@id": "greenhouse:Application/currentStage" },
+        "jobs":            { "@id": "greenhouse:Application/jobs", "@container": "@list" },
+        "rejection_reason":{ "@id": "greenhouse:Application/rejectionReason" }
+      }
+    },
+
+    "Job": {
+      "@id": "schema:JobPosting",
+      "@context": {
+        "id":             { "@id": "greenhouse:Job/id", "@type": "xsd:integer" },
+        "name":           { "@id": "schema:title", "@type": "xsd:string" },
+        "requisition_id": { "@id": "greenhouse:Job/requisitionId", "@type": "xsd:string" },
+        "departments":    { "@id": "schema:department", "@container": "@list" },
+        "offices":        { "@id": "schema:jobLocation", "@container": "@list" },
+        "status":         { "@id": "schema:employmentStatus", "@type": "xsd:string" },
+        "opened_at":      { "@id": "schema:datePosted", "@type": "xsd:dateTime" },
+        "closed_at":      { "@id": "greenhouse:Job/closedAt", "@type": "xsd:dateTime" }
+      }
+    },
+
+    "Opening": {
+      "@id": "greenhouse:Opening",
+      "@context": {
+        "id":            { "@id": "greenhouse:Opening/id", "@type": "xsd:integer" },
+        "opening_id":    { "@id": "greenhouse:Opening/openingId", "@type": "xsd:string" },
+        "status":        { "@id": "schema:itemCondition", "@type": "xsd:string" },
+        "opened_at":     { "@id": "schema:datePosted", "@type": "xsd:dateTime" },
+        "closed_at":     { "@id": "greenhouse:Opening/closedAt", "@type": "xsd:dateTime" }
+      }
+    },
+
+    "Department": {
+      "@id": "schema:Organization",
+      "@context": {
+        "id":   { "@id": "greenhouse:Department/id", "@type": "xsd:integer" },
+        "name": { "@id": "schema:name", "@type": "xsd:string" }
+      }
+    },
+
+    "Office": {
+      "@id": "schema:Place",
+      "@context": {
+        "id":   { "@id": "greenhouse:Office/id", "@type": "xsd:integer" },
+        "name": { "@id": "schema:name", "@type": "xsd:string" },
+        "location": { "@id": "schema:address" }
+      }
+    },
+
+    "User": {
+      "@id": "schema:Person",
+      "@context": {
+        "id":         { "@id": "greenhouse:User/id", "@type": "xsd:integer" },
+        "first_name": { "@id": "schema:givenName", "@type": "xsd:string" },
+        "last_name":  { "@id": "schema:familyName", "@type": "xsd:string" },
+        "primary_email_address": { "@id": "schema:email", "@type": "xsd:string" }
+      }
+    },
+
+    "Offer": {
+      "@id": "greenhouse:Offer",
+      "@context": {
+        "id":             { "@id": "greenhouse:Offer/id", "@type": "xsd:integer" },
+        "application_id": { "@id": "greenhouse:Offer/applicationId", "@type": "xsd:integer" },
+        "status":         { "@id": "schema:offerStatus", "@type": "xsd:string" },
+        "starts_at":      { "@id": "schema:validFrom", "@type": "xsd:date" }
+      }
+    },
+
+    "ScheduledInterview": {
+      "@id": "greenhouse:ScheduledInterview",
+      "@context": {
+        "id":          { "@id": "greenhouse:ScheduledInterview/id", "@type": "xsd:integer" },
+        "starts_at":   { "@id": "schema:startDate", "@type": "xsd:dateTime" },
+        "ends_at":     { "@id": "schema:endDate", "@type": "xsd:dateTime" },
+        "location":    { "@id": "schema:location" },
+        "status":      { "@id": "schema:eventStatus", "@type": "xsd:string" }
+      }
+    },
+
+    "Scorecard": {
+      "@id": "greenhouse:Scorecard",
+      "@context": {
+        "id":            { "@id": "greenhouse:Scorecard/id", "@type": "xsd:integer" },
+        "interviewer":   { "@id": "greenhouse:Scorecard/interviewer" },
+        "overall_recommendation": { "@id": "greenhouse:Scorecard/overallRecommendation", "@type": "xsd:string" },
+        "submitted_at":  { "@id": "schema:dateCreated", "@type": "xsd:dateTime" }
+      }
+    },
+
+    "AuditEvent": {
+      "@id": "greenhouse:AuditEvent",
+      "@context": {
+        "id":          { "@id": "greenhouse:AuditEvent/id", "@type": "xsd:string" },
+        "event_type":  { "@id": "schema:eventName", "@type": "xsd:string" },
+        "occurred_at": { "@id": "schema:dateCreated", "@type": "xsd:dateTime" },
+        "performer":   { "@id": "schema:agent" },
+        "event_target":{ "@id": "schema:object" }
+      }
+    }
+  }
+}

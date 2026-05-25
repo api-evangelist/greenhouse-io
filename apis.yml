@@ -1,0 +1,386 @@
+aid: greenhouse-io
+url: https://raw.githubusercontent.com/api-evangelist/greenhouse-io/refs/heads/main/apis.yml
+apis:
+- aid: greenhouse-io:greenhouse-harvest-api
+  name: Greenhouse Harvest API
+  tags:
+  - ATS
+  - Recruiting
+  - Candidates
+  - Jobs
+  - Interviews
+  - Offers
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  properties:
+  - url: https://developers.greenhouse.io/harvest.html
+    type: Documentation
+  - url: openapi/greenhouse-harvest-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/greenhouse-candidate-schema.json
+    type: JSONSchema
+  - url: json-schema/greenhouse-job-schema.json
+    type: JSONSchema
+  - url: json-ld/greenhouse-io-context.jsonld
+    type: JSONLD
+  - type: NaftikoCapability
+    url: capabilities/harvest-candidates.yaml
+  - type: NaftikoCapability
+    url: capabilities/harvest-applications.yaml
+  - type: NaftikoCapability
+    url: capabilities/harvest-jobs.yaml
+  - type: NaftikoCapability
+    url: capabilities/harvest-interviews-scorecards.yaml
+  - type: NaftikoCapability
+    url: capabilities/harvest-offers-approvals.yaml
+  - type: NaftikoCapability
+    url: capabilities/harvest-organization.yaml
+  - type: Authentication
+    name: HTTP Basic with API key as username
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    name: RFC-5988 Link headers (next, prev, last); per_page default 100, max 500
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  description: |
+    The Harvest API is Greenhouse's primary REST API and source of truth for recruiting data:
+    candidates, applications, jobs, openings, job posts, job stages, departments, offices,
+    users, offers, approval flows, scheduled interviews, scorecards, sources, tags, custom
+    fields, prospect pools, rejection reasons, and the per-candidate activity feed.
+    HTTP Basic with a granular per-permission API key; RFC-5988 Link pagination; rate limits
+    returned in X-RateLimit-Limit per 10s.
+
+- aid: greenhouse-io:greenhouse-job-board-api
+  name: Greenhouse Job Board API
+  tags:
+  - JobBoard
+  - Careers
+  - Public
+  - Applications
+  humanURL: https://developers.greenhouse.io/job-board.html
+  baseURL: https://boards-api.greenhouse.io/v1/boards/{board_token}
+  properties:
+  - url: https://developers.greenhouse.io/job-board.html
+    type: Documentation
+  - url: openapi/greenhouse-job-board-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/job-board-public.yaml
+  - type: Authentication
+    name: Public GET (no auth) + Basic auth for application POST
+    url: https://developers.greenhouse.io/job-board.html
+  description: |
+    The Job Board API exposes a customer's public career site data — jobs, departments,
+    offices — and accepts application submissions via POST /jobs/{id}. GET endpoints are
+    unauthenticated; POST endpoints accept multipart/form-data or JSON. Used to power
+    customer-owned career pages and third-party job-board syndication.
+
+- aid: greenhouse-io:greenhouse-audit-log-api
+  name: Greenhouse Audit Log API
+  tags:
+  - AuditLog
+  - Compliance
+  - Security
+  - Governance
+  - Enterprise
+  humanURL: https://developers.greenhouse.io/audit-log.html
+  baseURL: https://auditlog.us.greenhouse.io
+  properties:
+  - url: https://developers.greenhouse.io/audit-log.html
+    type: Documentation
+  - url: openapi/greenhouse-audit-log-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/audit-log-events.yaml
+  - type: Authentication
+    name: JWT bearer token obtained from POST /auth/jwt_access_token on harvest.greenhouse.io
+  - type: RateLimits
+    name: 50 req / 10s standard; 3 req / 30s for paginated reads
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    name: 30 days
+  description: |
+    The Audit Log API exposes important administrative events from the prior 30 days for
+    governance, compliance, and incident response. JWT bearer authentication (24h validity)
+    issued from the Harvest /auth/jwt_access_token endpoint. Pro-tier offering.
+
+- aid: greenhouse-io:greenhouse-candidate-ingestion-api
+  name: Greenhouse Candidate Ingestion (Partner) API
+  tags:
+  - Partner
+  - Ingestion
+  - Sourcing
+  - Candidates
+  - Prospects
+  humanURL: https://developers.greenhouse.io/candidate-ingestion.html
+  baseURL: https://api.greenhouse.io/v1/partner
+  properties:
+  - url: https://developers.greenhouse.io/candidate-ingestion.html
+    type: Documentation
+  - url: openapi/greenhouse-candidate-ingestion-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/partner-ingestion.yaml
+  - type: Authentication
+    name: OAuth 2.0 (Authorization Code or Client Credentials) or HTTP Basic with On-Behalf-Of header
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  description: |
+    The Candidate Ingestion (Partner) API lets sourcing partners create candidates and
+    prospects in a customer's Greenhouse account, list jobs visible to the integrated user,
+    read prospect pools, retrieve the current user, and generate branded tracking links.
+    Used by sourcing platforms, agencies, and recruitment marketing tools.
+
+- aid: greenhouse-io:greenhouse-onboarding-api
+  name: Greenhouse Onboarding API
+  tags:
+  - Onboarding
+  - HRIS
+  - GraphQL
+  - Employees
+  humanURL: https://developers.greenhouse.io/gho.html
+  baseURL: https://onboarding-api.greenhouse.io/graphql
+  properties:
+  - url: https://developers.greenhouse.io/gho.html
+    type: Documentation
+  - url: openapi/greenhouse-onboarding-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/onboarding-graphql.yaml
+  - type: Authentication
+    name: HTTP Basic with Access Key (username) and Secret Key (password); Super Admin issued
+  - type: RateLimits
+    name: 100 requests per window + 2500-point query-complexity ceiling; rateLimit GraphQL field exposes remaining budget
+    url: https://developers.greenhouse.io/gho.html
+  description: |
+    The Greenhouse Onboarding (GHO) API is a single GraphQL endpoint covering employees,
+    departments, locations, teams, custom fields, and mutations such as addPendingHire and
+    updateEmployeeProfile. Available on the Plus and Pro tiers; requires Super Admin to
+    generate or revoke keys.
+
+- aid: greenhouse-io:greenhouse-assessment-api
+  name: Greenhouse Assessment Partner API
+  tags:
+  - Assessment
+  - Partner
+  - PreHire
+  - Integrations
+  humanURL: https://developers.greenhouse.io/assessment.html
+  properties:
+  - url: https://developers.greenhouse.io/assessment.html
+    type: Documentation
+  - url: openapi/greenhouse-assessment-api-openapi.yml
+    type: OpenAPI
+  - type: Authentication
+    name: HTTP Basic over HTTPS; partner-hosted endpoints; API keys must be <171 chars
+  description: |
+    The Assessment Partner API defines the four endpoints — list_tests, send_test,
+    test_status, response_error — that assessment vendors implement so Greenhouse can
+    dispatch a test to a candidate and retrieve completion details. Partner-hosted rather
+    than Greenhouse-hosted; results retrieved via PATCH callback or hourly polling for
+    up to 8 weeks.
+
+- aid: greenhouse-io:greenhouse-recruiting-webhooks
+  name: Greenhouse Recruiting Webhooks
+  tags:
+  - Webhooks
+  - Events
+  - Recruiting
+  humanURL: https://developers.greenhouse.io/webhooks.html
+  properties:
+  - url: https://developers.greenhouse.io/webhooks.html
+    type: Documentation
+  - type: Authentication
+    name: HMAC SHA-256 signature header verified against the secret key and JSON body (Unicode-escaped)
+  - type: Retry
+    name: Up to 7 retries over ~15h with exponential backoff
+  - type: Events
+    data:
+    - candidate_hired
+    - candidate_rejected
+    - candidate_unrejected
+    - candidate_stage_change
+    - candidate_merged
+    - candidate_anonymized
+    - application_created
+    - application_deleted
+    - application_updated
+    - prospect_created
+    - prospect_updated
+    - prospect_rejected
+    - offer_created
+    - offer_updated
+    - interview_deleted
+    - scorecard_deleted
+    - job_created
+    - job_updated
+    - job_approved
+    - job_post_created
+    - department_deleted
+    - office_deleted
+  description: |
+    Event-driven webhooks from Greenhouse Recruiting. Greenhouse POSTs JSON to your HTTPS
+    endpoint on each event; payloads carry a Greenhouse-Event-ID header for idempotency and
+    HMAC SHA-256 signature verification.
+
+- aid: greenhouse-io:greenhouse-onboarding-webhooks
+  name: Greenhouse Onboarding Webhooks
+  tags:
+  - Webhooks
+  - Events
+  - Onboarding
+  - Beta
+  humanURL: https://developers.greenhouse.io/onboarding_webhooks.html
+  properties:
+  - url: https://developers.greenhouse.io/onboarding_webhooks.html
+    type: Documentation
+  - type: Authentication
+    name: HMAC SHA-256 signature header
+  - type: Retry
+    name: Up to 7 retries over ~15h with exponential backoff
+  - type: Events
+    data:
+    - employee_updated
+  description: |
+    Event-driven webhooks from Greenhouse Onboarding (currently in beta and gated by
+    customer approval). Each event posts event_type, id, and payload to the customer's
+    HTTPS endpoint; signatures use HMAC SHA-256 with a shared secret.
+
+name: Greenhouse
+tags:
+- ATS
+- Recruiting
+- Hiring
+- Talent Acquisition
+- Enterprise SaaS
+- Human Resources
+- Onboarding
+kind: contract
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+access: 3rd-Party
+common:
+- url: https://www.greenhouse.com
+  type: Portal
+- url: https://developers.greenhouse.io
+  type: Documentation
+- url: https://developers.greenhouse.io/harvest.html
+  type: Documentation
+  name: Harvest API
+- url: https://developers.greenhouse.io/job-board.html
+  type: Documentation
+  name: Job Board API
+- url: https://developers.greenhouse.io/webhooks.html
+  type: Documentation
+  name: Recruiting Webhooks
+- url: https://developers.greenhouse.io/onboarding_webhooks.html
+  type: Documentation
+  name: Onboarding Webhooks
+- url: https://developers.greenhouse.io/gho.html
+  type: Documentation
+  name: Onboarding API
+- url: https://developers.greenhouse.io/candidate-ingestion.html
+  type: Documentation
+  name: Candidate Ingestion API
+- url: https://developers.greenhouse.io/assessment.html
+  type: Documentation
+  name: Assessment API
+- url: https://developers.greenhouse.io/audit-log.html
+  type: Documentation
+  name: Audit Log API
+- url: https://www.greenhouse.com/pricing
+  type: Plans
+  name: Pricing
+- url: plans/greenhouse-io-plans-pricing.yml
+  type: Plans
+- url: rate-limits/greenhouse-io-rate-limits.yml
+  type: RateLimits
+- url: finops/greenhouse-io-finops.yml
+  type: FinOps
+- url: https://status.greenhouse.io
+  type: StatusPage
+- url: https://www.greenhouse.com/legal/privacy
+  type: PrivacyPolicy
+- url: https://www.greenhouse.com/legal/terms
+  type: TermsOfService
+- url: https://trust.greenhouse.com
+  type: TrustCenter
+- url: https://support.greenhouse.io
+  type: Support
+- url: https://www.greenhouse.com/customers
+  type: Customers
+- url: https://www.greenhouse.com/blog
+  type: Blog
+- url: https://integrations.greenhouse.com
+  type: Integrations
+- url: https://www.greenhouse.com/jobs
+  type: Careers
+- url: https://www.linkedin.com/company/greenhouse-software
+  type: LinkedIn
+- url: https://x.com/Greenhouse
+  type: Twitter
+- url: https://github.com/grnhse
+  type: GitHubOrganization
+- url: https://github.com/grnhse/greenhouse-api-docs
+  type: GitHubRepository
+  name: greenhouse-api-docs (Slate)
+- url: https://github.com/grnhse/greenhouse_io
+  type: SDK
+  name: Ruby SDK (greenhouse_io)
+- url: https://github.com/grnhse/greenhouse-tools-php
+  type: SDK
+  name: PHP Job Board Tools
+- url: https://github.com/grnhse/omniauth-greenhouse
+  type: SDK
+  name: OmniAuth Strategy (Ruby)
+- type: Features
+  data:
+  - Structured hiring with interview kits, scorecards, and stage gates
+  - Sourcing and CRM with prospect pools, prospect owners, and prospect stages
+  - Greenhouse Sourcing Automation (Plus tier)
+  - Candidate texting (Plus tier)
+  - AI-powered job boards and AI candidate summaries
+  - Real Talent — fraud detection, identity verification, candidate matching
+  - Ezra AI Labs conversational AI (post-acquisition)
+  - MyGreenhouse candidate experience portal
+  - Hundreds of pre-built integrations across sourcing, assessment, background, video, HRIS, e-sign
+  - Granular per-endpoint API key permissions (Harvest API)
+  - On-Behalf-Of header pattern for partner-attributed actions
+  - Recruiting Webhooks with HMAC SHA-256 signature verification
+  - Onboarding Webhooks (beta)
+  - Audit Log API (Pro tier) with JWT bearer auth and 30-day retention
+  - Onboarding GraphQL API with query-complexity rate limiting
+  - Greenhouse Onboarding for new-hire workflows, employee profiles, departments, locations
+  - Job Board API for unauthenticated public read of careers data
+  - Developer sandbox and sync (Pro tier)
+  - SSO via SAML 2.0; SCIM-style user provisioning via Harvest /users
+  - Business Intelligence Connector (Plus tier)
+  - Custom fields across job, candidate, application, offer, opening, department, office, user, prospect
+  sources:
+  - https://www.greenhouse.com
+  - https://www.greenhouse.com/pricing
+  - https://developers.greenhouse.io
+  - https://integrations.greenhouse.com
+  - https://status.greenhouse.io
+  updated: '2026-05-25'
+created: '2026-05-25T00:00:00.000Z'
+modified: '2026-05-25'
+position: Producing
+description: |
+  Greenhouse Software is an enterprise applicant tracking system (ATS) and end-to-end
+  hiring platform spanning sourcing, structured interviewing, offer management, hiring
+  decisions, and new-hire onboarding. The company markets itself across early-stage,
+  scaling, and enterprise tiers (Core, Plus, Pro) and lists customers including DoorDash,
+  Betterment, MLB, Coupang, HelloFresh, Trivago, and the NFL. Greenhouse exposes a broad
+  developer surface — Harvest (REST), Job Board, Audit Log (Pro), Candidate Ingestion
+  (Partner), Onboarding (GraphQL), Assessment (partner-hosted), and Recruiting /
+  Onboarding Webhooks — that powers hundreds of pre-built integrations across sourcing,
+  assessment, background-check, video-interviewing, HRIS, payroll, SSO, and e-signature
+  vendors. The platform recently acquired Ezra AI Labs to integrate conversational AI
+  into the hiring workflow and continues to invest in fraud detection and identity
+  verification through its Real Talent feature set.
+maintainers:
+- FN: Kin Lane
+  email: info@apievangelist.com
+  X: apievangelist
+  url: https://apievangelist.com
+specificationVersion: '0.16'

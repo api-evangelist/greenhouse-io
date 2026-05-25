@@ -1,0 +1,151 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Greenhouse Harvest API — Applications
+  description: 'Greenhouse Harvest API — Applications. Manage candidate applications including stage advancement, transfers, hires, rejections, attachments, and prospect conversion.'
+  tags:
+  - Greenhouse
+  - Harvest
+  - Applications
+  - ATS
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    GREENHOUSE_HARVEST_API_KEY: GREENHOUSE_HARVEST_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: harvest-applications
+    baseUri: https://harvest.greenhouse.io/v1
+    description: Greenhouse Harvest applications surface.
+    resources:
+    - name: applications
+      path: /applications
+      operations:
+      - name: listapplications
+        method: GET
+        description: List Applications
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: applications-id
+      path: /applications/{id}
+      operations:
+      - name: getapplication
+        method: GET
+        description: Retrieve Application
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+      - name: updateapplication
+        method: PATCH
+        description: Update Application
+        inputParameters: [ { name: body, in: body, type: object, required: true } ]
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+      - name: deleteapplication
+        method: DELETE
+        description: Delete Application
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: applications-advance
+      path: /applications/{id}/advance
+      operations:
+      - name: advanceapplication
+        method: POST
+        description: Advance Application
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: applications-move
+      path: /applications/{id}/move
+      operations:
+      - name: moveapplication
+        method: POST
+        description: Move Application
+        inputParameters: [ { name: body, in: body, type: object, required: true } ]
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: applications-transfer
+      path: /applications/{id}/transfer_to_job
+      operations:
+      - name: transferapplication
+        method: POST
+        description: Transfer Application To Job
+        inputParameters: [ { name: body, in: body, type: object, required: true } ]
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: applications-hire
+      path: /applications/{id}/hire
+      operations:
+      - name: hireapplication
+        method: POST
+        description: Hire Application
+        inputParameters: [ { name: body, in: body, type: object, required: true } ]
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: applications-reject
+      path: /applications/{id}/reject
+      operations:
+      - name: rejectapplication
+        method: POST
+        description: Reject Application
+        inputParameters: [ { name: body, in: body, type: object, required: true } ]
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: applications-unreject
+      path: /applications/{id}/unreject
+      operations:
+      - name: unrejectapplication
+        method: POST
+        description: Unreject Application
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    authentication:
+      type: basic
+      username: '{{env.GREENHOUSE_HARVEST_API_KEY}}'
+      password: ''
+  exposes:
+  - type: mcp
+    namespace: harvest-applications-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Greenhouse Applications.
+    tools:
+    - name: greenhouse-list-applications
+      description: List Applications
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: harvest-applications.listapplications
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-get-application
+      description: Retrieve Application
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: harvest-applications.getapplication
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-advance-application
+      description: Advance Application Stage
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: harvest-applications.advanceapplication
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-move-application
+      description: Move Application To Stage
+      hints: { readOnly: false, destructive: false, idempotent: true }
+      call: harvest-applications.moveapplication
+      with: { body: tools.body }
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-transfer-application
+      description: Transfer Application To Job
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: harvest-applications.transferapplication
+      with: { body: tools.body }
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-hire-application
+      description: Hire Application
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: harvest-applications.hireapplication
+      with: { body: tools.body }
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-reject-application
+      description: Reject Application
+      hints: { readOnly: false, destructive: true, idempotent: false }
+      call: harvest-applications.rejectapplication
+      with: { body: tools.body }
+      outputParameters: [ { type: object, mapping: $. } ]

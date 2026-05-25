@@ -1,0 +1,98 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Greenhouse
+providerId: greenhouse-io
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: false
+tags:
+  - ATS
+  - Recruiting
+  - Enterprise SaaS
+description: |
+  Greenhouse Recruiting & Onboarding commercial plans. Pricing is custom-quoted ("contact sales") and not
+  publicly disclosed; the structure below captures the three published commercial tiers — Core, Plus,
+  and Pro — and the included feature surface for each. The Greenhouse APIs (Harvest, Job Board, Onboarding,
+  Ingestion, Assessment, Audit Log) are included with the platform; the developer sandbox and Audit Log API
+  are gated to the Pro tier.
+sources:
+  - https://www.greenhouse.com/pricing
+  - https://developers.greenhouse.io/
+plans:
+  - id: greenhouse-core
+    name: Core
+    type: subscription
+    description: Core ATS for organizations establishing a consistent hiring process and replacing manual hiring tools with automation.
+    entries:
+      - label: Custom-quoted contract
+        name: contract
+        type: contract
+        metric: contract
+        limit: -1
+        timeFrame: annual
+        geo: global
+        unit: 1
+        price: Call
+        userMultiplied: false
+    elements:
+      - name: Sourcing and CRM
+      - name: Structured interview kits and scorecards
+      - name: Scheduling
+      - name: Reporting
+      - name: Single Sign-On (SSO)
+      - name: Real Talent matching and fraud detection
+      - name: Harvest API access
+      - name: Job Board API access
+      - name: Recruiting Webhooks
+      - name: Hundreds of pre-built integrations
+  - id: greenhouse-plus
+    name: Plus
+    type: subscription
+    description: For companies adding teams, locations or brands and driving efficiency and consistency with automation.
+    entries:
+      - label: Custom-quoted contract
+        name: contract
+        type: contract
+        metric: contract
+        limit: -1
+        timeFrame: annual
+        geo: global
+        unit: 1
+        price: Call
+        userMultiplied: false
+    elements:
+      - name: Everything in Core
+      - name: AI-powered report filters
+      - name: Business Intelligence Connector
+      - name: Greenhouse Sourcing Automation
+      - name: Candidate texting
+      - name: Fraud and spam detection
+      - name: Greenhouse Onboarding (GHO) GraphQL API
+      - name: Onboarding Webhooks (beta)
+  - id: greenhouse-pro
+    name: Pro
+    type: subscription
+    description: For enterprise organizations operating across regions and business units requiring advanced governance, auditability, and data security.
+    entries:
+      - label: Custom-quoted contract
+        name: contract
+        type: contract
+        metric: contract
+        limit: -1
+        timeFrame: annual
+        geo: global
+        unit: 1
+        price: Call
+        userMultiplied: false
+    elements:
+      - name: Everything in Plus
+      - name: Unlimited CRM events
+      - name: Enterprise-level data configuration
+      - name: Audit Log API (us.greenhouse.io)
+      - name: Developer Sandbox and Sync
+      - name: Enterprise-level Real Talent features
+notes:
+  - Greenhouse does not publish per-user, per-hire, or per-employee pricing publicly.
+  - The Harvest API, Job Board API, Recruiting Webhooks, and Candidate Ingestion API are part of all tiers; access to the Audit Log API and the developer sandbox is gated to Pro.
+  - The Assessment Partner API is consumed by approved assessment vendors and is not directly customer-billable.

@@ -1,0 +1,118 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Greenhouse Hire Flow — Composed Workflow
+  description: |
+    Cross-API workflow capability composing Greenhouse Harvest, Job Board, and Onboarding
+    so a single Naftiko-governed call can orchestrate the candidate journey: ingest a
+    candidate via the Job Board, advance the application through Harvest, hire it, then
+    create a corresponding pending hire in Onboarding.
+  tags:
+  - Greenhouse
+  - Workflow
+  - Hire
+  - ATS
+  - Onboarding
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    GREENHOUSE_HARVEST_API_KEY: GREENHOUSE_HARVEST_API_KEY
+    GREENHOUSE_JOB_BOARD_API_KEY: GREENHOUSE_JOB_BOARD_API_KEY
+    GREENHOUSE_BOARD_TOKEN: GREENHOUSE_BOARD_TOKEN
+    GREENHOUSE_ONBOARDING_ACCESS_KEY: GREENHOUSE_ONBOARDING_ACCESS_KEY
+    GREENHOUSE_ONBOARDING_SECRET_KEY: GREENHOUSE_ONBOARDING_SECRET_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: hire-flow-board
+    baseUri: https://boards-api.greenhouse.io/v1/boards/{{env.GREENHOUSE_BOARD_TOKEN}}
+    description: Public Job Board ingestion entry point.
+    resources:
+    - name: jobs-id
+      path: /jobs/{id}
+      operations:
+      - name: submitapplication
+        method: POST
+        description: Submit Application
+        inputParameters: [ { name: body, in: body, type: object, required: true } ]
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    authentication:
+      type: basic
+      username: '{{env.GREENHOUSE_JOB_BOARD_API_KEY}}'
+      password: ''
+  - type: http
+    namespace: hire-flow-harvest
+    baseUri: https://harvest.greenhouse.io/v1
+    description: Harvest pipeline advancement and hire.
+    resources:
+    - name: applications-advance
+      path: /applications/{id}/advance
+      operations:
+      - name: advance
+        method: POST
+        description: Advance Application
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: applications-hire
+      path: /applications/{id}/hire
+      operations:
+      - name: hire
+        method: POST
+        description: Hire Application
+        inputParameters: [ { name: body, in: body, type: object, required: true } ]
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    authentication:
+      type: basic
+      username: '{{env.GREENHOUSE_HARVEST_API_KEY}}'
+      password: ''
+  - type: http
+    namespace: hire-flow-onboarding
+    baseUri: https://onboarding-api.greenhouse.io
+    description: Onboarding pending-hire creation.
+    resources:
+    - name: graphql
+      path: /graphql
+      operations:
+      - name: addpendinghire
+        method: POST
+        description: Onboarding addPendingHire mutation
+        inputParameters: [ { name: body, in: body, type: object, required: true } ]
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    authentication:
+      type: basic
+      username: '{{env.GREENHOUSE_ONBOARDING_ACCESS_KEY}}'
+      password: '{{env.GREENHOUSE_ONBOARDING_SECRET_KEY}}'
+  exposes:
+  - type: mcp
+    namespace: hire-flow-mcp
+    port: 9090
+    transport: http
+    description: Workflow-oriented MCP tools spanning ATS to Onboarding.
+    tools:
+    - name: greenhouse-submit-and-hire
+      description: Submit application via Job Board, advance through Harvest stages, hire, then create Onboarding pending hire.
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: hire-flow-board.submitapplication
+      with: { body: tools.body }
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-advance-application
+      description: Advance Application
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: hire-flow-harvest.advance
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-hire-application
+      description: Hire Application
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: hire-flow-harvest.hire
+      with: { body: tools.body }
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-onboarding-add-pending-hire
+      description: Add Pending Hire (Onboarding)
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: hire-flow-onboarding.addpendinghire
+      with: { body: tools.body }
+      outputParameters: [ { type: object, mapping: $. } ]

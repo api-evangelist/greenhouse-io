@@ -1,0 +1,109 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Greenhouse Candidate Ingestion API — Partner Surface
+  description: 'Greenhouse Candidate Ingestion API for sourcing partners. Create candidates / prospects in a customer Greenhouse, list visible jobs and prospect pools, and generate tracking links.'
+  tags:
+  - Greenhouse
+  - Partner
+  - Ingestion
+  - Sourcing
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    GREENHOUSE_PARTNER_API_KEY: GREENHOUSE_PARTNER_API_KEY
+    GREENHOUSE_ON_BEHALF_OF: GREENHOUSE_ON_BEHALF_OF
+capability:
+  consumes:
+  - type: http
+    namespace: partner
+    baseUri: https://api.greenhouse.io/v1/partner
+    description: Partner / Candidate Ingestion surface.
+    headers:
+      On-Behalf-Of: '{{env.GREENHOUSE_ON_BEHALF_OF}}'
+    resources:
+    - name: candidates
+      path: /candidates
+      operations:
+      - name: listpartnercandidates
+        method: GET
+        description: List Partner Candidates
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+      - name: createpartnercandidate
+        method: POST
+        description: Create Partner Candidate
+        inputParameters: [ { name: body, in: body, type: object, required: true } ]
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: current-user
+      path: /current_user
+      operations:
+      - name: getcurrentuser
+        method: GET
+        description: Retrieve Current Partner User
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: jobs
+      path: /jobs
+      operations:
+      - name: listpartnerjobs
+        method: GET
+        description: List Partner Jobs
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: prospect-pools
+      path: /prospect_pools
+      operations:
+      - name: listpartnerprospectpools
+        method: GET
+        description: List Partner Prospect Pools
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: tracking-link
+      path: /tracking_link
+      operations:
+      - name: createtrackinglink
+        method: POST
+        description: Create Tracking Link
+        inputParameters: [ { name: body, in: body, type: object, required: true } ]
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    authentication:
+      type: basic
+      username: '{{env.GREENHOUSE_PARTNER_API_KEY}}'
+      password: ''
+  exposes:
+  - type: mcp
+    namespace: partner-mcp
+    port: 9090
+    transport: http
+    tools:
+    - name: greenhouse-list-partner-candidates
+      description: List Partner Candidates
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: partner.listpartnercandidates
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-create-partner-candidate
+      description: Create candidate or prospect on behalf of a user
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: partner.createpartnercandidate
+      with: { body: tools.body }
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-list-partner-jobs
+      description: List Partner Jobs
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: partner.listpartnerjobs
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-list-partner-prospect-pools
+      description: List Partner Prospect Pools
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: partner.listpartnerprospectpools
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-create-tracking-link
+      description: Create Tracking Link for sourcing campaigns
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: partner.createtrackinglink
+      with: { body: tools.body }
+      outputParameters: [ { type: object, mapping: $. } ]

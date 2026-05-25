@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/greenhouse-io/main/json-schema/greenhouse-job-schema.json",
+  "title": "Greenhouse Job",
+  "description": "A job record exposed by the Greenhouse Harvest API. Aligned with the documented Job resource on developers.greenhouse.io.",
+  "type": "object",
+  "required": ["id", "name", "status"],
+  "properties": {
+    "id":             { "type": "integer" },
+    "name":           { "type": "string" },
+    "requisition_id": { "type": ["string", "null"] },
+    "notes":          { "type": ["string", "null"] },
+    "confidential":   { "type": "boolean" },
+    "status":         { "type": "string", "enum": ["open", "closed", "draft"] },
+    "created_at":     { "type": "string", "format": "date-time" },
+    "opened_at":      { "type": ["string", "null"], "format": "date-time" },
+    "closed_at":      { "type": ["string", "null"], "format": "date-time" },
+    "updated_at":     { "type": "string", "format": "date-time" },
+    "departments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id":   { "type": "integer" },
+          "name": { "type": "string" }
+        }
+      }
+    },
+    "offices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id":   { "type": "integer" },
+          "name": { "type": "string" },
+          "location": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "hiring_team": {
+      "type": "object",
+      "properties": {
+        "hiring_managers": { "type": "array", "items": { "$ref": "#/$defs/UserRef" } },
+        "recruiters":      { "type": "array", "items": { "$ref": "#/$defs/UserRef" } },
+        "coordinators":    { "type": "array", "items": { "$ref": "#/$defs/UserRef" } },
+        "sourcers":        { "type": "array", "items": { "$ref": "#/$defs/UserRef" } }
+      }
+    },
+    "openings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id":         { "type": "integer" },
+          "opening_id": { "type": "string" },
+          "status":     { "type": "string", "enum": ["open", "closed"] },
+          "opened_at":  { "type": "string", "format": "date-time" },
+          "closed_at":  { "type": ["string", "null"], "format": "date-time" }
+        }
+      }
+    },
+    "custom_fields": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "$defs": {
+    "UserRef": {
+      "type": "object",
+      "properties": {
+        "id":   { "type": "integer" },
+        "name": { "type": "string" }
+      }
+    }
+  }
+}

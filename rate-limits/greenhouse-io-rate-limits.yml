@@ -1,0 +1,69 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Greenhouse
+providerId: greenhouse-io
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - ATS
+  - Rate Limiting
+  - Quotas
+description: |
+  Rate limit policies across Greenhouse's API surface — Harvest, Job Board, Audit Log, Candidate
+  Ingestion, and Onboarding GraphQL. Greenhouse uses a sliding-window counter expressed in
+  X-RateLimit-Limit/Remaining/Reset headers on Harvest, a fixed window on Audit Log, and a
+  combined request + query-complexity budget on the Onboarding GraphQL endpoint.
+sources:
+  - https://developers.greenhouse.io/harvest.html
+  - https://developers.greenhouse.io/audit-log.html
+  - https://developers.greenhouse.io/gho.html
+  - https://developers.greenhouse.io/candidate-ingestion.html
+headers:
+  limit: X-RateLimit-Limit
+  remaining: X-RateLimit-Remaining
+  reset: X-RateLimit-Reset
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+algorithm: sliding-window
+limits:
+  - api: Harvest API
+    scope: per API key
+    window: 10s
+    rpm: returned in X-RateLimit-Limit header per 10s
+    notes: |
+      Default per-token rate, with header-driven discovery. skip_count=true removes the Link "last" rel
+      to reduce pagination cost. Default page size 100; max 500.
+  - api: Job Board API
+    scope: per board / per IP
+    window: not published
+    rpm: not published
+    notes: |
+      GET endpoints are public and unauthenticated; POST application submission honours per-board
+      throttles set by Greenhouse and may be subject to anti-spam controls.
+  - api: Audit Log API
+    scope: per JWT
+    window: 10s
+    rpm: 50 requests / 10s (standard)
+    notes: Paginated reads (events with paging cursor) limited to 3 requests / 30s. JWT valid 24h.
+  - api: Candidate Ingestion (Partner) API
+    scope: per partner credential
+    window: not published
+    rpm: not published
+    notes: Standard 429 throttling on bursts; per-customer concurrency limits enforced server-side.
+  - api: Onboarding GraphQL API
+    scope: per Onboarding API key
+    window: per request budget
+    rpm: 100 requests per window
+    complexityPerQuery: 2500 points
+    notes: |
+      Complexity is the sum of requested fields; paginated lists multiply complexity by record count.
+      Clients should select the rateLimit field and inspect remaining budget and resetAt to pace work.
+retry:
+  strategy: exponential backoff
+  initialDelay: 1s
+  maxDelay: 60s
+  recommendation: Respect Retry-After when present; otherwise back off and resume on next window.

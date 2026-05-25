@@ -1,0 +1,96 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Greenhouse
+providerId: greenhouse-io
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: false
+tags:
+  - FinOps
+  - Cost Management
+  - FOCUS
+  - SaaS
+  - ATS
+description: |
+  FOCUS-aligned FinOps definition for Greenhouse Recruiting and Onboarding. Greenhouse is a
+  subscription-priced enterprise SaaS — contracts are typically annual and structured by tier
+  (Core / Plus / Pro) with custom add-ons; API access is included rather than separately
+  metered. FinOps reporting on Greenhouse therefore focuses on contract amortization, seat
+  allocation, integration cost attribution, and downstream usage of API-derived data.
+sources:
+  - https://www.greenhouse.com/pricing
+  - https://developers.greenhouse.io/harvest.html
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Greenhouse Software
+serviceCategory: Business Applications
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Annual
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Adjustment
+    - Credit
+  primaryUnit: contract
+  secondaryUnits:
+    - seat
+    - hire
+    - integration
+focusColumns:
+  ServiceName: Greenhouse Recruiting
+  ServiceCategory: Business Applications
+  ProviderName: Greenhouse Software
+  PublisherName: Greenhouse Software
+  InvoiceIssuerName: Greenhouse Software
+  PricingCategory: Subscription
+  PricingUnit: contract
+  BillingCurrency: USD
+meters:
+  - name: subscription_contract
+    unit: contract
+    aggregation: amortized
+    dimensions:
+      - tier
+      - region
+      - business_unit
+    description: Amortized portion of the annual Greenhouse contract per FOCUS BillingPeriod.
+  - name: active_seats
+    unit: seat
+    aggregation: average
+    dimensions:
+      - role
+      - department
+    description: Average active Greenhouse user seats during the FOCUS BillingPeriod.
+  - name: hires_completed
+    unit: hire
+    aggregation: sum
+    dimensions:
+      - department
+      - office
+      - job_template
+    description: Hires completed via Greenhouse (derived from Harvest application hire events).
+  - name: integrations_active
+    unit: integration
+    aggregation: count
+    dimensions:
+      - category
+    description: Active third-party integrations (sourcing, assessment, background, video, HRIS, e-sign).
+allocation:
+  strategy: showback
+  tags:
+    - department
+    - office
+    - business_unit
+    - hiring_manager
+  notes: |
+    Greenhouse does not natively emit FOCUS-formatted billing; finance teams typically reconcile the
+    contract invoice manually and use Harvest-derived hires-completed and seat metrics for showback
+    to hiring departments. Pro-tier customers can use the Audit Log API to attribute administrative
+    actions to specific actors for governance-driven chargeback.

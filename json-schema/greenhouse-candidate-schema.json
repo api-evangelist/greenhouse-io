@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/greenhouse-io/main/json-schema/greenhouse-candidate-schema.json",
+  "title": "Greenhouse Candidate",
+  "description": "A candidate record exposed by the Greenhouse Harvest API. Aligned with the documented Candidate resource on developers.greenhouse.io.",
+  "type": "object",
+  "required": ["id", "first_name", "last_name"],
+  "properties": {
+    "id":           { "type": "integer", "description": "Greenhouse candidate ID." },
+    "first_name":   { "type": "string" },
+    "last_name":    { "type": "string" },
+    "company":      { "type": ["string", "null"] },
+    "title":        { "type": ["string", "null"] },
+    "created_at":   { "type": "string", "format": "date-time" },
+    "updated_at":   { "type": "string", "format": "date-time" },
+    "last_activity":{ "type": "string", "format": "date-time" },
+    "is_private":   { "type": "boolean" },
+    "photo_url":    { "type": ["string", "null"], "format": "uri" },
+    "emails": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": { "type": "string", "format": "email" },
+          "type":  { "type": "string", "enum": ["personal", "work", "other"] }
+        }
+      }
+    },
+    "phone_numbers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": { "type": "string" },
+          "type":  { "type": "string", "enum": ["mobile", "home", "work", "skype", "other"] }
+        }
+      }
+    },
+    "addresses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": { "type": "string" },
+          "type":  { "type": "string" }
+        }
+      }
+    },
+    "social_media_addresses": {
+      "type": "array",
+      "items": { "type": "object", "properties": { "value": { "type": "string" } } }
+    },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "recruiter":   { "$ref": "#/$defs/UserRef" },
+    "coordinator": { "$ref": "#/$defs/UserRef" },
+    "applications": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/ApplicationSummary" }
+    },
+    "educations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "school_name": { "type": "string" },
+          "degree":      { "type": "string" },
+          "discipline":  { "type": "string" },
+          "start_date":  { "type": "string", "format": "date" },
+          "end_date":    { "type": "string", "format": "date" }
+        }
+      }
+    },
+    "employments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "company_name": { "type": "string" },
+          "title":        { "type": "string" },
+          "start_date":   { "type": "string", "format": "date" },
+          "end_date":     { "type": "string", "format": "date" }
+        }
+      }
+    },
+    "custom_fields": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "$defs": {
+    "UserRef": {
+      "type": ["object", "null"],
+      "properties": {
+        "id":         { "type": "integer" },
+        "first_name": { "type": "string" },
+        "last_name":  { "type": "string" },
+        "name":       { "type": "string" },
+        "employee_id":{ "type": ["string", "null"] }
+      }
+    },
+    "ApplicationSummary": {
+      "type": "object",
+      "properties": {
+        "id":            { "type": "integer" },
+        "candidate_id":  { "type": "integer" },
+        "status":        { "type": "string", "enum": ["active", "rejected", "hired", "converted"] },
+        "applied_at":    { "type": "string", "format": "date-time" },
+        "current_stage": {
+          "type": "object",
+          "properties": {
+            "id":   { "type": "integer" },
+            "name": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

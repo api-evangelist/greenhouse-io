@@ -1,0 +1,110 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Greenhouse Harvest API — Offers and Approvals
+  description: 'Greenhouse Harvest API — Offers and Approval Flows. Read offers, manage current offers, manage approval chains for jobs and offers.'
+  tags:
+  - Greenhouse
+  - Harvest
+  - Offers
+  - Approvals
+  - ATS
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    GREENHOUSE_HARVEST_API_KEY: GREENHOUSE_HARVEST_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: harvest-offers
+    baseUri: https://harvest.greenhouse.io/v1
+    description: Offers and approval flows.
+    resources:
+    - name: offers
+      path: /offers
+      operations:
+      - name: listoffers
+        method: GET
+        description: List Offers
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: offers-id
+      path: /offers/{id}
+      operations:
+      - name: getoffer
+        method: GET
+        description: Retrieve Offer
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: offers-current
+      path: /offers/{id}/current
+      operations:
+      - name: updatecurrentoffer
+        method: PATCH
+        description: Update Current Offer
+        inputParameters: [ { name: body, in: body, type: object, required: true } ]
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: approval-flows
+      path: /approval_flows
+      operations:
+      - name: createapprovalflow
+        method: POST
+        description: Create Approval Flow
+        inputParameters: [ { name: body, in: body, type: object, required: true } ]
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: approval-flows-id
+      path: /approval_flows/{id}
+      operations:
+      - name: getapprovalflow
+        method: GET
+        description: Retrieve Approval Flow
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: pending-approvals
+      path: /users/{id}/pending_approvals
+      operations:
+      - name: listpendingapprovals
+        method: GET
+        description: List User Pending Approvals
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    authentication:
+      type: basic
+      username: '{{env.GREENHOUSE_HARVEST_API_KEY}}'
+      password: ''
+  exposes:
+  - type: mcp
+    namespace: harvest-offers-mcp
+    port: 9090
+    transport: http
+    tools:
+    - name: greenhouse-list-offers
+      description: List Offers
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: harvest-offers.listoffers
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-get-offer
+      description: Retrieve Offer
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: harvest-offers.getoffer
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-update-current-offer
+      description: Update Current Offer
+      hints: { readOnly: false, destructive: false, idempotent: true }
+      call: harvest-offers.updatecurrentoffer
+      with: { body: tools.body }
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-create-approval-flow
+      description: Create Approval Flow
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: harvest-offers.createapprovalflow
+      with: { body: tools.body }
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-list-pending-approvals
+      description: List User Pending Approvals
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: harvest-offers.listpendingapprovals
+      outputParameters: [ { type: object, mapping: $. } ]

@@ -1,0 +1,97 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Greenhouse Job Board API — Public Surface
+  description: 'Greenhouse Job Board API. Unauthenticated read of public jobs, departments, and offices for a customer board, plus authenticated application submission.'
+  tags:
+  - Greenhouse
+  - JobBoard
+  - Careers
+  - Public
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    GREENHOUSE_BOARD_TOKEN: GREENHOUSE_BOARD_TOKEN
+    GREENHOUSE_JOB_BOARD_API_KEY: GREENHOUSE_JOB_BOARD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: job-board
+    baseUri: https://boards-api.greenhouse.io/v1/boards/{{env.GREENHOUSE_BOARD_TOKEN}}
+    description: Public Job Board read API.
+    resources:
+    - name: jobs
+      path: /jobs
+      operations:
+      - name: listjobs
+        method: GET
+        description: List Job Board Jobs
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: jobs-id
+      path: /jobs/{id}
+      operations:
+      - name: getjob
+        method: GET
+        description: Retrieve Job Board Job
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+      - name: submitapplication
+        method: POST
+        description: Submit Application
+        inputParameters: [ { name: body, in: body, type: object, required: true } ]
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: departments
+      path: /departments
+      operations:
+      - name: listdepartments
+        method: GET
+        description: List Job Board Departments
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    - name: offices
+      path: /offices
+      operations:
+      - name: listoffices
+        method: GET
+        description: List Job Board Offices
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    authentication:
+      type: basic
+      username: '{{env.GREENHOUSE_JOB_BOARD_API_KEY}}'
+      password: ''
+  exposes:
+  - type: mcp
+    namespace: job-board-mcp
+    port: 9090
+    transport: http
+    tools:
+    - name: greenhouse-list-board-jobs
+      description: List Job Board Jobs
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: job-board.listjobs
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-get-board-job
+      description: Retrieve Job Board Job
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: job-board.getjob
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-list-board-departments
+      description: List Job Board Departments
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: job-board.listdepartments
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-list-board-offices
+      description: List Job Board Offices
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: job-board.listoffices
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-submit-application
+      description: Submit Application
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: job-board.submitapplication
+      with: { body: tools.body }
+      outputParameters: [ { type: object, mapping: $. } ]

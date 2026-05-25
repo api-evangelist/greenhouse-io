@@ -1,0 +1,44 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Greenhouse Audit Log API — Events
+  description: 'Greenhouse Audit Log API. Retrieve audit events from the prior 30 days filtered by performer, target, event type, and time range.'
+  tags:
+  - Greenhouse
+  - AuditLog
+  - Compliance
+  - Security
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    GREENHOUSE_AUDIT_LOG_TOKEN: GREENHOUSE_AUDIT_LOG_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: audit-log
+    baseUri: https://auditlog.us.greenhouse.io
+    description: Audit Log read surface (JWT bearer obtained from Harvest /auth/jwt_access_token).
+    resources:
+    - name: events
+      path: /events
+      operations:
+      - name: listevents
+        method: GET
+        description: List Audit Events
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    authentication:
+      type: bearer
+      value: '{{env.GREENHOUSE_AUDIT_LOG_TOKEN}}'
+  exposes:
+  - type: mcp
+    namespace: audit-log-mcp
+    port: 9090
+    transport: http
+    tools:
+    - name: greenhouse-list-audit-events
+      description: List Audit Events with optional performer, target, and time filters
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: audit-log.listevents
+      outputParameters: [ { type: object, mapping: $. } ]

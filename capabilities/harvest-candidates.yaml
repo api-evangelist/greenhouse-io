@@ -1,0 +1,212 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Greenhouse Harvest API — Candidates
+  description: 'Greenhouse Harvest API — Candidates. Manage candidate profiles, attachments, notes, education, employment, prospects, anonymization, and merging.'
+  tags:
+  - Greenhouse
+  - Harvest
+  - Candidates
+  - ATS
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    GREENHOUSE_HARVEST_API_KEY: GREENHOUSE_HARVEST_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: harvest-candidates
+    baseUri: https://harvest.greenhouse.io/v1
+    description: Greenhouse Harvest candidate management surface.
+    resources:
+    - name: candidates
+      path: /candidates
+      operations:
+      - name: listcandidates
+        method: GET
+        description: List Candidates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createcandidate
+        method: POST
+        description: Create Candidate
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: candidates-id
+      path: /candidates/{id}
+      operations:
+      - name: getcandidate
+        method: GET
+        description: Retrieve Candidate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatecandidate
+        method: PATCH
+        description: Update Candidate
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: candidates-attachments
+      path: /candidates/{id}/attachments
+      operations:
+      - name: addcandidateattachment
+        method: POST
+        description: Add Candidate Attachment
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: candidates-notes
+      path: /candidates/{id}/notes
+      operations:
+      - name: addcandidatenote
+        method: POST
+        description: Add Candidate Note
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: candidates-anonymize
+      path: /candidates/{id}/anonymize
+      operations:
+      - name: anonymizecandidate
+        method: PUT
+        description: Anonymize Candidate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: candidates-merge
+      path: /candidates/{id}/merge
+      operations:
+      - name: mergecandidate
+        method: PUT
+        description: Merge Candidate
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.GREENHOUSE_HARVEST_API_KEY}}'
+      password: ''
+  exposes:
+  - type: rest
+    namespace: harvest-candidates-rest
+    port: 8080
+    description: REST adapter for the Candidates capability.
+    resources:
+    - path: /v1/candidates
+      name: candidates
+      operations:
+      - method: GET
+        name: listcandidates
+        call: harvest-candidates.listcandidates
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcandidate
+        call: harvest-candidates.createcandidate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/candidates/{id}
+      name: candidates-id
+      operations:
+      - method: GET
+        name: getcandidate
+        call: harvest-candidates.getcandidate
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatecandidate
+        call: harvest-candidates.updatecandidate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: harvest-candidates-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for the Candidates capability.
+    tools:
+    - name: greenhouse-list-candidates
+      description: List Candidates
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: harvest-candidates.listcandidates
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-create-candidate
+      description: Create Candidate
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: harvest-candidates.createcandidate
+      with: { body: tools.body }
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-get-candidate
+      description: Retrieve Candidate
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: harvest-candidates.getcandidate
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-update-candidate
+      description: Update Candidate
+      hints: { readOnly: false, destructive: false, idempotent: true }
+      call: harvest-candidates.updatecandidate
+      with: { body: tools.body }
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-anonymize-candidate
+      description: Anonymize Candidate (GDPR / privacy)
+      hints: { readOnly: false, destructive: true, idempotent: true }
+      call: harvest-candidates.anonymizecandidate
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: greenhouse-merge-candidate
+      description: Merge Candidate
+      hints: { readOnly: false, destructive: true, idempotent: false }
+      call: harvest-candidates.mergecandidate
+      with: { body: tools.body }
+      outputParameters: [ { type: object, mapping: $. } ]

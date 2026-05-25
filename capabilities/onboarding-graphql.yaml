@@ -1,0 +1,48 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Greenhouse Onboarding API — GraphQL
+  description: 'Greenhouse Onboarding (GHO) GraphQL API. Query employees, departments, locations, teams, and custom fields; mutate departments, locations, pending hires, and employee profiles. Rate limit budget exposed via rateLimit field.'
+  tags:
+  - Greenhouse
+  - Onboarding
+  - GraphQL
+  - HRIS
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    GREENHOUSE_ONBOARDING_ACCESS_KEY: GREENHOUSE_ONBOARDING_ACCESS_KEY
+    GREENHOUSE_ONBOARDING_SECRET_KEY: GREENHOUSE_ONBOARDING_SECRET_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: onboarding
+    baseUri: https://onboarding-api.greenhouse.io
+    description: Single GraphQL endpoint for all Onboarding operations.
+    resources:
+    - name: graphql
+      path: /graphql
+      operations:
+      - name: executegraphql
+        method: POST
+        description: Execute Onboarding GraphQL query or mutation
+        inputParameters: [ { name: body, in: body, type: object, required: true } ]
+        outputRawFormat: json
+        outputParameters: [ { name: result, type: object, value: $. } ]
+    authentication:
+      type: basic
+      username: '{{env.GREENHOUSE_ONBOARDING_ACCESS_KEY}}'
+      password: '{{env.GREENHOUSE_ONBOARDING_SECRET_KEY}}'
+  exposes:
+  - type: mcp
+    namespace: onboarding-mcp
+    port: 9090
+    transport: http
+    tools:
+    - name: greenhouse-onboarding-query
+      description: Execute a GraphQL query or mutation against the Greenhouse Onboarding endpoint
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: onboarding.executegraphql
+      with: { body: tools.body }
+      outputParameters: [ { type: object, mapping: $. } ]
