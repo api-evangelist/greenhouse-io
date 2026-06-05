@@ -23,18 +23,6 @@ apis:
     type: JSONSchema
   - url: json-ld/greenhouse-io-context.jsonld
     type: JSONLD
-  - type: NaftikoCapability
-    url: capabilities/harvest-candidates.yaml
-  - type: NaftikoCapability
-    url: capabilities/harvest-applications.yaml
-  - type: NaftikoCapability
-    url: capabilities/harvest-jobs.yaml
-  - type: NaftikoCapability
-    url: capabilities/harvest-interviews-scorecards.yaml
-  - type: NaftikoCapability
-    url: capabilities/harvest-offers-approvals.yaml
-  - type: NaftikoCapability
-    url: capabilities/harvest-organization.yaml
   - type: Authentication
     name: HTTP Basic with API key as username
     url: https://developers.greenhouse.io/harvest.html#authentication
@@ -50,7 +38,6 @@ apis:
     fields, prospect pools, rejection reasons, and the per-candidate activity feed.
     HTTP Basic with a granular per-permission API key; RFC-5988 Link pagination; rate limits
     returned in X-RateLimit-Limit per 10s.
-
 - aid: greenhouse-io:greenhouse-job-board-api
   name: Greenhouse Job Board API
   tags:
@@ -65,8 +52,6 @@ apis:
     type: Documentation
   - url: openapi/greenhouse-job-board-api-openapi.yml
     type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/job-board-public.yaml
   - type: Authentication
     name: Public GET (no auth) + Basic auth for application POST
     url: https://developers.greenhouse.io/job-board.html
@@ -75,7 +60,6 @@ apis:
     offices — and accepts application submissions via POST /jobs/{id}. GET endpoints are
     unauthenticated; POST endpoints accept multipart/form-data or JSON. Used to power
     customer-owned career pages and third-party job-board syndication.
-
 - aid: greenhouse-io:greenhouse-audit-log-api
   name: Greenhouse Audit Log API
   tags:
@@ -91,8 +75,6 @@ apis:
     type: Documentation
   - url: openapi/greenhouse-audit-log-api-openapi.yml
     type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/audit-log-events.yaml
   - type: Authentication
     name: JWT bearer token obtained from POST /auth/jwt_access_token on harvest.greenhouse.io
   - type: RateLimits
@@ -104,7 +86,6 @@ apis:
     The Audit Log API exposes important administrative events from the prior 30 days for
     governance, compliance, and incident response. JWT bearer authentication (24h validity)
     issued from the Harvest /auth/jwt_access_token endpoint. Pro-tier offering.
-
 - aid: greenhouse-io:greenhouse-candidate-ingestion-api
   name: Greenhouse Candidate Ingestion (Partner) API
   tags:
@@ -120,8 +101,6 @@ apis:
     type: Documentation
   - url: openapi/greenhouse-candidate-ingestion-api-openapi.yml
     type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/partner-ingestion.yaml
   - type: Authentication
     name: OAuth 2.0 (Authorization Code or Client Credentials) or HTTP Basic with On-Behalf-Of header
     url: https://developers.greenhouse.io/candidate-ingestion.html
@@ -130,7 +109,6 @@ apis:
     prospects in a customer's Greenhouse account, list jobs visible to the integrated user,
     read prospect pools, retrieve the current user, and generate branded tracking links.
     Used by sourcing platforms, agencies, and recruitment marketing tools.
-
 - aid: greenhouse-io:greenhouse-onboarding-api
   name: Greenhouse Onboarding API
   tags:
@@ -145,19 +123,20 @@ apis:
     type: Documentation
   - url: openapi/greenhouse-onboarding-api-openapi.yml
     type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/onboarding-graphql.yaml
   - type: Authentication
     name: HTTP Basic with Access Key (username) and Secret Key (password); Super Admin issued
   - type: RateLimits
-    name: 100 requests per window + 2500-point query-complexity ceiling; rateLimit GraphQL field exposes remaining budget
+    name: >-
+      100 requests per window + 2500-point query-complexity ceiling; rateLimit GraphQL field exposes remaining
+      budget
     url: https://developers.greenhouse.io/gho.html
+  - url: graphql/greenhouse-io-graphql.md
+    type: GraphQL
   description: |
     The Greenhouse Onboarding (GHO) API is a single GraphQL endpoint covering employees,
     departments, locations, teams, custom fields, and mutations such as addPendingHire and
     updateEmployeeProfile. Available on the Plus and Pro tiers; requires Super Admin to
     generate or revoke keys.
-
 - aid: greenhouse-io:greenhouse-assessment-api
   name: Greenhouse Assessment Partner API
   tags:
@@ -179,7 +158,6 @@ apis:
     dispatch a test to a candidate and retrieve completion details. Partner-hosted rather
     than Greenhouse-hosted; results retrieved via PATCH callback or hourly polling for
     up to 8 weeks.
-
 - aid: greenhouse-io:greenhouse-recruiting-webhooks
   name: Greenhouse Recruiting Webhooks
   tags:
@@ -222,7 +200,6 @@ apis:
     Event-driven webhooks from Greenhouse Recruiting. Greenhouse POSTs JSON to your HTTPS
     endpoint on each event; payloads carry a Greenhouse-Event-ID header for idempotency and
     HMAC SHA-256 signature verification.
-
 - aid: greenhouse-io:greenhouse-onboarding-webhooks
   name: Greenhouse Onboarding Webhooks
   tags:
@@ -245,7 +222,6 @@ apis:
     Event-driven webhooks from Greenhouse Onboarding (currently in beta and gated by
     customer approval). Each event posts event_type, id, and payload to the customer's
     HTTPS endpoint; signatures use HMAC SHA-256 with a shared secret.
-
 name: Greenhouse
 tags:
 - ATS
