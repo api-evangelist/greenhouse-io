@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Audit Log API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Issue Audit Log Access Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://auditlog.us.greenhouse.io/jwt_access_token",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Exchanges a Harvest API key (HTTP Basic) for a JWT bearer token valid for 24 hours."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Audit Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://auditlog.us.greenhouse.io/events",
+            "params": [
+              {
+                "name": "before_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "after_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "magic_time",
+                "value": "",
+                "type": "query",
+                "description": "Relative time keyword (e.g. last_24_hours, last_7_days)."
+              },
+              {
+                "name": "performer_ids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "performer_types",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "performer_ip_addresses",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "event_types",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "event_target_ids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "event_target_types",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "request_ids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "request_types",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paging",
+                "value": "",
+                "type": "query",
+                "description": "Opaque pagination cursor returned by a previous response."
+              }
+            ]
+          },
+          "docs": "Returns audit events filtered by performer, target, event type, request, and time range."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

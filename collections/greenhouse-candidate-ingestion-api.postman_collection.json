@@ -1,0 +1,693 @@
+{
+  "item": [
+    {
+      "id": "f36e5baa-407a-4d16-aa2c-49d4b16fd92c",
+      "name": "Candidates",
+      "description": {
+        "content": "Create or retrieve candidates / prospects in the customer's Greenhouse account.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fc9f08eb-b35e-49bf-a509-fa700a39297d",
+          "name": "List Partner Candidates",
+          "request": {
+            "name": "List Partner Candidates",
+            "description": {
+              "content": "Retrieve candidates by partner-supplied external IDs or Greenhouse IDs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "external_ids",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "candidate_ids",
+                  "value": "<integer>,<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                "key": "On-Behalf-Of",
+                "value": "<email>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3b944a84-eeb1-48cc-9102-1296d1b64360",
+              "name": "Partner candidates.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "external_ids",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "candidate_ids",
+                      "value": "<integer>,<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                    "key": "On-Behalf-Of",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"external_id\": \"string\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"company\": \"string\",\n    \"title\": \"string\",\n    \"emails\": [\n      {\n        \"value\": \"xCjD@CIaGdYPffUEiyDl.jyed\",\n        \"type\": \"string\"\n      },\n      {\n        \"value\": \"GJp33Y4Ak@fWyKsYwJfUyLbTXFIbEuwaizmXmhz.trd\",\n        \"type\": \"string\"\n      }\n    ],\n    \"phone_numbers\": [\n      {\n        \"value\": \"string\",\n        \"type\": \"string\"\n      },\n      {\n        \"value\": \"string\",\n        \"type\": \"string\"\n      }\n    ],\n    \"social_media_addresses\": [\n      {\n        \"value\": \"string\"\n      },\n      {\n        \"value\": \"string\"\n      }\n    ],\n    \"application\": {\n      \"job_id\": 2853,\n      \"initial_stage_id\": 6299,\n      \"source_id\": 7362,\n      \"referrer\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      }\n    },\n    \"prospect\": {\n      \"prospect_pool_id\": 4396,\n      \"prospect_stage_id\": 1995,\n      \"prospect_owner_id\": 3146\n    },\n    \"attachments\": [\n      {\n        \"filename\": \"string\",\n        \"type\": \"resume\",\n        \"content\": \"string\",\n        \"content_type\": \"string\",\n        \"url\": \"http://SZxYeiYx.oifrlCl3+qRJSaG9fXTMxQl-gtosbh1gUbwtgklEqW\"\n      },\n      {\n        \"filename\": \"string\",\n        \"type\": \"public\",\n        \"content\": \"string\",\n        \"content_type\": \"string\",\n        \"url\": \"https://ifnSMatHDxt.uxwEfk5bLFV9FxAkv+9WKd1WTmNTOKI\"\n      }\n    ]\n  },\n  {\n    \"external_id\": \"string\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"company\": \"string\",\n    \"title\": \"string\",\n    \"emails\": [\n      {\n        \"value\": \"RvsVsW@itCpQuPhiSpFEayElOevpTyzyHCm.bdj\",\n        \"type\": \"string\"\n      },\n      {\n        \"value\": \"0k3@X.hf\",\n        \"type\": \"string\"\n      }\n    ],\n    \"phone_numbers\": [\n      {\n        \"value\": \"string\",\n        \"type\": \"string\"\n      },\n      {\n        \"value\": \"string\",\n        \"type\": \"string\"\n      }\n    ],\n    \"social_media_addresses\": [\n      {\n        \"value\": \"string\"\n      },\n      {\n        \"value\": \"string\"\n      }\n    ],\n    \"application\": {\n      \"job_id\": 3711,\n      \"initial_stage_id\": 2312,\n      \"source_id\": 809,\n      \"referrer\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      }\n    },\n    \"prospect\": {\n      \"prospect_pool_id\": 4586,\n      \"prospect_stage_id\": 8481,\n      \"prospect_owner_id\": 5199\n    },\n    \"attachments\": [\n      {\n        \"filename\": \"string\",\n        \"type\": \"resume\",\n        \"content\": \"string\",\n        \"content_type\": \"string\",\n        \"url\": \"http://TAHWxsQQq.eoNO5VtMzn7Ah0mGhsPUx-aDVa+SGquH7h0p7j5vLC.SzH+uYsLNwk.l,v\"\n      },\n      {\n        \"filename\": \"string\",\n        \"type\": \"offer_letter\",\n        \"content\": \"string\",\n        \"content_type\": \"string\",\n        \"url\": \"http://jRiNDNVmZuYoNEpBvJfbwtY.zzcpM9ALBSZLAJWr8tx1FcWPZQZbuSWLx-6gPM0,IA5I6KCPPlApDT-W\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "909034c9-f6a3-4098-b1f8-e8098b808ee0",
+          "name": "Create Partner Candidate",
+          "request": {
+            "name": "Create Partner Candidate",
+            "description": {
+              "content": "Create a candidate or prospect on behalf of a Greenhouse user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                "key": "On-Behalf-Of",
+                "value": "<email>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"company\": \"<string>\",\n  \"title\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"social_media_addresses\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"application\": {\n    \"job_id\": \"<integer>\",\n    \"initial_stage_id\": \"<integer>\",\n    \"source_id\": \"<integer>\",\n    \"referrer\": {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  },\n  \"prospect\": {\n    \"prospect_pool_id\": \"<integer>\",\n    \"prospect_stage_id\": \"<integer>\",\n    \"prospect_owner_id\": \"<integer>\"\n  },\n  \"attachments\": [\n    {\n      \"filename\": \"<string>\",\n      \"type\": \"<string>\",\n      \"content\": \"<string>\",\n      \"content_type\": \"<string>\",\n      \"url\": \"<uri>\"\n    },\n    {\n      \"filename\": \"<string>\",\n      \"type\": \"<string>\",\n      \"content\": \"<string>\",\n      \"content_type\": \"<string>\",\n      \"url\": \"<uri>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dc050d87-29b2-424e-92f1-84c3d2df1b90",
+              "name": "Created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                    "key": "On-Behalf-Of",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"company\": \"<string>\",\n  \"title\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"social_media_addresses\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"application\": {\n    \"job_id\": \"<integer>\",\n    \"initial_stage_id\": \"<integer>\",\n    \"source_id\": \"<integer>\",\n    \"referrer\": {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  },\n  \"prospect\": {\n    \"prospect_pool_id\": \"<integer>\",\n    \"prospect_stage_id\": \"<integer>\",\n    \"prospect_owner_id\": \"<integer>\"\n  },\n  \"attachments\": [\n    {\n      \"filename\": \"<string>\",\n      \"type\": \"<string>\",\n      \"content\": \"<string>\",\n      \"content_type\": \"<string>\",\n      \"url\": \"<uri>\"\n    },\n    {\n      \"filename\": \"<string>\",\n      \"type\": \"<string>\",\n      \"content\": \"<string>\",\n      \"content_type\": \"<string>\",\n      \"url\": \"<uri>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"external_id\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"company\": \"string\",\n  \"title\": \"string\",\n  \"emails\": [\n    {\n      \"value\": \"ngExNExYj1AAs-X@CNXaCwKRfQnmwBztBWHJtsUQgzwGspWAl.ykcc\",\n      \"type\": \"string\"\n    },\n    {\n      \"value\": \"DDU@rzvPUIhZudANqmPklBFrsaIDGWUM.keq\",\n      \"type\": \"string\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\"\n    }\n  ],\n  \"social_media_addresses\": [\n    {\n      \"value\": \"string\"\n    },\n    {\n      \"value\": \"string\"\n    }\n  ],\n  \"application\": {\n    \"job_id\": 1527,\n    \"initial_stage_id\": 3887,\n    \"source_id\": 3040,\n    \"referrer\": {\n      \"type\": \"string\",\n      \"value\": \"string\"\n    }\n  },\n  \"prospect\": {\n    \"prospect_pool_id\": 1966,\n    \"prospect_stage_id\": 8507,\n    \"prospect_owner_id\": 8145\n  },\n  \"attachments\": [\n    {\n      \"filename\": \"string\",\n      \"type\": \"offer_letter\",\n      \"content\": \"string\",\n      \"content_type\": \"string\",\n      \"url\": \"http://RdWPDCwTkqB.mzjYm2e0,tbkY8HI3ioe2bKMFA3HEa.wYh7D2DkL88KtEbp1IVrWG.+t-H-ho,HDlaR6k\"\n    },\n    {\n      \"filename\": \"string\",\n      \"type\": \"public\",\n      \"content\": \"string\",\n      \"content_type\": \"string\",\n      \"url\": \"https://saMMgxzNFKpNgsMhMgeIJBWAsaj.tzOTCgWrcr4L4T58MbwtfnamgY6U.t8\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "51549dec-5e44-49f1-a918-b57cd2bb1ed6",
+      "name": "Jobs",
+      "description": {
+        "content": "List jobs visible to the integrated user.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3e9a03f5-5140-4f8f-9317-6893bf4eb664",
+          "name": "List Partner Jobs",
+          "request": {
+            "name": "List Partner Jobs",
+            "description": {
+              "content": "List jobs visible to the integrated user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                "key": "On-Behalf-Of",
+                "value": "<email>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b86dbc09-4503-448e-9e15-efd09d1246df",
+              "name": "Visible jobs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                    "key": "On-Behalf-Of",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 2959,\n    \"name\": \"string\",\n    \"requisition_id\": \"string\"\n  },\n  {\n    \"id\": 6754,\n    \"name\": \"string\",\n    \"requisition_id\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5f2945d7-68bb-4348-8b0c-20bee48c3c34",
+      "name": "ProspectPools",
+      "description": {
+        "content": "Read configured prospect pools and their stages.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "00b9052c-a853-4446-84cc-4f9402c788e5",
+          "name": "List Partner Prospect Pools",
+          "request": {
+            "name": "List Partner Prospect Pools",
+            "description": {},
+            "url": {
+              "path": [
+                "prospect_pools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                "key": "On-Behalf-Of",
+                "value": "<email>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c079d875-4a2b-491a-a566-48270d6e6cea",
+              "name": "Prospect pools.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prospect_pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                    "key": "On-Behalf-Of",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 5770,\n    \"name\": \"string\",\n    \"stages\": [\n      {\n        \"id\": 8973,\n        \"name\": \"string\",\n        \"priority\": 7009\n      },\n      {\n        \"id\": 9487,\n        \"name\": \"string\",\n        \"priority\": 6343\n      }\n    ]\n  },\n  {\n    \"id\": 3471,\n    \"name\": \"string\",\n    \"stages\": [\n      {\n        \"id\": 5176,\n        \"name\": \"string\",\n        \"priority\": 1829\n      },\n      {\n        \"id\": 7959,\n        \"name\": \"string\",\n        \"priority\": 7794\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "31e250bf-e409-4af4-af97-36bec1810d51",
+      "name": "Users",
+      "description": {
+        "content": "Inspect the current authenticated user.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "27fc232f-2f8e-440d-90cf-257ba9d3d916",
+          "name": "Retrieve Current Partner User",
+          "request": {
+            "name": "Retrieve Current Partner User",
+            "description": {},
+            "url": {
+              "path": [
+                "current_user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                "key": "On-Behalf-Of",
+                "value": "<email>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ae152c6-942a-47ab-8bac-ba22254e35e4",
+              "name": "Current user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "current_user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                    "key": "On-Behalf-Of",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 5603,\n  \"name\": \"string\",\n  \"email\": \"X5adYdoo5@gTuhKsGnadhQ.ic\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b394f3d8-486b-4dee-afff-503d464a2522",
+      "name": "TrackingLinks",
+      "description": {
+        "content": "Generate branded tracking links for sourcing campaigns.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9163dfeb-dcb0-41e0-82d4-ad2aaff4ceee",
+          "name": "Create Tracking Link",
+          "request": {
+            "name": "Create Tracking Link",
+            "description": {
+              "content": "Generate a branded tracking link tied to the partner and an optional job.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tracking_link"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                "key": "On-Behalf-Of",
+                "value": "<email>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"job_id\": \"<integer>\",\n  \"source_id\": \"<integer>\",\n  \"external_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "53227aed-81be-4c15-ae67-98b56856bba7",
+              "name": "Tracking link.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking_link"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                    "key": "On-Behalf-Of",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"job_id\": \"<integer>\",\n  \"source_id\": \"<integer>\",\n  \"external_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"http://bzQlNClK.uehhaGhjKdNLnRqy\",\n  \"expires_at\": \"1978-04-03T01:34:39.962Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.greenhouse.io/v1/partner",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "partner"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://app.greenhouse.io/oauth/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://app.greenhouse.io/oauth/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "50c82550-f695-4a77-8dcd-ffc655f6f88c",
+    "name": "Greenhouse Candidate Ingestion API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Candidate Ingestion API (a.k.a. the Partner API) lets sourcing partners create\ncandidates and prospects in a customer's Greenhouse account, list visible jobs and\nprospect pools, fetch the current user, and generate branded tracking links.\nAuthentication is OAuth 2.0 (Authorization Code or Client Credentials) or HTTP Basic\nwith a Partner API key plus an On-Behalf-Of header carrying a Greenhouse user email.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,308 @@
+{
+  "item": [
+    {
+      "id": "36c9f54c-c7ca-4b1b-bcae-c2ae4a667103",
+      "name": "GraphQL",
+      "description": {
+        "content": "Single GraphQL endpoint for all Onboarding operations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f509e65b-1699-4de1-9495-285146a4acac",
+          "name": "Execute Onboarding GraphQL",
+          "request": {
+            "name": "Execute Onboarding GraphQL",
+            "description": {
+              "content": "Execute a GraphQL query or mutation against the Greenhouse Onboarding schema.\nSupported root queries include `employee(id)`, `employees`, `departments`,\n`locations`, `customFields`, `teams`, and `rateLimit`. Supported mutations\ninclude department / location CRUD, `addPendingHire`, and `updateEmployeeProfile`.\nErrors use the GraphQL `errors` array with codes: Authentication, Validation,\nNotFound, Server, RateLimit.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "graphql"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"operationName\": \"<string>\",\n  \"variables\": {\n    \"key_0\": true,\n    \"key_1\": 2244,\n    \"key_2\": true\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "09ad3165-e417-4705-8159-3b77808890f0",
+              "name": "GraphQL response (errors carried inside the body).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "graphql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"operationName\": \"<string>\",\n  \"variables\": {\n    \"key_0\": 9985.611870008599,\n    \"key_1\": 2112.6338225467944,\n    \"key_2\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"extensions\": {\n        \"code\": \"NotFound\"\n      }\n    },\n    {\n      \"message\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"extensions\": {\n        \"code\": \"Server\"\n      }\n    }\n  ],\n  \"extensions\": {\n    \"rateLimit\": {\n      \"cost\": 2256,\n      \"remaining\": 7175,\n      \"resetAt\": \"1980-09-03T18:39:51.797Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0d4865a-122f-4d3b-9739-d63a3ad721f1",
+              "name": "Authentication failed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "graphql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"operationName\": \"<string>\",\n  \"variables\": {\n    \"key_0\": 9985.611870008599,\n    \"key_1\": 2112.6338225467944,\n    \"key_2\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "34dde4d6-3891-4a5f-82bb-1b3f12032367",
+              "name": "Rate or complexity limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "graphql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"operationName\": \"<string>\",\n  \"variables\": {\n    \"key_0\": 9985.611870008599,\n    \"key_1\": 2112.6338225467944,\n    \"key_2\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3cd0120a-8590-4395-8740-119c0ad6f8d0",
+          "name": "Onboarding GraphQL Schema (Documentation Pointer)",
+          "request": {
+            "name": "Onboarding GraphQL Schema (Documentation Pointer)",
+            "description": {
+              "content": "GraphQL schema is discovered via introspection by POSTing a standard introspection\nquery to /graphql. This path is documentation-only and not an additional HTTP route.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "graphql",
+                "introspection"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3130a615-9bec-403a-a23e-6bc183c54740",
+              "name": "See documentation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "graphql",
+                    "introspection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://onboarding-api.greenhouse.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "558f74c7-a876-479b-b079-2f5c85c2fb94",
+    "name": "Greenhouse Onboarding API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Greenhouse Onboarding (GHO) API is a single GraphQL endpoint exposing employee,\ndepartment, location, custom field, and team data along with mutations for creating\nand updating departments, locations, pending hires, and employee profiles.\nAuthentication uses HTTP Basic with an Onboarding Access Key (username) and Secret\nKey (password); only Super Admins can issue or revoke keys. Rate limiting is enforced\nby both request count (100 per window) and per-query complexity (max 2500 points);\nclients should inspect the `rateLimit` GraphQL field to track remaining budget.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+      "type": "text/plain"
+    }
+  }
+}

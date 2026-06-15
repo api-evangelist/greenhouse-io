@@ -1,0 +1,183 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Candidate Ingestion API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://app.greenhouse.io/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Candidates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Partner Candidates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.greenhouse.io/v1/partner/candidates",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "external_ids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "candidate_ids",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve candidates by partner-supplied external IDs or Greenhouse IDs."
+        },
+        {
+          "info": {
+            "name": "Create Partner Candidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.greenhouse.io/v1/partner/candidates",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a candidate or prospect on behalf of a Greenhouse user."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Current Partner User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.greenhouse.io/v1/partner/current_user",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve Current Partner User"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Partner Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.greenhouse.io/v1/partner/jobs",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "List jobs visible to the integrated user."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ProspectPools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Partner Prospect Pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.greenhouse.io/v1/partner/prospect_pools",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "List Partner Prospect Pools"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "TrackingLinks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Tracking Link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.greenhouse.io/v1/partner/tracking_link",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a branded tracking link tied to the partner and an optional job."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

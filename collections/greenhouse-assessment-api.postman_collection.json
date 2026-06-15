@@ -1,0 +1,584 @@
+{
+  "item": [
+    {
+      "id": "9356495e-f0d3-4ac7-b981-9b5c2cfd7590",
+      "name": "Tests",
+      "description": {
+        "content": "Available tests offered by the partner.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bab6baa3-429a-4246-9056-5a2ce3a85f96",
+          "name": "List Partner Tests",
+          "request": {
+            "name": "List Partner Tests",
+            "description": {
+              "content": "Returns the catalog of tests this partner offers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "list_tests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{partner_host}}",
+                  "key": "partner_host"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{base_path}}",
+                  "key": "base_path"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9c9c9df-372f-4628-91ba-0854439de97f",
+              "name": "Tests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list_tests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{partner_host}}",
+                      "key": "partner_host"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{base_path}}",
+                      "key": "base_path"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"partner_test_ids\": [\n    {\n      \"partner_test_id\": \"string\",\n      \"partner_test_name\": \"string\",\n      \"partner_test_description\": \"string\"\n    },\n    {\n      \"partner_test_id\": \"string\",\n      \"partner_test_name\": \"string\",\n      \"partner_test_description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "9af0f367-66dd-4be3-8b63-c38cfc492464",
+      "name": "TestDelivery",
+      "description": {
+        "content": "Sending tests to candidates and reporting status.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "313e98d0-fb9d-4438-9271-5d667b3288f8",
+          "name": "Send Test To Candidate",
+          "request": {
+            "name": "Send Test To Candidate",
+            "description": {
+              "content": "Greenhouse calls this when a candidate reaches the assessment stage; partner returns a unique partner_interview_id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "send_test"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{partner_host}}",
+                  "key": "partner_host"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{base_path}}",
+                  "key": "base_path"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"partner_test_id\": \"<string>\",\n  \"candidate\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"greenhouse_application_id\": \"<integer>\"\n  },\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": 1648\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2567cfd1-4b4b-49f7-99a3-39d728534889",
+              "name": "Test delivered.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "send_test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{partner_host}}",
+                      "key": "partner_host"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{base_path}}",
+                      "key": "base_path"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"partner_test_id\": \"<string>\",\n  \"candidate\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"greenhouse_application_id\": \"<integer>\"\n  },\n  \"metadata\": {\n    \"key_0\": 4370.377467127236\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"partner_interview_id\": \"string\",\n  \"test_url\": \"https://yRCdTeQYYcSlUV.eclf9TPzkkQ0HMMGR5ah4KpbbxzqR277gaG6H-K.vyHNvOK-kOHN2W\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "342e1b38-2b55-49f4-a6ae-b712952277b4",
+          "name": "Get Test Status",
+          "request": {
+            "name": "Get Test Status",
+            "description": {
+              "content": "Greenhouse polls hourly (or partner triggers via PATCH) to retrieve completion + results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "test_status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "partner_interview_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{partner_host}}",
+                  "key": "partner_host"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{base_path}}",
+                  "key": "base_path"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "372b485e-83db-43e2-b036-ab2cfdaf8caf",
+              "name": "Status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "test_status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partner_interview_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{partner_host}}",
+                      "key": "partner_host"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{base_path}}",
+                      "key": "base_path"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"partner_interview_id\": \"string\",\n  \"partner_test_id\": \"string\",\n  \"status\": \"in_progress\",\n  \"partner_score\": \"string\",\n  \"partner_profile_url\": \"https://giLWHduiHKcUHEaCuIDTaKlOo.ovnk7wGEyQHq7cuRd62hSCdFHTiHFITx.Erx5rYnryhNLNdVbUK0nJPswwhMEl\",\n  \"partner_profile_summary\": \"string\",\n  \"partner_score_details\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4b4efb5-97aa-445f-8a43-dee5e7526d6a",
+          "name": "Report Validation Errors",
+          "request": {
+            "name": "Report Validation Errors",
+            "description": {
+              "content": "Greenhouse sends validation error details so the partner can resolve issues.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "response_error"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{partner_host}}",
+                  "key": "partner_host"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{base_path}}",
+                  "key": "base_path"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"partner_interview_id\": \"<string>\",\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "02d59adf-a1e8-4d08-97df-45b520511672",
+              "name": "Acknowledged.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response_error"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{partner_host}}",
+                      "key": "partner_host"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{base_path}}",
+                      "key": "base_path"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"partner_interview_id\": \"<string>\",\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "partner.example.com",
+      "key": "partner_host"
+    },
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "greenhouse-assessment",
+      "key": "base_path"
+    },
+    {
+      "type": "string",
+      "value": "https://{{partner_host}}/{{base_path}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1135e798-ece3-4553-943a-d16938569a0f",
+    "name": "Greenhouse Assessment Partner API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+      "type": "text/plain"
+    }
+  }
+}

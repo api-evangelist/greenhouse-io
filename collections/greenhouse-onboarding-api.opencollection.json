@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Onboarding API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GraphQL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute Onboarding GraphQL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://onboarding-api.greenhouse.io/graphql",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute a GraphQL query or mutation against the Greenhouse Onboarding schema.\nSupported root queries include `employee(id)`, `employees`, `departments`,\n`locations`, `customFields`, `teams`, and `rateLimit`. Supported mutations\ninclude department / location CRUD, `addPendingHire`, and `updateEmployeeProfile`.\nErrors use the GraphQL `errors` array with codes: Authentication, Validation,\nNotFound, Server, RateLimit.\n"
+        },
+        {
+          "info": {
+            "name": "Onboarding GraphQL Schema (Documentation Pointer)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://onboarding-api.greenhouse.io/graphql/introspection"
+          },
+          "docs": "GraphQL schema is discovered via introspection by POSTing a standard introspection\nquery to /graphql. This path is documentation-only and not an additional HTTP route.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

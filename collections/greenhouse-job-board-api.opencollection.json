@@ -1,0 +1,183 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Job Board API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Job Board Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/jobs",
+            "params": [
+              {
+                "name": "content",
+                "value": "",
+                "type": "query",
+                "description": "When true, includes the full job description content."
+              }
+            ]
+          },
+          "docs": "Returns the list of public job listings for a board."
+        },
+        {
+          "info": {
+            "name": "Retrieve Job Board Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "questions",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve Job Board Job"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Submit a candidate application to a job posting. Accepts multipart/form-data or JSON. Requires Basic auth."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Departments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Job Board Departments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/departments",
+            "params": [
+              {
+                "name": "render_as",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Job Board Departments"
+        },
+        {
+          "info": {
+            "name": "Retrieve Job Board Department",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/departments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Job Board Department"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Offices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Job Board Offices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/offices",
+            "params": [
+              {
+                "name": "render_as",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Job Board Offices"
+        },
+        {
+          "info": {
+            "name": "Retrieve Job Board Office",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://boards-api.greenhouse.io/v1/boards/{board_token}/offices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Job Board Office"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

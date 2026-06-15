@@ -1,0 +1,441 @@
+{
+  "item": [
+    {
+      "id": "b4eafc53-1358-43fc-9771-1cc9555701b1",
+      "name": "Auth",
+      "description": {
+        "content": "JWT access token issuance.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d4b773fe-d296-41d5-a32f-0a9bcf549d9d",
+          "name": "Issue Audit Log Access Token",
+          "request": {
+            "name": "Issue Audit Log Access Token",
+            "description": {
+              "content": "Exchanges a Harvest API key (HTTP Basic) for a JWT bearer token valid for 24 hours.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "auth",
+                "jwt_access_token"
+              ],
+              "host": [
+                "harvest",
+                "greenhouse",
+                "io"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "da474989-efee-4691-a9ba-0424f0eb8cbe",
+              "name": "Token issued.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "auth",
+                    "jwt_access_token"
+                  ],
+                  "host": [
+                    "harvest",
+                    "greenhouse",
+                    "io"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"string\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 1566\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "a8e77353-036a-4f33-ae54-6027e42585b7",
+      "name": "Events",
+      "description": {
+        "content": "Audit log events.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "60be3b44-15c0-4708-9de1-6d5a90b76353",
+          "name": "List Audit Events",
+          "request": {
+            "name": "List Audit Events",
+            "description": {
+              "content": "Returns audit events filtered by performer, target, event type, request, and time range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "before_time",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "after_time",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "magic_time",
+                  "value": "<string>",
+                  "description": "Relative time keyword (e.g. last_24_hours, last_7_days)."
+                },
+                {
+                  "disabled": false,
+                  "key": "performer_ids",
+                  "value": "<integer>,<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "performer_types",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "performer_ip_addresses",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "event_types",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "event_target_ids",
+                  "value": "<integer>,<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "event_target_types",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "request_ids",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "request_types",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "paging",
+                  "value": "<string>",
+                  "description": "Opaque pagination cursor returned by a previous response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e57d14c8-7ccd-4dcb-9229-30c359778b16",
+              "name": "Audit events.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "before_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "after_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "magic_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "performer_ids",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "performer_types",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "performer_ip_addresses",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "event_types",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "event_target_ids",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "event_target_types",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "request_ids",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "request_types",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "paging",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"events\": [\n    {\n      \"id\": \"string\",\n      \"event_type\": \"string\",\n      \"occurred_at\": \"2008-02-25T07:27:17.131Z\",\n      \"performer\": {\n        \"id\": 2430,\n        \"type\": \"string\",\n        \"ip_address\": \"string\",\n        \"email\": \"JykxGcOYx@TVhgQQPjuRRn.vkv\"\n      },\n      \"event_target\": {\n        \"id\": 8407,\n        \"type\": \"string\"\n      },\n      \"request\": {\n        \"id\": \"string\",\n        \"type\": \"string\",\n        \"method\": \"string\",\n        \"path\": \"string\",\n        \"user_agent\": \"string\"\n      },\n      \"changes\": [\n        {\n          \"field\": \"string\",\n          \"old_value\": \"\",\n          \"new_value\": \"\"\n        },\n        {\n          \"field\": \"string\",\n          \"old_value\": \"\",\n          \"new_value\": \"\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"event_type\": \"string\",\n      \"occurred_at\": \"1987-02-24T13:48:01.212Z\",\n      \"performer\": {\n        \"id\": 4948,\n        \"type\": \"string\",\n        \"ip_address\": \"string\",\n        \"email\": \"cRQmqzgQGD@XrgzrDdjDkseTwGgdwpQwW.dx\"\n      },\n      \"event_target\": {\n        \"id\": 9272,\n        \"type\": \"string\"\n      },\n      \"request\": {\n        \"id\": \"string\",\n        \"type\": \"string\",\n        \"method\": \"string\",\n        \"path\": \"string\",\n        \"user_agent\": \"string\"\n      },\n      \"changes\": [\n        {\n          \"field\": \"string\",\n          \"old_value\": \"\",\n          \"new_value\": \"\"\n        },\n        {\n          \"field\": \"string\",\n          \"old_value\": \"\",\n          \"new_value\": \"\"\n        }\n      ]\n    }\n  ],\n  \"paging\": {\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d29da36d-b76e-43ee-bb18-fbcc2db92e59",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "before_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "after_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "magic_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "performer_ids",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "performer_types",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "performer_ip_addresses",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "event_types",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "event_target_ids",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "event_target_types",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "request_ids",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "request_types",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "paging",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://auditlog.us.greenhouse.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "75d7a0f8-03b5-49e5-ad61-5797875e7e16",
+    "name": "Greenhouse Audit Log API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Audit Log API exposes a record of important events that occurred in Greenhouse\nduring the prior 30 days, including who performed each event, the event target,\nand supporting request metadata. Authentication uses a short-lived JWT obtained\nfrom POST https://harvest.greenhouse.io/auth/jwt_access_token using a Harvest API key.\nRate limits: 50 requests / 10s on standard reads, 3 requests / 30s on paginated reads.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+      "type": "text/plain"
+    }
+  }
+}

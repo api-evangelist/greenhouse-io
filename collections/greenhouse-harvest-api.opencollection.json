@@ -1,0 +1,2645 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Harvest API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/applications",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Default 100, max 500."
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updated_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all applications across the organization."
+        },
+        {
+          "info": {
+            "name": "Retrieve Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Application"
+        },
+        {
+          "info": {
+            "name": "Update Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Application"
+        },
+        {
+          "info": {
+            "name": "Delete Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Application"
+        },
+        {
+          "info": {
+            "name": "Add Application to Candidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id/applications",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add Application to Candidate"
+        },
+        {
+          "info": {
+            "name": "Advance Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id/advance",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Move the application to the next interview stage."
+        },
+        {
+          "info": {
+            "name": "Move Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id/move",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Move the application to a specific stage."
+        },
+        {
+          "info": {
+            "name": "Transfer Application To Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id/transfer_to_job",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfer Application To Job"
+        },
+        {
+          "info": {
+            "name": "Convert Prospect To Candidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id/convert_prospect",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Convert Prospect To Candidate"
+        },
+        {
+          "info": {
+            "name": "Add Application Attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id/attachments",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add Application Attachment"
+        },
+        {
+          "info": {
+            "name": "Hire Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id/hire",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Hire Application"
+        },
+        {
+          "info": {
+            "name": "Reject Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id/reject",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reject Application"
+        },
+        {
+          "info": {
+            "name": "Update Rejection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id/reject",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Rejection"
+        },
+        {
+          "info": {
+            "name": "Unreject Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id/unreject",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Unreject Application"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Candidates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Candidates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/candidates",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Default 100, max 500."
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updated_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Candidates"
+        },
+        {
+          "info": {
+            "name": "Create Candidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/candidates",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Candidate"
+        },
+        {
+          "info": {
+            "name": "Delete Candidates Bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://harvest.greenhouse.io/v1/candidates",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Delete Candidates Bulk"
+        },
+        {
+          "info": {
+            "name": "Retrieve Candidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Candidate"
+        },
+        {
+          "info": {
+            "name": "Update Candidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Candidate"
+        },
+        {
+          "info": {
+            "name": "Add Candidate Attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id/attachments",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add Candidate Attachment"
+        },
+        {
+          "info": {
+            "name": "Add Candidate Note",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id/notes",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add Candidate Note"
+        },
+        {
+          "info": {
+            "name": "Add Candidate Email Note",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id/email_notes",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add Candidate Email Note"
+        },
+        {
+          "info": {
+            "name": "Add Candidate Education",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id/education",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add Candidate Education"
+        },
+        {
+          "info": {
+            "name": "Delete Candidate Education",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id/education/:education_id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "education_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Candidate Education"
+        },
+        {
+          "info": {
+            "name": "Add Candidate Employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id/employment",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add Candidate Employment"
+        },
+        {
+          "info": {
+            "name": "Delete Candidate Employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id/employment/:employment_id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Candidate Employment"
+        },
+        {
+          "info": {
+            "name": "Convert Candidate To Prospect",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id/prospect",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Convert Candidate To Prospect"
+        },
+        {
+          "info": {
+            "name": "Anonymize Candidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id/anonymize",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Anonymize Candidate"
+        },
+        {
+          "info": {
+            "name": "Merge Candidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id/merge",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Merge Candidate"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ActivityFeed",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Candidate Activity Feed",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id/activity_feed",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Candidate Activity Feed"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/jobs",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Default 100, max 500."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Jobs"
+        },
+        {
+          "info": {
+            "name": "Create Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/jobs",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Job"
+        },
+        {
+          "info": {
+            "name": "Retrieve Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Job"
+        },
+        {
+          "info": {
+            "name": "Update Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://harvest.greenhouse.io/v1/jobs/:id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Job"
+        },
+        {
+          "info": {
+            "name": "Retrieve Job Hiring Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/jobs/:id/hiring_team",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Job Hiring Team"
+        },
+        {
+          "info": {
+            "name": "Replace Job Hiring Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://harvest.greenhouse.io/v1/jobs/:id/hiring_team",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace Job Hiring Team"
+        },
+        {
+          "info": {
+            "name": "Add Hiring Team Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/jobs/:id/hiring_team_members",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add Hiring Team Member"
+        },
+        {
+          "info": {
+            "name": "Remove Hiring Team Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://harvest.greenhouse.io/v1/jobs/:id/hiring_team_members/:user_id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove Hiring Team Member"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "JobOpenings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Openings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/openings",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Default 100, max 500."
+              }
+            ]
+          },
+          "docs": "List Openings"
+        },
+        {
+          "info": {
+            "name": "Create Opening",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/openings",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Opening"
+        },
+        {
+          "info": {
+            "name": "Delete Openings Bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://harvest.greenhouse.io/v1/openings",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Delete Openings Bulk"
+        },
+        {
+          "info": {
+            "name": "Retrieve Opening",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/openings/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Opening"
+        },
+        {
+          "info": {
+            "name": "Update Opening",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://harvest.greenhouse.io/v1/openings/:id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Opening"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "JobPosts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Job Posts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/job_posts",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Default 100, max 500."
+              },
+              {
+                "name": "live",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Job Posts"
+        },
+        {
+          "info": {
+            "name": "Retrieve Job Post",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/job_posts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Job Post"
+        },
+        {
+          "info": {
+            "name": "Update Job Post",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://harvest.greenhouse.io/v1/job_posts/:id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Job Post"
+        },
+        {
+          "info": {
+            "name": "List Job Post Custom Locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/job_posts/:id/custom_locations",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Job Post Custom Locations"
+        },
+        {
+          "info": {
+            "name": "Update Job Post Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://harvest.greenhouse.io/v1/job_posts/:id/status",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Job Post Status"
+        },
+        {
+          "info": {
+            "name": "List Job Posts For Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/jobs/:job_id/job_posts",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Job Posts For Job"
+        },
+        {
+          "info": {
+            "name": "Retrieve Job Job Post",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/jobs/:job_id/job_posts/:id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Job Job Post"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "JobStages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Job Stages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/job_stages"
+          },
+          "docs": "List Job Stages"
+        },
+        {
+          "info": {
+            "name": "Retrieve Job Stage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/job_stages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Job Stage"
+        },
+        {
+          "info": {
+            "name": "List Job Stages For Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/jobs/:job_id/stages",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Job Stages For Job"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Departments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Departments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/departments"
+          },
+          "docs": "List Departments"
+        },
+        {
+          "info": {
+            "name": "Create Department",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/departments",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Department"
+        },
+        {
+          "info": {
+            "name": "Retrieve Department",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/departments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Department"
+        },
+        {
+          "info": {
+            "name": "Update Department",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://harvest.greenhouse.io/v1/departments/:id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Department"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Offices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Offices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/offices"
+          },
+          "docs": "List Offices"
+        },
+        {
+          "info": {
+            "name": "Create Office",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/offices",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Office"
+        },
+        {
+          "info": {
+            "name": "Retrieve Office",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/offices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Office"
+        },
+        {
+          "info": {
+            "name": "Update Office",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://harvest.greenhouse.io/v1/offices/:id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Office"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/users",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Default 100, max 500."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Users"
+        },
+        {
+          "info": {
+            "name": "Create User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/users",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create User"
+        },
+        {
+          "info": {
+            "name": "Retrieve User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve User"
+        },
+        {
+          "info": {
+            "name": "Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://harvest.greenhouse.io/v1/users/:id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update User"
+        },
+        {
+          "info": {
+            "name": "Add User Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/users/:id/email_addresses",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add User Email"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Approvals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List User Pending Approvals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/users/:id/pending_approvals",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List User Pending Approvals"
+        },
+        {
+          "info": {
+            "name": "Create Approval Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/approval_flows",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Approval Flow"
+        },
+        {
+          "info": {
+            "name": "Retrieve Approval Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/approval_flows/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Approval Flow"
+        },
+        {
+          "info": {
+            "name": "Replace Approver",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://harvest.greenhouse.io/v1/approval_flows/:id/approval_groups/:group_id/approvers/:user_id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Replace Approver"
+        },
+        {
+          "info": {
+            "name": "List Job Approval Flows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/jobs/:job_id/approval_flows",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Job Approval Flows"
+        },
+        {
+          "info": {
+            "name": "Replace Job Approval Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://harvest.greenhouse.io/v1/jobs/:job_id/approval_flows",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace Job Approval Flow"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Offers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Offers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/offers",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Default 100, max 500."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Offers"
+        },
+        {
+          "info": {
+            "name": "Retrieve Offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/offers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Offer"
+        },
+        {
+          "info": {
+            "name": "Update Current Offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://harvest.greenhouse.io/v1/offers/:id/current",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Current Offer"
+        },
+        {
+          "info": {
+            "name": "List Application Offers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id/offers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Application Offers"
+        },
+        {
+          "info": {
+            "name": "Retrieve Current Application Offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id/offers/current",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Current Application Offer"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ScheduledInterviews",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Scheduled Interviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/scheduled_interviews",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Default 100, max 500."
+              },
+              {
+                "name": "starts_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "starts_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Scheduled Interviews"
+        },
+        {
+          "info": {
+            "name": "Create Scheduled Interview",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/scheduled_interviews",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Scheduled Interview"
+        },
+        {
+          "info": {
+            "name": "Retrieve Scheduled Interview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/scheduled_interviews/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Scheduled Interview"
+        },
+        {
+          "info": {
+            "name": "Update Scheduled Interview",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://harvest.greenhouse.io/v1/scheduled_interviews/:id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Scheduled Interview"
+        },
+        {
+          "info": {
+            "name": "Delete Scheduled Interview",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://harvest.greenhouse.io/v1/scheduled_interviews/:id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Scheduled Interview"
+        },
+        {
+          "info": {
+            "name": "List Application Scheduled Interviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id/scheduled_interviews",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Application Scheduled Interviews"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Scorecards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Scorecards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/scorecards",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Default 100, max 500."
+              }
+            ]
+          },
+          "docs": "List Scorecards"
+        },
+        {
+          "info": {
+            "name": "Retrieve Scorecard",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/scorecards/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Scorecard"
+        },
+        {
+          "info": {
+            "name": "List Application Scorecards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/applications/:id/scorecards",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Application Scorecards"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/sources"
+          },
+          "docs": "List Sources"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Candidate Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/candidate_tags"
+          },
+          "docs": "List Candidate Tags"
+        },
+        {
+          "info": {
+            "name": "Create Candidate Tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/candidate_tags",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Candidate Tag"
+        },
+        {
+          "info": {
+            "name": "Delete Candidate Tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://harvest.greenhouse.io/v1/candidate_tags/:id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Candidate Tag"
+        },
+        {
+          "info": {
+            "name": "List Candidate Candidate Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id/candidate_tags",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Candidate Candidate Tags"
+        },
+        {
+          "info": {
+            "name": "Replace Candidate Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id/candidate_tags",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace Candidate Tags"
+        },
+        {
+          "info": {
+            "name": "Remove Candidate Tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://harvest.greenhouse.io/v1/candidates/:id/candidate_tags/:tag_id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tag_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove Candidate Tag"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "CustomFields",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Custom Fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/custom_fields"
+          },
+          "docs": "List Custom Fields"
+        },
+        {
+          "info": {
+            "name": "Create Custom Field",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/custom_fields",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Custom Field"
+        },
+        {
+          "info": {
+            "name": "Retrieve Custom Field",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/custom_fields/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Custom Field"
+        },
+        {
+          "info": {
+            "name": "Update Custom Field",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://harvest.greenhouse.io/v1/custom_fields/:id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Custom Field"
+        },
+        {
+          "info": {
+            "name": "Delete Custom Field",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://harvest.greenhouse.io/v1/custom_fields/:id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Custom Field"
+        },
+        {
+          "info": {
+            "name": "List Custom Field Options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/custom_fields/:id/custom_field_options",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Custom Field Options"
+        },
+        {
+          "info": {
+            "name": "Create Custom Field Option",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://harvest.greenhouse.io/v1/custom_fields/:id/custom_field_options",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Custom Field Option"
+        },
+        {
+          "info": {
+            "name": "Update Custom Field Option",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://harvest.greenhouse.io/v1/custom_fields/:id/custom_field_options/:option_id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "option_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Custom Field Option"
+        },
+        {
+          "info": {
+            "name": "Delete Custom Field Option",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://harvest.greenhouse.io/v1/custom_fields/:id/custom_field_options/:option_id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "option_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Custom Field Option"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ProspectPools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Prospect Pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/prospect_pools"
+          },
+          "docs": "List Prospect Pools"
+        },
+        {
+          "info": {
+            "name": "Retrieve Prospect Pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/prospect_pools/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Prospect Pool"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "RejectionReasons",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Rejection Reasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://harvest.greenhouse.io/v1/rejection_reasons"
+          },
+          "docs": "List Rejection Reasons"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
