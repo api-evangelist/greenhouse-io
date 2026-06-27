@@ -300,13 +300,13 @@ common:
   type: GitHubRepository
   name: greenhouse-api-docs (Slate)
 - url: https://github.com/grnhse/greenhouse_io
-  type: SDK
+  type: SDKs
   name: Ruby SDK (greenhouse_io)
 - url: https://github.com/grnhse/greenhouse-tools-php
-  type: SDK
+  type: SDKs
   name: PHP Job Board Tools
 - url: https://github.com/grnhse/omniauth-greenhouse
-  type: SDK
+  type: SDKs
   name: OmniAuth Strategy (Ruby)
 - type: Features
   data:
