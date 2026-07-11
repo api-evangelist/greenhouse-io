@@ -1,0 +1,20 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/greenhouse-candidate-ingestion-api-openapi.yml
+schemes:
+- name: OAuth2
+  source: openapi/greenhouse-candidate-ingestion-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://app.greenhouse.io/oauth/authorize
+    tokenUrl: https://app.greenhouse.io/oauth/token
+  - flow: clientCredentials
+    tokenUrl: https://app.greenhouse.io/oauth/token
+scopes:
+- scope: partner
+  description: Partner integration scope.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/greenhouse-candidate-ingestion-api-openapi.yml
