@@ -1,0 +1,43 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/greenhouse-assessment-api-openapi.yml, openapi/greenhouse-audit-log-api-openapi.yml,
+  openapi/greenhouse-candidate-ingestion-api-openapi.yml, openapi/greenhouse-harvest-api-openapi.yml,
+  openapi/greenhouse-job-board-api-openapi.yml, openapi/greenhouse-onboarding-api-openapi.yml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+  - clientCredentials
+schemes:
+- name: BasicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic; the API key is Base64-encoded and used as the username (key must
+    be <171 chars).
+  sources:
+  - openapi/greenhouse-assessment-api-openapi.yml
+  - openapi/greenhouse-audit-log-api-openapi.yml
+  - openapi/greenhouse-candidate-ingestion-api-openapi.yml
+  - openapi/greenhouse-harvest-api-openapi.yml
+  - openapi/greenhouse-job-board-api-openapi.yml
+  - openapi/greenhouse-onboarding-api-openapi.yml
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/greenhouse-audit-log-api-openapi.yml
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://app.greenhouse.io/oauth/authorize
+    tokenUrl: https://app.greenhouse.io/oauth/token
+    scopes: 1
+  - flow: clientCredentials
+    tokenUrl: https://app.greenhouse.io/oauth/token
+    scopes: 1
+  sources:
+  - openapi/greenhouse-candidate-ingestion-api-openapi.yml

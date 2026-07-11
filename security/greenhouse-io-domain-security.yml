@@ -1,0 +1,44 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.greenhouse.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 25 23:27:17 2026 GMT
+  hsts: false
+- host: developers.greenhouse.io
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 11 23:59:59 2026 GMT
+  hsts: false
+- host: harvest.greenhouse.io
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 17 23:59:59 2026 GMT
+  hsts: null
+domains:
+- domain: greenhouse.com
+  dnssec: false
+  caa:
+  - 0 issue "pki.goog; cansignhttpexchanges=yes"
+  - 0 issuewild "amazon.com"
+  - 0 issuewild "amazonaws.com"
+  - 0 issuewild "amazontrust.com"
+  - 0 issuewild "awstrust.com"
+  - 0 issuewild "letsencrypt.org"
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
+- domain: greenhouse.io
+  dnssec: false
+  caa:
+  - 0 issue "godaddy.com"
+  - 0 issue "letsencrypt.org"
+  - 0 issue "pki.goog; cansignhttpexchanges=yes"
+  - 0 issuewild "amazon.com"
+  - 0 issuewild "amazonaws.com"
+  - 0 issuewild "amazontrust.com"
+  spf: true
+  dmarc: true
+  dmarc_policy: none
