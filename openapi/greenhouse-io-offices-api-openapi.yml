@@ -1,0 +1,169 @@
+openapi: 3.1.0
+info:
+  title: Greenhouse Assessment Partner ActivityFeed Offices API
+  description: 'The Assessment Partner API defines the contract that assessment vendors implement so
+
+    Greenhouse can list available tests, send a test to a candidate, and retrieve the
+
+    candidate''s results. Endpoints are hosted by the partner (not Greenhouse) and are
+
+    secured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from
+
+    the partner with completed test status; otherwise it polls `test_status` hourly for
+
+    up to 8 weeks. API keys must be fewer than 171 characters.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+servers:
+- url: https://{partner_host}/{base_path}
+  description: Partner-hosted endpoint
+  variables:
+    partner_host:
+      default: partner.example.com
+    base_path:
+      default: greenhouse-assessment
+security:
+- BasicAuth: []
+tags:
+- name: Offices
+  description: Office locations.
+paths:
+  /offices:
+    get:
+      tags:
+      - Offices
+      summary: List Offices
+      operationId: listOffices
+      responses:
+        '200':
+          description: Offices.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Office'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    post:
+      tags:
+      - Offices
+      summary: Create Office
+      operationId: createOffice
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Office'
+      responses:
+        '201':
+          description: Created.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /offices/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      tags:
+      - Offices
+      summary: Retrieve Office
+      operationId: getOffice
+      responses:
+        '200':
+          description: Office.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Office'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    patch:
+      tags:
+      - Offices
+      summary: Update Office
+      operationId: updateOffice
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Office'
+      responses:
+        '200':
+          description: Updated.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Office:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        location:
+          type: object
+          properties:
+            name:
+              type: string
+        parent_id:
+          type: integer
+          nullable: true
+        child_ids:
+          type: array
+          items:
+            type: integer
+        external_id:
+          type: string
+          nullable: true
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic; the API key is Base64-encoded and used as the username (key must be <171 chars).

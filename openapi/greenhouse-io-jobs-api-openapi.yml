@@ -1,0 +1,476 @@
+openapi: 3.1.0
+info:
+  title: Greenhouse Assessment Partner ActivityFeed Jobs API
+  description: 'The Assessment Partner API defines the contract that assessment vendors implement so
+
+    Greenhouse can list available tests, send a test to a candidate, and retrieve the
+
+    candidate''s results. Endpoints are hosted by the partner (not Greenhouse) and are
+
+    secured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from
+
+    the partner with completed test status; otherwise it polls `test_status` hourly for
+
+    up to 8 weeks. API keys must be fewer than 171 characters.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+servers:
+- url: https://{partner_host}/{base_path}
+  description: Partner-hosted endpoint
+  variables:
+    partner_host:
+      default: partner.example.com
+    base_path:
+      default: greenhouse-assessment
+security:
+- BasicAuth: []
+tags:
+- name: Jobs
+  description: List jobs visible to the integrated user.
+paths:
+  /jobs:
+    get:
+      tags:
+      - Jobs
+      summary: List Partner Jobs
+      description: List jobs visible to the integrated user.
+      operationId: listPartnerJobs
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '200':
+          description: Visible jobs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    requisition_id:
+                      type: string
+                      nullable: true
+                    departments:
+                      type: array
+                      items:
+                        type: object
+                    offices:
+                      type: array
+                      items:
+                        type: object
+    post:
+      tags:
+      - Jobs
+      summary: Create Job
+      operationId: createJob
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobCreate'
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /jobs/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      tags:
+      - Jobs
+      summary: Retrieve Job
+      operationId: getJob
+      responses:
+        '200':
+          description: A single job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    patch:
+      tags:
+      - Jobs
+      summary: Update Job
+      operationId: updateJob
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobUpdate'
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /jobs/{id}/hiring_team:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      tags:
+      - Jobs
+      summary: Retrieve Job Hiring Team
+      operationId: getJobHiringTeam
+      responses:
+        '200':
+          description: Hiring team.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HiringTeam'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    put:
+      tags:
+      - Jobs
+      summary: Replace Job Hiring Team
+      operationId: replaceJobHiringTeam
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HiringTeam'
+      responses:
+        '200':
+          description: Replaced.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HiringTeam'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /jobs/{id}/hiring_team_members:
+    post:
+      tags:
+      - Jobs
+      summary: Add Hiring Team Member
+      operationId: addHiringTeamMember
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user_id
+              - role
+              properties:
+                user_id:
+                  type: integer
+                role:
+                  type: string
+                  enum:
+                  - hiring_manager
+                  - recruiter
+                  - coordinator
+                  - sourcer
+                  - interviewer
+      responses:
+        '201':
+          description: Added.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /jobs/{id}/hiring_team_members/{user_id}:
+    delete:
+      tags:
+      - Jobs
+      summary: Remove Hiring Team Member
+      operationId: removeHiringTeamMember
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      responses:
+        '204':
+          description: Removed.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  schemas:
+    HiringTeam:
+      type: object
+      properties:
+        hiring_managers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
+        recruiters:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
+        coordinators:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
+        sourcers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
+    JobCreate:
+      type: object
+      required:
+      - name
+      - template_job_id
+      properties:
+        name:
+          type: string
+        template_job_id:
+          type: integer
+        requisition_id:
+          type: string
+        department_id:
+          type: integer
+        office_ids:
+          type: array
+          items:
+            type: integer
+        number_of_openings:
+          type: integer
+    Office:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        location:
+          type: object
+          properties:
+            name:
+              type: string
+        parent_id:
+          type: integer
+          nullable: true
+        child_ids:
+          type: array
+          items:
+            type: integer
+        external_id:
+          type: string
+          nullable: true
+    UserRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        name:
+          type: string
+        employee_id:
+          type: string
+          nullable: true
+    Job:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        requisition_id:
+          type: string
+          nullable: true
+        notes:
+          type: string
+        confidential:
+          type: boolean
+        status:
+          type: string
+          enum:
+          - open
+          - closed
+          - draft
+        created_at:
+          type: string
+          format: date-time
+        opened_at:
+          type: string
+          format: date-time
+          nullable: true
+        closed_at:
+          type: string
+          format: date-time
+          nullable: true
+        updated_at:
+          type: string
+          format: date-time
+        departments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Department'
+        offices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Office'
+        hiring_team:
+          $ref: '#/components/schemas/HiringTeam'
+        custom_fields:
+          type: object
+          additionalProperties: true
+        openings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Opening'
+    Department:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        parent_id:
+          type: integer
+          nullable: true
+        parent_department_external_id:
+          type: string
+          nullable: true
+        child_ids:
+          type: array
+          items:
+            type: integer
+        external_id:
+          type: string
+          nullable: true
+    JobUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        requisition_id:
+          type: string
+        notes:
+          type: string
+        status:
+          type: string
+          enum:
+          - open
+          - closed
+          - draft
+        department_id:
+          type: integer
+        office_ids:
+          type: array
+          items:
+            type: integer
+        custom_fields:
+          type: object
+          additionalProperties: true
+    Opening:
+      type: object
+      properties:
+        id:
+          type: integer
+        opening_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - open
+          - closed
+        opened_at:
+          type: string
+          format: date-time
+        closed_at:
+          type: string
+          format: date-time
+          nullable: true
+        application_id:
+          type: integer
+          nullable: true
+        close_reason:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        custom_fields:
+          type: object
+          additionalProperties: true
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    OnBehalfOf_2:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: true
+      description: Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.
+      schema:
+        type: string
+        format: email
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic; the API key is Base64-encoded and used as the username (key must be <171 chars).

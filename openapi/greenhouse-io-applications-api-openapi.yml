@@ -1,0 +1,666 @@
+openapi: 3.1.0
+info:
+  title: Greenhouse Assessment Partner ActivityFeed Applications API
+  description: 'The Assessment Partner API defines the contract that assessment vendors implement so
+
+    Greenhouse can list available tests, send a test to a candidate, and retrieve the
+
+    candidate''s results. Endpoints are hosted by the partner (not Greenhouse) and are
+
+    secured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from
+
+    the partner with completed test status; otherwise it polls `test_status` hourly for
+
+    up to 8 weeks. API keys must be fewer than 171 characters.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+servers:
+- url: https://{partner_host}/{base_path}
+  description: Partner-hosted endpoint
+  variables:
+    partner_host:
+      default: partner.example.com
+    base_path:
+      default: greenhouse-assessment
+security:
+- BasicAuth: []
+tags:
+- name: Applications
+  description: Candidate applications to specific jobs, including stage advancement, transfers, hires, rejections, and attachments.
+paths:
+  /applications:
+    get:
+      tags:
+      - Applications
+      summary: List Applications
+      description: Returns a paginated list of all applications across the organization.
+      operationId: listApplications
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/CreatedAfter'
+      - $ref: '#/components/parameters/CreatedBefore'
+      - $ref: '#/components/parameters/UpdatedAfter'
+      - $ref: '#/components/parameters/UpdatedBefore'
+      - name: job_id
+        in: query
+        schema:
+          type: integer
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - active
+          - rejected
+          - hired
+          - converted
+      - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '200':
+          description: Array of applications.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Application'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /applications/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      tags:
+      - Applications
+      summary: Retrieve Application
+      operationId: getApplication
+      responses:
+        '200':
+          description: A single application.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    patch:
+      tags:
+      - Applications
+      summary: Update Application
+      operationId: updateApplication
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationUpdate'
+      responses:
+        '200':
+          description: Updated application.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    delete:
+      tags:
+      - Applications
+      summary: Delete Application
+      operationId: deleteApplication
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '204':
+          description: Deleted.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /candidates/{id}/applications:
+    post:
+      tags:
+      - Applications
+      summary: Add Application to Candidate
+      operationId: addCandidateApplication
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationCreate'
+      responses:
+        '201':
+          description: Created application.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /applications/{id}/advance:
+    post:
+      tags:
+      - Applications
+      summary: Advance Application
+      description: Move the application to the next interview stage.
+      operationId: advanceApplication
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '200':
+          description: Advanced.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /applications/{id}/move:
+    post:
+      tags:
+      - Applications
+      summary: Move Application
+      description: Move the application to a specific stage.
+      operationId: moveApplication
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - from_stage_id
+              - to_stage_id
+              properties:
+                from_stage_id:
+                  type: integer
+                to_stage_id:
+                  type: integer
+      responses:
+        '200':
+          description: Moved.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /applications/{id}/transfer_to_job:
+    post:
+      tags:
+      - Applications
+      summary: Transfer Application To Job
+      operationId: transferApplicationToJob
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - new_job_id
+              properties:
+                new_job_id:
+                  type: integer
+                new_job_stage_id:
+                  type: integer
+      responses:
+        '200':
+          description: Transferred.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /applications/{id}/convert_prospect:
+    patch:
+      tags:
+      - Applications
+      summary: Convert Prospect To Candidate
+      operationId: convertProspect
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                job_id:
+                  type: integer
+                job_stage_id:
+                  type: integer
+      responses:
+        '200':
+          description: Converted.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /applications/{id}/attachments:
+    post:
+      tags:
+      - Applications
+      summary: Add Application Attachment
+      operationId: addApplicationAttachment
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Attachment'
+      responses:
+        '201':
+          description: Attached.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /applications/{id}/hire:
+    post:
+      tags:
+      - Applications
+      summary: Hire Application
+      operationId: hireApplication
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                start_date:
+                  type: string
+                  format: date
+                opening_id:
+                  type: integer
+      responses:
+        '200':
+          description: Hired.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /applications/{id}/reject:
+    post:
+      tags:
+      - Applications
+      summary: Reject Application
+      operationId: rejectApplication
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rejection_reason_id:
+                  type: integer
+                notes:
+                  type: string
+      responses:
+        '200':
+          description: Rejected.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    patch:
+      tags:
+      - Applications
+      summary: Update Rejection
+      operationId: updateApplicationRejection
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rejection_reason_id:
+                  type: integer
+                notes:
+                  type: string
+      responses:
+        '200':
+          description: Updated rejection.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /applications/{id}/unreject:
+    post:
+      tags:
+      - Applications
+      summary: Unreject Application
+      operationId: unrejectApplication
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '200':
+          description: Unrejected.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /jobs/{id}:
+    post:
+      tags:
+      - Applications
+      summary: Submit Application
+      description: Submit a candidate application to a job posting. Accepts multipart/form-data or JSON. Requires Basic auth.
+      operationId: submitApplication
+      security:
+      - BasicAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationSubmission'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ApplicationSubmission'
+      responses:
+        '200':
+          description: Application accepted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: string
+components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      in: query
+      description: Default 100, max 500.
+      schema:
+        type: integer
+        default: 100
+        maximum: 500
+    CreatedAfter:
+      name: created_after
+      in: query
+      schema:
+        type: string
+        format: date-time
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+    UpdatedBefore:
+      name: updated_before
+      in: query
+      schema:
+        type: string
+        format: date-time
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+    CreatedBefore:
+      name: created_before
+      in: query
+      schema:
+        type: string
+        format: date-time
+    UpdatedAfter:
+      name: updated_after
+      in: query
+      schema:
+        type: string
+        format: date-time
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    UserRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        name:
+          type: string
+        employee_id:
+          type: string
+          nullable: true
+    ApplicationSubmission:
+      type: object
+      required:
+      - first_name
+      - last_name
+      - email
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        location:
+          type: string
+          description: City, State / Country.
+        resume_text:
+          type: string
+        resume_text_file:
+          type: string
+          description: Base64-encoded resume file content.
+        resume_content_filename:
+          type: string
+        resume_content_type:
+          type: string
+        cover_letter_text:
+          type: string
+        cover_letter_content:
+          type: string
+          description: Base64-encoded cover letter.
+        cover_letter_content_filename:
+          type: string
+        question_id:
+          type: string
+          description: Greenhouse-defined custom question identifiers; multiple entries allowed.
+    ApplicationCreate:
+      type: object
+      required:
+      - job_id
+      properties:
+        job_id:
+          type: integer
+        source_id:
+          type: integer
+        initial_stage_id:
+          type: integer
+        referrer:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - outside
+              - id
+              - email
+            value:
+              type: string
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+    ApplicationUpdate:
+      type: object
+      properties:
+        source_id:
+          type: integer
+        prospect_owner_id:
+          type: integer
+        prospect_pool_id:
+          type: integer
+        prospect_stage_id:
+          type: integer
+        custom_fields:
+          type: object
+          additionalProperties: true
+    Attachment:
+      type: object
+      required:
+      - filename
+      - type
+      properties:
+        filename:
+          type: string
+        url:
+          type: string
+          format: uri
+        type:
+          type: string
+          enum:
+          - resume
+          - cover_letter
+          - admin_only
+          - public
+          - offer_letter
+          - take_home_test
+          - offer_packet
+        content:
+          type: string
+          description: Base64 file content.
+        content_type:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    Application:
+      type: object
+      properties:
+        id:
+          type: integer
+        candidate_id:
+          type: integer
+        prospect:
+          type: boolean
+        applied_at:
+          type: string
+          format: date-time
+        rejected_at:
+          type: string
+          format: date-time
+          nullable: true
+        last_activity_at:
+          type: string
+          format: date-time
+        location:
+          type: object
+          properties:
+            address:
+              type: string
+        source:
+          type: object
+          properties:
+            id:
+              type: integer
+            public_name:
+              type: string
+        credited_to:
+          $ref: '#/components/schemas/UserRef'
+        rejection_reason:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        rejection_details:
+          type: object
+          nullable: true
+        jobs:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+        job_post_id:
+          type: integer
+          nullable: true
+        status:
+          type: string
+          enum:
+          - active
+          - rejected
+          - hired
+          - converted
+        current_stage:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        answers:
+          type: array
+          items:
+            type: object
+            properties:
+              question:
+                type: string
+              answer:
+                type: string
+        custom_fields:
+          type: object
+          additionalProperties: true
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic; the API key is Base64-encoded and used as the username (key must be <171 chars).

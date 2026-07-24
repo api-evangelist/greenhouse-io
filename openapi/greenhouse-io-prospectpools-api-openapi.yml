@@ -1,0 +1,146 @@
+openapi: 3.1.0
+info:
+  title: Greenhouse Assessment Partner ActivityFeed ProspectPools API
+  description: 'The Assessment Partner API defines the contract that assessment vendors implement so
+
+    Greenhouse can list available tests, send a test to a candidate, and retrieve the
+
+    candidate''s results. Endpoints are hosted by the partner (not Greenhouse) and are
+
+    secured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from
+
+    the partner with completed test status; otherwise it polls `test_status` hourly for
+
+    up to 8 weeks. API keys must be fewer than 171 characters.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+servers:
+- url: https://{partner_host}/{base_path}
+  description: Partner-hosted endpoint
+  variables:
+    partner_host:
+      default: partner.example.com
+    base_path:
+      default: greenhouse-assessment
+security:
+- BasicAuth: []
+tags:
+- name: ProspectPools
+  description: Read configured prospect pools and their stages.
+paths:
+  /prospect_pools:
+    get:
+      tags:
+      - ProspectPools
+      summary: List Partner Prospect Pools
+      operationId: listPartnerProspectPools
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '200':
+          description: Prospect pools.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    stages:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          name:
+                            type: string
+                          priority:
+                            type: integer
+  /prospect_pools/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      tags:
+      - ProspectPools
+      summary: Retrieve Prospect Pool
+      operationId: getProspectPool
+      responses:
+        '200':
+          description: Prospect pool.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProspectPool'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  schemas:
+    ProspectPool:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        prospect_stages:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              priority:
+                type: integer
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: true
+      description: Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.
+      schema:
+        type: string
+        format: email
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic; the API key is Base64-encoded and used as the username (key must be <171 chars).

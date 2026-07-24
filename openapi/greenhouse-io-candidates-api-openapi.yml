@@ -1,0 +1,755 @@
+openapi: 3.1.0
+info:
+  title: Greenhouse Assessment Partner ActivityFeed Candidates API
+  description: 'The Assessment Partner API defines the contract that assessment vendors implement so
+
+    Greenhouse can list available tests, send a test to a candidate, and retrieve the
+
+    candidate''s results. Endpoints are hosted by the partner (not Greenhouse) and are
+
+    secured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from
+
+    the partner with completed test status; otherwise it polls `test_status` hourly for
+
+    up to 8 weeks. API keys must be fewer than 171 characters.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+servers:
+- url: https://{partner_host}/{base_path}
+  description: Partner-hosted endpoint
+  variables:
+    partner_host:
+      default: partner.example.com
+    base_path:
+      default: greenhouse-assessment
+security:
+- BasicAuth: []
+tags:
+- name: Candidates
+  description: Create or retrieve candidates / prospects in the customer's Greenhouse account.
+paths:
+  /candidates:
+    get:
+      tags:
+      - Candidates
+      summary: List Partner Candidates
+      description: Retrieve candidates by partner-supplied external IDs or Greenhouse IDs.
+      operationId: listPartnerCandidates
+      parameters:
+      - name: external_ids
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+        explode: false
+      - name: candidate_ids
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+        style: form
+        explode: false
+      - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '200':
+          description: Partner candidates.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PartnerCandidate'
+    post:
+      tags:
+      - Candidates
+      summary: Create Partner Candidate
+      description: Create a candidate or prospect on behalf of a Greenhouse user.
+      operationId: createPartnerCandidate
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartnerCandidate'
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartnerCandidate'
+    delete:
+      tags:
+      - Candidates
+      summary: Delete Candidates Bulk
+      operationId: deleteCandidates
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      responses:
+        '204':
+          description: Deleted.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /candidates/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      tags:
+      - Candidates
+      summary: Retrieve Candidate
+      operationId: getCandidate
+      responses:
+        '200':
+          description: A single candidate.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Candidate'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    patch:
+      tags:
+      - Candidates
+      summary: Update Candidate
+      operationId: updateCandidate
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CandidateUpdate'
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Candidate'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /candidates/{id}/attachments:
+    post:
+      tags:
+      - Candidates
+      summary: Add Candidate Attachment
+      operationId: addCandidateAttachment
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Attachment'
+      responses:
+        '201':
+          description: Attached.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /candidates/{id}/notes:
+    post:
+      tags:
+      - Candidates
+      summary: Add Candidate Note
+      operationId: addCandidateNote
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user_id
+              - body
+              - visibility
+              properties:
+                user_id:
+                  type: integer
+                body:
+                  type: string
+                visibility:
+                  type: string
+                  enum:
+                  - admin_only
+                  - private
+                  - public
+      responses:
+        '201':
+          description: Note added.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /candidates/{id}/email_notes:
+    post:
+      tags:
+      - Candidates
+      summary: Add Candidate Email Note
+      operationId: addCandidateEmailNote
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                to:
+                  type: string
+                from:
+                  type: string
+                subject:
+                  type: string
+                body:
+                  type: string
+      responses:
+        '201':
+          description: Email note recorded.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /candidates/{id}/education:
+    post:
+      tags:
+      - Candidates
+      summary: Add Candidate Education
+      operationId: addCandidateEducation
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Education'
+      responses:
+        '201':
+          description: Education added.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /candidates/{id}/education/{education_id}:
+    delete:
+      tags:
+      - Candidates
+      summary: Delete Candidate Education
+      operationId: deleteCandidateEducation
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - name: education_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      responses:
+        '204':
+          description: Deleted.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /candidates/{id}/employment:
+    post:
+      tags:
+      - Candidates
+      summary: Add Candidate Employment
+      operationId: addCandidateEmployment
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employment'
+      responses:
+        '201':
+          description: Employment added.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /candidates/{id}/employment/{employment_id}:
+    delete:
+      tags:
+      - Candidates
+      summary: Delete Candidate Employment
+      operationId: deleteCandidateEmployment
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - name: employment_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      responses:
+        '204':
+          description: Deleted.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /candidates/{id}/prospect:
+    post:
+      tags:
+      - Candidates
+      summary: Convert Candidate To Prospect
+      operationId: candidateToProspect
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      responses:
+        '200':
+          description: Converted to prospect.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /candidates/{id}/anonymize:
+    put:
+      tags:
+      - Candidates
+      summary: Anonymize Candidate
+      operationId: anonymizeCandidate
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      responses:
+        '200':
+          description: Anonymized.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /candidates/{id}/merge:
+    put:
+      tags:
+      - Candidates
+      summary: Merge Candidate
+      operationId: mergeCandidate
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf_2'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - primary_candidate_id
+              properties:
+                primary_candidate_id:
+                  type: integer
+                duplicate_candidate_id:
+                  type: integer
+      responses:
+        '200':
+          description: Merged.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    OnBehalfOf_2:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: true
+      description: Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.
+      schema:
+        type: string
+        format: email
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    UserRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        name:
+          type: string
+        employee_id:
+          type: string
+          nullable: true
+    Candidate:
+      type: object
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        company:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        last_activity:
+          type: string
+          format: date-time
+        is_private:
+          type: boolean
+        photo_url:
+          type: string
+          nullable: true
+        emails:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                format: email
+              type:
+                type: string
+        phone_numbers:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+              type:
+                type: string
+        addresses:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+              type:
+                type: string
+        social_media_addresses:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+        recruiter:
+          $ref: '#/components/schemas/UserRef'
+        coordinator:
+          $ref: '#/components/schemas/UserRef'
+        tags:
+          type: array
+          items:
+            type: string
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
+        educations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Education'
+        employments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employment'
+        custom_fields:
+          type: object
+          additionalProperties: true
+    Employment:
+      type: object
+      properties:
+        company_name:
+          type: string
+        title:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+    Attachment:
+      type: object
+      required:
+      - filename
+      - type
+      properties:
+        filename:
+          type: string
+        url:
+          type: string
+          format: uri
+        type:
+          type: string
+          enum:
+          - resume
+          - cover_letter
+          - admin_only
+          - public
+          - offer_letter
+          - take_home_test
+          - offer_packet
+        content:
+          type: string
+          description: Base64 file content.
+        content_type:
+          type: string
+    PartnerCandidate:
+      type: object
+      required:
+      - external_id
+      - first_name
+      - last_name
+      properties:
+        external_id:
+          type: string
+          description: Partner-system identifier for this candidate.
+        first_name:
+          type: string
+        last_name:
+          type: string
+        company:
+          type: string
+        title:
+          type: string
+        emails:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                format: email
+              type:
+                type: string
+        phone_numbers:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+              type:
+                type: string
+        social_media_addresses:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+        application:
+          type: object
+          properties:
+            job_id:
+              type: integer
+            initial_stage_id:
+              type: integer
+            source_id:
+              type: integer
+            referrer:
+              type: object
+              properties:
+                type:
+                  type: string
+                value:
+                  type: string
+        prospect:
+          type: object
+          properties:
+            prospect_pool_id:
+              type: integer
+            prospect_stage_id:
+              type: integer
+            prospect_owner_id:
+              type: integer
+        attachments:
+          type: array
+          items:
+            type: object
+            properties:
+              filename:
+                type: string
+              type:
+                type: string
+                enum:
+                - resume
+                - cover_letter
+                - admin_only
+                - public
+                - offer_letter
+              content:
+                type: string
+              content_type:
+                type: string
+              url:
+                type: string
+                format: uri
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    Education:
+      type: object
+      properties:
+        school_name:
+          type: string
+        degree:
+          type: string
+        discipline:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+    CandidateUpdate:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        company:
+          type: string
+        title:
+          type: string
+        is_private:
+          type: boolean
+        custom_fields:
+          type: object
+          additionalProperties: true
+    Application:
+      type: object
+      properties:
+        id:
+          type: integer
+        candidate_id:
+          type: integer
+        prospect:
+          type: boolean
+        applied_at:
+          type: string
+          format: date-time
+        rejected_at:
+          type: string
+          format: date-time
+          nullable: true
+        last_activity_at:
+          type: string
+          format: date-time
+        location:
+          type: object
+          properties:
+            address:
+              type: string
+        source:
+          type: object
+          properties:
+            id:
+              type: integer
+            public_name:
+              type: string
+        credited_to:
+          $ref: '#/components/schemas/UserRef'
+        rejection_reason:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        rejection_details:
+          type: object
+          nullable: true
+        jobs:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+        job_post_id:
+          type: integer
+          nullable: true
+        status:
+          type: string
+          enum:
+          - active
+          - rejected
+          - hired
+          - converted
+        current_stage:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        answers:
+          type: array
+          items:
+            type: object
+            properties:
+              question:
+                type: string
+              answer:
+                type: string
+        custom_fields:
+          type: object
+          additionalProperties: true
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic; the API key is Base64-encoded and used as the username (key must be <171 chars).

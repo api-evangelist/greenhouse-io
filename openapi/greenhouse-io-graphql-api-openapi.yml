@@ -1,0 +1,146 @@
+openapi: 3.1.0
+info:
+  title: Greenhouse Assessment Partner ActivityFeed GraphQL API
+  description: 'The Assessment Partner API defines the contract that assessment vendors implement so
+
+    Greenhouse can list available tests, send a test to a candidate, and retrieve the
+
+    candidate''s results. Endpoints are hosted by the partner (not Greenhouse) and are
+
+    secured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from
+
+    the partner with completed test status; otherwise it polls `test_status` hourly for
+
+    up to 8 weeks. API keys must be fewer than 171 characters.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+servers:
+- url: https://{partner_host}/{base_path}
+  description: Partner-hosted endpoint
+  variables:
+    partner_host:
+      default: partner.example.com
+    base_path:
+      default: greenhouse-assessment
+security:
+- BasicAuth: []
+tags:
+- name: GraphQL
+  description: Single GraphQL endpoint for all Onboarding operations.
+paths:
+  /graphql:
+    post:
+      tags:
+      - GraphQL
+      summary: Execute Onboarding GraphQL
+      description: 'Execute a GraphQL query or mutation against the Greenhouse Onboarding schema.
+
+        Supported root queries include `employee(id)`, `employees`, `departments`,
+
+        `locations`, `customFields`, `teams`, and `rateLimit`. Supported mutations
+
+        include department / location CRUD, `addPendingHire`, and `updateEmployeeProfile`.
+
+        Errors use the GraphQL `errors` array with codes: Authentication, Validation,
+
+        NotFound, Server, RateLimit.
+
+        '
+      operationId: executeOnboardingGraphQL
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+      responses:
+        '200':
+          description: GraphQL response (errors carried inside the body).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+        '401':
+          description: Authentication failed.
+        '429':
+          description: Rate or complexity limit exceeded.
+  /graphql/introspection:
+    get:
+      tags:
+      - GraphQL
+      summary: Onboarding GraphQL Schema (Documentation Pointer)
+      description: 'GraphQL schema is discovered via introspection by POSTing a standard introspection
+
+        query to /graphql. This path is documentation-only and not an additional HTTP route.
+
+        '
+      operationId: getOnboardingIntrospectionDocs
+      responses:
+        '200':
+          description: See documentation.
+components:
+  schemas:
+    GraphQLRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+        operationName:
+          type: string
+        variables:
+          type: object
+          additionalProperties: true
+    GraphQLResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+          nullable: true
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+              path:
+                type: array
+                items:
+                  type: string
+              extensions:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    enum:
+                    - Authentication
+                    - Validation
+                    - NotFound
+                    - Server
+                    - RateLimit
+        extensions:
+          type: object
+          properties:
+            rateLimit:
+              type: object
+              properties:
+                cost:
+                  type: integer
+                remaining:
+                  type: integer
+                resetAt:
+                  type: string
+                  format: date-time
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic; the API key is Base64-encoded and used as the username (key must be <171 chars).

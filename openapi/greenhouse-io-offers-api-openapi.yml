@@ -1,0 +1,230 @@
+openapi: 3.1.0
+info:
+  title: Greenhouse Assessment Partner ActivityFeed Offers API
+  description: 'The Assessment Partner API defines the contract that assessment vendors implement so
+
+    Greenhouse can list available tests, send a test to a candidate, and retrieve the
+
+    candidate''s results. Endpoints are hosted by the partner (not Greenhouse) and are
+
+    secured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from
+
+    the partner with completed test status; otherwise it polls `test_status` hourly for
+
+    up to 8 weeks. API keys must be fewer than 171 characters.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+servers:
+- url: https://{partner_host}/{base_path}
+  description: Partner-hosted endpoint
+  variables:
+    partner_host:
+      default: partner.example.com
+    base_path:
+      default: greenhouse-assessment
+security:
+- BasicAuth: []
+tags:
+- name: Offers
+  description: Offers extended to candidates.
+paths:
+  /offers:
+    get:
+      tags:
+      - Offers
+      summary: List Offers
+      operationId: listOffers
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - draft
+          - approved
+          - sent
+          - sent_manually
+          - accepted
+          - rejected
+          - deprecated
+      responses:
+        '200':
+          description: Offers.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Offer'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /offers/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      tags:
+      - Offers
+      summary: Retrieve Offer
+      operationId: getOffer
+      responses:
+        '200':
+          description: Offer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offer'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /offers/{id}/current:
+    patch:
+      tags:
+      - Offers
+      summary: Update Current Offer
+      operationId: updateCurrentOffer
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Offer'
+      responses:
+        '200':
+          description: Updated.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /applications/{id}/offers:
+    get:
+      tags:
+      - Offers
+      summary: List Application Offers
+      operationId: listApplicationOffers
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Offers for the application.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Offer'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /applications/{id}/offers/current:
+    get:
+      tags:
+      - Offers
+      summary: Retrieve Current Application Offer
+      operationId: getCurrentApplicationOffer
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Current offer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offer'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  schemas:
+    Offer:
+      type: object
+      properties:
+        id:
+          type: integer
+        application_id:
+          type: integer
+        version:
+          type: integer
+        status:
+          type: string
+          enum:
+          - draft
+          - approved
+          - sent
+          - sent_manually
+          - accepted
+          - rejected
+          - deprecated
+        sent_at:
+          type: string
+          format: date-time
+          nullable: true
+        resolved_at:
+          type: string
+          format: date-time
+          nullable: true
+        starts_at:
+          type: string
+          format: date
+          nullable: true
+        custom_fields:
+          type: object
+          additionalProperties: true
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      in: query
+      description: Default 100, max 500.
+      schema:
+        type: integer
+        default: 100
+        maximum: 500
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic; the API key is Base64-encoded and used as the username (key must be <171 chars).

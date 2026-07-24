@@ -1,0 +1,200 @@
+openapi: 3.1.0
+info:
+  title: Greenhouse Assessment Partner ActivityFeed Scorecards API
+  description: 'The Assessment Partner API defines the contract that assessment vendors implement so
+
+    Greenhouse can list available tests, send a test to a candidate, and retrieve the
+
+    candidate''s results. Endpoints are hosted by the partner (not Greenhouse) and are
+
+    secured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from
+
+    the partner with completed test status; otherwise it polls `test_status` hourly for
+
+    up to 8 weeks. API keys must be fewer than 171 characters.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+servers:
+- url: https://{partner_host}/{base_path}
+  description: Partner-hosted endpoint
+  variables:
+    partner_host:
+      default: partner.example.com
+    base_path:
+      default: greenhouse-assessment
+security:
+- BasicAuth: []
+tags:
+- name: Scorecards
+  description: Interview scorecards captured by interviewers.
+paths:
+  /scorecards:
+    get:
+      tags:
+      - Scorecards
+      summary: List Scorecards
+      operationId: listScorecards
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: Scorecards.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Scorecard'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /scorecards/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      tags:
+      - Scorecards
+      summary: Retrieve Scorecard
+      operationId: getScorecard
+      responses:
+        '200':
+          description: Scorecard.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Scorecard'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /applications/{id}/scorecards:
+    get:
+      tags:
+      - Scorecards
+      summary: List Application Scorecards
+      operationId: listApplicationScorecards
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Scorecards.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Scorecard'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      in: query
+      description: Default 100, max 500.
+      schema:
+        type: integer
+        default: 100
+        maximum: 500
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Scorecard:
+      type: object
+      properties:
+        id:
+          type: integer
+        application_id:
+          type: integer
+        interview:
+          type: string
+        interviewer:
+          $ref: '#/components/schemas/UserRef'
+        submitted_at:
+          type: string
+          format: date-time
+          nullable: true
+        overall_recommendation:
+          type: string
+          enum:
+          - strong_yes
+          - true
+          - false
+          - strong_no
+          - no_decision
+        attributes:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              type:
+                type: string
+              note:
+                type: string
+              rating:
+                type: string
+        questions:
+          type: array
+          items:
+            type: object
+            properties:
+              question:
+                type: string
+              answer:
+                type: string
+    UserRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        name:
+          type: string
+        employee_id:
+          type: string
+          nullable: true
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic; the API key is Base64-encoded and used as the username (key must be <171 chars).

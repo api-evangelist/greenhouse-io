@@ -1,0 +1,252 @@
+openapi: 3.1.0
+info:
+  title: Greenhouse Assessment Partner ActivityFeed ScheduledInterviews API
+  description: 'The Assessment Partner API defines the contract that assessment vendors implement so
+
+    Greenhouse can list available tests, send a test to a candidate, and retrieve the
+
+    candidate''s results. Endpoints are hosted by the partner (not Greenhouse) and are
+
+    secured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from
+
+    the partner with completed test status; otherwise it polls `test_status` hourly for
+
+    up to 8 weeks. API keys must be fewer than 171 characters.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+servers:
+- url: https://{partner_host}/{base_path}
+  description: Partner-hosted endpoint
+  variables:
+    partner_host:
+      default: partner.example.com
+    base_path:
+      default: greenhouse-assessment
+security:
+- BasicAuth: []
+tags:
+- name: ScheduledInterviews
+  description: Scheduled interview events on the calendar.
+paths:
+  /scheduled_interviews:
+    get:
+      tags:
+      - ScheduledInterviews
+      summary: List Scheduled Interviews
+      operationId: listScheduledInterviews
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: starts_after
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: starts_before
+        in: query
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Scheduled interviews.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScheduledInterview'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    post:
+      tags:
+      - ScheduledInterviews
+      summary: Create Scheduled Interview
+      operationId: createScheduledInterview
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduledInterview'
+      responses:
+        '201':
+          description: Created.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /scheduled_interviews/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      tags:
+      - ScheduledInterviews
+      summary: Retrieve Scheduled Interview
+      operationId: getScheduledInterview
+      responses:
+        '200':
+          description: Scheduled interview.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledInterview'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    patch:
+      tags:
+      - ScheduledInterviews
+      summary: Update Scheduled Interview
+      operationId: updateScheduledInterview
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduledInterview'
+      responses:
+        '200':
+          description: Updated.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    delete:
+      tags:
+      - ScheduledInterviews
+      summary: Delete Scheduled Interview
+      operationId: deleteScheduledInterview
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '204':
+          description: Deleted.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /applications/{id}/scheduled_interviews:
+    get:
+      tags:
+      - ScheduledInterviews
+      summary: List Application Scheduled Interviews
+      operationId: listApplicationScheduledInterviews
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Scheduled interviews.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScheduledInterview'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      in: query
+      description: Default 100, max 500.
+      schema:
+        type: integer
+        default: 100
+        maximum: 500
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    ScheduledInterview:
+      type: object
+      properties:
+        id:
+          type: integer
+        application_id:
+          type: integer
+        interview:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        starts_at:
+          type: string
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
+        location:
+          type: string
+          nullable: true
+        video_conferencing_url:
+          type: string
+          format: uri
+          nullable: true
+        status:
+          type: string
+          enum:
+          - scheduled
+          - awaiting_feedback
+          - complete
+        interviewers:
+          type: array
+          items:
+            type: object
+            properties:
+              user_id:
+                type: integer
+              response_status:
+                type: string
+                enum:
+                - needs_action
+                - accepted
+                - declined
+                - tentative
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic; the API key is Base64-encoded and used as the username (key must be <171 chars).

@@ -1,0 +1,220 @@
+openapi: 3.1.0
+info:
+  title: Greenhouse Assessment Partner ActivityFeed Events API
+  description: 'The Assessment Partner API defines the contract that assessment vendors implement so
+
+    Greenhouse can list available tests, send a test to a candidate, and retrieve the
+
+    candidate''s results. Endpoints are hosted by the partner (not Greenhouse) and are
+
+    secured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from
+
+    the partner with completed test status; otherwise it polls `test_status` hourly for
+
+    up to 8 weeks. API keys must be fewer than 171 characters.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+servers:
+- url: https://{partner_host}/{base_path}
+  description: Partner-hosted endpoint
+  variables:
+    partner_host:
+      default: partner.example.com
+    base_path:
+      default: greenhouse-assessment
+security:
+- BasicAuth: []
+tags:
+- name: Events
+  description: Audit log events.
+paths:
+  /events:
+    get:
+      tags:
+      - Events
+      summary: List Audit Events
+      description: Returns audit events filtered by performer, target, event type, request, and time range.
+      operationId: listAuditEvents
+      parameters:
+      - name: before_time
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: after_time
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: magic_time
+        in: query
+        description: Relative time keyword (e.g. last_24_hours, last_7_days).
+        schema:
+          type: string
+      - name: performer_ids
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+        style: form
+        explode: false
+      - name: performer_types
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - User
+            - ApiKey
+            - System
+        style: form
+        explode: false
+      - name: performer_ip_addresses
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+        explode: false
+      - name: event_types
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+        explode: false
+      - name: event_target_ids
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+        style: form
+        explode: false
+      - name: event_target_types
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+        explode: false
+      - name: request_ids
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+        explode: false
+      - name: request_types
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - API
+            - UI
+            - JobBoard
+            - Webhook
+        style: form
+        explode: false
+      - name: paging
+        in: query
+        description: Opaque pagination cursor returned by a previous response.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Audit events.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  events:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AuditEvent'
+                  paging:
+                    type: object
+                    properties:
+                      next:
+                        type: string
+                        nullable: true
+        '429':
+          description: Rate limit exceeded.
+components:
+  schemas:
+    AuditEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        event_type:
+          type: string
+        occurred_at:
+          type: string
+          format: date-time
+        performer:
+          type: object
+          properties:
+            id:
+              type: integer
+            type:
+              type: string
+            ip_address:
+              type: string
+            email:
+              type: string
+              format: email
+              nullable: true
+        event_target:
+          type: object
+          properties:
+            id:
+              type: integer
+            type:
+              type: string
+        request:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            method:
+              type: string
+            path:
+              type: string
+            user_agent:
+              type: string
+        changes:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              old_value: {}
+              new_value: {}
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic; the API key is Base64-encoded and used as the username (key must be <171 chars).

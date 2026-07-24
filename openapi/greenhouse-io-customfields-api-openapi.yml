@@ -1,0 +1,289 @@
+openapi: 3.1.0
+info:
+  title: Greenhouse Assessment Partner ActivityFeed CustomFields API
+  description: 'The Assessment Partner API defines the contract that assessment vendors implement so
+
+    Greenhouse can list available tests, send a test to a candidate, and retrieve the
+
+    candidate''s results. Endpoints are hosted by the partner (not Greenhouse) and are
+
+    secured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from
+
+    the partner with completed test status; otherwise it polls `test_status` hourly for
+
+    up to 8 weeks. API keys must be fewer than 171 characters.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+servers:
+- url: https://{partner_host}/{base_path}
+  description: Partner-hosted endpoint
+  variables:
+    partner_host:
+      default: partner.example.com
+    base_path:
+      default: greenhouse-assessment
+security:
+- BasicAuth: []
+tags:
+- name: CustomFields
+  description: Org-defined custom fields and their options.
+paths:
+  /custom_fields:
+    get:
+      tags:
+      - CustomFields
+      summary: List Custom Fields
+      operationId: listCustomFields
+      responses:
+        '200':
+          description: Custom fields.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomField'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    post:
+      tags:
+      - CustomFields
+      summary: Create Custom Field
+      operationId: createCustomField
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomField'
+      responses:
+        '201':
+          description: Created.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /custom_fields/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      tags:
+      - CustomFields
+      summary: Retrieve Custom Field
+      operationId: getCustomField
+      responses:
+        '200':
+          description: Custom field.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomField'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    patch:
+      tags:
+      - CustomFields
+      summary: Update Custom Field
+      operationId: updateCustomField
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomField'
+      responses:
+        '200':
+          description: Updated.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    delete:
+      tags:
+      - CustomFields
+      summary: Delete Custom Field
+      operationId: deleteCustomField
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '204':
+          description: Deleted.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /custom_fields/{id}/custom_field_options:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      tags:
+      - CustomFields
+      summary: List Custom Field Options
+      operationId: listCustomFieldOptions
+      responses:
+        '200':
+          description: Options.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomFieldOption'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    post:
+      tags:
+      - CustomFields
+      summary: Create Custom Field Option
+      operationId: createCustomFieldOption
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomFieldOption'
+      responses:
+        '201':
+          description: Created.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+  /custom_fields/{id}/custom_field_options/{option_id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    - name: option_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    patch:
+      tags:
+      - CustomFields
+      summary: Update Custom Field Option
+      operationId: updateCustomFieldOption
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomFieldOption'
+      responses:
+        '200':
+          description: Updated.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+    delete:
+      tags:
+      - CustomFields
+      summary: Delete Custom Field Option
+      operationId: deleteCustomFieldOption
+      parameters:
+      - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '204':
+          description: Deleted.
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+  schemas:
+    CustomField:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        field_type:
+          type: string
+          enum:
+          - job
+          - candidate
+          - application
+          - offer
+          - opening
+          - department
+          - office
+          - user
+          - prospect
+        value_type:
+          type: string
+          enum:
+          - short_text
+          - long_text
+          - currency
+          - currency_range
+          - date
+          - number
+          - number_range
+          - single_select
+          - multi_select
+          - url
+          - yes_no
+        active:
+          type: boolean
+        required:
+          type: boolean
+        private:
+          type: boolean
+        custom_field_options:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldOption'
+    CustomFieldOption:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        priority:
+          type: integer
+        external_id:
+          type: string
+          nullable: true
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic; the API key is Base64-encoded and used as the username (key must be <171 chars).
