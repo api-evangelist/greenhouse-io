@@ -1,163 +1,6 @@
 aid: greenhouse-io
 url: https://raw.githubusercontent.com/api-evangelist/greenhouse-io/refs/heads/main/apis.yml
 apis:
-- aid: greenhouse-io:greenhouse-harvest-api
-  name: Greenhouse Harvest API
-  tags:
-  - ATS
-  - Recruiting
-  - Candidates
-  - Jobs
-  - Interviews
-  - Offers
-  humanURL: https://developers.greenhouse.io/harvest.html
-  baseURL: https://harvest.greenhouse.io/v1
-  properties:
-  - url: https://developers.greenhouse.io/harvest.html
-    type: Documentation
-  - url: openapi/greenhouse-harvest-api-openapi.yml
-    type: OpenAPI
-  - url: json-schema/greenhouse-candidate-schema.json
-    type: JSONSchema
-  - url: json-schema/greenhouse-job-schema.json
-    type: JSONSchema
-  - url: json-ld/greenhouse-io-context.jsonld
-    type: JSONLD
-  - type: Authentication
-    name: HTTP Basic with API key as username
-    url: https://developers.greenhouse.io/harvest.html#authentication
-  - type: Pagination
-    name: RFC-5988 Link headers (next, prev, last); per_page default 100, max 500
-    url: https://developers.greenhouse.io/harvest.html#pagination
-  - type: RateLimits
-    url: https://developers.greenhouse.io/harvest.html#rate-limits
-  description: |
-    The Harvest API is Greenhouse's primary REST API and source of truth for recruiting data:
-    candidates, applications, jobs, openings, job posts, job stages, departments, offices,
-    users, offers, approval flows, scheduled interviews, scorecards, sources, tags, custom
-    fields, prospect pools, rejection reasons, and the per-candidate activity feed.
-    HTTP Basic with a granular per-permission API key; RFC-5988 Link pagination; rate limits
-    returned in X-RateLimit-Limit per 10s.
-- aid: greenhouse-io:greenhouse-job-board-api
-  name: Greenhouse Job Board API
-  tags:
-  - JobBoard
-  - Careers
-  - Public
-  - Applications
-  humanURL: https://developers.greenhouse.io/job-board.html
-  baseURL: https://boards-api.greenhouse.io/v1/boards/{board_token}
-  properties:
-  - url: https://developers.greenhouse.io/job-board.html
-    type: Documentation
-  - url: openapi/greenhouse-job-board-api-openapi.yml
-    type: OpenAPI
-  - type: Authentication
-    name: Public GET (no auth) + Basic auth for application POST
-    url: https://developers.greenhouse.io/job-board.html
-  description: |
-    The Job Board API exposes a customer's public career site data — jobs, departments,
-    offices — and accepts application submissions via POST /jobs/{id}. GET endpoints are
-    unauthenticated; POST endpoints accept multipart/form-data or JSON. Used to power
-    customer-owned career pages and third-party job-board syndication.
-- aid: greenhouse-io:greenhouse-audit-log-api
-  name: Greenhouse Audit Log API
-  tags:
-  - AuditLog
-  - Compliance
-  - Security
-  - Governance
-  - Enterprise
-  humanURL: https://developers.greenhouse.io/audit-log.html
-  baseURL: https://auditlog.us.greenhouse.io
-  properties:
-  - url: https://developers.greenhouse.io/audit-log.html
-    type: Documentation
-  - url: openapi/greenhouse-audit-log-api-openapi.yml
-    type: OpenAPI
-  - type: Authentication
-    name: JWT bearer token obtained from POST /auth/jwt_access_token on harvest.greenhouse.io
-  - type: RateLimits
-    name: 50 req / 10s standard; 3 req / 30s for paginated reads
-    url: https://developers.greenhouse.io/audit-log.html
-  - type: Retention
-    name: 30 days
-  description: |
-    The Audit Log API exposes important administrative events from the prior 30 days for
-    governance, compliance, and incident response. JWT bearer authentication (24h validity)
-    issued from the Harvest /auth/jwt_access_token endpoint. Pro-tier offering.
-- aid: greenhouse-io:greenhouse-candidate-ingestion-api
-  name: Greenhouse Candidate Ingestion (Partner) API
-  tags:
-  - Partner
-  - Ingestion
-  - Sourcing
-  - Candidates
-  - Prospects
-  humanURL: https://developers.greenhouse.io/candidate-ingestion.html
-  baseURL: https://api.greenhouse.io/v1/partner
-  properties:
-  - url: https://developers.greenhouse.io/candidate-ingestion.html
-    type: Documentation
-  - url: openapi/greenhouse-candidate-ingestion-api-openapi.yml
-    type: OpenAPI
-  - type: Authentication
-    name: OAuth 2.0 (Authorization Code or Client Credentials) or HTTP Basic with On-Behalf-Of header
-    url: https://developers.greenhouse.io/candidate-ingestion.html
-  description: |
-    The Candidate Ingestion (Partner) API lets sourcing partners create candidates and
-    prospects in a customer's Greenhouse account, list jobs visible to the integrated user,
-    read prospect pools, retrieve the current user, and generate branded tracking links.
-    Used by sourcing platforms, agencies, and recruitment marketing tools.
-- aid: greenhouse-io:greenhouse-onboarding-api
-  name: Greenhouse Onboarding API
-  tags:
-  - Onboarding
-  - HRIS
-  - GraphQL
-  - Employees
-  humanURL: https://developers.greenhouse.io/gho.html
-  baseURL: https://onboarding-api.greenhouse.io/graphql
-  properties:
-  - url: https://developers.greenhouse.io/gho.html
-    type: Documentation
-  - url: openapi/greenhouse-onboarding-api-openapi.yml
-    type: OpenAPI
-  - type: Authentication
-    name: HTTP Basic with Access Key (username) and Secret Key (password); Super Admin issued
-  - type: RateLimits
-    name: >-
-      100 requests per window + 2500-point query-complexity ceiling; rateLimit GraphQL field exposes remaining
-      budget
-    url: https://developers.greenhouse.io/gho.html
-  - url: graphql/greenhouse-io-graphql.md
-    type: GraphQL
-  description: |
-    The Greenhouse Onboarding (GHO) API is a single GraphQL endpoint covering employees,
-    departments, locations, teams, custom fields, and mutations such as addPendingHire and
-    updateEmployeeProfile. Available on the Plus and Pro tiers; requires Super Admin to
-    generate or revoke keys.
-- aid: greenhouse-io:greenhouse-assessment-api
-  name: Greenhouse Assessment Partner API
-  tags:
-  - Assessment
-  - Partner
-  - PreHire
-  - Integrations
-  humanURL: https://developers.greenhouse.io/assessment.html
-  properties:
-  - url: https://developers.greenhouse.io/assessment.html
-    type: Documentation
-  - url: openapi/greenhouse-assessment-api-openapi.yml
-    type: OpenAPI
-  - type: Authentication
-    name: HTTP Basic over HTTPS; partner-hosted endpoints; API keys must be <171 chars
-  description: |
-    The Assessment Partner API defines the four endpoints — list_tests, send_test,
-    test_status, response_error — that assessment vendors implement so Greenhouse can
-    dispatch a test to a candidate and retrieve completion details. Partner-hosted rather
-    than Greenhouse-hosted; results retrieved via PATCH callback or hourly polling for
-    up to 8 weeks.
 - aid: greenhouse-io:greenhouse-recruiting-webhooks
   name: Greenhouse Recruiting Webhooks
   tags:
@@ -169,7 +12,8 @@ apis:
   - url: https://developers.greenhouse.io/webhooks.html
     type: Documentation
   - type: Authentication
-    name: HMAC SHA-256 signature header verified against the secret key and JSON body (Unicode-escaped)
+    name: >-
+      HMAC SHA-256 signature header verified against the secret key and JSON body (Unicode-escaped)
   - type: Retry
     name: Up to 7 retries over ~15h with exponential backoff
   - type: Events
@@ -196,9 +40,11 @@ apis:
     - job_post_created
     - department_deleted
     - office_deleted
-  description: |
+  description: >
     Event-driven webhooks from Greenhouse Recruiting. Greenhouse POSTs JSON to your HTTPS
+
     endpoint on each event; payloads carry a Greenhouse-Event-ID header for idempotency and
+
     HMAC SHA-256 signature verification.
 - aid: greenhouse-io:greenhouse-onboarding-webhooks
   name: Greenhouse Onboarding Webhooks
@@ -218,10 +64,1214 @@ apis:
   - type: Events
     data:
     - employee_updated
-  description: |
+  description: >
     Event-driven webhooks from Greenhouse Onboarding (currently in beta and gated by
+
     customer approval). Each event posts event_type, id, and payload to the customer's
+
     HTTPS endpoint; signatures use HMAC SHA-256 with a shared secret.
+- aid: greenhouse-io:greenhouse-io-activityfeed-api
+  name: Greenhouse ActivityFeed API
+  description: Per-candidate timeline of activity events.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - ActivityFeed
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-activityfeed-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-applications-api
+  name: Greenhouse Applications API
+  description: >-
+    Candidate applications to specific jobs, including stage advancement, transfers, hires, rejections,
+    and attachments.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-applications-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-approvals-api
+  name: Greenhouse Approvals API
+  description: Approval flows for jobs and offers.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Approvals
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-approvals-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-auth-api
+  name: Greenhouse Auth API
+  description: JWT access token issuance.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-auth-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-candidates-api
+  name: Greenhouse Candidates API
+  description: Create or retrieve candidates / prospects in the customer's Greenhouse account.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Candidates
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-candidates-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-customfields-api
+  name: Greenhouse CustomFields API
+  description: Org-defined custom fields and their options.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - CustomFields
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-customfields-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-departments-api
+  name: Greenhouse Departments API
+  description: Organizational departments.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Departments
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-departments-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-events-api
+  name: Greenhouse Events API
+  description: Audit log events.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-events-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-graphql-api
+  name: Greenhouse GraphQL API
+  description: Single GraphQL endpoint for all Onboarding operations.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - GraphQL
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-graphql-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-jobopenings-api
+  name: Greenhouse JobOpenings API
+  description: Individual openings under a Job.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - JobOpenings
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-jobopenings-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-jobposts-api
+  name: Greenhouse JobPosts API
+  description: Public-facing job postings and their statuses.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - JobPosts
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-jobposts-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-jobs-api
+  name: Greenhouse Jobs API
+  description: List jobs visible to the integrated user.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-jobstages-api
+  name: Greenhouse JobStages API
+  description: The interview/pipeline stages a job uses.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - JobStages
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-jobstages-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-offers-api
+  name: Greenhouse Offers API
+  description: Offers extended to candidates.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Offers
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-offers-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-offices-api
+  name: Greenhouse Offices API
+  description: Office locations.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Offices
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-offices-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-prospectpools-api
+  name: Greenhouse ProspectPools API
+  description: Read configured prospect pools and their stages.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - ProspectPools
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-prospectpools-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-rejectionreasons-api
+  name: Greenhouse RejectionReasons API
+  description: Configured rejection reasons.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - RejectionReasons
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-rejectionreasons-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-scheduledinterviews-api
+  name: Greenhouse ScheduledInterviews API
+  description: Scheduled interview events on the calendar.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - ScheduledInterviews
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-scheduledinterviews-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-scorecards-api
+  name: Greenhouse Scorecards API
+  description: Interview scorecards captured by interviewers.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Scorecards
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-scorecards-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-sources-api
+  name: Greenhouse Sources API
+  description: Candidate-source taxonomy (where the candidate came from).
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-sources-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-tags-api
+  name: Greenhouse Tags API
+  description: Candidate tags.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-tags-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-testdelivery-api
+  name: Greenhouse TestDelivery API
+  description: Sending tests to candidates and reporting status.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - TestDelivery
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-testdelivery-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-tests-api
+  name: Greenhouse Tests API
+  description: Available tests offered by the partner.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Tests
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-tests-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-trackinglinks-api
+  name: Greenhouse TrackingLinks API
+  description: Generate branded tracking links for sourcing campaigns.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - TrackingLinks
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-trackinglinks-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
+- aid: greenhouse-io:greenhouse-io-users-api
+  name: Greenhouse Users API
+  description: Inspect the current authenticated user.
+  humanURL: https://developers.greenhouse.io/harvest.html
+  baseURL: https://harvest.greenhouse.io/v1
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/greenhouse-io-users-api-openapi.yml
+  - type: Documentation
+    url: https://developers.greenhouse.io/harvest.html
+  - type: JSONSchema
+    url: json-schema/greenhouse-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/greenhouse-job-schema.json
+  - type: JSONLD
+    url: json-ld/greenhouse-io-context.jsonld
+  - type: Authentication
+    url: https://developers.greenhouse.io/harvest.html#authentication
+  - type: Pagination
+    url: https://developers.greenhouse.io/harvest.html#pagination
+  - type: RateLimits
+    url: https://developers.greenhouse.io/harvest.html#rate-limits
+  - type: Documentation
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/job-board.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Authentication
+    url: null
+  - type: RateLimits
+    url: https://developers.greenhouse.io/audit-log.html
+  - type: Retention
+    url: null
+  - type: Documentation
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Authentication
+    url: https://developers.greenhouse.io/candidate-ingestion.html
+  - type: Documentation
+    url: https://developers.greenhouse.io/gho.html
+  - type: RateLimits
+    url: https://developers.greenhouse.io/gho.html
+  - type: GraphQL
+    url: graphql/greenhouse-io-graphql.md
+  - type: Documentation
+    url: https://developers.greenhouse.io/assessment.html
 name: Greenhouse
 tags:
 - ATS
@@ -232,9 +1282,24 @@ tags:
 - Human Resources
 - Onboarding
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/greenhouse-io.png
 access: 3rd-Party
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/greenhouse/overview
 - type: AgenticAccess
   url: agentic-access/greenhouse-io-agentic-access.yml
 - type: TrustCenter
