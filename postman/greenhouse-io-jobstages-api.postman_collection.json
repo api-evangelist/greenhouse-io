@@ -1,0 +1,475 @@
+{
+  "info": {
+    "_postman_id": "85cd2a9c-ce52-4eb8-8b72-9ad6e9dc2d30",
+    "name": "Greenhouse Assessment Partner ActivityFeed JobStages API",
+    "description": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:33.000Z",
+    "updatedAt": "2026-07-28T01:51:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-85cd2a9c-ce52-4eb8-8b72-9ad6e9dc2d30"
+  },
+  "item": [
+    {
+      "name": "job_stages",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve Job Stage",
+              "id": "4c77086c-1435-4bcd-8454-09708117229e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/job_stages/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "job_stages",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "1e4648bb-5309-464c-9718-e451a9539322",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "37c0b66e-8885-439f-b56b-5333af896250",
+                  "name": "Job stage.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/job_stages/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "job_stages",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"interviews\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:33.000Z",
+                  "updatedAt": "2026-07-28T01:51:33.000Z",
+                  "uid": "35240-37c0b66e-8885-439f-b56b-5333af896250"
+                },
+                {
+                  "id": "5be1778a-3e90-46b6-bf99-32f621d876ac",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/job_stages/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "job_stages",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:33.000Z",
+                  "updatedAt": "2026-07-28T01:51:33.000Z",
+                  "uid": "35240-5be1778a-3e90-46b6-bf99-32f621d876ac"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:33.000Z",
+              "updatedAt": "2026-07-28T01:51:33.000Z",
+              "uid": "35240-4c77086c-1435-4bcd-8454-09708117229e"
+            }
+          ],
+          "id": "bd31f45c-09e8-4428-a9fe-243a7d00ca1d",
+          "createdAt": "2026-07-28T01:51:33.000Z",
+          "updatedAt": "2026-07-28T01:51:33.000Z",
+          "uid": "35240-bd31f45c-09e8-4428-a9fe-243a7d00ca1d"
+        },
+        {
+          "name": "List Job Stages",
+          "id": "abc3a3ff-fba1-44f5-93df-cb8ab1e24a8d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/job_stages",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "job_stages"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9db14a46-ae99-4942-8827-c937312c1725",
+              "name": "Job stages.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/job_stages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "job_stages"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"priority\": \"<integer>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"interviews\": [\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"priority\": \"<integer>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"interviews\": [\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      }\n    ]\n  }\n]",
+              "createdAt": "2026-07-28T01:51:33.000Z",
+              "updatedAt": "2026-07-28T01:51:33.000Z",
+              "uid": "35240-9db14a46-ae99-4942-8827-c937312c1725"
+            },
+            {
+              "id": "b4b49f77-442b-4327-9c5e-ca7e7a8c6cfd",
+              "name": "Error response.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/job_stages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "job_stages"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:33.000Z",
+              "updatedAt": "2026-07-28T01:51:33.000Z",
+              "uid": "35240-b4b49f77-442b-4327-9c5e-ca7e7a8c6cfd"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:33.000Z",
+          "updatedAt": "2026-07-28T01:51:33.000Z",
+          "uid": "35240-abc3a3ff-fba1-44f5-93df-cb8ab1e24a8d"
+        }
+      ],
+      "id": "80980793-f458-41a4-8356-6692b344c84d",
+      "createdAt": "2026-07-28T01:51:33.000Z",
+      "updatedAt": "2026-07-28T01:51:33.000Z",
+      "uid": "35240-80980793-f458-41a4-8356-6692b344c84d"
+    },
+    {
+      "name": "jobs",
+      "item": [
+        {
+          "name": "{job_id}",
+          "item": [
+            {
+              "name": "stages",
+              "item": [
+                {
+                  "name": "List Job Stages For Job",
+                  "id": "cf26fbe7-1a19-4124-829a-456aae83a880",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:job_id/stages",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":job_id",
+                        "stages"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c282b08a-e640-432d-b2d0-c00a280a36e9",
+                          "key": "job_id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "f35a4cbb-536a-49b7-8f93-69d2689d42b2",
+                      "name": "Stages.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:job_id/stages",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":job_id",
+                            "stages"
+                          ],
+                          "variable": [
+                            {
+                              "key": "job_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"priority\": \"<integer>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"interviews\": [\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"priority\": \"<integer>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"interviews\": [\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      }\n    ]\n  }\n]",
+                      "createdAt": "2026-07-28T01:51:33.000Z",
+                      "updatedAt": "2026-07-28T01:51:33.000Z",
+                      "uid": "35240-f35a4cbb-536a-49b7-8f93-69d2689d42b2"
+                    },
+                    {
+                      "id": "64b81ea9-fcb9-4c65-9ff0-c4035494cf6b",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:job_id/stages",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":job_id",
+                            "stages"
+                          ],
+                          "variable": [
+                            {
+                              "key": "job_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:33.000Z",
+                      "updatedAt": "2026-07-28T01:51:33.000Z",
+                      "uid": "35240-64b81ea9-fcb9-4c65-9ff0-c4035494cf6b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:33.000Z",
+                  "updatedAt": "2026-07-28T01:51:33.000Z",
+                  "uid": "35240-cf26fbe7-1a19-4124-829a-456aae83a880"
+                }
+              ],
+              "id": "4af6a696-73c5-41f5-82f9-604c94c70048",
+              "createdAt": "2026-07-28T01:51:33.000Z",
+              "updatedAt": "2026-07-28T01:51:33.000Z",
+              "uid": "35240-4af6a696-73c5-41f5-82f9-604c94c70048"
+            }
+          ],
+          "id": "4ded536f-7ef7-40ce-b29e-b482ef01ed2a",
+          "createdAt": "2026-07-28T01:51:33.000Z",
+          "updatedAt": "2026-07-28T01:51:33.000Z",
+          "uid": "35240-4ded536f-7ef7-40ce-b29e-b482ef01ed2a"
+        }
+      ],
+      "id": "4e0d21e0-8558-41a2-902b-e4a2df94e97f",
+      "createdAt": "2026-07-28T01:51:33.000Z",
+      "updatedAt": "2026-07-28T01:51:33.000Z",
+      "uid": "35240-4e0d21e0-8558-41a2-902b-e4a2df94e97f"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "partner_host",
+      "value": "partner.example.com"
+    },
+    {
+      "key": "base_path",
+      "value": "greenhouse-assessment"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{partner_host}}/{{base_path}}"
+    }
+  ]
+}

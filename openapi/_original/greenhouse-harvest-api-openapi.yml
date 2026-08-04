@@ -1,0 +1,2315 @@
+openapi: 3.1.0
+info:
+  title: Greenhouse Harvest API
+  description: |
+    The Harvest API is Greenhouse's primary REST API for programmatic access to recruiting data:
+    candidates, applications, jobs, openings, job posts, departments, offices, users, offers,
+    approvals, scheduled interviews, scorecards, sources, tags, custom fields, prospect pools,
+    and the activity feed. Harvest uses HTTP Basic authentication with a per-permission API key,
+    RFC-5988 Link-header pagination (default 100, max 500 per page), and a per-token rate limit
+    of N requests per 10 seconds returned in the X-RateLimit-Limit header.
+  version: "1.0.0"
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+  license:
+    name: Greenhouse API Terms
+    url: https://www.greenhouse.com/legal
+servers:
+  - url: https://harvest.greenhouse.io/v1
+    description: Production Harvest API
+
+security:
+  - BasicAuth: []
+
+tags:
+  - name: Applications
+    description: Candidate applications to specific jobs, including stage advancement, transfers, hires, rejections, and attachments.
+  - name: Candidates
+    description: Candidate profiles, notes, attachments, education, employment, prospect conversion, anonymization, and merging.
+  - name: Jobs
+    description: Job records and their hiring teams.
+  - name: JobOpenings
+    description: Individual openings under a Job.
+  - name: JobPosts
+    description: Public-facing job postings and their statuses.
+  - name: JobStages
+    description: The interview/pipeline stages a job uses.
+  - name: Departments
+    description: Organizational departments.
+  - name: Offices
+    description: Office locations.
+  - name: Users
+    description: Greenhouse users and their email addresses.
+  - name: Offers
+    description: Offers extended to candidates.
+  - name: Approvals
+    description: Approval flows for jobs and offers.
+  - name: ScheduledInterviews
+    description: Scheduled interview events on the calendar.
+  - name: Scorecards
+    description: Interview scorecards captured by interviewers.
+  - name: Sources
+    description: Candidate-source taxonomy (where the candidate came from).
+  - name: Tags
+    description: Candidate tags.
+  - name: CustomFields
+    description: Org-defined custom fields and their options.
+  - name: ActivityFeed
+    description: Per-candidate timeline of activity events.
+  - name: ProspectPools
+    description: Sourcing prospect pools.
+  - name: RejectionReasons
+    description: Configured rejection reasons.
+
+paths:
+  /applications:
+    get:
+      tags: [Applications]
+      summary: List Applications
+      description: Returns a paginated list of all applications across the organization.
+      operationId: listApplications
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/CreatedAfter'
+        - $ref: '#/components/parameters/CreatedBefore'
+        - $ref: '#/components/parameters/UpdatedAfter'
+        - $ref: '#/components/parameters/UpdatedBefore'
+        - name: job_id
+          in: query
+          schema: { type: integer }
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [active, rejected, hired, converted]
+        - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '200':
+          description: Array of applications.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Application' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /applications/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      tags: [Applications]
+      summary: Retrieve Application
+      operationId: getApplication
+      responses:
+        '200':
+          description: A single application.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Application' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    patch:
+      tags: [Applications]
+      summary: Update Application
+      operationId: updateApplication
+      parameters:
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ApplicationUpdate' }
+      responses:
+        '200':
+          description: Updated application.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Application' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    delete:
+      tags: [Applications]
+      summary: Delete Application
+      operationId: deleteApplication
+      parameters:
+        - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '204': { description: Deleted. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /candidates/{id}/applications:
+    post:
+      tags: [Applications]
+      summary: Add Application to Candidate
+      operationId: addCandidateApplication
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ApplicationCreate' }
+      responses:
+        '201':
+          description: Created application.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Application' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /applications/{id}/advance:
+    post:
+      tags: [Applications]
+      summary: Advance Application
+      description: Move the application to the next interview stage.
+      operationId: advanceApplication
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '200': { description: Advanced. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /applications/{id}/move:
+    post:
+      tags: [Applications]
+      summary: Move Application
+      description: Move the application to a specific stage.
+      operationId: moveApplication
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [from_stage_id, to_stage_id]
+              properties:
+                from_stage_id: { type: integer }
+                to_stage_id: { type: integer }
+      responses:
+        '200': { description: Moved. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /applications/{id}/transfer_to_job:
+    post:
+      tags: [Applications]
+      summary: Transfer Application To Job
+      operationId: transferApplicationToJob
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [new_job_id]
+              properties:
+                new_job_id: { type: integer }
+                new_job_stage_id: { type: integer }
+      responses:
+        '200': { description: Transferred. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /applications/{id}/convert_prospect:
+    patch:
+      tags: [Applications]
+      summary: Convert Prospect To Candidate
+      operationId: convertProspect
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                job_id: { type: integer }
+                job_stage_id: { type: integer }
+      responses:
+        '200': { description: Converted. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /applications/{id}/attachments:
+    post:
+      tags: [Applications]
+      summary: Add Application Attachment
+      operationId: addApplicationAttachment
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Attachment' }
+      responses:
+        '201': { description: Attached. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /applications/{id}/hire:
+    post:
+      tags: [Applications]
+      summary: Hire Application
+      operationId: hireApplication
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                start_date: { type: string, format: date }
+                opening_id: { type: integer }
+      responses:
+        '200': { description: Hired. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /applications/{id}/reject:
+    post:
+      tags: [Applications]
+      summary: Reject Application
+      operationId: rejectApplication
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rejection_reason_id: { type: integer }
+                notes: { type: string }
+      responses:
+        '200': { description: Rejected. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    patch:
+      tags: [Applications]
+      summary: Update Rejection
+      operationId: updateApplicationRejection
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rejection_reason_id: { type: integer }
+                notes: { type: string }
+      responses:
+        '200': { description: Updated rejection. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /applications/{id}/unreject:
+    post:
+      tags: [Applications]
+      summary: Unreject Application
+      operationId: unrejectApplication
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '200': { description: Unrejected. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /candidates:
+    get:
+      tags: [Candidates]
+      summary: List Candidates
+      operationId: listCandidates
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/CreatedAfter'
+        - $ref: '#/components/parameters/CreatedBefore'
+        - $ref: '#/components/parameters/UpdatedAfter'
+        - $ref: '#/components/parameters/UpdatedBefore'
+        - name: email
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Array of candidates.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Candidate' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    post:
+      tags: [Candidates]
+      summary: Create Candidate
+      operationId: createCandidate
+      parameters:
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CandidateCreate' }
+      responses:
+        '201':
+          description: Created candidate.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Candidate' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    delete:
+      tags: [Candidates]
+      summary: Delete Candidates Bulk
+      operationId: deleteCandidates
+      parameters:
+        - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '204': { description: Deleted. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /candidates/{id}:
+    parameters: [ { $ref: '#/components/parameters/Id' } ]
+    get:
+      tags: [Candidates]
+      summary: Retrieve Candidate
+      operationId: getCandidate
+      responses:
+        '200':
+          description: A single candidate.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Candidate' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    patch:
+      tags: [Candidates]
+      summary: Update Candidate
+      operationId: updateCandidate
+      parameters:
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CandidateUpdate' }
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Candidate' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /candidates/{id}/attachments:
+    post:
+      tags: [Candidates]
+      summary: Add Candidate Attachment
+      operationId: addCandidateAttachment
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Attachment' }
+      responses:
+        '201': { description: Attached. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /candidates/{id}/notes:
+    post:
+      tags: [Candidates]
+      summary: Add Candidate Note
+      operationId: addCandidateNote
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [user_id, body, visibility]
+              properties:
+                user_id: { type: integer }
+                body: { type: string }
+                visibility: { type: string, enum: [admin_only, private, public] }
+      responses:
+        '201': { description: Note added. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /candidates/{id}/email_notes:
+    post:
+      tags: [Candidates]
+      summary: Add Candidate Email Note
+      operationId: addCandidateEmailNote
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id: { type: integer }
+                to: { type: string }
+                from: { type: string }
+                subject: { type: string }
+                body: { type: string }
+      responses:
+        '201': { description: Email note recorded. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /candidates/{id}/education:
+    post:
+      tags: [Candidates]
+      summary: Add Candidate Education
+      operationId: addCandidateEducation
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Education' }
+      responses:
+        '201': { description: Education added. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /candidates/{id}/education/{education_id}:
+    delete:
+      tags: [Candidates]
+      summary: Delete Candidate Education
+      operationId: deleteCandidateEducation
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - name: education_id
+          in: path
+          required: true
+          schema: { type: integer }
+        - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '204': { description: Deleted. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /candidates/{id}/employment:
+    post:
+      tags: [Candidates]
+      summary: Add Candidate Employment
+      operationId: addCandidateEmployment
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Employment' }
+      responses:
+        '201': { description: Employment added. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /candidates/{id}/employment/{employment_id}:
+    delete:
+      tags: [Candidates]
+      summary: Delete Candidate Employment
+      operationId: deleteCandidateEmployment
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - name: employment_id
+          in: path
+          required: true
+          schema: { type: integer }
+        - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '204': { description: Deleted. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /candidates/{id}/prospect:
+    post:
+      tags: [Candidates]
+      summary: Convert Candidate To Prospect
+      operationId: candidateToProspect
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '200': { description: Converted to prospect. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /candidates/{id}/anonymize:
+    put:
+      tags: [Candidates]
+      summary: Anonymize Candidate
+      operationId: anonymizeCandidate
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '200': { description: Anonymized. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /candidates/{id}/merge:
+    put:
+      tags: [Candidates]
+      summary: Merge Candidate
+      operationId: mergeCandidate
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [primary_candidate_id]
+              properties:
+                primary_candidate_id: { type: integer }
+                duplicate_candidate_id: { type: integer }
+      responses:
+        '200': { description: Merged. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /candidates/{id}/activity_feed:
+    get:
+      tags: [ActivityFeed]
+      summary: List Candidate Activity Feed
+      operationId: getCandidateActivityFeed
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Activity feed.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ActivityFeed' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /jobs:
+    get:
+      tags: [Jobs]
+      summary: List Jobs
+      operationId: listJobs
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+        - name: status
+          in: query
+          schema: { type: string, enum: [open, closed, draft] }
+        - $ref: '#/components/parameters/UpdatedAfter'
+      responses:
+        '200':
+          description: Array of jobs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Job' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    post:
+      tags: [Jobs]
+      summary: Create Job
+      operationId: createJob
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/JobCreate' }
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Job' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /jobs/{id}:
+    parameters: [ { $ref: '#/components/parameters/Id' } ]
+    get:
+      tags: [Jobs]
+      summary: Retrieve Job
+      operationId: getJob
+      responses:
+        '200':
+          description: A single job.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Job' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    patch:
+      tags: [Jobs]
+      summary: Update Job
+      operationId: updateJob
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/JobUpdate' }
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Job' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /jobs/{id}/hiring_team:
+    parameters: [ { $ref: '#/components/parameters/Id' } ]
+    get:
+      tags: [Jobs]
+      summary: Retrieve Job Hiring Team
+      operationId: getJobHiringTeam
+      responses:
+        '200':
+          description: Hiring team.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/HiringTeam' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    put:
+      tags: [Jobs]
+      summary: Replace Job Hiring Team
+      operationId: replaceJobHiringTeam
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/HiringTeam' }
+      responses:
+        '200':
+          description: Replaced.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/HiringTeam' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /jobs/{id}/hiring_team_members:
+    post:
+      tags: [Jobs]
+      summary: Add Hiring Team Member
+      operationId: addHiringTeamMember
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [user_id, role]
+              properties:
+                user_id: { type: integer }
+                role: { type: string, enum: [hiring_manager, recruiter, coordinator, sourcer, interviewer] }
+      responses:
+        '201': { description: Added. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /jobs/{id}/hiring_team_members/{user_id}:
+    delete:
+      tags: [Jobs]
+      summary: Remove Hiring Team Member
+      operationId: removeHiringTeamMember
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - name: user_id
+          in: path
+          required: true
+          schema: { type: integer }
+        - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '204': { description: Removed. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /openings:
+    get:
+      tags: [JobOpenings]
+      summary: List Openings
+      operationId: listOpenings
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: Array of openings.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Opening' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    post:
+      tags: [JobOpenings]
+      summary: Create Opening
+      operationId: createOpening
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Opening' }
+      responses:
+        '201': { description: Created. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    delete:
+      tags: [JobOpenings]
+      summary: Delete Openings Bulk
+      operationId: deleteOpenings
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      responses:
+        '204': { description: Deleted. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /openings/{id}:
+    parameters: [ { $ref: '#/components/parameters/Id' } ]
+    get:
+      tags: [JobOpenings]
+      summary: Retrieve Opening
+      operationId: getOpening
+      responses:
+        '200':
+          description: Opening.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Opening' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    patch:
+      tags: [JobOpenings]
+      summary: Update Opening
+      operationId: updateOpening
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Opening' }
+      responses:
+        '200': { description: Updated. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /job_posts:
+    get:
+      tags: [JobPosts]
+      summary: List Job Posts
+      operationId: listJobPosts
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+        - name: live
+          in: query
+          schema: { type: boolean }
+        - name: active
+          in: query
+          schema: { type: boolean }
+      responses:
+        '200':
+          description: Array of job posts.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/JobPost' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /job_posts/{id}:
+    parameters: [ { $ref: '#/components/parameters/Id' } ]
+    get:
+      tags: [JobPosts]
+      summary: Retrieve Job Post
+      operationId: getJobPost
+      responses:
+        '200':
+          description: Job post.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/JobPost' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    patch:
+      tags: [JobPosts]
+      summary: Update Job Post
+      operationId: updateJobPost
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/JobPost' }
+      responses:
+        '200': { description: Updated. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /job_posts/{id}/custom_locations:
+    get:
+      tags: [JobPosts]
+      summary: List Job Post Custom Locations
+      operationId: listJobPostCustomLocations
+      parameters: [ { $ref: '#/components/parameters/Id' } ]
+      responses:
+        '200':
+          description: Custom locations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name: { type: string }
+                    region: { type: string }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /job_posts/{id}/status:
+    patch:
+      tags: [JobPosts]
+      summary: Update Job Post Status
+      operationId: updateJobPostStatus
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [status]
+              properties:
+                status: { type: string, enum: [live, offline] }
+      responses:
+        '200': { description: Status changed. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /jobs/{job_id}/job_posts:
+    get:
+      tags: [JobPosts]
+      summary: List Job Posts For Job
+      operationId: listJobJobPosts
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Job posts for a job.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/JobPost' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /jobs/{job_id}/job_posts/{id}:
+    get:
+      tags: [JobPosts]
+      summary: Retrieve Job Job Post
+      operationId: getJobJobPost
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema: { type: integer }
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Job post.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/JobPost' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /job_stages:
+    get:
+      tags: [JobStages]
+      summary: List Job Stages
+      operationId: listJobStages
+      responses:
+        '200':
+          description: Job stages.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/JobStage' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /job_stages/{id}:
+    get:
+      tags: [JobStages]
+      summary: Retrieve Job Stage
+      operationId: getJobStage
+      parameters: [ { $ref: '#/components/parameters/Id' } ]
+      responses:
+        '200':
+          description: Job stage.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/JobStage' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /jobs/{job_id}/stages:
+    get:
+      tags: [JobStages]
+      summary: List Job Stages For Job
+      operationId: listJobStagesForJob
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Stages.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/JobStage' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /departments:
+    get:
+      tags: [Departments]
+      summary: List Departments
+      operationId: listDepartments
+      responses:
+        '200':
+          description: Departments.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Department' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    post:
+      tags: [Departments]
+      summary: Create Department
+      operationId: createDepartment
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Department' }
+      responses:
+        '201': { description: Created. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /departments/{id}:
+    parameters: [ { $ref: '#/components/parameters/Id' } ]
+    get:
+      tags: [Departments]
+      summary: Retrieve Department
+      operationId: getDepartment
+      responses:
+        '200':
+          description: Department.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Department' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    patch:
+      tags: [Departments]
+      summary: Update Department
+      operationId: updateDepartment
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Department' }
+      responses:
+        '200': { description: Updated. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /offices:
+    get:
+      tags: [Offices]
+      summary: List Offices
+      operationId: listOffices
+      responses:
+        '200':
+          description: Offices.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Office' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    post:
+      tags: [Offices]
+      summary: Create Office
+      operationId: createOffice
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Office' }
+      responses:
+        '201': { description: Created. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /offices/{id}:
+    parameters: [ { $ref: '#/components/parameters/Id' } ]
+    get:
+      tags: [Offices]
+      summary: Retrieve Office
+      operationId: getOffice
+      responses:
+        '200':
+          description: Office.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Office' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    patch:
+      tags: [Offices]
+      summary: Update Office
+      operationId: updateOffice
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Office' }
+      responses:
+        '200': { description: Updated. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /users:
+    get:
+      tags: [Users]
+      summary: List Users
+      operationId: listUsers
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+        - name: email
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Users.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/User' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    post:
+      tags: [Users]
+      summary: Create User
+      operationId: createUser
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/User' }
+      responses:
+        '201': { description: Created. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /users/{id}:
+    parameters: [ { $ref: '#/components/parameters/Id' } ]
+    get:
+      tags: [Users]
+      summary: Retrieve User
+      operationId: getUser
+      responses:
+        '200':
+          description: User.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    patch:
+      tags: [Users]
+      summary: Update User
+      operationId: updateUser
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/User' }
+      responses:
+        '200': { description: Updated. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /users/{id}/email_addresses:
+    post:
+      tags: [Users]
+      summary: Add User Email
+      operationId: addUserEmail
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email: { type: string, format: email }
+                primary: { type: boolean }
+      responses:
+        '201': { description: Added. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /users/{id}/pending_approvals:
+    get:
+      tags: [Approvals]
+      summary: List User Pending Approvals
+      operationId: listUserPendingApprovals
+      parameters: [ { $ref: '#/components/parameters/Id' } ]
+      responses:
+        '200':
+          description: Pending approvals.
+          content:
+            application/json:
+              schema: { type: array, items: { type: object } }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /offers:
+    get:
+      tags: [Offers]
+      summary: List Offers
+      operationId: listOffers
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+        - name: status
+          in: query
+          schema: { type: string, enum: [draft, approved, sent, sent_manually, accepted, rejected, deprecated] }
+      responses:
+        '200':
+          description: Offers.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Offer' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /offers/{id}:
+    parameters: [ { $ref: '#/components/parameters/Id' } ]
+    get:
+      tags: [Offers]
+      summary: Retrieve Offer
+      operationId: getOffer
+      responses:
+        '200':
+          description: Offer.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Offer' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /offers/{id}/current:
+    patch:
+      tags: [Offers]
+      summary: Update Current Offer
+      operationId: updateCurrentOffer
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/OnBehalfOf'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Offer' }
+      responses:
+        '200': { description: Updated. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /applications/{id}/offers:
+    get:
+      tags: [Offers]
+      summary: List Application Offers
+      operationId: listApplicationOffers
+      parameters: [ { $ref: '#/components/parameters/Id' } ]
+      responses:
+        '200':
+          description: Offers for the application.
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Offer' } }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /applications/{id}/offers/current:
+    get:
+      tags: [Offers]
+      summary: Retrieve Current Application Offer
+      operationId: getCurrentApplicationOffer
+      parameters: [ { $ref: '#/components/parameters/Id' } ]
+      responses:
+        '200':
+          description: Current offer.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Offer' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /approval_flows:
+    post:
+      tags: [Approvals]
+      summary: Create Approval Flow
+      operationId: createApprovalFlow
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                job_id: { type: integer }
+                approval_groups: { type: array, items: { type: object } }
+      responses:
+        '201': { description: Created. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /approval_flows/{id}:
+    parameters: [ { $ref: '#/components/parameters/Id' } ]
+    get:
+      tags: [Approvals]
+      summary: Retrieve Approval Flow
+      operationId: getApprovalFlow
+      responses:
+        '200':
+          description: Approval flow.
+          content:
+            application/json:
+              schema: { type: object }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /approval_flows/{id}/approval_groups/{group_id}/approvers/{user_id}:
+    put:
+      tags: [Approvals]
+      summary: Replace Approver
+      operationId: replaceApprover
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - name: group_id
+          in: path
+          required: true
+          schema: { type: integer }
+        - name: user_id
+          in: path
+          required: true
+          schema: { type: integer }
+        - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '200': { description: Replaced. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /jobs/{job_id}/approval_flows:
+    parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema: { type: integer }
+    get:
+      tags: [Approvals]
+      summary: List Job Approval Flows
+      operationId: listJobApprovalFlows
+      responses:
+        '200':
+          description: Approval flows.
+          content:
+            application/json:
+              schema: { type: array, items: { type: object } }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    put:
+      tags: [Approvals]
+      summary: Replace Job Approval Flow
+      operationId: replaceJobApprovalFlow
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                approval_groups: { type: array, items: { type: object } }
+      responses:
+        '200': { description: Replaced. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /scheduled_interviews:
+    get:
+      tags: [ScheduledInterviews]
+      summary: List Scheduled Interviews
+      operationId: listScheduledInterviews
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+        - name: starts_after
+          in: query
+          schema: { type: string, format: date-time }
+        - name: starts_before
+          in: query
+          schema: { type: string, format: date-time }
+      responses:
+        '200':
+          description: Scheduled interviews.
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/ScheduledInterview' } }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    post:
+      tags: [ScheduledInterviews]
+      summary: Create Scheduled Interview
+      operationId: createScheduledInterview
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ScheduledInterview' }
+      responses:
+        '201': { description: Created. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /scheduled_interviews/{id}:
+    parameters: [ { $ref: '#/components/parameters/Id' } ]
+    get:
+      tags: [ScheduledInterviews]
+      summary: Retrieve Scheduled Interview
+      operationId: getScheduledInterview
+      responses:
+        '200':
+          description: Scheduled interview.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ScheduledInterview' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    patch:
+      tags: [ScheduledInterviews]
+      summary: Update Scheduled Interview
+      operationId: updateScheduledInterview
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ScheduledInterview' }
+      responses:
+        '200': { description: Updated. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    delete:
+      tags: [ScheduledInterviews]
+      summary: Delete Scheduled Interview
+      operationId: deleteScheduledInterview
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      responses:
+        '204': { description: Deleted. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /applications/{id}/scheduled_interviews:
+    get:
+      tags: [ScheduledInterviews]
+      summary: List Application Scheduled Interviews
+      operationId: listApplicationScheduledInterviews
+      parameters: [ { $ref: '#/components/parameters/Id' } ]
+      responses:
+        '200':
+          description: Scheduled interviews.
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/ScheduledInterview' } }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /scorecards:
+    get:
+      tags: [Scorecards]
+      summary: List Scorecards
+      operationId: listScorecards
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: Scorecards.
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Scorecard' } }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /scorecards/{id}:
+    parameters: [ { $ref: '#/components/parameters/Id' } ]
+    get:
+      tags: [Scorecards]
+      summary: Retrieve Scorecard
+      operationId: getScorecard
+      responses:
+        '200':
+          description: Scorecard.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Scorecard' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /applications/{id}/scorecards:
+    get:
+      tags: [Scorecards]
+      summary: List Application Scorecards
+      operationId: listApplicationScorecards
+      parameters: [ { $ref: '#/components/parameters/Id' } ]
+      responses:
+        '200':
+          description: Scorecards.
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Scorecard' } }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /sources:
+    get:
+      tags: [Sources]
+      summary: List Sources
+      operationId: listSources
+      responses:
+        '200':
+          description: Sources.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Source' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /candidate_tags:
+    get:
+      tags: [Tags]
+      summary: List Candidate Tags
+      operationId: listCandidateTags
+      responses:
+        '200':
+          description: Tags.
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Tag' } }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    post:
+      tags: [Tags]
+      summary: Create Candidate Tag
+      operationId: createCandidateTag
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Tag' }
+      responses:
+        '201': { description: Created. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /candidate_tags/{id}:
+    parameters: [ { $ref: '#/components/parameters/Id' } ]
+    delete:
+      tags: [Tags]
+      summary: Delete Candidate Tag
+      operationId: deleteCandidateTag
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      responses:
+        '204': { description: Deleted. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /candidates/{id}/candidate_tags:
+    parameters: [ { $ref: '#/components/parameters/Id' } ]
+    get:
+      tags: [Tags]
+      summary: List Candidate Candidate Tags
+      operationId: listCandidateCandidateTags
+      responses:
+        '200':
+          description: Tags.
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Tag' } }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    put:
+      tags: [Tags]
+      summary: Replace Candidate Tags
+      operationId: replaceCandidateTags
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tag_ids: { type: array, items: { type: integer } }
+      responses:
+        '200': { description: Replaced. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /candidates/{id}/candidate_tags/{tag_id}:
+    delete:
+      tags: [Tags]
+      summary: Remove Candidate Tag
+      operationId: removeCandidateTag
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - name: tag_id
+          in: path
+          required: true
+          schema: { type: integer }
+        - $ref: '#/components/parameters/OnBehalfOf'
+      responses:
+        '204': { description: Removed. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /custom_fields:
+    get:
+      tags: [CustomFields]
+      summary: List Custom Fields
+      operationId: listCustomFields
+      responses:
+        '200':
+          description: Custom fields.
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/CustomField' } }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    post:
+      tags: [CustomFields]
+      summary: Create Custom Field
+      operationId: createCustomField
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CustomField' }
+      responses:
+        '201': { description: Created. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /custom_fields/{id}:
+    parameters: [ { $ref: '#/components/parameters/Id' } ]
+    get:
+      tags: [CustomFields]
+      summary: Retrieve Custom Field
+      operationId: getCustomField
+      responses:
+        '200':
+          description: Custom field.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CustomField' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    patch:
+      tags: [CustomFields]
+      summary: Update Custom Field
+      operationId: updateCustomField
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CustomField' }
+      responses:
+        '200': { description: Updated. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    delete:
+      tags: [CustomFields]
+      summary: Delete Custom Field
+      operationId: deleteCustomField
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      responses:
+        '204': { description: Deleted. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /custom_fields/{id}/custom_field_options:
+    parameters: [ { $ref: '#/components/parameters/Id' } ]
+    get:
+      tags: [CustomFields]
+      summary: List Custom Field Options
+      operationId: listCustomFieldOptions
+      responses:
+        '200':
+          description: Options.
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/CustomFieldOption' } }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    post:
+      tags: [CustomFields]
+      summary: Create Custom Field Option
+      operationId: createCustomFieldOption
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CustomFieldOption' }
+      responses:
+        '201': { description: Created. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /custom_fields/{id}/custom_field_options/{option_id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+      - name: option_id
+        in: path
+        required: true
+        schema: { type: integer }
+    patch:
+      tags: [CustomFields]
+      summary: Update Custom Field Option
+      operationId: updateCustomFieldOption
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CustomFieldOption' }
+      responses:
+        '200': { description: Updated. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+    delete:
+      tags: [CustomFields]
+      summary: Delete Custom Field Option
+      operationId: deleteCustomFieldOption
+      parameters: [ { $ref: '#/components/parameters/OnBehalfOf' } ]
+      responses:
+        '204': { description: Deleted. }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /prospect_pools:
+    get:
+      tags: [ProspectPools]
+      summary: List Prospect Pools
+      operationId: listProspectPools
+      responses:
+        '200':
+          description: Prospect pools.
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/ProspectPool' } }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /prospect_pools/{id}:
+    parameters: [ { $ref: '#/components/parameters/Id' } ]
+    get:
+      tags: [ProspectPools]
+      summary: Retrieve Prospect Pool
+      operationId: getProspectPool
+      responses:
+        '200':
+          description: Prospect pool.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ProspectPool' }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+  /rejection_reasons:
+    get:
+      tags: [RejectionReasons]
+      summary: List Rejection Reasons
+      operationId: listRejectionReasons
+      responses:
+        '200':
+          description: Rejection reasons.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id: { type: integer }
+                    name: { type: string }
+                    type:
+                      type: object
+                      properties:
+                        id: { type: integer }
+                        name: { type: string }
+        '4XX': { $ref: '#/components/responses/ErrorResponse' }
+
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic with the Harvest API key as the username and an empty password (Base64 encoded).
+
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema: { type: integer }
+    Page:
+      name: page
+      in: query
+      schema: { type: integer, default: 1 }
+    PerPage:
+      name: per_page
+      in: query
+      description: Default 100, max 500.
+      schema: { type: integer, default: 100, maximum: 500 }
+    CreatedAfter:
+      name: created_after
+      in: query
+      schema: { type: string, format: date-time }
+    CreatedBefore:
+      name: created_before
+      in: query
+      schema: { type: string, format: date-time }
+    UpdatedAfter:
+      name: updated_after
+      in: query
+      schema: { type: string, format: date-time }
+    UpdatedBefore:
+      name: updated_before
+      in: query
+      schema: { type: string, format: date-time }
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema: { type: integer }
+
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        message: { type: string }
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field: { type: string }
+              message: { type: string }
+
+    Application:
+      type: object
+      properties:
+        id: { type: integer }
+        candidate_id: { type: integer }
+        prospect: { type: boolean }
+        applied_at: { type: string, format: date-time }
+        rejected_at: { type: string, format: date-time, nullable: true }
+        last_activity_at: { type: string, format: date-time }
+        location:
+          type: object
+          properties:
+            address: { type: string }
+        source:
+          type: object
+          properties:
+            id: { type: integer }
+            public_name: { type: string }
+        credited_to: { $ref: '#/components/schemas/UserRef' }
+        rejection_reason:
+          type: object
+          nullable: true
+          properties:
+            id: { type: integer }
+            name: { type: string }
+        rejection_details:
+          type: object
+          nullable: true
+        jobs:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: integer }
+              name: { type: string }
+        job_post_id: { type: integer, nullable: true }
+        status: { type: string, enum: [active, rejected, hired, converted] }
+        current_stage:
+          type: object
+          properties:
+            id: { type: integer }
+            name: { type: string }
+        answers:
+          type: array
+          items:
+            type: object
+            properties:
+              question: { type: string }
+              answer: { type: string }
+        custom_fields:
+          type: object
+          additionalProperties: true
+
+    ApplicationCreate:
+      type: object
+      required: [job_id]
+      properties:
+        job_id: { type: integer }
+        source_id: { type: integer }
+        initial_stage_id: { type: integer }
+        referrer:
+          type: object
+          properties:
+            type: { type: string, enum: [outside, id, email] }
+            value: { type: string }
+        attachments:
+          type: array
+          items: { $ref: '#/components/schemas/Attachment' }
+
+    ApplicationUpdate:
+      type: object
+      properties:
+        source_id: { type: integer }
+        prospect_owner_id: { type: integer }
+        prospect_pool_id: { type: integer }
+        prospect_stage_id: { type: integer }
+        custom_fields:
+          type: object
+          additionalProperties: true
+
+    Candidate:
+      type: object
+      properties:
+        id: { type: integer }
+        first_name: { type: string }
+        last_name: { type: string }
+        company: { type: string, nullable: true }
+        title: { type: string, nullable: true }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+        last_activity: { type: string, format: date-time }
+        is_private: { type: boolean }
+        photo_url: { type: string, nullable: true }
+        emails:
+          type: array
+          items:
+            type: object
+            properties:
+              value: { type: string, format: email }
+              type: { type: string }
+        phone_numbers:
+          type: array
+          items:
+            type: object
+            properties:
+              value: { type: string }
+              type: { type: string }
+        addresses:
+          type: array
+          items:
+            type: object
+            properties:
+              value: { type: string }
+              type: { type: string }
+        social_media_addresses:
+          type: array
+          items:
+            type: object
+            properties:
+              value: { type: string }
+        recruiter: { $ref: '#/components/schemas/UserRef' }
+        coordinator: { $ref: '#/components/schemas/UserRef' }
+        tags:
+          type: array
+          items: { type: string }
+        applications:
+          type: array
+          items: { $ref: '#/components/schemas/Application' }
+        educations:
+          type: array
+          items: { $ref: '#/components/schemas/Education' }
+        employments:
+          type: array
+          items: { $ref: '#/components/schemas/Employment' }
+        custom_fields:
+          type: object
+          additionalProperties: true
+
+    CandidateCreate:
+      type: object
+      required: [first_name, last_name]
+      properties:
+        first_name: { type: string }
+        last_name: { type: string }
+        company: { type: string }
+        title: { type: string }
+        phone_numbers:
+          type: array
+          items: { type: object }
+        addresses:
+          type: array
+          items: { type: object }
+        emails:
+          type: array
+          items: { type: object }
+        applications:
+          type: array
+          items: { $ref: '#/components/schemas/ApplicationCreate' }
+
+    CandidateUpdate:
+      type: object
+      properties:
+        first_name: { type: string }
+        last_name: { type: string }
+        company: { type: string }
+        title: { type: string }
+        is_private: { type: boolean }
+        custom_fields:
+          type: object
+          additionalProperties: true
+
+    Attachment:
+      type: object
+      required: [filename, type]
+      properties:
+        filename: { type: string }
+        url: { type: string, format: uri }
+        type: { type: string, enum: [resume, cover_letter, admin_only, public, offer_letter, take_home_test, offer_packet] }
+        content: { type: string, description: Base64 file content. }
+        content_type: { type: string }
+
+    Education:
+      type: object
+      properties:
+        school_name: { type: string }
+        degree: { type: string }
+        discipline: { type: string }
+        start_date: { type: string, format: date }
+        end_date: { type: string, format: date }
+
+    Employment:
+      type: object
+      properties:
+        company_name: { type: string }
+        title: { type: string }
+        start_date: { type: string, format: date }
+        end_date: { type: string, format: date }
+
+    ActivityFeed:
+      type: object
+      properties:
+        activities:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: integer }
+              created_at: { type: string, format: date-time }
+              subject: { type: string }
+              body: { type: string }
+              user: { $ref: '#/components/schemas/UserRef' }
+        notes:
+          type: array
+          items: { type: object }
+        emails:
+          type: array
+          items: { type: object }
+
+    Job:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        requisition_id: { type: string, nullable: true }
+        notes: { type: string }
+        confidential: { type: boolean }
+        status: { type: string, enum: [open, closed, draft] }
+        created_at: { type: string, format: date-time }
+        opened_at: { type: string, format: date-time, nullable: true }
+        closed_at: { type: string, format: date-time, nullable: true }
+        updated_at: { type: string, format: date-time }
+        departments:
+          type: array
+          items: { $ref: '#/components/schemas/Department' }
+        offices:
+          type: array
+          items: { $ref: '#/components/schemas/Office' }
+        hiring_team:
+          $ref: '#/components/schemas/HiringTeam'
+        custom_fields:
+          type: object
+          additionalProperties: true
+        openings:
+          type: array
+          items: { $ref: '#/components/schemas/Opening' }
+
+    JobCreate:
+      type: object
+      required: [name, template_job_id]
+      properties:
+        name: { type: string }
+        template_job_id: { type: integer }
+        requisition_id: { type: string }
+        department_id: { type: integer }
+        office_ids: { type: array, items: { type: integer } }
+        number_of_openings: { type: integer }
+
+    JobUpdate:
+      type: object
+      properties:
+        name: { type: string }
+        requisition_id: { type: string }
+        notes: { type: string }
+        status: { type: string, enum: [open, closed, draft] }
+        department_id: { type: integer }
+        office_ids: { type: array, items: { type: integer } }
+        custom_fields:
+          type: object
+          additionalProperties: true
+
+    Opening:
+      type: object
+      properties:
+        id: { type: integer }
+        opening_id: { type: string }
+        status: { type: string, enum: [open, closed] }
+        opened_at: { type: string, format: date-time }
+        closed_at: { type: string, format: date-time, nullable: true }
+        application_id: { type: integer, nullable: true }
+        close_reason:
+          type: object
+          nullable: true
+          properties:
+            id: { type: integer }
+            name: { type: string }
+        custom_fields:
+          type: object
+          additionalProperties: true
+
+    JobPost:
+      type: object
+      properties:
+        id: { type: integer }
+        title: { type: string }
+        location:
+          type: object
+          properties:
+            name: { type: string }
+        internal: { type: boolean }
+        active: { type: boolean }
+        live: { type: boolean }
+        first_published_at: { type: string, format: date-time, nullable: true }
+        content: { type: string }
+        questions:
+          type: array
+          items: { type: object }
+
+    JobStage:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        priority: { type: integer }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+        interviews:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: integer }
+              name: { type: string }
+
+    Department:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        parent_id: { type: integer, nullable: true }
+        parent_department_external_id: { type: string, nullable: true }
+        child_ids: { type: array, items: { type: integer } }
+        external_id: { type: string, nullable: true }
+
+    Office:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        location:
+          type: object
+          properties:
+            name: { type: string }
+        parent_id: { type: integer, nullable: true }
+        child_ids: { type: array, items: { type: integer } }
+        external_id: { type: string, nullable: true }
+
+    User:
+      type: object
+      properties:
+        id: { type: integer }
+        first_name: { type: string }
+        last_name: { type: string }
+        name: { type: string }
+        primary_email_address: { type: string, format: email }
+        emails: { type: array, items: { type: string, format: email } }
+        employee_id: { type: string, nullable: true }
+        site_admin: { type: boolean }
+        disabled: { type: boolean }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+        linked_candidate_ids: { type: array, items: { type: integer } }
+
+    UserRef:
+      type: object
+      nullable: true
+      properties:
+        id: { type: integer }
+        first_name: { type: string }
+        last_name: { type: string }
+        name: { type: string }
+        employee_id: { type: string, nullable: true }
+
+    HiringTeam:
+      type: object
+      properties:
+        hiring_managers: { type: array, items: { $ref: '#/components/schemas/UserRef' } }
+        recruiters: { type: array, items: { $ref: '#/components/schemas/UserRef' } }
+        coordinators: { type: array, items: { $ref: '#/components/schemas/UserRef' } }
+        sourcers: { type: array, items: { $ref: '#/components/schemas/UserRef' } }
+
+    Offer:
+      type: object
+      properties:
+        id: { type: integer }
+        application_id: { type: integer }
+        version: { type: integer }
+        status: { type: string, enum: [draft, approved, sent, sent_manually, accepted, rejected, deprecated] }
+        sent_at: { type: string, format: date-time, nullable: true }
+        resolved_at: { type: string, format: date-time, nullable: true }
+        starts_at: { type: string, format: date, nullable: true }
+        custom_fields:
+          type: object
+          additionalProperties: true
+
+    ScheduledInterview:
+      type: object
+      properties:
+        id: { type: integer }
+        application_id: { type: integer }
+        interview:
+          type: object
+          properties:
+            id: { type: integer }
+            name: { type: string }
+        starts_at: { type: string, format: date-time }
+        ends_at: { type: string, format: date-time }
+        location: { type: string, nullable: true }
+        video_conferencing_url: { type: string, format: uri, nullable: true }
+        status: { type: string, enum: [scheduled, awaiting_feedback, complete] }
+        interviewers:
+          type: array
+          items:
+            type: object
+            properties:
+              user_id: { type: integer }
+              response_status: { type: string, enum: [needs_action, accepted, declined, tentative] }
+
+    Scorecard:
+      type: object
+      properties:
+        id: { type: integer }
+        application_id: { type: integer }
+        interview: { type: string }
+        interviewer: { $ref: '#/components/schemas/UserRef' }
+        submitted_at: { type: string, format: date-time, nullable: true }
+        overall_recommendation: { type: string, enum: [strong_yes, yes, no, strong_no, no_decision] }
+        attributes:
+          type: array
+          items:
+            type: object
+            properties:
+              name: { type: string }
+              type: { type: string }
+              note: { type: string }
+              rating: { type: string }
+        questions:
+          type: array
+          items:
+            type: object
+            properties:
+              question: { type: string }
+              answer: { type: string }
+
+    Source:
+      type: object
+      properties:
+        id: { type: integer }
+        type:
+          type: object
+          properties:
+            id: { type: integer }
+            name: { type: string }
+        name: { type: string }
+
+    Tag:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+
+    CustomField:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        field_type: { type: string, enum: [job, candidate, application, offer, opening, department, office, user, prospect] }
+        value_type: { type: string, enum: [short_text, long_text, currency, currency_range, date, number, number_range, single_select, multi_select, url, yes_no] }
+        active: { type: boolean }
+        required: { type: boolean }
+        private: { type: boolean }
+        custom_field_options:
+          type: array
+          items: { $ref: '#/components/schemas/CustomFieldOption' }
+
+    CustomFieldOption:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        priority: { type: integer }
+        external_id: { type: string, nullable: true }
+
+    ProspectPool:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        prospect_stages:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: integer }
+              name: { type: string }
+              priority: { type: integer }

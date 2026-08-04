@@ -1,0 +1,112 @@
+openapi: 3.1.0
+info:
+  title: Greenhouse Onboarding API
+  description: |
+    The Greenhouse Onboarding (GHO) API is a single GraphQL endpoint exposing employee,
+    department, location, custom field, and team data along with mutations for creating
+    and updating departments, locations, pending hires, and employee profiles.
+    Authentication uses HTTP Basic with an Onboarding Access Key (username) and Secret
+    Key (password); only Super Admins can issue or revoke keys. Rate limiting is enforced
+    by both request count (100 per window) and per-query complexity (max 2500 points);
+    clients should inspect the `rateLimit` GraphQL field to track remaining budget.
+  version: "1.0.0"
+  contact:
+    name: Greenhouse Software
+    url: https://www.greenhouse.com
+    email: developers@greenhouse.io
+servers:
+  - url: https://onboarding-api.greenhouse.io
+    description: Onboarding GraphQL endpoint host.
+
+security:
+  - BasicAuth: []
+
+tags:
+  - name: GraphQL
+    description: Single GraphQL endpoint for all Onboarding operations.
+
+paths:
+  /graphql:
+    post:
+      tags: [GraphQL]
+      summary: Execute Onboarding GraphQL
+      description: |
+        Execute a GraphQL query or mutation against the Greenhouse Onboarding schema.
+        Supported root queries include `employee(id)`, `employees`, `departments`,
+        `locations`, `customFields`, `teams`, and `rateLimit`. Supported mutations
+        include department / location CRUD, `addPendingHire`, and `updateEmployeeProfile`.
+        Errors use the GraphQL `errors` array with codes: Authentication, Validation,
+        NotFound, Server, RateLimit.
+      operationId: executeOnboardingGraphQL
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/GraphQLRequest' }
+      responses:
+        '200':
+          description: GraphQL response (errors carried inside the body).
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/GraphQLResponse' }
+        '401': { description: Authentication failed. }
+        '429': { description: Rate or complexity limit exceeded. }
+
+  /graphql/introspection:
+    get:
+      tags: [GraphQL]
+      summary: Onboarding GraphQL Schema (Documentation Pointer)
+      description: |
+        GraphQL schema is discovered via introspection by POSTing a standard introspection
+        query to /graphql. This path is documentation-only and not an additional HTTP route.
+      operationId: getOnboardingIntrospectionDocs
+      responses:
+        '200': { description: See documentation. }
+
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic with the Onboarding Access Key as username and Secret Key as password.
+
+  schemas:
+    GraphQLRequest:
+      type: object
+      required: [query]
+      properties:
+        query: { type: string }
+        operationName: { type: string }
+        variables:
+          type: object
+          additionalProperties: true
+
+    GraphQLResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+          nullable: true
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message: { type: string }
+              path:
+                type: array
+                items: { type: string }
+              extensions:
+                type: object
+                properties:
+                  code: { type: string, enum: [Authentication, Validation, NotFound, Server, RateLimit] }
+        extensions:
+          type: object
+          properties:
+            rateLimit:
+              type: object
+              properties:
+                cost: { type: integer }
+                remaining: { type: integer }
+                resetAt: { type: string, format: date-time }

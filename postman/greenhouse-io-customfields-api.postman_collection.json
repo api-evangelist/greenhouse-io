@@ -1,0 +1,1498 @@
+{
+  "info": {
+    "_postman_id": "58fa3d5d-9be6-4488-ae50-c3d3ab89cee5",
+    "name": "Greenhouse Assessment Partner ActivityFeed CustomFields API",
+    "description": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:26.000Z",
+    "updatedAt": "2026-07-28T01:51:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-58fa3d5d-9be6-4488-ae50-c3d3ab89cee5"
+  },
+  "item": [
+    {
+      "name": "custom_fields",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "custom_field_options",
+              "item": [
+                {
+                  "name": "{option_id}",
+                  "item": [
+                    {
+                      "name": "Update Custom Field Option",
+                      "id": "ed1567b9-5d78-4d6d-ad2c-856ff488f647",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"external_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/custom_fields/:id/custom_field_options/:option_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "custom_fields",
+                            ":id",
+                            "custom_field_options",
+                            ":option_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "3d9891a7-fe05-4474-abce-e46378c9b212",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "8af74281-3d25-4cbf-9b9c-08f1ea58f160",
+                              "key": "option_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "8348a36e-c5a8-464f-bb22-455168937682",
+                          "name": "Updated.",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                                "key": "On-Behalf-Of",
+                                "value": "<integer>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"external_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/custom_fields/:id/custom_field_options/:option_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "custom_fields",
+                                ":id",
+                                "custom_field_options",
+                                ":option_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "option_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:51:26.000Z",
+                          "updatedAt": "2026-07-28T01:51:26.000Z",
+                          "uid": "35240-8348a36e-c5a8-464f-bb22-455168937682"
+                        },
+                        {
+                          "id": "7cff073c-8447-41b9-842e-b763cd1e5749",
+                          "name": "Error response.",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                                "key": "On-Behalf-Of",
+                                "value": "<integer>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"external_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/custom_fields/:id/custom_field_options/:option_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "custom_fields",
+                                ":id",
+                                "custom_field_options",
+                                ":option_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "option_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:51:26.000Z",
+                          "updatedAt": "2026-07-28T01:51:26.000Z",
+                          "uid": "35240-7cff073c-8447-41b9-842e-b763cd1e5749"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:51:26.000Z",
+                      "updatedAt": "2026-07-28T01:51:26.000Z",
+                      "uid": "35240-ed1567b9-5d78-4d6d-ad2c-856ff488f647"
+                    },
+                    {
+                      "name": "Delete Custom Field Option",
+                      "id": "cfce5118-f5a0-4601-ac57-1e199e42fb2a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/custom_fields/:id/custom_field_options/:option_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "custom_fields",
+                            ":id",
+                            "custom_field_options",
+                            ":option_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "fe861af0-2f9a-4749-8e5f-e1a486dbbe9d",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "52a410d8-ba1c-4cdb-bad5-f7f54808c013",
+                              "key": "option_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "054f48c0-7672-431e-b880-42fc40b99d50",
+                          "name": "Deleted.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                                "key": "On-Behalf-Of",
+                                "value": "<integer>"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/custom_fields/:id/custom_field_options/:option_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "custom_fields",
+                                ":id",
+                                "custom_field_options",
+                                ":option_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "option_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:51:26.000Z",
+                          "updatedAt": "2026-07-28T01:51:26.000Z",
+                          "uid": "35240-054f48c0-7672-431e-b880-42fc40b99d50"
+                        },
+                        {
+                          "id": "569baed3-b4b0-47cf-becf-cd74ae0faeca",
+                          "name": "Error response.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                                "key": "On-Behalf-Of",
+                                "value": "<integer>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/custom_fields/:id/custom_field_options/:option_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "custom_fields",
+                                ":id",
+                                "custom_field_options",
+                                ":option_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "option_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:51:26.000Z",
+                          "updatedAt": "2026-07-28T01:51:26.000Z",
+                          "uid": "35240-569baed3-b4b0-47cf-becf-cd74ae0faeca"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:51:26.000Z",
+                      "updatedAt": "2026-07-28T01:51:26.000Z",
+                      "uid": "35240-cfce5118-f5a0-4601-ac57-1e199e42fb2a"
+                    }
+                  ],
+                  "id": "1482e85b-d1dd-403c-b2f3-afd7be974e94",
+                  "createdAt": "2026-07-28T01:51:26.000Z",
+                  "updatedAt": "2026-07-28T01:51:26.000Z",
+                  "uid": "35240-1482e85b-d1dd-403c-b2f3-afd7be974e94"
+                },
+                {
+                  "name": "List Custom Field Options",
+                  "id": "34881e55-e495-4835-b9e2-d44a898b86a3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/custom_fields/:id/custom_field_options",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "custom_fields",
+                        ":id",
+                        "custom_field_options"
+                      ],
+                      "variable": [
+                        {
+                          "id": "357a480d-9b99-400e-b77e-522ea965d148",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "199cb8b5-80f4-487c-bb3d-d63027498d1e",
+                      "name": "Options.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/custom_fields/:id/custom_field_options",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "custom_fields",
+                            ":id",
+                            "custom_field_options"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"priority\": \"<integer>\",\n    \"external_id\": \"<string>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"priority\": \"<integer>\",\n    \"external_id\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-07-28T01:51:26.000Z",
+                      "updatedAt": "2026-07-28T01:51:26.000Z",
+                      "uid": "35240-199cb8b5-80f4-487c-bb3d-d63027498d1e"
+                    },
+                    {
+                      "id": "64d37ca9-8fc9-4643-914d-e76302239d6d",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/custom_fields/:id/custom_field_options",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "custom_fields",
+                            ":id",
+                            "custom_field_options"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:26.000Z",
+                      "updatedAt": "2026-07-28T01:51:26.000Z",
+                      "uid": "35240-64d37ca9-8fc9-4643-914d-e76302239d6d"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:26.000Z",
+                  "updatedAt": "2026-07-28T01:51:26.000Z",
+                  "uid": "35240-34881e55-e495-4835-b9e2-d44a898b86a3"
+                },
+                {
+                  "name": "Create Custom Field Option",
+                  "id": "db3db6fb-27fa-4cd8-a6e9-298a76943916",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"external_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/custom_fields/:id/custom_field_options",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "custom_fields",
+                        ":id",
+                        "custom_field_options"
+                      ],
+                      "variable": [
+                        {
+                          "id": "1d6f4a23-1152-4352-8ef7-806df5f656a5",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "62fe4c6a-7b7b-45f9-882a-8691c1ed3a0e",
+                      "name": "Created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"external_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/custom_fields/:id/custom_field_options",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "custom_fields",
+                            ":id",
+                            "custom_field_options"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:51:26.000Z",
+                      "updatedAt": "2026-07-28T01:51:26.000Z",
+                      "uid": "35240-62fe4c6a-7b7b-45f9-882a-8691c1ed3a0e"
+                    },
+                    {
+                      "id": "c25bda1b-60b8-48d4-9a9a-ad04922a8d72",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"external_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/custom_fields/:id/custom_field_options",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "custom_fields",
+                            ":id",
+                            "custom_field_options"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:26.000Z",
+                      "updatedAt": "2026-07-28T01:51:26.000Z",
+                      "uid": "35240-c25bda1b-60b8-48d4-9a9a-ad04922a8d72"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:26.000Z",
+                  "updatedAt": "2026-07-28T01:51:26.000Z",
+                  "uid": "35240-db3db6fb-27fa-4cd8-a6e9-298a76943916"
+                }
+              ],
+              "id": "74442201-9344-45fc-aea3-8f009149607c",
+              "createdAt": "2026-07-28T01:51:26.000Z",
+              "updatedAt": "2026-07-28T01:51:26.000Z",
+              "uid": "35240-74442201-9344-45fc-aea3-8f009149607c"
+            },
+            {
+              "name": "Retrieve Custom Field",
+              "id": "ca8f456a-2806-441a-a034-29c901cfd0f0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/custom_fields/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "custom_fields",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "cda7b9b7-8f2a-4957-b973-ad2ae1801f42",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "bc774153-b04f-4d12-a628-7e3aefe6543f",
+                  "name": "Custom field.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/custom_fields/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "custom_fields",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"field_type\": \"user\",\n  \"value_type\": \"yes_no\",\n  \"active\": \"<boolean>\",\n  \"required\": \"<boolean>\",\n  \"private\": \"<boolean>\",\n  \"custom_field_options\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"priority\": \"<integer>\",\n      \"external_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"priority\": \"<integer>\",\n      \"external_id\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:26.000Z",
+                  "updatedAt": "2026-07-28T01:51:26.000Z",
+                  "uid": "35240-bc774153-b04f-4d12-a628-7e3aefe6543f"
+                },
+                {
+                  "id": "2996ecde-e46b-494c-93ee-0cd91978a278",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/custom_fields/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "custom_fields",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:26.000Z",
+                  "updatedAt": "2026-07-28T01:51:26.000Z",
+                  "uid": "35240-2996ecde-e46b-494c-93ee-0cd91978a278"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:26.000Z",
+              "updatedAt": "2026-07-28T01:51:26.000Z",
+              "uid": "35240-ca8f456a-2806-441a-a034-29c901cfd0f0"
+            },
+            {
+              "name": "Update Custom Field",
+              "id": "dd82c9aa-1e2f-4c32-a8c4-27e35f45c5ad",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"field_type\": \"user\",\n  \"value_type\": \"yes_no\",\n  \"active\": \"<boolean>\",\n  \"required\": \"<boolean>\",\n  \"private\": \"<boolean>\",\n  \"custom_field_options\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"priority\": \"<integer>\",\n      \"external_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"priority\": \"<integer>\",\n      \"external_id\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/custom_fields/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "custom_fields",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "e00c4f21-e950-42e5-bdf7-f5dc8ffa7ff1",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "245d1c3e-aafb-4a21-ad22-7a180e719510",
+                  "name": "Updated.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"field_type\": \"user\",\n  \"value_type\": \"yes_no\",\n  \"active\": \"<boolean>\",\n  \"required\": \"<boolean>\",\n  \"private\": \"<boolean>\",\n  \"custom_field_options\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"priority\": \"<integer>\",\n      \"external_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"priority\": \"<integer>\",\n      \"external_id\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/custom_fields/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "custom_fields",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:51:26.000Z",
+                  "updatedAt": "2026-07-28T01:51:26.000Z",
+                  "uid": "35240-245d1c3e-aafb-4a21-ad22-7a180e719510"
+                },
+                {
+                  "id": "956f293a-c4d8-432b-9912-b3b754a9f4d4",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"field_type\": \"user\",\n  \"value_type\": \"yes_no\",\n  \"active\": \"<boolean>\",\n  \"required\": \"<boolean>\",\n  \"private\": \"<boolean>\",\n  \"custom_field_options\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"priority\": \"<integer>\",\n      \"external_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"priority\": \"<integer>\",\n      \"external_id\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/custom_fields/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "custom_fields",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:26.000Z",
+                  "updatedAt": "2026-07-28T01:51:26.000Z",
+                  "uid": "35240-956f293a-c4d8-432b-9912-b3b754a9f4d4"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:26.000Z",
+              "updatedAt": "2026-07-28T01:51:26.000Z",
+              "uid": "35240-dd82c9aa-1e2f-4c32-a8c4-27e35f45c5ad"
+            },
+            {
+              "name": "Delete Custom Field",
+              "id": "55f3c75f-f8fa-411b-9d77-1be4554d2713",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/custom_fields/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "custom_fields",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "08c83863-af61-4487-b283-13718a05c9c8",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "f68d8bad-0810-4e1e-9d9a-fca98d65f0e9",
+                  "name": "Deleted.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/custom_fields/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "custom_fields",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:51:26.000Z",
+                  "updatedAt": "2026-07-28T01:51:26.000Z",
+                  "uid": "35240-f68d8bad-0810-4e1e-9d9a-fca98d65f0e9"
+                },
+                {
+                  "id": "e38274d3-64ac-4916-8cdc-6a654c786e05",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/custom_fields/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "custom_fields",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:26.000Z",
+                  "updatedAt": "2026-07-28T01:51:26.000Z",
+                  "uid": "35240-e38274d3-64ac-4916-8cdc-6a654c786e05"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:26.000Z",
+              "updatedAt": "2026-07-28T01:51:26.000Z",
+              "uid": "35240-55f3c75f-f8fa-411b-9d77-1be4554d2713"
+            }
+          ],
+          "id": "eeed9b58-d71d-400b-a300-bea599b64a9d",
+          "createdAt": "2026-07-28T01:51:26.000Z",
+          "updatedAt": "2026-07-28T01:51:26.000Z",
+          "uid": "35240-eeed9b58-d71d-400b-a300-bea599b64a9d"
+        },
+        {
+          "name": "List Custom Fields",
+          "id": "e37c9dce-5a9a-4ea4-8a74-7af452064a74",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/custom_fields",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "custom_fields"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8ced3531-cc60-4c06-a27c-bab8c55f013e",
+              "name": "Custom fields.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/custom_fields",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "custom_fields"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"field_type\": \"office\",\n    \"value_type\": \"currency\",\n    \"active\": \"<boolean>\",\n    \"required\": \"<boolean>\",\n    \"private\": \"<boolean>\",\n    \"custom_field_options\": [\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"priority\": \"<integer>\",\n        \"external_id\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"priority\": \"<integer>\",\n        \"external_id\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"field_type\": \"opening\",\n    \"value_type\": \"url\",\n    \"active\": \"<boolean>\",\n    \"required\": \"<boolean>\",\n    \"private\": \"<boolean>\",\n    \"custom_field_options\": [\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"priority\": \"<integer>\",\n        \"external_id\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"priority\": \"<integer>\",\n        \"external_id\": \"<string>\"\n      }\n    ]\n  }\n]",
+              "createdAt": "2026-07-28T01:51:26.000Z",
+              "updatedAt": "2026-07-28T01:51:26.000Z",
+              "uid": "35240-8ced3531-cc60-4c06-a27c-bab8c55f013e"
+            },
+            {
+              "id": "e982fe40-c894-4f7f-a1a6-3b97db286b07",
+              "name": "Error response.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/custom_fields",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "custom_fields"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:26.000Z",
+              "updatedAt": "2026-07-28T01:51:26.000Z",
+              "uid": "35240-e982fe40-c894-4f7f-a1a6-3b97db286b07"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:26.000Z",
+          "updatedAt": "2026-07-28T01:51:26.000Z",
+          "uid": "35240-e37c9dce-5a9a-4ea4-8a74-7af452064a74"
+        },
+        {
+          "name": "Create Custom Field",
+          "id": "6bdcb5fc-1fd8-4f68-8ce4-9f6b12f4e3a4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                "key": "On-Behalf-Of",
+                "value": "<integer>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"field_type\": \"user\",\n  \"value_type\": \"yes_no\",\n  \"active\": \"<boolean>\",\n  \"required\": \"<boolean>\",\n  \"private\": \"<boolean>\",\n  \"custom_field_options\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"priority\": \"<integer>\",\n      \"external_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"priority\": \"<integer>\",\n      \"external_id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/custom_fields",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "custom_fields"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b649cd73-9b39-4f47-9a69-0b991be28a9a",
+              "name": "Created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"field_type\": \"user\",\n  \"value_type\": \"yes_no\",\n  \"active\": \"<boolean>\",\n  \"required\": \"<boolean>\",\n  \"private\": \"<boolean>\",\n  \"custom_field_options\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"priority\": \"<integer>\",\n      \"external_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"priority\": \"<integer>\",\n      \"external_id\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/custom_fields",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "custom_fields"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:51:26.000Z",
+              "updatedAt": "2026-07-28T01:51:26.000Z",
+              "uid": "35240-b649cd73-9b39-4f47-9a69-0b991be28a9a"
+            },
+            {
+              "id": "cecfd415-d619-45cc-bd76-743e3f32b3d3",
+              "name": "Error response.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"field_type\": \"user\",\n  \"value_type\": \"yes_no\",\n  \"active\": \"<boolean>\",\n  \"required\": \"<boolean>\",\n  \"private\": \"<boolean>\",\n  \"custom_field_options\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"priority\": \"<integer>\",\n      \"external_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"priority\": \"<integer>\",\n      \"external_id\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/custom_fields",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "custom_fields"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:26.000Z",
+              "updatedAt": "2026-07-28T01:51:26.000Z",
+              "uid": "35240-cecfd415-d619-45cc-bd76-743e3f32b3d3"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:26.000Z",
+          "updatedAt": "2026-07-28T01:51:26.000Z",
+          "uid": "35240-6bdcb5fc-1fd8-4f68-8ce4-9f6b12f4e3a4"
+        }
+      ],
+      "id": "c77e95ff-b942-46d8-af29-c64b3f9bb530",
+      "createdAt": "2026-07-28T01:51:26.000Z",
+      "updatedAt": "2026-07-28T01:51:26.000Z",
+      "uid": "35240-c77e95ff-b942-46d8-af29-c64b3f9bb530"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "partner_host",
+      "value": "partner.example.com"
+    },
+    {
+      "key": "base_path",
+      "value": "greenhouse-assessment"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{partner_host}}/{{base_path}}"
+    }
+  ]
+}

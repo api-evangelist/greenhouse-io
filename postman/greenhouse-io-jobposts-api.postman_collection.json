@@ -1,0 +1,1219 @@
+{
+  "info": {
+    "_postman_id": "732998e0-9254-43b9-8fc5-2789bf440fa0",
+    "name": "Greenhouse Assessment Partner ActivityFeed JobPosts API",
+    "description": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:30.000Z",
+    "updatedAt": "2026-07-28T01:51:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-732998e0-9254-43b9-8fc5-2789bf440fa0"
+  },
+  "item": [
+    {
+      "name": "job_posts",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "custom_locations",
+              "item": [
+                {
+                  "name": "List Job Post Custom Locations",
+                  "id": "0731ac33-f756-4e5b-a6ce-40fc0727bbeb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/job_posts/:id/custom_locations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "job_posts",
+                        ":id",
+                        "custom_locations"
+                      ],
+                      "variable": [
+                        {
+                          "id": "301daac3-cc87-48bf-bf70-2f14a94a2bb8",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "0e280647-5431-4560-a85f-f4f5ccd788d6",
+                      "name": "Custom locations.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/job_posts/:id/custom_locations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "job_posts",
+                            ":id",
+                            "custom_locations"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"name\": \"<string>\",\n    \"region\": \"<string>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"region\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-07-28T01:51:31.000Z",
+                      "updatedAt": "2026-07-28T01:51:31.000Z",
+                      "uid": "35240-0e280647-5431-4560-a85f-f4f5ccd788d6"
+                    },
+                    {
+                      "id": "056d746c-7551-49ca-8f64-ea0af7cbafda",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/job_posts/:id/custom_locations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "job_posts",
+                            ":id",
+                            "custom_locations"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:31.000Z",
+                      "updatedAt": "2026-07-28T01:51:31.000Z",
+                      "uid": "35240-056d746c-7551-49ca-8f64-ea0af7cbafda"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:31.000Z",
+                  "updatedAt": "2026-07-28T01:51:31.000Z",
+                  "uid": "35240-0731ac33-f756-4e5b-a6ce-40fc0727bbeb"
+                }
+              ],
+              "id": "133cec13-1032-425b-a843-1a93a146abdb",
+              "createdAt": "2026-07-28T01:51:31.000Z",
+              "updatedAt": "2026-07-28T01:51:31.000Z",
+              "uid": "35240-133cec13-1032-425b-a843-1a93a146abdb"
+            },
+            {
+              "name": "status",
+              "item": [
+                {
+                  "name": "Update Job Post Status",
+                  "id": "80a797ac-8836-4f4f-babf-a812344970d7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"status\": \"offline\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/job_posts/:id/status",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "job_posts",
+                        ":id",
+                        "status"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5a416221-31e6-4584-a52b-66c1dc042248",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "b2fa0f72-1507-4501-a80d-24866f8d9fe6",
+                      "name": "Status changed.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"offline\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/job_posts/:id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "job_posts",
+                            ":id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:51:31.000Z",
+                      "updatedAt": "2026-07-28T01:51:31.000Z",
+                      "uid": "35240-b2fa0f72-1507-4501-a80d-24866f8d9fe6"
+                    },
+                    {
+                      "id": "3efd5079-4a59-480a-9932-8cc492191edb",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"offline\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/job_posts/:id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "job_posts",
+                            ":id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:31.000Z",
+                      "updatedAt": "2026-07-28T01:51:31.000Z",
+                      "uid": "35240-3efd5079-4a59-480a-9932-8cc492191edb"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:31.000Z",
+                  "updatedAt": "2026-07-28T01:51:31.000Z",
+                  "uid": "35240-80a797ac-8836-4f4f-babf-a812344970d7"
+                }
+              ],
+              "id": "dddefa22-3351-40a7-aab8-c5e4daa86b39",
+              "createdAt": "2026-07-28T01:51:31.000Z",
+              "updatedAt": "2026-07-28T01:51:31.000Z",
+              "uid": "35240-dddefa22-3351-40a7-aab8-c5e4daa86b39"
+            },
+            {
+              "name": "Retrieve Job Post",
+              "id": "90096e9e-ca43-46a7-861b-4e39e66a310b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/job_posts/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "job_posts",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "c57f32c2-71aa-4429-8f99-380010149b23",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "5d57cd43-ca35-4896-98f3-ca7feb0910b6",
+                  "name": "Job post.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/job_posts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "job_posts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"location\": {\n    \"name\": \"<string>\"\n  },\n  \"internal\": \"<boolean>\",\n  \"active\": \"<boolean>\",\n  \"live\": \"<boolean>\",\n  \"first_published_at\": \"<dateTime>\",\n  \"content\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:51:31.000Z",
+                  "updatedAt": "2026-07-28T01:51:31.000Z",
+                  "uid": "35240-5d57cd43-ca35-4896-98f3-ca7feb0910b6"
+                },
+                {
+                  "id": "0982de91-9bfd-4c8a-88fb-457cc15d6fbd",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/job_posts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "job_posts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:31.000Z",
+                  "updatedAt": "2026-07-28T01:51:31.000Z",
+                  "uid": "35240-0982de91-9bfd-4c8a-88fb-457cc15d6fbd"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:31.000Z",
+              "updatedAt": "2026-07-28T01:51:31.000Z",
+              "uid": "35240-90096e9e-ca43-46a7-861b-4e39e66a310b"
+            },
+            {
+              "name": "Update Job Post",
+              "id": "71387172-8094-404b-8ce6-d1d9776b44bb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"location\": {\n    \"name\": \"<string>\"\n  },\n  \"internal\": \"<boolean>\",\n  \"active\": \"<boolean>\",\n  \"live\": \"<boolean>\",\n  \"first_published_at\": \"<dateTime>\",\n  \"content\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/job_posts/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "job_posts",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "4bbc84c5-5adb-4ea8-a1cb-109b44237e83",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "1e331f9c-66f0-40ef-9c82-fb1ec34a3076",
+                  "name": "Updated.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"location\": {\n    \"name\": \"<string>\"\n  },\n  \"internal\": \"<boolean>\",\n  \"active\": \"<boolean>\",\n  \"live\": \"<boolean>\",\n  \"first_published_at\": \"<dateTime>\",\n  \"content\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/job_posts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "job_posts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:51:31.000Z",
+                  "updatedAt": "2026-07-28T01:51:31.000Z",
+                  "uid": "35240-1e331f9c-66f0-40ef-9c82-fb1ec34a3076"
+                },
+                {
+                  "id": "8a4ec14d-45d3-433f-8e62-1c385235206e",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"location\": {\n    \"name\": \"<string>\"\n  },\n  \"internal\": \"<boolean>\",\n  \"active\": \"<boolean>\",\n  \"live\": \"<boolean>\",\n  \"first_published_at\": \"<dateTime>\",\n  \"content\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/job_posts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "job_posts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:31.000Z",
+                  "updatedAt": "2026-07-28T01:51:31.000Z",
+                  "uid": "35240-8a4ec14d-45d3-433f-8e62-1c385235206e"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:31.000Z",
+              "updatedAt": "2026-07-28T01:51:31.000Z",
+              "uid": "35240-71387172-8094-404b-8ce6-d1d9776b44bb"
+            }
+          ],
+          "id": "db950324-3eec-4b51-afdf-c09b225c520d",
+          "createdAt": "2026-07-28T01:51:31.000Z",
+          "updatedAt": "2026-07-28T01:51:31.000Z",
+          "uid": "35240-db950324-3eec-4b51-afdf-c09b225c520d"
+        },
+        {
+          "name": "List Job Posts",
+          "id": "3f33641f-ffa2-4ab1-b453-78c6f800e692",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/job_posts?page=1&per_page=100&live=<boolean>&active=<boolean>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "job_posts"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "description": "Default 100, max 500.",
+                  "key": "per_page",
+                  "value": "100"
+                },
+                {
+                  "key": "live",
+                  "value": "<boolean>"
+                },
+                {
+                  "key": "active",
+                  "value": "<boolean>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f7f8713d-9577-45a2-9387-994cf56df2e6",
+              "name": "Array of job posts.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/job_posts?page=1&per_page=100&live=<boolean>&active=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "job_posts"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Default 100, max 500.",
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "live",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"title\": \"<string>\",\n    \"location\": {\n      \"name\": \"<string>\"\n    },\n    \"internal\": \"<boolean>\",\n    \"active\": \"<boolean>\",\n    \"live\": \"<boolean>\",\n    \"first_published_at\": \"<dateTime>\",\n    \"content\": \"<string>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"title\": \"<string>\",\n    \"location\": {\n      \"name\": \"<string>\"\n    },\n    \"internal\": \"<boolean>\",\n    \"active\": \"<boolean>\",\n    \"live\": \"<boolean>\",\n    \"first_published_at\": \"<dateTime>\",\n    \"content\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-07-28T01:51:31.000Z",
+              "updatedAt": "2026-07-28T01:51:31.000Z",
+              "uid": "35240-f7f8713d-9577-45a2-9387-994cf56df2e6"
+            },
+            {
+              "id": "4b9697fb-ead4-444c-8920-b1ad8de6d54b",
+              "name": "Error response.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/job_posts?page=1&per_page=100&live=<boolean>&active=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "job_posts"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Default 100, max 500.",
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "live",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:31.000Z",
+              "updatedAt": "2026-07-28T01:51:31.000Z",
+              "uid": "35240-4b9697fb-ead4-444c-8920-b1ad8de6d54b"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:31.000Z",
+          "updatedAt": "2026-07-28T01:51:31.000Z",
+          "uid": "35240-3f33641f-ffa2-4ab1-b453-78c6f800e692"
+        }
+      ],
+      "id": "d0d7fe63-71bb-4c7b-bf24-2178c3ce8347",
+      "createdAt": "2026-07-28T01:51:31.000Z",
+      "updatedAt": "2026-07-28T01:51:31.000Z",
+      "uid": "35240-d0d7fe63-71bb-4c7b-bf24-2178c3ce8347"
+    },
+    {
+      "name": "jobs",
+      "item": [
+        {
+          "name": "{job_id}",
+          "item": [
+            {
+              "name": "job_posts",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Retrieve Job Job Post",
+                      "id": "4b5d4d03-c318-4e81-8bba-d8e9679d11b5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:job_id/job_posts/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":job_id",
+                            "job_posts",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "676f1069-137a-46f5-adbe-9b7f083a6290",
+                              "key": "job_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "3903dfc6-ad58-4442-822f-bb6cf41fd13a",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "be87c18a-57c4-48cd-91c4-47d795f4dcf6",
+                          "name": "Job post.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/jobs/:job_id/job_posts/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "jobs",
+                                ":job_id",
+                                "job_posts",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "job_id"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"location\": {\n    \"name\": \"<string>\"\n  },\n  \"internal\": \"<boolean>\",\n  \"active\": \"<boolean>\",\n  \"live\": \"<boolean>\",\n  \"first_published_at\": \"<dateTime>\",\n  \"content\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:51:31.000Z",
+                          "updatedAt": "2026-07-28T01:51:31.000Z",
+                          "uid": "35240-be87c18a-57c4-48cd-91c4-47d795f4dcf6"
+                        },
+                        {
+                          "id": "da21b241-b729-4257-9c58-867c91c1c006",
+                          "name": "Error response.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/jobs/:job_id/job_posts/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "jobs",
+                                ":job_id",
+                                "job_posts",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "job_id"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:51:31.000Z",
+                          "updatedAt": "2026-07-28T01:51:31.000Z",
+                          "uid": "35240-da21b241-b729-4257-9c58-867c91c1c006"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:51:31.000Z",
+                      "updatedAt": "2026-07-28T01:51:31.000Z",
+                      "uid": "35240-4b5d4d03-c318-4e81-8bba-d8e9679d11b5"
+                    }
+                  ],
+                  "id": "70cb452c-1f87-4607-816e-0fde9e14e989",
+                  "createdAt": "2026-07-28T01:51:31.000Z",
+                  "updatedAt": "2026-07-28T01:51:31.000Z",
+                  "uid": "35240-70cb452c-1f87-4607-816e-0fde9e14e989"
+                },
+                {
+                  "name": "List Job Posts For Job",
+                  "id": "c941d9a7-df72-42e9-978d-663c1bfe47ae",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:job_id/job_posts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":job_id",
+                        "job_posts"
+                      ],
+                      "variable": [
+                        {
+                          "id": "7814751a-381e-4337-ac4b-485afcbc41de",
+                          "key": "job_id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "d228bae3-789c-4025-ae9b-efb290f419b4",
+                      "name": "Job posts for a job.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:job_id/job_posts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":job_id",
+                            "job_posts"
+                          ],
+                          "variable": [
+                            {
+                              "key": "job_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"title\": \"<string>\",\n    \"location\": {\n      \"name\": \"<string>\"\n    },\n    \"internal\": \"<boolean>\",\n    \"active\": \"<boolean>\",\n    \"live\": \"<boolean>\",\n    \"first_published_at\": \"<dateTime>\",\n    \"content\": \"<string>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"title\": \"<string>\",\n    \"location\": {\n      \"name\": \"<string>\"\n    },\n    \"internal\": \"<boolean>\",\n    \"active\": \"<boolean>\",\n    \"live\": \"<boolean>\",\n    \"first_published_at\": \"<dateTime>\",\n    \"content\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-07-28T01:51:31.000Z",
+                      "updatedAt": "2026-07-28T01:51:31.000Z",
+                      "uid": "35240-d228bae3-789c-4025-ae9b-efb290f419b4"
+                    },
+                    {
+                      "id": "667a0d59-62f6-4e45-9167-7781443f3686",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:job_id/job_posts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":job_id",
+                            "job_posts"
+                          ],
+                          "variable": [
+                            {
+                              "key": "job_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:31.000Z",
+                      "updatedAt": "2026-07-28T01:51:31.000Z",
+                      "uid": "35240-667a0d59-62f6-4e45-9167-7781443f3686"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:31.000Z",
+                  "updatedAt": "2026-07-28T01:51:31.000Z",
+                  "uid": "35240-c941d9a7-df72-42e9-978d-663c1bfe47ae"
+                }
+              ],
+              "id": "3e243bd0-98f9-4a62-ac5d-5aa17e09ed1e",
+              "createdAt": "2026-07-28T01:51:31.000Z",
+              "updatedAt": "2026-07-28T01:51:31.000Z",
+              "uid": "35240-3e243bd0-98f9-4a62-ac5d-5aa17e09ed1e"
+            }
+          ],
+          "id": "1a038109-23b7-4c7d-b4aa-62b867dab8a0",
+          "createdAt": "2026-07-28T01:51:31.000Z",
+          "updatedAt": "2026-07-28T01:51:31.000Z",
+          "uid": "35240-1a038109-23b7-4c7d-b4aa-62b867dab8a0"
+        }
+      ],
+      "id": "d25ac509-9048-4fe2-a7b2-08dc6055ba07",
+      "createdAt": "2026-07-28T01:51:31.000Z",
+      "updatedAt": "2026-07-28T01:51:31.000Z",
+      "uid": "35240-d25ac509-9048-4fe2-a7b2-08dc6055ba07"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "partner_host",
+      "value": "partner.example.com"
+    },
+    {
+      "key": "base_path",
+      "value": "greenhouse-assessment"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{partner_host}}/{{base_path}}"
+    }
+  ]
+}

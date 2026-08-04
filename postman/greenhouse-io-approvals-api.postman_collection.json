@@ -1,0 +1,1087 @@
+{
+  "info": {
+    "_postman_id": "32bfee0f-5c85-47c8-9371-f6e251820678",
+    "name": "Greenhouse Assessment Partner ActivityFeed Approvals API",
+    "description": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:22.000Z",
+    "updatedAt": "2026-07-28T01:51:22.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-32bfee0f-5c85-47c8-9371-f6e251820678"
+  },
+  "item": [
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "pending_approvals",
+              "item": [
+                {
+                  "name": "List User Pending Approvals",
+                  "id": "dc9c8f35-250e-4f7c-86c4-84258b428154",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id/pending_approvals",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id",
+                        "pending_approvals"
+                      ],
+                      "variable": [
+                        {
+                          "id": "79fb754d-8e20-424b-beda-a5dd9092bd23",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "b6772e6b-c5e0-4057-8ef8-1ef7b20a8769",
+                      "name": "Pending approvals.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:id/pending_approvals",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":id",
+                            "pending_approvals"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[]",
+                      "createdAt": "2026-07-28T01:51:23.000Z",
+                      "updatedAt": "2026-07-28T01:51:23.000Z",
+                      "uid": "35240-b6772e6b-c5e0-4057-8ef8-1ef7b20a8769"
+                    },
+                    {
+                      "id": "add6fd1f-e229-41ca-9165-515f8a287952",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:id/pending_approvals",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":id",
+                            "pending_approvals"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:23.000Z",
+                      "updatedAt": "2026-07-28T01:51:23.000Z",
+                      "uid": "35240-add6fd1f-e229-41ca-9165-515f8a287952"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:23.000Z",
+                  "updatedAt": "2026-07-28T01:51:23.000Z",
+                  "uid": "35240-dc9c8f35-250e-4f7c-86c4-84258b428154"
+                }
+              ],
+              "id": "a1aa1c12-9423-4027-a24a-bad258ce3ee6",
+              "createdAt": "2026-07-28T01:51:23.000Z",
+              "updatedAt": "2026-07-28T01:51:23.000Z",
+              "uid": "35240-a1aa1c12-9423-4027-a24a-bad258ce3ee6"
+            }
+          ],
+          "id": "29bc7f75-d692-4eb2-9335-c43e4a14b1eb",
+          "createdAt": "2026-07-28T01:51:23.000Z",
+          "updatedAt": "2026-07-28T01:51:23.000Z",
+          "uid": "35240-29bc7f75-d692-4eb2-9335-c43e4a14b1eb"
+        }
+      ],
+      "id": "f7dbfa7e-6bea-436c-99fe-bd0f3f2832f2",
+      "createdAt": "2026-07-28T01:51:23.000Z",
+      "updatedAt": "2026-07-28T01:51:23.000Z",
+      "uid": "35240-f7dbfa7e-6bea-436c-99fe-bd0f3f2832f2"
+    },
+    {
+      "name": "approval_flows",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "approval_groups",
+              "item": [
+                {
+                  "name": "{group_id}",
+                  "item": [
+                    {
+                      "name": "approvers",
+                      "item": [
+                        {
+                          "name": "{user_id}",
+                          "item": [
+                            {
+                              "name": "Replace Approver",
+                              "id": "e1dd2e78-dbee-4e9a-aac4-2e698e16f9f7",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                                    "key": "On-Behalf-Of",
+                                    "value": "<integer>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/approval_flows/:id/approval_groups/:group_id/approvers/:user_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "approval_flows",
+                                    ":id",
+                                    "approval_groups",
+                                    ":group_id",
+                                    "approvers",
+                                    ":user_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "1224ed13-c53d-4799-bd3d-7ed79290d8a7",
+                                      "key": "id",
+                                      "value": "<integer>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "ab449f61-e10d-4cb4-bbfa-c19164045000",
+                                      "key": "group_id",
+                                      "value": "<integer>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "debf199d-dfe0-4912-b8dc-188bc3f01ae6",
+                                      "key": "user_id",
+                                      "value": "<integer>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "444577eb-6914-4a99-94ef-c0040fbed34d",
+                                  "name": "Replaced.",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                                        "key": "On-Behalf-Of",
+                                        "value": "<integer>"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/approval_flows/:id/approval_groups/:group_id/approvers/:user_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "approval_flows",
+                                        ":id",
+                                        "approval_groups",
+                                        ":group_id",
+                                        "approvers",
+                                        ":user_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "id"
+                                        },
+                                        {
+                                          "key": "group_id"
+                                        },
+                                        {
+                                          "key": "user_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T01:51:23.000Z",
+                                  "updatedAt": "2026-07-28T01:51:23.000Z",
+                                  "uid": "35240-444577eb-6914-4a99-94ef-c0040fbed34d"
+                                },
+                                {
+                                  "id": "e533859d-31a5-4895-adc1-51639c488cb0",
+                                  "name": "Error response.",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                                        "key": "On-Behalf-Of",
+                                        "value": "<integer>"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/approval_flows/:id/approval_groups/:group_id/approvers/:user_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "approval_flows",
+                                        ":id",
+                                        "approval_groups",
+                                        ":group_id",
+                                        "approvers",
+                                        ":user_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "id"
+                                        },
+                                        {
+                                          "key": "group_id"
+                                        },
+                                        {
+                                          "key": "user_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T01:51:23.000Z",
+                                  "updatedAt": "2026-07-28T01:51:23.000Z",
+                                  "uid": "35240-e533859d-31a5-4895-adc1-51639c488cb0"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T01:51:23.000Z",
+                              "updatedAt": "2026-07-28T01:51:23.000Z",
+                              "uid": "35240-e1dd2e78-dbee-4e9a-aac4-2e698e16f9f7"
+                            }
+                          ],
+                          "id": "2c82f3fd-6741-4b27-a823-1c56481f8e04",
+                          "createdAt": "2026-07-28T01:51:23.000Z",
+                          "updatedAt": "2026-07-28T01:51:23.000Z",
+                          "uid": "35240-2c82f3fd-6741-4b27-a823-1c56481f8e04"
+                        }
+                      ],
+                      "id": "a9f498df-0235-4324-8e28-3a1fa24793f3",
+                      "createdAt": "2026-07-28T01:51:23.000Z",
+                      "updatedAt": "2026-07-28T01:51:23.000Z",
+                      "uid": "35240-a9f498df-0235-4324-8e28-3a1fa24793f3"
+                    }
+                  ],
+                  "id": "1e201d34-e0e1-4620-9d27-e67d8bc212bc",
+                  "createdAt": "2026-07-28T01:51:23.000Z",
+                  "updatedAt": "2026-07-28T01:51:23.000Z",
+                  "uid": "35240-1e201d34-e0e1-4620-9d27-e67d8bc212bc"
+                }
+              ],
+              "id": "528cadf7-e48d-41ad-ac1e-41779d88ff4c",
+              "createdAt": "2026-07-28T01:51:23.000Z",
+              "updatedAt": "2026-07-28T01:51:23.000Z",
+              "uid": "35240-528cadf7-e48d-41ad-ac1e-41779d88ff4c"
+            },
+            {
+              "name": "Retrieve Approval Flow",
+              "id": "65f6d2bd-588a-4320-ba7b-e21a095471d1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/approval_flows/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "approval_flows",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d191e94d-e1c4-474b-bb46-537df6ed7522",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "d32c0f89-706d-4f67-8194-15383fd0df08",
+                  "name": "Approval flow.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/approval_flows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "approval_flows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T01:51:23.000Z",
+                  "updatedAt": "2026-07-28T01:51:23.000Z",
+                  "uid": "35240-d32c0f89-706d-4f67-8194-15383fd0df08"
+                },
+                {
+                  "id": "d429fe33-f0cf-49e8-8806-bccf233333e5",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/approval_flows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "approval_flows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:23.000Z",
+                  "updatedAt": "2026-07-28T01:51:23.000Z",
+                  "uid": "35240-d429fe33-f0cf-49e8-8806-bccf233333e5"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:23.000Z",
+              "updatedAt": "2026-07-28T01:51:23.000Z",
+              "uid": "35240-65f6d2bd-588a-4320-ba7b-e21a095471d1"
+            }
+          ],
+          "id": "340a7479-eb9b-4ae2-b9d4-674816772ee2",
+          "createdAt": "2026-07-28T01:51:23.000Z",
+          "updatedAt": "2026-07-28T01:51:23.000Z",
+          "uid": "35240-340a7479-eb9b-4ae2-b9d4-674816772ee2"
+        },
+        {
+          "name": "Create Approval Flow",
+          "id": "fbaffec2-bf8b-4785-9231-e8b9ceabb07c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                "key": "On-Behalf-Of",
+                "value": "<integer>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"job_id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/approval_flows",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "approval_flows"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0080dd9e-f130-453d-9984-6f2e341235e7",
+              "name": "Created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"job_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/approval_flows",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "approval_flows"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:51:23.000Z",
+              "updatedAt": "2026-07-28T01:51:23.000Z",
+              "uid": "35240-0080dd9e-f130-453d-9984-6f2e341235e7"
+            },
+            {
+              "id": "bdf753ad-5f5c-4eab-b1ac-6d4aaaf51389",
+              "name": "Error response.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"job_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/approval_flows",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "approval_flows"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:23.000Z",
+              "updatedAt": "2026-07-28T01:51:23.000Z",
+              "uid": "35240-bdf753ad-5f5c-4eab-b1ac-6d4aaaf51389"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:23.000Z",
+          "updatedAt": "2026-07-28T01:51:23.000Z",
+          "uid": "35240-fbaffec2-bf8b-4785-9231-e8b9ceabb07c"
+        }
+      ],
+      "id": "ddeb447e-68de-4126-9592-f59e18fad0ec",
+      "createdAt": "2026-07-28T01:51:23.000Z",
+      "updatedAt": "2026-07-28T01:51:23.000Z",
+      "uid": "35240-ddeb447e-68de-4126-9592-f59e18fad0ec"
+    },
+    {
+      "name": "jobs",
+      "item": [
+        {
+          "name": "{job_id}",
+          "item": [
+            {
+              "name": "approval_flows",
+              "item": [
+                {
+                  "name": "List Job Approval Flows",
+                  "id": "7cb6367b-94db-4f66-909e-e20b8a18ce22",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:job_id/approval_flows",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":job_id",
+                        "approval_flows"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e2d1f6cf-0388-4606-9beb-e10515cf2add",
+                          "key": "job_id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "12177369-ef12-4dc7-a64b-55f86406e0e7",
+                      "name": "Approval flows.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:job_id/approval_flows",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":job_id",
+                            "approval_flows"
+                          ],
+                          "variable": [
+                            {
+                              "key": "job_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[]",
+                      "createdAt": "2026-07-28T01:51:23.000Z",
+                      "updatedAt": "2026-07-28T01:51:23.000Z",
+                      "uid": "35240-12177369-ef12-4dc7-a64b-55f86406e0e7"
+                    },
+                    {
+                      "id": "9c9e79df-725b-44cb-aa83-10d950746dce",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:job_id/approval_flows",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":job_id",
+                            "approval_flows"
+                          ],
+                          "variable": [
+                            {
+                              "key": "job_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:23.000Z",
+                      "updatedAt": "2026-07-28T01:51:23.000Z",
+                      "uid": "35240-9c9e79df-725b-44cb-aa83-10d950746dce"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:23.000Z",
+                  "updatedAt": "2026-07-28T01:51:23.000Z",
+                  "uid": "35240-7cb6367b-94db-4f66-909e-e20b8a18ce22"
+                },
+                {
+                  "name": "Replace Job Approval Flow",
+                  "id": "0467ac20-2067-4613-9e65-1d7236931ddf",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:job_id/approval_flows",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":job_id",
+                        "approval_flows"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d7ead917-2454-47fc-a472-4b489d0b6b3d",
+                          "key": "job_id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "24c47e90-fc82-4147-8e2d-9e8ada0ce03a",
+                      "name": "Replaced.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:job_id/approval_flows",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":job_id",
+                            "approval_flows"
+                          ],
+                          "variable": [
+                            {
+                              "key": "job_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:51:23.000Z",
+                      "updatedAt": "2026-07-28T01:51:23.000Z",
+                      "uid": "35240-24c47e90-fc82-4147-8e2d-9e8ada0ce03a"
+                    },
+                    {
+                      "id": "241e22df-c08a-46a8-86dc-b326a4349e77",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:job_id/approval_flows",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":job_id",
+                            "approval_flows"
+                          ],
+                          "variable": [
+                            {
+                              "key": "job_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:23.000Z",
+                      "updatedAt": "2026-07-28T01:51:23.000Z",
+                      "uid": "35240-241e22df-c08a-46a8-86dc-b326a4349e77"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:23.000Z",
+                  "updatedAt": "2026-07-28T01:51:23.000Z",
+                  "uid": "35240-0467ac20-2067-4613-9e65-1d7236931ddf"
+                }
+              ],
+              "id": "b6c017b6-ba1f-4203-876e-9a17461cdc50",
+              "createdAt": "2026-07-28T01:51:23.000Z",
+              "updatedAt": "2026-07-28T01:51:23.000Z",
+              "uid": "35240-b6c017b6-ba1f-4203-876e-9a17461cdc50"
+            }
+          ],
+          "id": "c61a5326-c4a1-4b4b-9407-299ea4bad217",
+          "createdAt": "2026-07-28T01:51:23.000Z",
+          "updatedAt": "2026-07-28T01:51:23.000Z",
+          "uid": "35240-c61a5326-c4a1-4b4b-9407-299ea4bad217"
+        }
+      ],
+      "id": "fb4ed6da-e716-4faf-949a-9b35ce8f80a7",
+      "createdAt": "2026-07-28T01:51:23.000Z",
+      "updatedAt": "2026-07-28T01:51:23.000Z",
+      "uid": "35240-fb4ed6da-e716-4faf-949a-9b35ce8f80a7"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "partner_host",
+      "value": "partner.example.com"
+    },
+    {
+      "key": "base_path",
+      "value": "greenhouse-assessment"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{partner_host}}/{{base_path}}"
+    }
+  ]
+}

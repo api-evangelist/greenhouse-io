@@ -1,0 +1,317 @@
+{
+  "info": {
+    "_postman_id": "89915e16-4ba1-4edb-ac0d-0af03cc547cc",
+    "name": "Greenhouse Assessment Partner ActivityFeed GraphQL API",
+    "description": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:28.000Z",
+    "updatedAt": "2026-07-28T01:51:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-89915e16-4ba1-4edb-ac0d-0af03cc547cc"
+  },
+  "item": [
+    {
+      "name": "graphql",
+      "item": [
+        {
+          "name": "introspection",
+          "item": [
+            {
+              "name": "Onboarding GraphQL Schema (Documentation Pointer)",
+              "id": "0108b061-c573-429c-9674-5bbc7d455b59",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/graphql/introspection",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "graphql",
+                    "introspection"
+                  ]
+                },
+                "description": "GraphQL schema is discovered via introspection by POSTing a standard introspection\nquery to /graphql. This path is documentation-only and not an additional HTTP route.\n"
+              },
+              "response": [
+                {
+                  "id": "bb70d744-dd76-485a-8309-a53a2a9b0dac",
+                  "name": "See documentation.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/graphql/introspection",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "graphql",
+                        "introspection"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:51:29.000Z",
+                  "updatedAt": "2026-07-28T01:51:29.000Z",
+                  "uid": "35240-bb70d744-dd76-485a-8309-a53a2a9b0dac"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:29.000Z",
+              "updatedAt": "2026-07-28T01:51:29.000Z",
+              "uid": "35240-0108b061-c573-429c-9674-5bbc7d455b59"
+            }
+          ],
+          "id": "617795be-0421-4085-8dd2-ec5811e4b1f2",
+          "createdAt": "2026-07-28T01:51:29.000Z",
+          "updatedAt": "2026-07-28T01:51:29.000Z",
+          "uid": "35240-617795be-0421-4085-8dd2-ec5811e4b1f2"
+        },
+        {
+          "name": "Execute Onboarding GraphQL",
+          "id": "3aaa9f32-2a57-4fa9-8f82-97e055c8abf9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"operationName\": \"<string>\",\n  \"variables\": {\n    \"ut63a\": 22930411.478846848\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/graphql",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "graphql"
+              ]
+            },
+            "description": "Execute a GraphQL query or mutation against the Greenhouse Onboarding schema.\nSupported root queries include `employee(id)`, `employees`, `departments`,\n`locations`, `customFields`, `teams`, and `rateLimit`. Supported mutations\ninclude department / location CRUD, `addPendingHire`, and `updateEmployeeProfile`.\nErrors use the GraphQL `errors` array with codes: Authentication, Validation,\nNotFound, Server, RateLimit.\n"
+          },
+          "response": [
+            {
+              "id": "e5b601b7-00aa-42d3-8cc0-7e71a931b8a3",
+              "name": "GraphQL response (errors carried inside the body).",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"operationName\": \"<string>\",\n  \"variables\": {\n    \"ut63a\": 22930411.478846848\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/graphql",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "graphql"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"elitd5\": true,\n    \"velit_a\": false\n  },\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"extensions\": {\n        \"code\": \"RateLimit\"\n      }\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"extensions\": {\n        \"code\": \"Authentication\"\n      }\n    }\n  ],\n  \"extensions\": {\n    \"rateLimit\": {\n      \"cost\": \"<integer>\",\n      \"remaining\": \"<integer>\",\n      \"resetAt\": \"<dateTime>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T01:51:29.000Z",
+              "updatedAt": "2026-07-28T01:51:29.000Z",
+              "uid": "35240-e5b601b7-00aa-42d3-8cc0-7e71a931b8a3"
+            },
+            {
+              "id": "5fc2234f-e423-4670-bfc2-d50f9bc63255",
+              "name": "Authentication failed.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"operationName\": \"<string>\",\n  \"variables\": {\n    \"ut63a\": 22930411.478846848\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/graphql",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "graphql"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:51:29.000Z",
+              "updatedAt": "2026-07-28T01:51:29.000Z",
+              "uid": "35240-5fc2234f-e423-4670-bfc2-d50f9bc63255"
+            },
+            {
+              "id": "8ebc4b9d-0c24-4a87-9602-5ebe71bf7d09",
+              "name": "Rate or complexity limit exceeded.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"operationName\": \"<string>\",\n  \"variables\": {\n    \"ut63a\": 22930411.478846848\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/graphql",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "graphql"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:51:29.000Z",
+              "updatedAt": "2026-07-28T01:51:29.000Z",
+              "uid": "35240-8ebc4b9d-0c24-4a87-9602-5ebe71bf7d09"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:29.000Z",
+          "updatedAt": "2026-07-28T01:51:29.000Z",
+          "uid": "35240-3aaa9f32-2a57-4fa9-8f82-97e055c8abf9"
+        }
+      ],
+      "id": "bb80dde8-c4c9-4dd9-b81e-413cd5555c03",
+      "createdAt": "2026-07-28T01:51:29.000Z",
+      "updatedAt": "2026-07-28T01:51:29.000Z",
+      "uid": "35240-bb80dde8-c4c9-4dd9-b81e-413cd5555c03"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "partner_host",
+      "value": "partner.example.com"
+    },
+    {
+      "key": "base_path",
+      "value": "greenhouse-assessment"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{partner_host}}/{{base_path}}"
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+{
+  "info": {
+    "_postman_id": "3d33d100-179c-4288-81cc-4356c71c4074",
+    "name": "Greenhouse Assessment Partner ActivityFeed TrackingLinks API",
+    "description": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:52:00.000Z",
+    "updatedAt": "2026-07-28T01:52:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3d33d100-179c-4288-81cc-4356c71c4074"
+  },
+  "item": [
+    {
+      "name": "tracking_link",
+      "item": [
+        {
+          "name": "Create Tracking Link",
+          "id": "dcbcc525-1390-465c-a3a5-74148a5e08c3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                "key": "On-Behalf-Of",
+                "value": "<email>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"job_id\": \"<integer>\",\n  \"source_id\": \"<integer>\",\n  \"external_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/tracking_link",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tracking_link"
+              ]
+            },
+            "description": "Generate a branded tracking link tied to the partner and an optional job."
+          },
+          "response": [
+            {
+              "id": "6d866cbe-0d2e-4927-afe8-a7fe865e9262",
+              "name": "Tracking link.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                    "key": "On-Behalf-Of",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"job_id\": \"<integer>\",\n  \"source_id\": \"<integer>\",\n  \"external_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tracking_link",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tracking_link"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"url\": \"<uri>\",\n  \"expires_at\": \"<dateTime>\"\n}",
+              "createdAt": "2026-07-28T01:52:00.000Z",
+              "updatedAt": "2026-07-28T01:52:00.000Z",
+              "uid": "35240-6d866cbe-0d2e-4927-afe8-a7fe865e9262"
+            }
+          ],
+          "createdAt": "2026-07-28T01:52:00.000Z",
+          "updatedAt": "2026-07-28T01:52:00.000Z",
+          "uid": "35240-dcbcc525-1390-465c-a3a5-74148a5e08c3"
+        }
+      ],
+      "id": "a883781b-cb2e-4383-8d36-81f7a99008b2",
+      "createdAt": "2026-07-28T01:52:00.000Z",
+      "updatedAt": "2026-07-28T01:52:00.000Z",
+      "uid": "35240-a883781b-cb2e-4383-8d36-81f7a99008b2"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "partner_host",
+      "value": "partner.example.com"
+    },
+    {
+      "key": "base_path",
+      "value": "greenhouse-assessment"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{partner_host}}/{{base_path}}"
+    }
+  ]
+}

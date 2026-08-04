@@ -1,0 +1,278 @@
+{
+  "info": {
+    "_postman_id": "996886b8-decb-41ea-b139-985349fb02d0",
+    "name": "Greenhouse Assessment Partner ActivityFeed ProspectPools API",
+    "description": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:36.000Z",
+    "updatedAt": "2026-07-28T01:51:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-996886b8-decb-41ea-b139-985349fb02d0"
+  },
+  "item": [
+    {
+      "name": "prospect_pools",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve Prospect Pool",
+              "id": "da11aa04-8e4e-415b-9234-b2e4b558eb4f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/prospect_pools/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "prospect_pools",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "06029a86-ad19-4027-8394-b9c176b77b01",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "14b5e1d1-a440-43ed-8899-acb444b8d0ce",
+                  "name": "Prospect pool.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/prospect_pools/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "prospect_pools",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"prospect_stages\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"priority\": \"<integer>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"priority\": \"<integer>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:36.000Z",
+                  "updatedAt": "2026-07-28T01:51:36.000Z",
+                  "uid": "35240-14b5e1d1-a440-43ed-8899-acb444b8d0ce"
+                },
+                {
+                  "id": "0b1dee22-11e6-4865-8e78-dcb078ab360d",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/prospect_pools/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "prospect_pools",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:36.000Z",
+                  "updatedAt": "2026-07-28T01:51:36.000Z",
+                  "uid": "35240-0b1dee22-11e6-4865-8e78-dcb078ab360d"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:36.000Z",
+              "updatedAt": "2026-07-28T01:51:36.000Z",
+              "uid": "35240-da11aa04-8e4e-415b-9234-b2e4b558eb4f"
+            }
+          ],
+          "id": "bcde945a-5536-4758-8762-c94a955dbc2a",
+          "createdAt": "2026-07-28T01:51:36.000Z",
+          "updatedAt": "2026-07-28T01:51:36.000Z",
+          "uid": "35240-bcde945a-5536-4758-8762-c94a955dbc2a"
+        },
+        {
+          "name": "List Partner Prospect Pools",
+          "id": "55f8e1a2-ff1a-4ba0-b857-f73e096d5235",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                "key": "On-Behalf-Of",
+                "value": "<email>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/prospect_pools",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "prospect_pools"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d43cbbf1-bba7-4fd2-a0fe-2441123b3505",
+              "name": "Prospect pools.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                    "key": "On-Behalf-Of",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/prospect_pools",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "prospect_pools"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"stages\": [\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"priority\": \"<integer>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"priority\": \"<integer>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"stages\": [\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"priority\": \"<integer>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"priority\": \"<integer>\"\n      }\n    ]\n  }\n]",
+              "createdAt": "2026-07-28T01:51:36.000Z",
+              "updatedAt": "2026-07-28T01:51:36.000Z",
+              "uid": "35240-d43cbbf1-bba7-4fd2-a0fe-2441123b3505"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:36.000Z",
+          "updatedAt": "2026-07-28T01:51:36.000Z",
+          "uid": "35240-55f8e1a2-ff1a-4ba0-b857-f73e096d5235"
+        }
+      ],
+      "id": "bff07781-2b0b-430b-9979-d2bc9939501a",
+      "createdAt": "2026-07-28T01:51:36.000Z",
+      "updatedAt": "2026-07-28T01:51:36.000Z",
+      "uid": "35240-bff07781-2b0b-430b-9979-d2bc9939501a"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "partner_host",
+      "value": "partner.example.com"
+    },
+    {
+      "key": "base_path",
+      "value": "greenhouse-assessment"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{partner_host}}/{{base_path}}"
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "info": {
+    "_postman_id": "33368c8e-3741-4d7a-9432-f83b119137b9",
+    "name": "Greenhouse Assessment Partner ActivityFeed Auth API",
+    "description": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:23.000Z",
+    "updatedAt": "2026-07-28T01:51:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-33368c8e-3741-4d7a-9432-f83b119137b9"
+  },
+  "item": [
+    {
+      "name": "jwt_access_token",
+      "item": [
+        {
+          "name": "Issue Audit Log Access Token",
+          "id": "30cb2bb2-a932-4cd5-8ef9-de93eb325d58",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://harvest.greenhouse.io/auth/jwt_access_token",
+              "protocol": "https",
+              "host": [
+                "harvest",
+                "greenhouse",
+                "io"
+              ],
+              "path": [
+                "auth",
+                "jwt_access_token"
+              ]
+            },
+            "description": "Exchanges a Harvest API key (HTTP Basic) for a JWT bearer token valid for 24 hours."
+          },
+          "response": [
+            {
+              "id": "b4fc03b2-6c80-4876-b875-d1ce51ea255a",
+              "name": "Token issued.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "https://harvest.greenhouse.io/auth/jwt_access_token",
+                  "protocol": "https",
+                  "host": [
+                    "harvest",
+                    "greenhouse",
+                    "io"
+                  ],
+                  "path": [
+                    "auth",
+                    "jwt_access_token"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"access_token\": \"<string>\",\n  \"token_type\": \"<string>\",\n  \"expires_in\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T01:51:24.000Z",
+              "updatedAt": "2026-07-28T01:51:24.000Z",
+              "uid": "35240-b4fc03b2-6c80-4876-b875-d1ce51ea255a"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:24.000Z",
+          "updatedAt": "2026-07-28T01:51:24.000Z",
+          "uid": "35240-30cb2bb2-a932-4cd5-8ef9-de93eb325d58"
+        }
+      ],
+      "id": "5f1a3067-552c-4edc-a3b1-54ffab79a569",
+      "createdAt": "2026-07-28T01:51:24.000Z",
+      "updatedAt": "2026-07-28T01:51:24.000Z",
+      "uid": "35240-5f1a3067-552c-4edc-a3b1-54ffab79a569"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "partner_host",
+      "value": "partner.example.com"
+    },
+    {
+      "key": "base_path",
+      "value": "greenhouse-assessment"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{partner_host}}/{{base_path}}"
+    }
+  ]
+}

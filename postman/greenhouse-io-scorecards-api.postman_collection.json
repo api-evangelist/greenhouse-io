@@ -1,0 +1,508 @@
+{
+  "info": {
+    "_postman_id": "4d55a561-6431-4367-bb4f-532ee29301a5",
+    "name": "Greenhouse Assessment Partner ActivityFeed Scorecards API",
+    "description": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:38.000Z",
+    "updatedAt": "2026-07-28T01:51:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4d55a561-6431-4367-bb4f-532ee29301a5"
+  },
+  "item": [
+    {
+      "name": "scorecards",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve Scorecard",
+              "id": "51c0e930-abba-4ddc-8999-5f508a9c6ee5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/scorecards/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "scorecards",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "e0d079e1-0704-45b0-bf0d-1d48a8d63ce3",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "e62a1b7d-7f16-4e0f-b2a4-fac7ece5d439",
+                  "name": "Scorecard.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/scorecards/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "scorecards",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"application_id\": \"<integer>\",\n  \"interview\": \"<string>\",\n  \"interviewer\": {\n    \"id\": \"<integer>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"name\": \"<string>\",\n    \"employee_id\": \"<string>\"\n  },\n  \"submitted_at\": \"<dateTime>\",\n  \"overall_recommendation\": \"true\",\n  \"attributes\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"note\": \"<string>\",\n      \"rating\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"note\": \"<string>\",\n      \"rating\": \"<string>\"\n    }\n  ],\n  \"questions\": [\n    {\n      \"question\": \"<string>\",\n      \"answer\": \"<string>\"\n    },\n    {\n      \"question\": \"<string>\",\n      \"answer\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:39.000Z",
+                  "updatedAt": "2026-07-28T01:51:39.000Z",
+                  "uid": "35240-e62a1b7d-7f16-4e0f-b2a4-fac7ece5d439"
+                },
+                {
+                  "id": "998aaca3-b8db-4d63-b11c-ef91c266b33c",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/scorecards/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "scorecards",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:39.000Z",
+                  "updatedAt": "2026-07-28T01:51:39.000Z",
+                  "uid": "35240-998aaca3-b8db-4d63-b11c-ef91c266b33c"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:39.000Z",
+              "updatedAt": "2026-07-28T01:51:39.000Z",
+              "uid": "35240-51c0e930-abba-4ddc-8999-5f508a9c6ee5"
+            }
+          ],
+          "id": "ad74ee5c-0f80-4d65-8097-2b08757f4c53",
+          "createdAt": "2026-07-28T01:51:39.000Z",
+          "updatedAt": "2026-07-28T01:51:39.000Z",
+          "uid": "35240-ad74ee5c-0f80-4d65-8097-2b08757f4c53"
+        },
+        {
+          "name": "List Scorecards",
+          "id": "7cbef66b-37a8-4b6b-8595-cb92c012c998",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/scorecards?page=1&per_page=100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "scorecards"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "description": "Default 100, max 500.",
+                  "key": "per_page",
+                  "value": "100"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8bc54145-8350-4414-84a8-3a241e813d76",
+              "name": "Scorecards.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/scorecards?page=1&per_page=100",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "scorecards"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Default 100, max 500.",
+                      "key": "per_page",
+                      "value": "100"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"application_id\": \"<integer>\",\n    \"interview\": \"<string>\",\n    \"interviewer\": {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"name\": \"<string>\",\n      \"employee_id\": \"<string>\"\n    },\n    \"submitted_at\": \"<dateTime>\",\n    \"overall_recommendation\": \"no_decision\",\n    \"attributes\": [\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"note\": \"<string>\",\n        \"rating\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"note\": \"<string>\",\n        \"rating\": \"<string>\"\n      }\n    ],\n    \"questions\": [\n      {\n        \"question\": \"<string>\",\n        \"answer\": \"<string>\"\n      },\n      {\n        \"question\": \"<string>\",\n        \"answer\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<integer>\",\n    \"application_id\": \"<integer>\",\n    \"interview\": \"<string>\",\n    \"interviewer\": {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"name\": \"<string>\",\n      \"employee_id\": \"<string>\"\n    },\n    \"submitted_at\": \"<dateTime>\",\n    \"overall_recommendation\": \"false\",\n    \"attributes\": [\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"note\": \"<string>\",\n        \"rating\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"note\": \"<string>\",\n        \"rating\": \"<string>\"\n      }\n    ],\n    \"questions\": [\n      {\n        \"question\": \"<string>\",\n        \"answer\": \"<string>\"\n      },\n      {\n        \"question\": \"<string>\",\n        \"answer\": \"<string>\"\n      }\n    ]\n  }\n]",
+              "createdAt": "2026-07-28T01:51:39.000Z",
+              "updatedAt": "2026-07-28T01:51:39.000Z",
+              "uid": "35240-8bc54145-8350-4414-84a8-3a241e813d76"
+            },
+            {
+              "id": "be568294-dbd6-4a47-8a42-46f62bb253a5",
+              "name": "Error response.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/scorecards?page=1&per_page=100",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "scorecards"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Default 100, max 500.",
+                      "key": "per_page",
+                      "value": "100"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:39.000Z",
+              "updatedAt": "2026-07-28T01:51:39.000Z",
+              "uid": "35240-be568294-dbd6-4a47-8a42-46f62bb253a5"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:39.000Z",
+          "updatedAt": "2026-07-28T01:51:39.000Z",
+          "uid": "35240-7cbef66b-37a8-4b6b-8595-cb92c012c998"
+        }
+      ],
+      "id": "d4a1cb72-232e-4ca8-98f1-9a8a50881de0",
+      "createdAt": "2026-07-28T01:51:39.000Z",
+      "updatedAt": "2026-07-28T01:51:39.000Z",
+      "uid": "35240-d4a1cb72-232e-4ca8-98f1-9a8a50881de0"
+    },
+    {
+      "name": "applications",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "scorecards",
+              "item": [
+                {
+                  "name": "List Application Scorecards",
+                  "id": "e42c2648-d396-48a5-9c2a-3fab20220a86",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/applications/:id/scorecards",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "applications",
+                        ":id",
+                        "scorecards"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5cffd4fa-2965-4877-9c98-c12db931ddba",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "c92d9127-4d8f-4422-b64c-a2cdbefef544",
+                      "name": "Scorecards.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/applications/:id/scorecards",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "applications",
+                            ":id",
+                            "scorecards"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"application_id\": \"<integer>\",\n    \"interview\": \"<string>\",\n    \"interviewer\": {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"name\": \"<string>\",\n      \"employee_id\": \"<string>\"\n    },\n    \"submitted_at\": \"<dateTime>\",\n    \"overall_recommendation\": \"no_decision\",\n    \"attributes\": [\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"note\": \"<string>\",\n        \"rating\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"note\": \"<string>\",\n        \"rating\": \"<string>\"\n      }\n    ],\n    \"questions\": [\n      {\n        \"question\": \"<string>\",\n        \"answer\": \"<string>\"\n      },\n      {\n        \"question\": \"<string>\",\n        \"answer\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<integer>\",\n    \"application_id\": \"<integer>\",\n    \"interview\": \"<string>\",\n    \"interviewer\": {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"name\": \"<string>\",\n      \"employee_id\": \"<string>\"\n    },\n    \"submitted_at\": \"<dateTime>\",\n    \"overall_recommendation\": \"false\",\n    \"attributes\": [\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"note\": \"<string>\",\n        \"rating\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"note\": \"<string>\",\n        \"rating\": \"<string>\"\n      }\n    ],\n    \"questions\": [\n      {\n        \"question\": \"<string>\",\n        \"answer\": \"<string>\"\n      },\n      {\n        \"question\": \"<string>\",\n        \"answer\": \"<string>\"\n      }\n    ]\n  }\n]",
+                      "createdAt": "2026-07-28T01:51:39.000Z",
+                      "updatedAt": "2026-07-28T01:51:39.000Z",
+                      "uid": "35240-c92d9127-4d8f-4422-b64c-a2cdbefef544"
+                    },
+                    {
+                      "id": "85aae056-9c6c-4ed7-97ed-3d3212ff9b90",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/applications/:id/scorecards",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "applications",
+                            ":id",
+                            "scorecards"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:39.000Z",
+                      "updatedAt": "2026-07-28T01:51:39.000Z",
+                      "uid": "35240-85aae056-9c6c-4ed7-97ed-3d3212ff9b90"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:39.000Z",
+                  "updatedAt": "2026-07-28T01:51:39.000Z",
+                  "uid": "35240-e42c2648-d396-48a5-9c2a-3fab20220a86"
+                }
+              ],
+              "id": "e151a1ab-8eb6-404f-946e-b0e0e3caab51",
+              "createdAt": "2026-07-28T01:51:39.000Z",
+              "updatedAt": "2026-07-28T01:51:39.000Z",
+              "uid": "35240-e151a1ab-8eb6-404f-946e-b0e0e3caab51"
+            }
+          ],
+          "id": "942dd9b7-3528-46fb-aa6d-7bbf208ad0b3",
+          "createdAt": "2026-07-28T01:51:39.000Z",
+          "updatedAt": "2026-07-28T01:51:39.000Z",
+          "uid": "35240-942dd9b7-3528-46fb-aa6d-7bbf208ad0b3"
+        }
+      ],
+      "id": "d5b5dbc2-5ae8-437b-b37d-677672fe7546",
+      "createdAt": "2026-07-28T01:51:39.000Z",
+      "updatedAt": "2026-07-28T01:51:39.000Z",
+      "uid": "35240-d5b5dbc2-5ae8-437b-b37d-677672fe7546"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "partner_host",
+      "value": "partner.example.com"
+    },
+    {
+      "key": "base_path",
+      "value": "greenhouse-assessment"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{partner_host}}/{{base_path}}"
+    }
+  ]
+}

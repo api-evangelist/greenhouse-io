@@ -1,0 +1,326 @@
+{
+  "info": {
+    "_postman_id": "0f555812-a91a-4bd2-80aa-ffcf3c1c7879",
+    "name": "Greenhouse Assessment Partner ActivityFeed Events API",
+    "description": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:28.000Z",
+    "updatedAt": "2026-07-28T01:51:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0f555812-a91a-4bd2-80aa-ffcf3c1c7879"
+  },
+  "item": [
+    {
+      "name": "events",
+      "item": [
+        {
+          "name": "List Audit Events",
+          "id": "d0222718-9df3-4f51-b573-d5447c5a8393",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/events?before_time=<dateTime>&after_time=<dateTime>&date=<date>&magic_time=<string>&performer_ids=<integer>,<integer>&performer_types=User,System&performer_ip_addresses=<string>,<string>&event_types=<string>,<string>&event_target_ids=<integer>,<integer>&event_target_types=<string>,<string>&request_ids=<string>,<string>&request_types=JobBoard,JobBoard&paging=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "events"
+              ],
+              "query": [
+                {
+                  "key": "before_time",
+                  "value": "<dateTime>"
+                },
+                {
+                  "key": "after_time",
+                  "value": "<dateTime>"
+                },
+                {
+                  "key": "date",
+                  "value": "<date>"
+                },
+                {
+                  "description": "Relative time keyword (e.g. last_24_hours, last_7_days).",
+                  "key": "magic_time",
+                  "value": "<string>"
+                },
+                {
+                  "key": "performer_ids",
+                  "value": "<integer>,<integer>"
+                },
+                {
+                  "key": "performer_types",
+                  "value": "User,System"
+                },
+                {
+                  "key": "performer_ip_addresses",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "key": "event_types",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "key": "event_target_ids",
+                  "value": "<integer>,<integer>"
+                },
+                {
+                  "key": "event_target_types",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "key": "request_ids",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "key": "request_types",
+                  "value": "JobBoard,JobBoard"
+                },
+                {
+                  "description": "Opaque pagination cursor returned by a previous response.",
+                  "key": "paging",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns audit events filtered by performer, target, event type, request, and time range."
+          },
+          "response": [
+            {
+              "id": "6fbcd41a-dddb-450a-8ed8-dd0f8090724d",
+              "name": "Audit events.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/events?before_time=<dateTime>&after_time=<dateTime>&date=<date>&magic_time=<string>&performer_ids=<integer>,<integer>&performer_types=User,System&performer_ip_addresses=<string>,<string>&event_types=<string>,<string>&event_target_ids=<integer>,<integer>&event_target_types=<string>,<string>&request_ids=<string>,<string>&request_types=JobBoard,JobBoard&paging=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ],
+                  "query": [
+                    {
+                      "key": "before_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "after_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Relative time keyword (e.g. last_24_hours, last_7_days).",
+                      "key": "magic_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "performer_ids",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "performer_types",
+                      "value": "User,System"
+                    },
+                    {
+                      "key": "performer_ip_addresses",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "event_types",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "event_target_ids",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "event_target_types",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "request_ids",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "request_types",
+                      "value": "JobBoard,JobBoard"
+                    },
+                    {
+                      "description": "Opaque pagination cursor returned by a previous response.",
+                      "key": "paging",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"events\": [\n    {\n      \"id\": \"<string>\",\n      \"event_type\": \"<string>\",\n      \"occurred_at\": \"<dateTime>\",\n      \"performer\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"ip_address\": \"<string>\",\n        \"email\": \"<email>\"\n      },\n      \"event_target\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"request\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"method\": \"<string>\",\n        \"path\": \"<string>\",\n        \"user_agent\": \"<string>\"\n      },\n      \"changes\": [\n        {\n          \"field\": \"<string>\",\n          \"old_value\": {},\n          \"new_value\": {}\n        },\n        {\n          \"field\": \"<string>\",\n          \"old_value\": {},\n          \"new_value\": {}\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"event_type\": \"<string>\",\n      \"occurred_at\": \"<dateTime>\",\n      \"performer\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"ip_address\": \"<string>\",\n        \"email\": \"<email>\"\n      },\n      \"event_target\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"request\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"method\": \"<string>\",\n        \"path\": \"<string>\",\n        \"user_agent\": \"<string>\"\n      },\n      \"changes\": [\n        {\n          \"field\": \"<string>\",\n          \"old_value\": {},\n          \"new_value\": {}\n        },\n        {\n          \"field\": \"<string>\",\n          \"old_value\": {},\n          \"new_value\": {}\n        }\n      ]\n    }\n  ],\n  \"paging\": {\n    \"next\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:51:28.000Z",
+              "updatedAt": "2026-07-28T01:51:28.000Z",
+              "uid": "35240-6fbcd41a-dddb-450a-8ed8-dd0f8090724d"
+            },
+            {
+              "id": "07de6def-eda0-436e-977b-f14f0ca51506",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/events?before_time=<dateTime>&after_time=<dateTime>&date=<date>&magic_time=<string>&performer_ids=<integer>,<integer>&performer_types=User,System&performer_ip_addresses=<string>,<string>&event_types=<string>,<string>&event_target_ids=<integer>,<integer>&event_target_types=<string>,<string>&request_ids=<string>,<string>&request_types=JobBoard,JobBoard&paging=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ],
+                  "query": [
+                    {
+                      "key": "before_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "after_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Relative time keyword (e.g. last_24_hours, last_7_days).",
+                      "key": "magic_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "performer_ids",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "performer_types",
+                      "value": "User,System"
+                    },
+                    {
+                      "key": "performer_ip_addresses",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "event_types",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "event_target_ids",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "event_target_types",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "request_ids",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "request_types",
+                      "value": "JobBoard,JobBoard"
+                    },
+                    {
+                      "description": "Opaque pagination cursor returned by a previous response.",
+                      "key": "paging",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:51:28.000Z",
+              "updatedAt": "2026-07-28T01:51:28.000Z",
+              "uid": "35240-07de6def-eda0-436e-977b-f14f0ca51506"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:28.000Z",
+          "updatedAt": "2026-07-28T01:51:28.000Z",
+          "uid": "35240-d0222718-9df3-4f51-b573-d5447c5a8393"
+        }
+      ],
+      "id": "3a4c6ef5-012e-433d-a91b-92a9489caeb3",
+      "createdAt": "2026-07-28T01:51:28.000Z",
+      "updatedAt": "2026-07-28T01:51:28.000Z",
+      "uid": "35240-3a4c6ef5-012e-433d-a91b-92a9489caeb3"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "partner_host",
+      "value": "partner.example.com"
+    },
+    {
+      "key": "base_path",
+      "value": "greenhouse-assessment"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{partner_host}}/{{base_path}}"
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "info": {
+    "_postman_id": "4be5aafd-a4c5-4b65-8a70-90e2cdf43c28",
+    "name": "Greenhouse Assessment Partner ActivityFeed Sources API",
+    "description": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:39.000Z",
+    "updatedAt": "2026-07-28T01:51:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4be5aafd-a4c5-4b65-8a70-90e2cdf43c28"
+  },
+  "item": [
+    {
+      "name": "sources",
+      "item": [
+        {
+          "name": "List Sources",
+          "id": "d20de895-9365-4205-96af-44bfeed72928",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/sources",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sources"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "104fed2b-0bd5-47f1-b9c2-98033e0c1cf2",
+              "name": "Sources.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/sources",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sources"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"type\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    \"name\": \"<string>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"type\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    \"name\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-07-28T01:51:40.000Z",
+              "updatedAt": "2026-07-28T01:51:40.000Z",
+              "uid": "35240-104fed2b-0bd5-47f1-b9c2-98033e0c1cf2"
+            },
+            {
+              "id": "13dfab85-2f82-47de-bf0d-671465d4e32c",
+              "name": "Error response.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/sources",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sources"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:40.000Z",
+              "updatedAt": "2026-07-28T01:51:40.000Z",
+              "uid": "35240-13dfab85-2f82-47de-bf0d-671465d4e32c"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:40.000Z",
+          "updatedAt": "2026-07-28T01:51:40.000Z",
+          "uid": "35240-d20de895-9365-4205-96af-44bfeed72928"
+        }
+      ],
+      "id": "6b3cfecf-86e7-4439-8fe6-965bd561f01a",
+      "createdAt": "2026-07-28T01:51:40.000Z",
+      "updatedAt": "2026-07-28T01:51:40.000Z",
+      "uid": "35240-6b3cfecf-86e7-4439-8fe6-965bd561f01a"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "partner_host",
+      "value": "partner.example.com"
+    },
+    {
+      "key": "base_path",
+      "value": "greenhouse-assessment"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{partner_host}}/{{base_path}}"
+    }
+  ]
+}

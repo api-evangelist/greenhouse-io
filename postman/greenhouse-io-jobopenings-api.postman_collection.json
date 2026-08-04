@@ -1,0 +1,808 @@
+{
+  "info": {
+    "_postman_id": "6da47bb1-19a5-459c-a1db-cd22f44feef1",
+    "name": "Greenhouse Assessment Partner ActivityFeed JobOpenings API",
+    "description": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:29.000Z",
+    "updatedAt": "2026-07-28T01:51:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6da47bb1-19a5-459c-a1db-cd22f44feef1"
+  },
+  "item": [
+    {
+      "name": "openings",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve Opening",
+              "id": "3bef6318-406c-481b-81f8-ecc4dd32ab3b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/openings/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "openings",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "566f49ed-f786-41f8-8849-71e9ddd983cf",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "61c658a7-6faf-43e5-9b42-20d97ff2c95d",
+                  "name": "Opening.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/openings/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "openings",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"opening_id\": \"<string>\",\n  \"status\": \"closed\",\n  \"opened_at\": \"<dateTime>\",\n  \"closed_at\": \"<dateTime>\",\n  \"application_id\": \"<integer>\",\n  \"close_reason\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"custom_fields\": {\n    \"aliquipf\": -62273635\n  }\n}",
+                  "createdAt": "2026-07-28T01:51:30.000Z",
+                  "updatedAt": "2026-07-28T01:51:30.000Z",
+                  "uid": "35240-61c658a7-6faf-43e5-9b42-20d97ff2c95d"
+                },
+                {
+                  "id": "7bf63c44-9835-403b-a5bb-bf3e0b3bcfdf",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/openings/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "openings",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:30.000Z",
+                  "updatedAt": "2026-07-28T01:51:30.000Z",
+                  "uid": "35240-7bf63c44-9835-403b-a5bb-bf3e0b3bcfdf"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:30.000Z",
+              "updatedAt": "2026-07-28T01:51:30.000Z",
+              "uid": "35240-3bef6318-406c-481b-81f8-ecc4dd32ab3b"
+            },
+            {
+              "name": "Update Opening",
+              "id": "3b76a68b-4df1-4ac1-a502-87cf0aaaaa91",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"opening_id\": \"<string>\",\n  \"status\": \"closed\",\n  \"opened_at\": \"<dateTime>\",\n  \"closed_at\": \"<dateTime>\",\n  \"application_id\": \"<integer>\",\n  \"close_reason\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"custom_fields\": {\n    \"aliquipf\": -62273635\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/openings/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "openings",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "39812e7b-8336-4142-b9bb-5a6c051432ac",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "f0e120be-44f5-4bf1-8ccf-07a02ed6c90f",
+                  "name": "Updated.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<integer>\",\n  \"opening_id\": \"<string>\",\n  \"status\": \"closed\",\n  \"opened_at\": \"<dateTime>\",\n  \"closed_at\": \"<dateTime>\",\n  \"application_id\": \"<integer>\",\n  \"close_reason\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"custom_fields\": {\n    \"aliquipf\": -62273635\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/openings/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "openings",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:51:30.000Z",
+                  "updatedAt": "2026-07-28T01:51:30.000Z",
+                  "uid": "35240-f0e120be-44f5-4bf1-8ccf-07a02ed6c90f"
+                },
+                {
+                  "id": "b1118c57-8116-4305-9a7e-aa7a8e0b25c2",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<integer>\",\n  \"opening_id\": \"<string>\",\n  \"status\": \"closed\",\n  \"opened_at\": \"<dateTime>\",\n  \"closed_at\": \"<dateTime>\",\n  \"application_id\": \"<integer>\",\n  \"close_reason\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"custom_fields\": {\n    \"aliquipf\": -62273635\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/openings/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "openings",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:30.000Z",
+                  "updatedAt": "2026-07-28T01:51:30.000Z",
+                  "uid": "35240-b1118c57-8116-4305-9a7e-aa7a8e0b25c2"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:30.000Z",
+              "updatedAt": "2026-07-28T01:51:30.000Z",
+              "uid": "35240-3b76a68b-4df1-4ac1-a502-87cf0aaaaa91"
+            }
+          ],
+          "id": "4ff4018f-9335-4241-851b-19089449e82d",
+          "createdAt": "2026-07-28T01:51:30.000Z",
+          "updatedAt": "2026-07-28T01:51:30.000Z",
+          "uid": "35240-4ff4018f-9335-4241-851b-19089449e82d"
+        },
+        {
+          "name": "List Openings",
+          "id": "cb55b9de-ee87-449f-84f4-1ada0099d795",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/openings?page=1&per_page=100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "openings"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "description": "Default 100, max 500.",
+                  "key": "per_page",
+                  "value": "100"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c6451c04-a897-4b85-9025-749c766c8444",
+              "name": "Array of openings.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/openings?page=1&per_page=100",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "openings"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Default 100, max 500.",
+                      "key": "per_page",
+                      "value": "100"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"opening_id\": \"<string>\",\n    \"status\": \"closed\",\n    \"opened_at\": \"<dateTime>\",\n    \"closed_at\": \"<dateTime>\",\n    \"application_id\": \"<integer>\",\n    \"close_reason\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    \"custom_fields\": {\n      \"esse_d\": \"et ipsum mollit esse\",\n      \"in_d_\": 8224736.004660562,\n      \"dolore_22\": \"s\"\n    }\n  },\n  {\n    \"id\": \"<integer>\",\n    \"opening_id\": \"<string>\",\n    \"status\": \"open\",\n    \"opened_at\": \"<dateTime>\",\n    \"closed_at\": \"<dateTime>\",\n    \"application_id\": \"<integer>\",\n    \"close_reason\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    \"custom_fields\": {\n      \"ut_f88\": \"id amet\",\n      \"cupidatatf\": \"labore sint cill\",\n      \"sedb\": -36454902,\n      \"irure2_\": true\n    }\n  }\n]",
+              "createdAt": "2026-07-28T01:51:30.000Z",
+              "updatedAt": "2026-07-28T01:51:30.000Z",
+              "uid": "35240-c6451c04-a897-4b85-9025-749c766c8444"
+            },
+            {
+              "id": "51cf25c2-600e-4971-8692-814b68a193ae",
+              "name": "Error response.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/openings?page=1&per_page=100",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "openings"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Default 100, max 500.",
+                      "key": "per_page",
+                      "value": "100"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:30.000Z",
+              "updatedAt": "2026-07-28T01:51:30.000Z",
+              "uid": "35240-51cf25c2-600e-4971-8692-814b68a193ae"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:30.000Z",
+          "updatedAt": "2026-07-28T01:51:30.000Z",
+          "uid": "35240-cb55b9de-ee87-449f-84f4-1ada0099d795"
+        },
+        {
+          "name": "Create Opening",
+          "id": "e1f708f2-3858-4467-a9db-30e119775777",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                "key": "On-Behalf-Of",
+                "value": "<integer>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"opening_id\": \"<string>\",\n  \"status\": \"closed\",\n  \"opened_at\": \"<dateTime>\",\n  \"closed_at\": \"<dateTime>\",\n  \"application_id\": \"<integer>\",\n  \"close_reason\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"custom_fields\": {\n    \"aliquipf\": -62273635\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/openings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "openings"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "219cdae2-fa68-45f3-bba3-efdeaf027cbe",
+              "name": "Created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"opening_id\": \"<string>\",\n  \"status\": \"closed\",\n  \"opened_at\": \"<dateTime>\",\n  \"closed_at\": \"<dateTime>\",\n  \"application_id\": \"<integer>\",\n  \"close_reason\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"custom_fields\": {\n    \"aliquipf\": -62273635\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/openings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "openings"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:51:30.000Z",
+              "updatedAt": "2026-07-28T01:51:30.000Z",
+              "uid": "35240-219cdae2-fa68-45f3-bba3-efdeaf027cbe"
+            },
+            {
+              "id": "134b883c-54e1-4071-a2a1-ef619f0f3fe4",
+              "name": "Error response.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"opening_id\": \"<string>\",\n  \"status\": \"closed\",\n  \"opened_at\": \"<dateTime>\",\n  \"closed_at\": \"<dateTime>\",\n  \"application_id\": \"<integer>\",\n  \"close_reason\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"custom_fields\": {\n    \"aliquipf\": -62273635\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/openings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "openings"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:30.000Z",
+              "updatedAt": "2026-07-28T01:51:30.000Z",
+              "uid": "35240-134b883c-54e1-4071-a2a1-ef619f0f3fe4"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:30.000Z",
+          "updatedAt": "2026-07-28T01:51:30.000Z",
+          "uid": "35240-e1f708f2-3858-4467-a9db-30e119775777"
+        },
+        {
+          "name": "Delete Openings Bulk",
+          "id": "56cdcbc9-6b33-4342-a50d-1b561ea6b21f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                "key": "On-Behalf-Of",
+                "value": "<integer>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/openings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "openings"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "31437e84-6233-4d97-9649-740acff8c515",
+              "name": "Deleted.",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/openings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "openings"
+                  ]
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:51:30.000Z",
+              "updatedAt": "2026-07-28T01:51:30.000Z",
+              "uid": "35240-31437e84-6233-4d97-9649-740acff8c515"
+            },
+            {
+              "id": "66987427-ed15-479c-8a1b-af9b5bbd6c9f",
+              "name": "Error response.",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/openings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "openings"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:30.000Z",
+              "updatedAt": "2026-07-28T01:51:30.000Z",
+              "uid": "35240-66987427-ed15-479c-8a1b-af9b5bbd6c9f"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:30.000Z",
+          "updatedAt": "2026-07-28T01:51:30.000Z",
+          "uid": "35240-56cdcbc9-6b33-4342-a50d-1b561ea6b21f"
+        }
+      ],
+      "id": "2126134e-0609-42e4-a517-1a95aed44bfd",
+      "createdAt": "2026-07-28T01:51:30.000Z",
+      "updatedAt": "2026-07-28T01:51:30.000Z",
+      "uid": "35240-2126134e-0609-42e4-a517-1a95aed44bfd"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "partner_host",
+      "value": "partner.example.com"
+    },
+    {
+      "key": "base_path",
+      "value": "greenhouse-assessment"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{partner_host}}/{{base_path}}"
+    }
+  ]
+}

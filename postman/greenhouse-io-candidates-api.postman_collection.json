@@ -1,0 +1,2534 @@
+{
+  "info": {
+    "_postman_id": "e49ab7a1-8a57-4e5b-98ff-b212ba9533a1",
+    "name": "Greenhouse Assessment Partner ActivityFeed Candidates API",
+    "description": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:25.000Z",
+    "updatedAt": "2026-07-28T01:51:25.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e49ab7a1-8a57-4e5b-98ff-b212ba9533a1"
+  },
+  "item": [
+    {
+      "name": "candidates",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "attachments",
+              "item": [
+                {
+                  "name": "Add Candidate Attachment",
+                  "id": "46504681-5d70-4ef3-9408-e1f05ad542f9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filename\": \"<string>\",\n  \"type\": \"cover_letter\",\n  \"url\": \"<uri>\",\n  \"content\": \"<string>\",\n  \"content_type\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/candidates/:id/attachments",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidates",
+                        ":id",
+                        "attachments"
+                      ],
+                      "variable": [
+                        {
+                          "id": "db75804f-052d-4df2-aa2a-b9e8e9de8264",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "0dbe6b12-5915-4d54-8caf-84c05daa1810",
+                      "name": "Attached.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"filename\": \"<string>\",\n  \"type\": \"cover_letter\",\n  \"url\": \"<uri>\",\n  \"content\": \"<string>\",\n  \"content_type\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/attachments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "attachments"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-0dbe6b12-5915-4d54-8caf-84c05daa1810"
+                    },
+                    {
+                      "id": "9d5b336a-2b04-4c2a-92e3-a52ddd3d61d9",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"filename\": \"<string>\",\n  \"type\": \"cover_letter\",\n  \"url\": \"<uri>\",\n  \"content\": \"<string>\",\n  \"content_type\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/attachments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "attachments"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-9d5b336a-2b04-4c2a-92e3-a52ddd3d61d9"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:25.000Z",
+                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                  "uid": "35240-46504681-5d70-4ef3-9408-e1f05ad542f9"
+                }
+              ],
+              "id": "03678277-17be-4261-a25a-99b1e0cd478e",
+              "createdAt": "2026-07-28T01:51:25.000Z",
+              "updatedAt": "2026-07-28T01:51:25.000Z",
+              "uid": "35240-03678277-17be-4261-a25a-99b1e0cd478e"
+            },
+            {
+              "name": "notes",
+              "item": [
+                {
+                  "name": "Add Candidate Note",
+                  "id": "4357a372-0b5c-4928-a384-c05f1b9b55da",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"user_id\": \"<integer>\",\n  \"body\": \"<string>\",\n  \"visibility\": \"public\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/candidates/:id/notes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidates",
+                        ":id",
+                        "notes"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a65a8294-e687-44a7-8644-7064333039a2",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "25a689c6-c830-4ab5-9d19-de93ad35210a",
+                      "name": "Note added.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"user_id\": \"<integer>\",\n  \"body\": \"<string>\",\n  \"visibility\": \"public\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/notes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "notes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-25a689c6-c830-4ab5-9d19-de93ad35210a"
+                    },
+                    {
+                      "id": "bda0d25e-102c-4fee-b44e-3b1cf2a12352",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"user_id\": \"<integer>\",\n  \"body\": \"<string>\",\n  \"visibility\": \"public\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/notes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "notes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-bda0d25e-102c-4fee-b44e-3b1cf2a12352"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:25.000Z",
+                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                  "uid": "35240-4357a372-0b5c-4928-a384-c05f1b9b55da"
+                }
+              ],
+              "id": "e336d65a-bef1-4912-8ad0-6456346644a7",
+              "createdAt": "2026-07-28T01:51:25.000Z",
+              "updatedAt": "2026-07-28T01:51:25.000Z",
+              "uid": "35240-e336d65a-bef1-4912-8ad0-6456346644a7"
+            },
+            {
+              "name": "email_notes",
+              "item": [
+                {
+                  "name": "Add Candidate Email Note",
+                  "id": "90c53acc-ab9a-41e5-ad25-06143da83a93",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"user_id\": \"<integer>\",\n  \"to\": \"<string>\",\n  \"from\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"body\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/candidates/:id/email_notes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidates",
+                        ":id",
+                        "email_notes"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c77c198a-4733-4f82-b4a5-29765b7f50c7",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "f20cb485-c116-47eb-bfd3-c200d2434105",
+                      "name": "Email note recorded.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"user_id\": \"<integer>\",\n  \"to\": \"<string>\",\n  \"from\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"body\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/email_notes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "email_notes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-f20cb485-c116-47eb-bfd3-c200d2434105"
+                    },
+                    {
+                      "id": "91ae1c27-ae1e-4236-ac22-cfd3f28beaf6",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"user_id\": \"<integer>\",\n  \"to\": \"<string>\",\n  \"from\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"body\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/email_notes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "email_notes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-91ae1c27-ae1e-4236-ac22-cfd3f28beaf6"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:25.000Z",
+                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                  "uid": "35240-90c53acc-ab9a-41e5-ad25-06143da83a93"
+                }
+              ],
+              "id": "73ed08a1-0d20-4bbe-8ca9-1e05c6c5c470",
+              "createdAt": "2026-07-28T01:51:25.000Z",
+              "updatedAt": "2026-07-28T01:51:25.000Z",
+              "uid": "35240-73ed08a1-0d20-4bbe-8ca9-1e05c6c5c470"
+            },
+            {
+              "name": "education",
+              "item": [
+                {
+                  "name": "{education_id}",
+                  "item": [
+                    {
+                      "name": "Delete Candidate Education",
+                      "id": "11e51e7e-3b3d-49fa-a782-4849bc406ded",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/education/:education_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "education",
+                            ":education_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d4f29878-ca58-4360-9c5f-093f0e394ab3",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "b137b173-2f70-4ceb-a22b-d31ab8ecf855",
+                              "key": "education_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "e30fe007-e83e-406c-8f7d-9c41b1abb4bc",
+                          "name": "Deleted.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                                "key": "On-Behalf-Of",
+                                "value": "<integer>"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/candidates/:id/education/:education_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "candidates",
+                                ":id",
+                                "education",
+                                ":education_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "education_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:51:25.000Z",
+                          "updatedAt": "2026-07-28T01:51:25.000Z",
+                          "uid": "35240-e30fe007-e83e-406c-8f7d-9c41b1abb4bc"
+                        },
+                        {
+                          "id": "6beb82c3-cbbc-4f09-b547-badc94763217",
+                          "name": "Error response.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                                "key": "On-Behalf-Of",
+                                "value": "<integer>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/candidates/:id/education/:education_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "candidates",
+                                ":id",
+                                "education",
+                                ":education_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "education_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:51:25.000Z",
+                          "updatedAt": "2026-07-28T01:51:25.000Z",
+                          "uid": "35240-6beb82c3-cbbc-4f09-b547-badc94763217"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-11e51e7e-3b3d-49fa-a782-4849bc406ded"
+                    }
+                  ],
+                  "id": "34413e3c-ab15-40eb-98b4-dbaeb3fb3827",
+                  "createdAt": "2026-07-28T01:51:25.000Z",
+                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                  "uid": "35240-34413e3c-ab15-40eb-98b4-dbaeb3fb3827"
+                },
+                {
+                  "name": "Add Candidate Education",
+                  "id": "91e2d9a7-c765-4770-b446-694de7340b52",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"school_name\": \"<string>\",\n  \"degree\": \"<string>\",\n  \"discipline\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/candidates/:id/education",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidates",
+                        ":id",
+                        "education"
+                      ],
+                      "variable": [
+                        {
+                          "id": "438271d9-3d0e-4e04-88a0-21b3c40c6167",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "5546f713-2c86-4ca8-b185-82be3b7280cc",
+                      "name": "Education added.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"school_name\": \"<string>\",\n  \"degree\": \"<string>\",\n  \"discipline\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/education",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "education"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-5546f713-2c86-4ca8-b185-82be3b7280cc"
+                    },
+                    {
+                      "id": "6796a04b-0deb-4dc4-a7e0-9f601ae606e0",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"school_name\": \"<string>\",\n  \"degree\": \"<string>\",\n  \"discipline\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/education",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "education"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-6796a04b-0deb-4dc4-a7e0-9f601ae606e0"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:25.000Z",
+                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                  "uid": "35240-91e2d9a7-c765-4770-b446-694de7340b52"
+                }
+              ],
+              "id": "d7ab1635-722a-41d6-b035-d6ff9983779a",
+              "createdAt": "2026-07-28T01:51:25.000Z",
+              "updatedAt": "2026-07-28T01:51:25.000Z",
+              "uid": "35240-d7ab1635-722a-41d6-b035-d6ff9983779a"
+            },
+            {
+              "name": "employment",
+              "item": [
+                {
+                  "name": "{employment_id}",
+                  "item": [
+                    {
+                      "name": "Delete Candidate Employment",
+                      "id": "77706583-0207-44f8-8caf-bbf877f4670c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/employment/:employment_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "employment",
+                            ":employment_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "542ba393-23c3-4d25-aed6-982070b7eca3",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "ae5c9a70-cce9-4143-afd0-569e4493fd68",
+                              "key": "employment_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "43cde5ae-1087-4bfd-86a9-117e429b8b7b",
+                          "name": "Deleted.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                                "key": "On-Behalf-Of",
+                                "value": "<integer>"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/candidates/:id/employment/:employment_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "candidates",
+                                ":id",
+                                "employment",
+                                ":employment_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:51:25.000Z",
+                          "updatedAt": "2026-07-28T01:51:25.000Z",
+                          "uid": "35240-43cde5ae-1087-4bfd-86a9-117e429b8b7b"
+                        },
+                        {
+                          "id": "c12ae35e-fa7c-4b4f-92a8-4a14a419b11f",
+                          "name": "Error response.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                                "key": "On-Behalf-Of",
+                                "value": "<integer>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/candidates/:id/employment/:employment_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "candidates",
+                                ":id",
+                                "employment",
+                                ":employment_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:51:25.000Z",
+                          "updatedAt": "2026-07-28T01:51:25.000Z",
+                          "uid": "35240-c12ae35e-fa7c-4b4f-92a8-4a14a419b11f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-77706583-0207-44f8-8caf-bbf877f4670c"
+                    }
+                  ],
+                  "id": "5fb0f92c-1f0e-4149-ac99-d352f85b7297",
+                  "createdAt": "2026-07-28T01:51:25.000Z",
+                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                  "uid": "35240-5fb0f92c-1f0e-4149-ac99-d352f85b7297"
+                },
+                {
+                  "name": "Add Candidate Employment",
+                  "id": "d751916c-732f-4226-845f-8ec085700389",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"company_name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/candidates/:id/employment",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidates",
+                        ":id",
+                        "employment"
+                      ],
+                      "variable": [
+                        {
+                          "id": "97378319-2d93-4eae-bfe7-1ccd10e6087a",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "fef07888-f5d6-4d93-91f5-94975bae98ac",
+                      "name": "Employment added.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"company_name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/employment",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "employment"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-fef07888-f5d6-4d93-91f5-94975bae98ac"
+                    },
+                    {
+                      "id": "541bce6c-8440-4d37-85f0-a34438260553",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"company_name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/employment",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "employment"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-541bce6c-8440-4d37-85f0-a34438260553"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:25.000Z",
+                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                  "uid": "35240-d751916c-732f-4226-845f-8ec085700389"
+                }
+              ],
+              "id": "5aeadd59-24fa-47e1-8894-f4461412a681",
+              "createdAt": "2026-07-28T01:51:25.000Z",
+              "updatedAt": "2026-07-28T01:51:25.000Z",
+              "uid": "35240-5aeadd59-24fa-47e1-8894-f4461412a681"
+            },
+            {
+              "name": "prospect",
+              "item": [
+                {
+                  "name": "Convert Candidate To Prospect",
+                  "id": "06382b3b-256e-48c2-ab47-abb292051838",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/candidates/:id/prospect",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidates",
+                        ":id",
+                        "prospect"
+                      ],
+                      "variable": [
+                        {
+                          "id": "6e49e9d5-a5fa-4f12-9fcd-89dc41d2614a",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "79cf19f6-dcc8-4c0f-8bf8-965c7ce0c733",
+                      "name": "Converted to prospect.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/prospect",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "prospect"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-79cf19f6-dcc8-4c0f-8bf8-965c7ce0c733"
+                    },
+                    {
+                      "id": "5c09f469-7f81-41a5-b7c4-e280cc60775e",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/prospect",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "prospect"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-5c09f469-7f81-41a5-b7c4-e280cc60775e"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:25.000Z",
+                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                  "uid": "35240-06382b3b-256e-48c2-ab47-abb292051838"
+                }
+              ],
+              "id": "d1ab14ed-15d7-4c65-96a0-bc5645f118d4",
+              "createdAt": "2026-07-28T01:51:25.000Z",
+              "updatedAt": "2026-07-28T01:51:25.000Z",
+              "uid": "35240-d1ab14ed-15d7-4c65-96a0-bc5645f118d4"
+            },
+            {
+              "name": "anonymize",
+              "item": [
+                {
+                  "name": "Anonymize Candidate",
+                  "id": "ca86b112-f563-4256-95e8-292f5d5b9a0d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/candidates/:id/anonymize",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidates",
+                        ":id",
+                        "anonymize"
+                      ],
+                      "variable": [
+                        {
+                          "id": "25230151-3906-4056-b7fd-3eff987fbf1d",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "f5635528-77b2-4b7f-81c4-0389b791310f",
+                      "name": "Anonymized.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/anonymize",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "anonymize"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-f5635528-77b2-4b7f-81c4-0389b791310f"
+                    },
+                    {
+                      "id": "385f38d7-7c13-400f-8c0f-aae2f3bf3264",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/anonymize",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "anonymize"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-385f38d7-7c13-400f-8c0f-aae2f3bf3264"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:25.000Z",
+                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                  "uid": "35240-ca86b112-f563-4256-95e8-292f5d5b9a0d"
+                }
+              ],
+              "id": "3555f983-d348-4007-bbfa-66abb7c42270",
+              "createdAt": "2026-07-28T01:51:25.000Z",
+              "updatedAt": "2026-07-28T01:51:25.000Z",
+              "uid": "35240-3555f983-d348-4007-bbfa-66abb7c42270"
+            },
+            {
+              "name": "merge",
+              "item": [
+                {
+                  "name": "Merge Candidate",
+                  "id": "7e2604d7-4f7d-4e19-a859-5db13295cca2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"primary_candidate_id\": \"<integer>\",\n  \"duplicate_candidate_id\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/candidates/:id/merge",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidates",
+                        ":id",
+                        "merge"
+                      ],
+                      "variable": [
+                        {
+                          "id": "8d44b298-9ea0-4974-80db-d3b11ccc03a2",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "5f1603c5-574c-4d2d-8dd9-b5b7d6ece788",
+                      "name": "Merged.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"primary_candidate_id\": \"<integer>\",\n  \"duplicate_candidate_id\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/merge",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "merge"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-5f1603c5-574c-4d2d-8dd9-b5b7d6ece788"
+                    },
+                    {
+                      "id": "7f073cc5-99e7-4f27-816c-7c9ac67bdab7",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"primary_candidate_id\": \"<integer>\",\n  \"duplicate_candidate_id\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/merge",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "merge"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-7f073cc5-99e7-4f27-816c-7c9ac67bdab7"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:25.000Z",
+                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                  "uid": "35240-7e2604d7-4f7d-4e19-a859-5db13295cca2"
+                }
+              ],
+              "id": "ca92d226-ffa1-465f-9d93-ce6439b2958c",
+              "createdAt": "2026-07-28T01:51:25.000Z",
+              "updatedAt": "2026-07-28T01:51:25.000Z",
+              "uid": "35240-ca92d226-ffa1-465f-9d93-ce6439b2958c"
+            },
+            {
+              "name": "Retrieve Candidate",
+              "id": "f7e106d4-0546-4965-9141-328d3edac6a3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/candidates/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "candidates",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "76907018-1fd2-4765-8b2b-f7af48b0215b",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "8fb00706-26f4-45cb-bdc2-e52d8db02acf",
+                  "name": "A single candidate.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/candidates/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidates",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"company\": \"<string>\",\n  \"title\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"last_activity\": \"<dateTime>\",\n  \"is_private\": \"<boolean>\",\n  \"photo_url\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"addresses\": [\n    {\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"social_media_addresses\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"recruiter\": {\n    \"id\": \"<integer>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"name\": \"<string>\",\n    \"employee_id\": \"<string>\"\n  },\n  \"coordinator\": {\n    \"id\": \"<integer>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"name\": \"<string>\",\n    \"employee_id\": \"<string>\"\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"applications\": [\n    {\n      \"id\": \"<integer>\",\n      \"candidate_id\": \"<integer>\",\n      \"prospect\": \"<boolean>\",\n      \"applied_at\": \"<dateTime>\",\n      \"rejected_at\": \"<dateTime>\",\n      \"last_activity_at\": \"<dateTime>\",\n      \"location\": {\n        \"address\": \"<string>\"\n      },\n      \"source\": {\n        \"id\": \"<integer>\",\n        \"public_name\": \"<string>\"\n      },\n      \"credited_to\": {\n        \"id\": \"<integer>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"name\": \"<string>\",\n        \"employee_id\": \"<string>\"\n      },\n      \"rejection_reason\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"rejection_details\": {},\n      \"jobs\": [\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"job_post_id\": \"<integer>\",\n      \"status\": \"active\",\n      \"current_stage\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"answers\": [\n        {\n          \"question\": \"<string>\",\n          \"answer\": \"<string>\"\n        },\n        {\n          \"question\": \"<string>\",\n          \"answer\": \"<string>\"\n        }\n      ],\n      \"custom_fields\": {\n        \"exercitation_f\": -98930888.04552655\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"candidate_id\": \"<integer>\",\n      \"prospect\": \"<boolean>\",\n      \"applied_at\": \"<dateTime>\",\n      \"rejected_at\": \"<dateTime>\",\n      \"last_activity_at\": \"<dateTime>\",\n      \"location\": {\n        \"address\": \"<string>\"\n      },\n      \"source\": {\n        \"id\": \"<integer>\",\n        \"public_name\": \"<string>\"\n      },\n      \"credited_to\": {\n        \"id\": \"<integer>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"name\": \"<string>\",\n        \"employee_id\": \"<string>\"\n      },\n      \"rejection_reason\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"rejection_details\": {},\n      \"jobs\": [\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"job_post_id\": \"<integer>\",\n      \"status\": \"active\",\n      \"current_stage\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"answers\": [\n        {\n          \"question\": \"<string>\",\n          \"answer\": \"<string>\"\n        },\n        {\n          \"question\": \"<string>\",\n          \"answer\": \"<string>\"\n        }\n      ],\n      \"custom_fields\": {\n        \"eu_a7\": -45117799,\n        \"dolor_8d1\": \"par\"\n      }\n    }\n  ],\n  \"educations\": [\n    {\n      \"school_name\": \"<string>\",\n      \"degree\": \"<string>\",\n      \"discipline\": \"<string>\",\n      \"start_date\": \"<date>\",\n      \"end_date\": \"<date>\"\n    },\n    {\n      \"school_name\": \"<string>\",\n      \"degree\": \"<string>\",\n      \"discipline\": \"<string>\",\n      \"start_date\": \"<date>\",\n      \"end_date\": \"<date>\"\n    }\n  ],\n  \"employments\": [\n    {\n      \"company_name\": \"<string>\",\n      \"title\": \"<string>\",\n      \"start_date\": \"<date>\",\n      \"end_date\": \"<date>\"\n    },\n    {\n      \"company_name\": \"<string>\",\n      \"title\": \"<string>\",\n      \"start_date\": \"<date>\",\n      \"end_date\": \"<date>\"\n    }\n  ],\n  \"custom_fields\": {\n    \"ut2\": \"dolore enim\",\n    \"exercitation_006\": -27205688.967114523,\n    \"non7\": \"ipsum\",\n    \"aliquip_c\": -82003347.7800652,\n    \"Duis_6a1\": \"consectetur occaecat voluptate in\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:51:25.000Z",
+                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                  "uid": "35240-8fb00706-26f4-45cb-bdc2-e52d8db02acf"
+                },
+                {
+                  "id": "387dbdfb-ec70-4141-98ee-df751f4fd8df",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/candidates/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidates",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:25.000Z",
+                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                  "uid": "35240-387dbdfb-ec70-4141-98ee-df751f4fd8df"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:25.000Z",
+              "updatedAt": "2026-07-28T01:51:25.000Z",
+              "uid": "35240-f7e106d4-0546-4965-9141-328d3edac6a3"
+            },
+            {
+              "name": "Update Candidate",
+              "id": "9ecdca8b-7d84-4ee0-8afe-522e1a41487e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"company\": \"<string>\",\n  \"title\": \"<string>\",\n  \"is_private\": \"<boolean>\",\n  \"custom_fields\": {\n    \"quis_1\": false,\n    \"sintf1\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/candidates/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "candidates",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "7229b87b-826f-438e-83f4-054b74cde15d",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "72dd028e-24b6-4d95-aebd-f08ff6c37349",
+                  "name": "Updated.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"company\": \"<string>\",\n  \"title\": \"<string>\",\n  \"is_private\": \"<boolean>\",\n  \"custom_fields\": {\n    \"quis_1\": false,\n    \"sintf1\": false\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/candidates/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidates",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"company\": \"<string>\",\n  \"title\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"last_activity\": \"<dateTime>\",\n  \"is_private\": \"<boolean>\",\n  \"photo_url\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"addresses\": [\n    {\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"social_media_addresses\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"recruiter\": {\n    \"id\": \"<integer>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"name\": \"<string>\",\n    \"employee_id\": \"<string>\"\n  },\n  \"coordinator\": {\n    \"id\": \"<integer>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"name\": \"<string>\",\n    \"employee_id\": \"<string>\"\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"applications\": [\n    {\n      \"id\": \"<integer>\",\n      \"candidate_id\": \"<integer>\",\n      \"prospect\": \"<boolean>\",\n      \"applied_at\": \"<dateTime>\",\n      \"rejected_at\": \"<dateTime>\",\n      \"last_activity_at\": \"<dateTime>\",\n      \"location\": {\n        \"address\": \"<string>\"\n      },\n      \"source\": {\n        \"id\": \"<integer>\",\n        \"public_name\": \"<string>\"\n      },\n      \"credited_to\": {\n        \"id\": \"<integer>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"name\": \"<string>\",\n        \"employee_id\": \"<string>\"\n      },\n      \"rejection_reason\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"rejection_details\": {},\n      \"jobs\": [\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"job_post_id\": \"<integer>\",\n      \"status\": \"active\",\n      \"current_stage\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"answers\": [\n        {\n          \"question\": \"<string>\",\n          \"answer\": \"<string>\"\n        },\n        {\n          \"question\": \"<string>\",\n          \"answer\": \"<string>\"\n        }\n      ],\n      \"custom_fields\": {\n        \"exercitation_f\": -98930888.04552655\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"candidate_id\": \"<integer>\",\n      \"prospect\": \"<boolean>\",\n      \"applied_at\": \"<dateTime>\",\n      \"rejected_at\": \"<dateTime>\",\n      \"last_activity_at\": \"<dateTime>\",\n      \"location\": {\n        \"address\": \"<string>\"\n      },\n      \"source\": {\n        \"id\": \"<integer>\",\n        \"public_name\": \"<string>\"\n      },\n      \"credited_to\": {\n        \"id\": \"<integer>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"name\": \"<string>\",\n        \"employee_id\": \"<string>\"\n      },\n      \"rejection_reason\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"rejection_details\": {},\n      \"jobs\": [\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"job_post_id\": \"<integer>\",\n      \"status\": \"active\",\n      \"current_stage\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"answers\": [\n        {\n          \"question\": \"<string>\",\n          \"answer\": \"<string>\"\n        },\n        {\n          \"question\": \"<string>\",\n          \"answer\": \"<string>\"\n        }\n      ],\n      \"custom_fields\": {\n        \"eu_a7\": -45117799,\n        \"dolor_8d1\": \"par\"\n      }\n    }\n  ],\n  \"educations\": [\n    {\n      \"school_name\": \"<string>\",\n      \"degree\": \"<string>\",\n      \"discipline\": \"<string>\",\n      \"start_date\": \"<date>\",\n      \"end_date\": \"<date>\"\n    },\n    {\n      \"school_name\": \"<string>\",\n      \"degree\": \"<string>\",\n      \"discipline\": \"<string>\",\n      \"start_date\": \"<date>\",\n      \"end_date\": \"<date>\"\n    }\n  ],\n  \"employments\": [\n    {\n      \"company_name\": \"<string>\",\n      \"title\": \"<string>\",\n      \"start_date\": \"<date>\",\n      \"end_date\": \"<date>\"\n    },\n    {\n      \"company_name\": \"<string>\",\n      \"title\": \"<string>\",\n      \"start_date\": \"<date>\",\n      \"end_date\": \"<date>\"\n    }\n  ],\n  \"custom_fields\": {\n    \"ut2\": \"dolore enim\",\n    \"exercitation_006\": -27205688.967114523,\n    \"non7\": \"ipsum\",\n    \"aliquip_c\": -82003347.7800652,\n    \"Duis_6a1\": \"consectetur occaecat voluptate in\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:51:25.000Z",
+                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                  "uid": "35240-72dd028e-24b6-4d95-aebd-f08ff6c37349"
+                },
+                {
+                  "id": "b2935dd1-4f79-4e37-8de6-b2c5ccfd4ce6",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"company\": \"<string>\",\n  \"title\": \"<string>\",\n  \"is_private\": \"<boolean>\",\n  \"custom_fields\": {\n    \"quis_1\": false,\n    \"sintf1\": false\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/candidates/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidates",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:25.000Z",
+                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                  "uid": "35240-b2935dd1-4f79-4e37-8de6-b2c5ccfd4ce6"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:25.000Z",
+              "updatedAt": "2026-07-28T01:51:25.000Z",
+              "uid": "35240-9ecdca8b-7d84-4ee0-8afe-522e1a41487e"
+            }
+          ],
+          "id": "97e7d468-f10f-483e-9108-948f116432a1",
+          "createdAt": "2026-07-28T01:51:25.000Z",
+          "updatedAt": "2026-07-28T01:51:25.000Z",
+          "uid": "35240-97e7d468-f10f-483e-9108-948f116432a1"
+        },
+        {
+          "name": "List Partner Candidates",
+          "id": "294d893a-cd26-459e-9b63-c5b944c2126f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                "key": "On-Behalf-Of",
+                "value": "<email>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/candidates?external_ids=<string>,<string>&candidate_ids=<integer>,<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "candidates"
+              ],
+              "query": [
+                {
+                  "key": "external_ids",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "key": "candidate_ids",
+                  "value": "<integer>,<integer>"
+                }
+              ]
+            },
+            "description": "Retrieve candidates by partner-supplied external IDs or Greenhouse IDs."
+          },
+          "response": [
+            {
+              "id": "0e186d5b-0fa1-4c77-af45-e1d5b7400c47",
+              "name": "Partner candidates.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                    "key": "On-Behalf-Of",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/candidates?external_ids=<string>,<string>&candidate_ids=<integer>,<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "candidates"
+                  ],
+                  "query": [
+                    {
+                      "key": "external_ids",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "candidate_ids",
+                      "value": "<integer>,<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"external_id\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"company\": \"<string>\",\n    \"title\": \"<string>\",\n    \"emails\": [\n      {\n        \"value\": \"<email>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"value\": \"<email>\",\n        \"type\": \"<string>\"\n      }\n    ],\n    \"phone_numbers\": [\n      {\n        \"value\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"value\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    ],\n    \"social_media_addresses\": [\n      {\n        \"value\": \"<string>\"\n      },\n      {\n        \"value\": \"<string>\"\n      }\n    ],\n    \"application\": {\n      \"job_id\": \"<integer>\",\n      \"initial_stage_id\": \"<integer>\",\n      \"source_id\": \"<integer>\",\n      \"referrer\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    },\n    \"prospect\": {\n      \"prospect_pool_id\": \"<integer>\",\n      \"prospect_stage_id\": \"<integer>\",\n      \"prospect_owner_id\": \"<integer>\"\n    },\n    \"attachments\": [\n      {\n        \"filename\": \"<string>\",\n        \"type\": \"admin_only\",\n        \"content\": \"<string>\",\n        \"content_type\": \"<string>\",\n        \"url\": \"<uri>\"\n      },\n      {\n        \"filename\": \"<string>\",\n        \"type\": \"resume\",\n        \"content\": \"<string>\",\n        \"content_type\": \"<string>\",\n        \"url\": \"<uri>\"\n      }\n    ]\n  },\n  {\n    \"external_id\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"company\": \"<string>\",\n    \"title\": \"<string>\",\n    \"emails\": [\n      {\n        \"value\": \"<email>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"value\": \"<email>\",\n        \"type\": \"<string>\"\n      }\n    ],\n    \"phone_numbers\": [\n      {\n        \"value\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"value\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    ],\n    \"social_media_addresses\": [\n      {\n        \"value\": \"<string>\"\n      },\n      {\n        \"value\": \"<string>\"\n      }\n    ],\n    \"application\": {\n      \"job_id\": \"<integer>\",\n      \"initial_stage_id\": \"<integer>\",\n      \"source_id\": \"<integer>\",\n      \"referrer\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    },\n    \"prospect\": {\n      \"prospect_pool_id\": \"<integer>\",\n      \"prospect_stage_id\": \"<integer>\",\n      \"prospect_owner_id\": \"<integer>\"\n    },\n    \"attachments\": [\n      {\n        \"filename\": \"<string>\",\n        \"type\": \"cover_letter\",\n        \"content\": \"<string>\",\n        \"content_type\": \"<string>\",\n        \"url\": \"<uri>\"\n      },\n      {\n        \"filename\": \"<string>\",\n        \"type\": \"admin_only\",\n        \"content\": \"<string>\",\n        \"content_type\": \"<string>\",\n        \"url\": \"<uri>\"\n      }\n    ]\n  }\n]",
+              "createdAt": "2026-07-28T01:51:25.000Z",
+              "updatedAt": "2026-07-28T01:51:25.000Z",
+              "uid": "35240-0e186d5b-0fa1-4c77-af45-e1d5b7400c47"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:25.000Z",
+          "updatedAt": "2026-07-28T01:51:25.000Z",
+          "uid": "35240-294d893a-cd26-459e-9b63-c5b944c2126f"
+        },
+        {
+          "name": "Create Partner Candidate",
+          "id": "316d65f4-bad2-4b0c-be51-d14489d17541",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                "key": "On-Behalf-Of",
+                "value": "<email>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"company\": \"<string>\",\n  \"title\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"social_media_addresses\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"application\": {\n    \"job_id\": \"<integer>\",\n    \"initial_stage_id\": \"<integer>\",\n    \"source_id\": \"<integer>\",\n    \"referrer\": {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  },\n  \"prospect\": {\n    \"prospect_pool_id\": \"<integer>\",\n    \"prospect_stage_id\": \"<integer>\",\n    \"prospect_owner_id\": \"<integer>\"\n  },\n  \"attachments\": [\n    {\n      \"filename\": \"<string>\",\n      \"type\": \"offer_letter\",\n      \"content\": \"<string>\",\n      \"content_type\": \"<string>\",\n      \"url\": \"<uri>\"\n    },\n    {\n      \"filename\": \"<string>\",\n      \"type\": \"offer_letter\",\n      \"content\": \"<string>\",\n      \"content_type\": \"<string>\",\n      \"url\": \"<uri>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/candidates",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "candidates"
+              ]
+            },
+            "description": "Create a candidate or prospect on behalf of a Greenhouse user."
+          },
+          "response": [
+            {
+              "id": "8d7834b7-5ac1-4137-b30b-c38eadf224ce",
+              "name": "Created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                    "key": "On-Behalf-Of",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"company\": \"<string>\",\n  \"title\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"social_media_addresses\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"application\": {\n    \"job_id\": \"<integer>\",\n    \"initial_stage_id\": \"<integer>\",\n    \"source_id\": \"<integer>\",\n    \"referrer\": {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  },\n  \"prospect\": {\n    \"prospect_pool_id\": \"<integer>\",\n    \"prospect_stage_id\": \"<integer>\",\n    \"prospect_owner_id\": \"<integer>\"\n  },\n  \"attachments\": [\n    {\n      \"filename\": \"<string>\",\n      \"type\": \"offer_letter\",\n      \"content\": \"<string>\",\n      \"content_type\": \"<string>\",\n      \"url\": \"<uri>\"\n    },\n    {\n      \"filename\": \"<string>\",\n      \"type\": \"offer_letter\",\n      \"content\": \"<string>\",\n      \"content_type\": \"<string>\",\n      \"url\": \"<uri>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/candidates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "candidates"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"external_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"company\": \"<string>\",\n  \"title\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"phone_numbers\": [\n    {\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"social_media_addresses\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"application\": {\n    \"job_id\": \"<integer>\",\n    \"initial_stage_id\": \"<integer>\",\n    \"source_id\": \"<integer>\",\n    \"referrer\": {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  },\n  \"prospect\": {\n    \"prospect_pool_id\": \"<integer>\",\n    \"prospect_stage_id\": \"<integer>\",\n    \"prospect_owner_id\": \"<integer>\"\n  },\n  \"attachments\": [\n    {\n      \"filename\": \"<string>\",\n      \"type\": \"offer_letter\",\n      \"content\": \"<string>\",\n      \"content_type\": \"<string>\",\n      \"url\": \"<uri>\"\n    },\n    {\n      \"filename\": \"<string>\",\n      \"type\": \"offer_letter\",\n      \"content\": \"<string>\",\n      \"content_type\": \"<string>\",\n      \"url\": \"<uri>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:25.000Z",
+              "updatedAt": "2026-07-28T01:51:25.000Z",
+              "uid": "35240-8d7834b7-5ac1-4137-b30b-c38eadf224ce"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:25.000Z",
+          "updatedAt": "2026-07-28T01:51:25.000Z",
+          "uid": "35240-316d65f4-bad2-4b0c-be51-d14489d17541"
+        },
+        {
+          "name": "Delete Candidates Bulk",
+          "id": "db366272-3624-4386-a6fe-b35f598d64b2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                "key": "On-Behalf-Of",
+                "value": "<integer>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/candidates",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "candidates"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "93dae0e4-714b-468d-a3a1-c6387159c522",
+              "name": "Deleted.",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/candidates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "candidates"
+                  ]
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:51:25.000Z",
+              "updatedAt": "2026-07-28T01:51:25.000Z",
+              "uid": "35240-93dae0e4-714b-468d-a3a1-c6387159c522"
+            },
+            {
+              "id": "828a4cf5-4a89-4f85-b17d-ebb93808fdfb",
+              "name": "Error response.",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/candidates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "candidates"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:25.000Z",
+              "updatedAt": "2026-07-28T01:51:25.000Z",
+              "uid": "35240-828a4cf5-4a89-4f85-b17d-ebb93808fdfb"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:25.000Z",
+          "updatedAt": "2026-07-28T01:51:25.000Z",
+          "uid": "35240-db366272-3624-4386-a6fe-b35f598d64b2"
+        }
+      ],
+      "id": "e825e42c-e803-4a4c-b078-488b57c5817e",
+      "createdAt": "2026-07-28T01:51:25.000Z",
+      "updatedAt": "2026-07-28T01:51:25.000Z",
+      "uid": "35240-e825e42c-e803-4a4c-b078-488b57c5817e"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "partner_host",
+      "value": "partner.example.com"
+    },
+    {
+      "key": "base_path",
+      "value": "greenhouse-assessment"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{partner_host}}/{{base_path}}"
+    }
+  ]
+}

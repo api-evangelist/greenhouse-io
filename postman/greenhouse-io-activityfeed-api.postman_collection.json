@@ -1,0 +1,208 @@
+{
+  "info": {
+    "_postman_id": "297bdff6-c2bc-4096-afc4-801d9582ff18",
+    "name": "Greenhouse Assessment Partner ActivityFeed API",
+    "description": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:08.000Z",
+    "updatedAt": "2026-07-28T01:51:09.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-297bdff6-c2bc-4096-afc4-801d9582ff18"
+  },
+  "item": [
+    {
+      "name": "candidates",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "activity_feed",
+              "item": [
+                {
+                  "name": "List Candidate Activity Feed",
+                  "id": "fc7adc91-db0f-475c-bf11-2ba03e17d1b9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/candidates/:id/activity_feed",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidates",
+                        ":id",
+                        "activity_feed"
+                      ],
+                      "variable": [
+                        {
+                          "id": "785f79dc-ed0d-4d4b-a8a9-2df4c734b594",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "76c47aa3-790b-4299-9bc6-d82b547e6876",
+                      "name": "Activity feed.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/activity_feed",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "activity_feed"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"activities\": [\n    {\n      \"id\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"subject\": \"<string>\",\n      \"body\": \"<string>\",\n      \"user\": {\n        \"id\": \"<integer>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"name\": \"<string>\",\n        \"employee_id\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"subject\": \"<string>\",\n      \"body\": \"<string>\",\n      \"user\": {\n        \"id\": \"<integer>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"name\": \"<string>\",\n        \"employee_id\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:09.000Z",
+                      "updatedAt": "2026-07-28T01:51:09.000Z",
+                      "uid": "35240-76c47aa3-790b-4299-9bc6-d82b547e6876"
+                    },
+                    {
+                      "id": "221aa7a8-5ffe-4576-a7d2-cfa46782f91c",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/activity_feed",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "activity_feed"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:09.000Z",
+                      "updatedAt": "2026-07-28T01:51:09.000Z",
+                      "uid": "35240-221aa7a8-5ffe-4576-a7d2-cfa46782f91c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:09.000Z",
+                  "updatedAt": "2026-07-28T01:51:09.000Z",
+                  "uid": "35240-fc7adc91-db0f-475c-bf11-2ba03e17d1b9"
+                }
+              ],
+              "id": "e2b9fcac-c7da-4dc7-94bd-df452f8651fb",
+              "createdAt": "2026-07-28T01:51:09.000Z",
+              "updatedAt": "2026-07-28T01:51:09.000Z",
+              "uid": "35240-e2b9fcac-c7da-4dc7-94bd-df452f8651fb"
+            }
+          ],
+          "id": "54b52a10-de46-48ba-9f63-f23406ff3ccb",
+          "createdAt": "2026-07-28T01:51:09.000Z",
+          "updatedAt": "2026-07-28T01:51:09.000Z",
+          "uid": "35240-54b52a10-de46-48ba-9f63-f23406ff3ccb"
+        }
+      ],
+      "id": "6067c919-edd6-4c83-ae15-1e87c3937b5a",
+      "createdAt": "2026-07-28T01:51:09.000Z",
+      "updatedAt": "2026-07-28T01:51:09.000Z",
+      "uid": "35240-6067c919-edd6-4c83-ae15-1e87c3937b5a"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "partner_host",
+      "value": "partner.example.com"
+    },
+    {
+      "key": "base_path",
+      "value": "greenhouse-assessment"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{partner_host}}/{{base_path}}"
+    }
+  ]
+}

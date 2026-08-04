@@ -1,0 +1,655 @@
+{
+  "info": {
+    "_postman_id": "2cec691b-7690-4759-95e5-937bc2296641",
+    "name": "Greenhouse Assessment Partner ActivityFeed Offices API",
+    "description": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:35.000Z",
+    "updatedAt": "2026-07-28T01:51:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2cec691b-7690-4759-95e5-937bc2296641"
+  },
+  "item": [
+    {
+      "name": "offices",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve Office",
+              "id": "386b9115-a7ca-4a14-ab67-683cef529d3b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/offices/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offices",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ccf2fada-415a-4eb5-a3f0-5c6d290c18d7",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "0880e714-16b9-41c8-8d3d-6f9e1499eca6",
+                  "name": "Office.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/offices/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offices",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"location\": {\n    \"name\": \"<string>\"\n  },\n  \"parent_id\": \"<integer>\",\n  \"child_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"external_id\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:51:35.000Z",
+                  "updatedAt": "2026-07-28T01:51:35.000Z",
+                  "uid": "35240-0880e714-16b9-41c8-8d3d-6f9e1499eca6"
+                },
+                {
+                  "id": "0f7b80d3-8b93-430a-bbb6-c280e8996db3",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/offices/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offices",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:35.000Z",
+                  "updatedAt": "2026-07-28T01:51:35.000Z",
+                  "uid": "35240-0f7b80d3-8b93-430a-bbb6-c280e8996db3"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:35.000Z",
+              "updatedAt": "2026-07-28T01:51:35.000Z",
+              "uid": "35240-386b9115-a7ca-4a14-ab67-683cef529d3b"
+            },
+            {
+              "name": "Update Office",
+              "id": "cdfa14af-0f48-48fb-9130-a994cfefbc24",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"location\": {\n    \"name\": \"<string>\"\n  },\n  \"parent_id\": \"<integer>\",\n  \"child_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"external_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/offices/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offices",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d0cde493-c0eb-4e68-a8bb-4413fa64948c",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "316583a4-48fc-4eb3-87a3-2eedf2c69bf9",
+                  "name": "Updated.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"location\": {\n    \"name\": \"<string>\"\n  },\n  \"parent_id\": \"<integer>\",\n  \"child_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"external_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/offices/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offices",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:51:35.000Z",
+                  "updatedAt": "2026-07-28T01:51:35.000Z",
+                  "uid": "35240-316583a4-48fc-4eb3-87a3-2eedf2c69bf9"
+                },
+                {
+                  "id": "558a4dbb-80d8-486d-864e-60a022ac1df0",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"location\": {\n    \"name\": \"<string>\"\n  },\n  \"parent_id\": \"<integer>\",\n  \"child_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"external_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/offices/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offices",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:35.000Z",
+                  "updatedAt": "2026-07-28T01:51:35.000Z",
+                  "uid": "35240-558a4dbb-80d8-486d-864e-60a022ac1df0"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:35.000Z",
+              "updatedAt": "2026-07-28T01:51:35.000Z",
+              "uid": "35240-cdfa14af-0f48-48fb-9130-a994cfefbc24"
+            }
+          ],
+          "id": "12cfe126-7342-4ad0-a6de-98004b8dba06",
+          "createdAt": "2026-07-28T01:51:35.000Z",
+          "updatedAt": "2026-07-28T01:51:35.000Z",
+          "uid": "35240-12cfe126-7342-4ad0-a6de-98004b8dba06"
+        },
+        {
+          "name": "List Offices",
+          "id": "3e2d1872-e0e2-4321-978b-9f121d99ce00",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/offices",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "offices"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "32425a44-2d19-49f9-9be6-1d38fe2cac76",
+              "name": "Offices.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/offices",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offices"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"location\": {\n      \"name\": \"<string>\"\n    },\n    \"parent_id\": \"<integer>\",\n    \"child_ids\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"external_id\": \"<string>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"location\": {\n      \"name\": \"<string>\"\n    },\n    \"parent_id\": \"<integer>\",\n    \"child_ids\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"external_id\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-07-28T01:51:35.000Z",
+              "updatedAt": "2026-07-28T01:51:35.000Z",
+              "uid": "35240-32425a44-2d19-49f9-9be6-1d38fe2cac76"
+            },
+            {
+              "id": "ff580fc1-1b0d-41bc-a696-96c4b83e2e5d",
+              "name": "Error response.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/offices",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offices"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:35.000Z",
+              "updatedAt": "2026-07-28T01:51:35.000Z",
+              "uid": "35240-ff580fc1-1b0d-41bc-a696-96c4b83e2e5d"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:35.000Z",
+          "updatedAt": "2026-07-28T01:51:35.000Z",
+          "uid": "35240-3e2d1872-e0e2-4321-978b-9f121d99ce00"
+        },
+        {
+          "name": "Create Office",
+          "id": "8206d6e1-241b-473b-985b-b75bb381c6aa",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                "key": "On-Behalf-Of",
+                "value": "<integer>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"location\": {\n    \"name\": \"<string>\"\n  },\n  \"parent_id\": \"<integer>\",\n  \"child_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"external_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/offices",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "offices"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1df660b8-deb7-4ce6-bd01-109fe9bbe35b",
+              "name": "Created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"location\": {\n    \"name\": \"<string>\"\n  },\n  \"parent_id\": \"<integer>\",\n  \"child_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"external_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/offices",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offices"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:51:35.000Z",
+              "updatedAt": "2026-07-28T01:51:35.000Z",
+              "uid": "35240-1df660b8-deb7-4ce6-bd01-109fe9bbe35b"
+            },
+            {
+              "id": "11f3fe94-2b12-42f8-a424-f7b45e06d0ed",
+              "name": "Error response.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"location\": {\n    \"name\": \"<string>\"\n  },\n  \"parent_id\": \"<integer>\",\n  \"child_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"external_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/offices",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offices"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:35.000Z",
+              "updatedAt": "2026-07-28T01:51:35.000Z",
+              "uid": "35240-11f3fe94-2b12-42f8-a424-f7b45e06d0ed"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:35.000Z",
+          "updatedAt": "2026-07-28T01:51:35.000Z",
+          "uid": "35240-8206d6e1-241b-473b-985b-b75bb381c6aa"
+        }
+      ],
+      "id": "d84ecb31-e95e-4a3e-9d49-2f7a57ae8b9d",
+      "createdAt": "2026-07-28T01:51:35.000Z",
+      "updatedAt": "2026-07-28T01:51:35.000Z",
+      "uid": "35240-d84ecb31-e95e-4a3e-9d49-2f7a57ae8b9d"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "partner_host",
+      "value": "partner.example.com"
+    },
+    {
+      "key": "base_path",
+      "value": "greenhouse-assessment"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{partner_host}}/{{base_path}}"
+    }
+  ]
+}

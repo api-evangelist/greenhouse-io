@@ -1,0 +1,125 @@
+{
+  "info": {
+    "_postman_id": "749175c8-003c-417a-933c-5e73320676ab",
+    "name": "Greenhouse Assessment Partner ActivityFeed Tests API",
+    "description": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:59.000Z",
+    "updatedAt": "2026-07-28T01:51:59.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-749175c8-003c-417a-933c-5e73320676ab"
+  },
+  "item": [
+    {
+      "name": "list_tests",
+      "item": [
+        {
+          "name": "List Partner Tests",
+          "id": "4fcbefa1-be16-4b25-be78-385676765e25",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/list_tests",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "list_tests"
+              ]
+            },
+            "description": "Returns the catalog of tests this partner offers."
+          },
+          "response": [
+            {
+              "id": "4ed18163-3988-422d-a80d-9146f8a8dc3f",
+              "name": "Tests.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/list_tests",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "list_tests"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"partner_test_ids\": [\n    {\n      \"partner_test_id\": \"<string>\",\n      \"partner_test_name\": \"<string>\",\n      \"partner_test_description\": \"<string>\"\n    },\n    {\n      \"partner_test_id\": \"<string>\",\n      \"partner_test_name\": \"<string>\",\n      \"partner_test_description\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:59.000Z",
+              "updatedAt": "2026-07-28T01:51:59.000Z",
+              "uid": "35240-4ed18163-3988-422d-a80d-9146f8a8dc3f"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:59.000Z",
+          "updatedAt": "2026-07-28T01:51:59.000Z",
+          "uid": "35240-4fcbefa1-be16-4b25-be78-385676765e25"
+        }
+      ],
+      "id": "0357d166-f3b3-42e1-a0d9-d9d8fb26f8dc",
+      "createdAt": "2026-07-28T01:51:59.000Z",
+      "updatedAt": "2026-07-28T01:51:59.000Z",
+      "uid": "35240-0357d166-f3b3-42e1-a0d9-d9d8fb26f8dc"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "partner_host",
+      "value": "partner.example.com"
+    },
+    {
+      "key": "base_path",
+      "value": "greenhouse-assessment"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{partner_host}}/{{base_path}}"
+    }
+  ]
+}

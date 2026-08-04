@@ -1,0 +1,997 @@
+{
+  "info": {
+    "_postman_id": "8b5188c3-a748-407e-ba9d-f9a9b5266eeb",
+    "name": "Greenhouse Assessment Partner ActivityFeed Tags API",
+    "description": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:41.000Z",
+    "updatedAt": "2026-07-28T01:51:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8b5188c3-a748-407e-ba9d-f9a9b5266eeb"
+  },
+  "item": [
+    {
+      "name": "candidate_tags",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Delete Candidate Tag",
+              "id": "68fe6643-1659-4038-ba6e-d5f08c82d46f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/candidate_tags/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "candidate_tags",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "df1b1b56-698a-4b9d-afb7-a2099acb17e8",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "0f395e34-b11c-4d61-9dbd-7f04f950cf02",
+                  "name": "Deleted.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/candidate_tags/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidate_tags",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:51:41.000Z",
+                  "updatedAt": "2026-07-28T01:51:41.000Z",
+                  "uid": "35240-0f395e34-b11c-4d61-9dbd-7f04f950cf02"
+                },
+                {
+                  "id": "d9313b04-eb37-4886-b879-c152ed779a21",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/candidate_tags/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidate_tags",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:41.000Z",
+                  "updatedAt": "2026-07-28T01:51:41.000Z",
+                  "uid": "35240-d9313b04-eb37-4886-b879-c152ed779a21"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:41.000Z",
+              "updatedAt": "2026-07-28T01:51:41.000Z",
+              "uid": "35240-68fe6643-1659-4038-ba6e-d5f08c82d46f"
+            }
+          ],
+          "id": "2b77629d-03ea-4dc4-8820-79869a9c9e02",
+          "createdAt": "2026-07-28T01:51:41.000Z",
+          "updatedAt": "2026-07-28T01:51:41.000Z",
+          "uid": "35240-2b77629d-03ea-4dc4-8820-79869a9c9e02"
+        },
+        {
+          "name": "List Candidate Tags",
+          "id": "b7003f53-be8e-436b-96b1-798e97ffd055",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/candidate_tags",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "candidate_tags"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9f36626f-8eef-4850-9a9c-47a13f599ac2",
+              "name": "Tags.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/candidate_tags",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "candidate_tags"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-07-28T01:51:41.000Z",
+              "updatedAt": "2026-07-28T01:51:41.000Z",
+              "uid": "35240-9f36626f-8eef-4850-9a9c-47a13f599ac2"
+            },
+            {
+              "id": "7b66b9d2-ee58-4aa4-9a04-089919728420",
+              "name": "Error response.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/candidate_tags",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "candidate_tags"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:41.000Z",
+              "updatedAt": "2026-07-28T01:51:41.000Z",
+              "uid": "35240-7b66b9d2-ee58-4aa4-9a04-089919728420"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:41.000Z",
+          "updatedAt": "2026-07-28T01:51:41.000Z",
+          "uid": "35240-b7003f53-be8e-436b-96b1-798e97ffd055"
+        },
+        {
+          "name": "Create Candidate Tag",
+          "id": "71dcc02d-9d44-4423-a6ad-8a941630dec4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                "key": "On-Behalf-Of",
+                "value": "<integer>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/candidate_tags",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "candidate_tags"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ceea6498-8c8a-4e90-8ad2-0e3eb70b5c55",
+              "name": "Created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/candidate_tags",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "candidate_tags"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:51:41.000Z",
+              "updatedAt": "2026-07-28T01:51:41.000Z",
+              "uid": "35240-ceea6498-8c8a-4e90-8ad2-0e3eb70b5c55"
+            },
+            {
+              "id": "d04806e7-2908-4e4f-b820-399a2ef7c09a",
+              "name": "Error response.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/candidate_tags",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "candidate_tags"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:41.000Z",
+              "updatedAt": "2026-07-28T01:51:41.000Z",
+              "uid": "35240-d04806e7-2908-4e4f-b820-399a2ef7c09a"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:41.000Z",
+          "updatedAt": "2026-07-28T01:51:41.000Z",
+          "uid": "35240-71dcc02d-9d44-4423-a6ad-8a941630dec4"
+        }
+      ],
+      "id": "80eb33b0-ff75-4848-b74c-394e868c041f",
+      "createdAt": "2026-07-28T01:51:41.000Z",
+      "updatedAt": "2026-07-28T01:51:41.000Z",
+      "uid": "35240-80eb33b0-ff75-4848-b74c-394e868c041f"
+    },
+    {
+      "name": "candidates",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "candidate_tags",
+              "item": [
+                {
+                  "name": "{tag_id}",
+                  "item": [
+                    {
+                      "name": "Remove Candidate Tag",
+                      "id": "60bd00eb-76d2-4d79-8ea4-97f871a457ca",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/candidate_tags/:tag_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "candidate_tags",
+                            ":tag_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "afe672ed-da78-4208-8784-11f29511001e",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "981b295e-8950-4380-996c-49ba5dc15675",
+                              "key": "tag_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "d045e793-34b1-4f1d-9c29-a767c23351c0",
+                          "name": "Removed.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                                "key": "On-Behalf-Of",
+                                "value": "<integer>"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/candidates/:id/candidate_tags/:tag_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "candidates",
+                                ":id",
+                                "candidate_tags",
+                                ":tag_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "tag_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:51:41.000Z",
+                          "updatedAt": "2026-07-28T01:51:41.000Z",
+                          "uid": "35240-d045e793-34b1-4f1d-9c29-a767c23351c0"
+                        },
+                        {
+                          "id": "92603f4b-ce67-4ebd-83e3-d4e1379bbcf4",
+                          "name": "Error response.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                                "key": "On-Behalf-Of",
+                                "value": "<integer>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/candidates/:id/candidate_tags/:tag_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "candidates",
+                                ":id",
+                                "candidate_tags",
+                                ":tag_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "tag_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:51:41.000Z",
+                          "updatedAt": "2026-07-28T01:51:41.000Z",
+                          "uid": "35240-92603f4b-ce67-4ebd-83e3-d4e1379bbcf4"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:51:41.000Z",
+                      "updatedAt": "2026-07-28T01:51:41.000Z",
+                      "uid": "35240-60bd00eb-76d2-4d79-8ea4-97f871a457ca"
+                    }
+                  ],
+                  "id": "45a0197d-9490-40b2-9543-d05805642bc8",
+                  "createdAt": "2026-07-28T01:51:41.000Z",
+                  "updatedAt": "2026-07-28T01:51:41.000Z",
+                  "uid": "35240-45a0197d-9490-40b2-9543-d05805642bc8"
+                },
+                {
+                  "name": "List Candidate Candidate Tags",
+                  "id": "6b6b3aa8-b4a4-414c-9acb-692afc9fa5c5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/candidates/:id/candidate_tags",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidates",
+                        ":id",
+                        "candidate_tags"
+                      ],
+                      "variable": [
+                        {
+                          "id": "55e19a7f-68fd-4faf-89ce-f388cf3c9fe8",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "466eb34a-0fe9-4fd3-9b6e-2c2a385604c6",
+                      "name": "Tags.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/candidate_tags",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "candidate_tags"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-07-28T01:51:41.000Z",
+                      "updatedAt": "2026-07-28T01:51:41.000Z",
+                      "uid": "35240-466eb34a-0fe9-4fd3-9b6e-2c2a385604c6"
+                    },
+                    {
+                      "id": "d9707a17-68ea-46ee-81c4-aa96e56eb2b4",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/candidate_tags",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "candidate_tags"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:41.000Z",
+                      "updatedAt": "2026-07-28T01:51:41.000Z",
+                      "uid": "35240-d9707a17-68ea-46ee-81c4-aa96e56eb2b4"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:41.000Z",
+                  "updatedAt": "2026-07-28T01:51:41.000Z",
+                  "uid": "35240-6b6b3aa8-b4a4-414c-9acb-692afc9fa5c5"
+                },
+                {
+                  "name": "Replace Candidate Tags",
+                  "id": "6cf9ceb1-4d49-46fd-b886-f4367cf41abd",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"tag_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/candidates/:id/candidate_tags",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidates",
+                        ":id",
+                        "candidate_tags"
+                      ],
+                      "variable": [
+                        {
+                          "id": "98c0c1e7-3435-4939-936f-1fd36d6d716d",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "edac046b-90f8-4d55-96a3-d40f4b316cb7",
+                      "name": "Replaced.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"tag_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/candidate_tags",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "candidate_tags"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:51:41.000Z",
+                      "updatedAt": "2026-07-28T01:51:41.000Z",
+                      "uid": "35240-edac046b-90f8-4d55-96a3-d40f4b316cb7"
+                    },
+                    {
+                      "id": "85e0d82d-5ee3-409b-946e-6a95578ad6a6",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"tag_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/candidates/:id/candidate_tags",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "candidates",
+                            ":id",
+                            "candidate_tags"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:41.000Z",
+                      "updatedAt": "2026-07-28T01:51:41.000Z",
+                      "uid": "35240-85e0d82d-5ee3-409b-946e-6a95578ad6a6"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:41.000Z",
+                  "updatedAt": "2026-07-28T01:51:41.000Z",
+                  "uid": "35240-6cf9ceb1-4d49-46fd-b886-f4367cf41abd"
+                }
+              ],
+              "id": "60bc73c6-e51e-4f55-a007-02c97887544c",
+              "createdAt": "2026-07-28T01:51:41.000Z",
+              "updatedAt": "2026-07-28T01:51:41.000Z",
+              "uid": "35240-60bc73c6-e51e-4f55-a007-02c97887544c"
+            }
+          ],
+          "id": "18dd428f-4674-4ad9-90d5-f6d82777319d",
+          "createdAt": "2026-07-28T01:51:41.000Z",
+          "updatedAt": "2026-07-28T01:51:41.000Z",
+          "uid": "35240-18dd428f-4674-4ad9-90d5-f6d82777319d"
+        }
+      ],
+      "id": "b8b326b9-6fd0-4d51-937a-56e53cf9f4c2",
+      "createdAt": "2026-07-28T01:51:41.000Z",
+      "updatedAt": "2026-07-28T01:51:41.000Z",
+      "uid": "35240-b8b326b9-6fd0-4d51-937a-56e53cf9f4c2"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "partner_host",
+      "value": "partner.example.com"
+    },
+    {
+      "key": "base_path",
+      "value": "greenhouse-assessment"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{partner_host}}/{{base_path}}"
+    }
+  ]
+}

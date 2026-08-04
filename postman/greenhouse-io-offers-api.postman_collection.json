@@ -1,0 +1,865 @@
+{
+  "info": {
+    "_postman_id": "161cf466-9155-484c-bdd8-324a3d198546",
+    "name": "Greenhouse Assessment Partner ActivityFeed Offers API",
+    "description": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:34.000Z",
+    "updatedAt": "2026-07-28T01:51:34.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-161cf466-9155-484c-bdd8-324a3d198546"
+  },
+  "item": [
+    {
+      "name": "offers",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "current",
+              "item": [
+                {
+                  "name": "Update Current Offer",
+                  "id": "6abd4e19-b32b-4f21-ab7d-0c2f9495c481",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<integer>\",\n  \"application_id\": \"<integer>\",\n  \"version\": \"<integer>\",\n  \"status\": \"draft\",\n  \"sent_at\": \"<dateTime>\",\n  \"resolved_at\": \"<dateTime>\",\n  \"starts_at\": \"<date>\",\n  \"custom_fields\": {\n    \"veniama\": true\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/offers/:id/current",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offers",
+                        ":id",
+                        "current"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ecfff327-4f50-4043-8839-29f1b2c8e081",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "a8650439-c38c-42d9-a0b0-9b1b6ac1b696",
+                      "name": "Updated.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<integer>\",\n  \"application_id\": \"<integer>\",\n  \"version\": \"<integer>\",\n  \"status\": \"draft\",\n  \"sent_at\": \"<dateTime>\",\n  \"resolved_at\": \"<dateTime>\",\n  \"starts_at\": \"<date>\",\n  \"custom_fields\": {\n    \"veniama\": true\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/offers/:id/current",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "offers",
+                            ":id",
+                            "current"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:51:34.000Z",
+                      "updatedAt": "2026-07-28T01:51:34.000Z",
+                      "uid": "35240-a8650439-c38c-42d9-a0b0-9b1b6ac1b696"
+                    },
+                    {
+                      "id": "92571196-2e46-443f-af12-dd4c50df8577",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                            "key": "On-Behalf-Of",
+                            "value": "<integer>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<integer>\",\n  \"application_id\": \"<integer>\",\n  \"version\": \"<integer>\",\n  \"status\": \"draft\",\n  \"sent_at\": \"<dateTime>\",\n  \"resolved_at\": \"<dateTime>\",\n  \"starts_at\": \"<date>\",\n  \"custom_fields\": {\n    \"veniama\": true\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/offers/:id/current",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "offers",
+                            ":id",
+                            "current"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:34.000Z",
+                      "updatedAt": "2026-07-28T01:51:34.000Z",
+                      "uid": "35240-92571196-2e46-443f-af12-dd4c50df8577"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:34.000Z",
+                  "updatedAt": "2026-07-28T01:51:34.000Z",
+                  "uid": "35240-6abd4e19-b32b-4f21-ab7d-0c2f9495c481"
+                }
+              ],
+              "id": "b0851c67-64ab-4ab5-8004-4af0bf62f48e",
+              "createdAt": "2026-07-28T01:51:34.000Z",
+              "updatedAt": "2026-07-28T01:51:34.000Z",
+              "uid": "35240-b0851c67-64ab-4ab5-8004-4af0bf62f48e"
+            },
+            {
+              "name": "Retrieve Offer",
+              "id": "6a92ba57-3eda-4d58-a46c-50f7d6ac2a01",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/offers/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offers",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "49f2a5d2-abfb-4095-8f58-c10301c42d7e",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "8524b188-2850-49f8-a232-169c1f7d9924",
+                  "name": "Offer.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/offers/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offers",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"application_id\": \"<integer>\",\n  \"version\": \"<integer>\",\n  \"status\": \"draft\",\n  \"sent_at\": \"<dateTime>\",\n  \"resolved_at\": \"<dateTime>\",\n  \"starts_at\": \"<date>\",\n  \"custom_fields\": {\n    \"veniama\": true\n  }\n}",
+                  "createdAt": "2026-07-28T01:51:34.000Z",
+                  "updatedAt": "2026-07-28T01:51:34.000Z",
+                  "uid": "35240-8524b188-2850-49f8-a232-169c1f7d9924"
+                },
+                {
+                  "id": "577c22b7-e69d-4be4-bbc2-a7d9209231d1",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/offers/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offers",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:34.000Z",
+                  "updatedAt": "2026-07-28T01:51:34.000Z",
+                  "uid": "35240-577c22b7-e69d-4be4-bbc2-a7d9209231d1"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:34.000Z",
+              "updatedAt": "2026-07-28T01:51:34.000Z",
+              "uid": "35240-6a92ba57-3eda-4d58-a46c-50f7d6ac2a01"
+            }
+          ],
+          "id": "7708712b-c082-4acc-8eda-ad6cf9211265",
+          "createdAt": "2026-07-28T01:51:34.000Z",
+          "updatedAt": "2026-07-28T01:51:34.000Z",
+          "uid": "35240-7708712b-c082-4acc-8eda-ad6cf9211265"
+        },
+        {
+          "name": "List Offers",
+          "id": "688b7b6f-de3c-41df-a892-c0a92c87f1e3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/offers?page=1&per_page=100&status=sent",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "offers"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "description": "Default 100, max 500.",
+                  "key": "per_page",
+                  "value": "100"
+                },
+                {
+                  "key": "status",
+                  "value": "sent"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "40594566-456f-454b-980b-973a5effe49c",
+              "name": "Offers.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/offers?page=1&per_page=100&status=sent",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offers"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Default 100, max 500.",
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "status",
+                      "value": "sent"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"application_id\": \"<integer>\",\n    \"version\": \"<integer>\",\n    \"status\": \"deprecated\",\n    \"sent_at\": \"<dateTime>\",\n    \"resolved_at\": \"<dateTime>\",\n    \"starts_at\": \"<date>\",\n    \"custom_fields\": {\n      \"sint_f\": -16679670\n    }\n  },\n  {\n    \"id\": \"<integer>\",\n    \"application_id\": \"<integer>\",\n    \"version\": \"<integer>\",\n    \"status\": \"rejected\",\n    \"sent_at\": \"<dateTime>\",\n    \"resolved_at\": \"<dateTime>\",\n    \"starts_at\": \"<date>\",\n    \"custom_fields\": {\n      \"Duis_85\": \"sint laborum tempor anim nulla\",\n      \"docaa\": \"laboris ut\"\n    }\n  }\n]",
+              "createdAt": "2026-07-28T01:51:34.000Z",
+              "updatedAt": "2026-07-28T01:51:34.000Z",
+              "uid": "35240-40594566-456f-454b-980b-973a5effe49c"
+            },
+            {
+              "id": "96228f53-8f9a-4671-a3e1-51597e258722",
+              "name": "Error response.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/offers?page=1&per_page=100&status=sent",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offers"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Default 100, max 500.",
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "status",
+                      "value": "sent"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:34.000Z",
+              "updatedAt": "2026-07-28T01:51:34.000Z",
+              "uid": "35240-96228f53-8f9a-4671-a3e1-51597e258722"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:34.000Z",
+          "updatedAt": "2026-07-28T01:51:34.000Z",
+          "uid": "35240-688b7b6f-de3c-41df-a892-c0a92c87f1e3"
+        }
+      ],
+      "id": "0354cf48-b025-4764-be81-885dbe219b42",
+      "createdAt": "2026-07-28T01:51:34.000Z",
+      "updatedAt": "2026-07-28T01:51:34.000Z",
+      "uid": "35240-0354cf48-b025-4764-be81-885dbe219b42"
+    },
+    {
+      "name": "applications",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "offers",
+              "item": [
+                {
+                  "name": "current",
+                  "item": [
+                    {
+                      "name": "Retrieve Current Application Offer",
+                      "id": "9b0292a0-a72e-452b-8427-429ddc067c13",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/applications/:id/offers/current",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "applications",
+                            ":id",
+                            "offers",
+                            "current"
+                          ],
+                          "variable": [
+                            {
+                              "id": "1fe4f825-9c0d-4ee3-a877-21584089c44c",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "5f06f1ed-d61d-47cf-9237-5f7d7d3d9725",
+                          "name": "Current offer.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/applications/:id/offers/current",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "applications",
+                                ":id",
+                                "offers",
+                                "current"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<integer>\",\n  \"application_id\": \"<integer>\",\n  \"version\": \"<integer>\",\n  \"status\": \"draft\",\n  \"sent_at\": \"<dateTime>\",\n  \"resolved_at\": \"<dateTime>\",\n  \"starts_at\": \"<date>\",\n  \"custom_fields\": {\n    \"veniama\": true\n  }\n}",
+                          "createdAt": "2026-07-28T01:51:34.000Z",
+                          "updatedAt": "2026-07-28T01:51:34.000Z",
+                          "uid": "35240-5f06f1ed-d61d-47cf-9237-5f7d7d3d9725"
+                        },
+                        {
+                          "id": "acc543e8-95c4-4a8d-a2e6-77a80b95e794",
+                          "name": "Error response.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/applications/:id/offers/current",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "applications",
+                                ":id",
+                                "offers",
+                                "current"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:51:34.000Z",
+                          "updatedAt": "2026-07-28T01:51:34.000Z",
+                          "uid": "35240-acc543e8-95c4-4a8d-a2e6-77a80b95e794"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:51:34.000Z",
+                      "updatedAt": "2026-07-28T01:51:34.000Z",
+                      "uid": "35240-9b0292a0-a72e-452b-8427-429ddc067c13"
+                    }
+                  ],
+                  "id": "879f0822-7117-4e54-b00d-e9e9937cfb94",
+                  "createdAt": "2026-07-28T01:51:34.000Z",
+                  "updatedAt": "2026-07-28T01:51:34.000Z",
+                  "uid": "35240-879f0822-7117-4e54-b00d-e9e9937cfb94"
+                },
+                {
+                  "name": "List Application Offers",
+                  "id": "1f22dd3f-bb09-4457-aa7a-d296b5ff2843",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/applications/:id/offers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "applications",
+                        ":id",
+                        "offers"
+                      ],
+                      "variable": [
+                        {
+                          "id": "6ab26687-5989-46a5-9441-298d93214932",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "4c96760c-2350-4b30-91d2-341fde0c5cf2",
+                      "name": "Offers for the application.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/applications/:id/offers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "applications",
+                            ":id",
+                            "offers"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"application_id\": \"<integer>\",\n    \"version\": \"<integer>\",\n    \"status\": \"deprecated\",\n    \"sent_at\": \"<dateTime>\",\n    \"resolved_at\": \"<dateTime>\",\n    \"starts_at\": \"<date>\",\n    \"custom_fields\": {\n      \"sint_f\": -16679670\n    }\n  },\n  {\n    \"id\": \"<integer>\",\n    \"application_id\": \"<integer>\",\n    \"version\": \"<integer>\",\n    \"status\": \"rejected\",\n    \"sent_at\": \"<dateTime>\",\n    \"resolved_at\": \"<dateTime>\",\n    \"starts_at\": \"<date>\",\n    \"custom_fields\": {\n      \"Duis_85\": \"sint laborum tempor anim nulla\",\n      \"docaa\": \"laboris ut\"\n    }\n  }\n]",
+                      "createdAt": "2026-07-28T01:51:34.000Z",
+                      "updatedAt": "2026-07-28T01:51:34.000Z",
+                      "uid": "35240-4c96760c-2350-4b30-91d2-341fde0c5cf2"
+                    },
+                    {
+                      "id": "7bd87ac5-80a1-45b9-974c-2c4c0f60c13c",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/applications/:id/offers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "applications",
+                            ":id",
+                            "offers"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:34.000Z",
+                      "updatedAt": "2026-07-28T01:51:34.000Z",
+                      "uid": "35240-7bd87ac5-80a1-45b9-974c-2c4c0f60c13c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:34.000Z",
+                  "updatedAt": "2026-07-28T01:51:34.000Z",
+                  "uid": "35240-1f22dd3f-bb09-4457-aa7a-d296b5ff2843"
+                }
+              ],
+              "id": "40dca676-d94f-4c70-a552-ff39e0d0d111",
+              "createdAt": "2026-07-28T01:51:34.000Z",
+              "updatedAt": "2026-07-28T01:51:34.000Z",
+              "uid": "35240-40dca676-d94f-4c70-a552-ff39e0d0d111"
+            }
+          ],
+          "id": "79740c62-e1df-4081-8075-fd83bd8f780e",
+          "createdAt": "2026-07-28T01:51:34.000Z",
+          "updatedAt": "2026-07-28T01:51:34.000Z",
+          "uid": "35240-79740c62-e1df-4081-8075-fd83bd8f780e"
+        }
+      ],
+      "id": "118d8b73-dc18-409b-9ddc-409bd4c68a73",
+      "createdAt": "2026-07-28T01:51:34.000Z",
+      "updatedAt": "2026-07-28T01:51:34.000Z",
+      "uid": "35240-118d8b73-dc18-409b-9ddc-409bd4c68a73"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "partner_host",
+      "value": "partner.example.com"
+    },
+    {
+      "key": "base_path",
+      "value": "greenhouse-assessment"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{partner_host}}/{{base_path}}"
+    }
+  ]
+}

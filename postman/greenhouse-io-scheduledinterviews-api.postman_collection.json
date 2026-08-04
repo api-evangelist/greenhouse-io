@@ -1,0 +1,1018 @@
+{
+  "info": {
+    "_postman_id": "e9ffe27d-03ea-48f2-8482-1b3259f95d62",
+    "name": "Greenhouse Assessment Partner ActivityFeed ScheduledInterviews API",
+    "description": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:38.000Z",
+    "updatedAt": "2026-07-28T01:51:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e9ffe27d-03ea-48f2-8482-1b3259f95d62"
+  },
+  "item": [
+    {
+      "name": "scheduled_interviews",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve Scheduled Interview",
+              "id": "fdedd778-9410-499b-811e-a596013b901b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled_interviews/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "scheduled_interviews",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "f28bf827-69cf-4dac-ba7e-bd833c2b9887",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "7ea4b785-a7bc-4312-a9f5-d24cbef2657f",
+                  "name": "Scheduled interview.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/scheduled_interviews/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "scheduled_interviews",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"application_id\": \"<integer>\",\n  \"interview\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"starts_at\": \"<dateTime>\",\n  \"ends_at\": \"<dateTime>\",\n  \"location\": \"<string>\",\n  \"video_conferencing_url\": \"<uri>\",\n  \"status\": \"scheduled\",\n  \"interviewers\": [\n    {\n      \"user_id\": \"<integer>\",\n      \"response_status\": \"declined\"\n    },\n    {\n      \"user_id\": \"<integer>\",\n      \"response_status\": \"needs_action\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:38.000Z",
+                  "updatedAt": "2026-07-28T01:51:38.000Z",
+                  "uid": "35240-7ea4b785-a7bc-4312-a9f5-d24cbef2657f"
+                },
+                {
+                  "id": "56331408-ca58-46c6-a352-0b65a7c18ef8",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/scheduled_interviews/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "scheduled_interviews",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:38.000Z",
+                  "updatedAt": "2026-07-28T01:51:38.000Z",
+                  "uid": "35240-56331408-ca58-46c6-a352-0b65a7c18ef8"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:38.000Z",
+              "updatedAt": "2026-07-28T01:51:38.000Z",
+              "uid": "35240-fdedd778-9410-499b-811e-a596013b901b"
+            },
+            {
+              "name": "Update Scheduled Interview",
+              "id": "047fe548-c787-498d-bd91-828727a1a3de",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"application_id\": \"<integer>\",\n  \"interview\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"starts_at\": \"<dateTime>\",\n  \"ends_at\": \"<dateTime>\",\n  \"location\": \"<string>\",\n  \"video_conferencing_url\": \"<uri>\",\n  \"status\": \"scheduled\",\n  \"interviewers\": [\n    {\n      \"user_id\": \"<integer>\",\n      \"response_status\": \"declined\"\n    },\n    {\n      \"user_id\": \"<integer>\",\n      \"response_status\": \"needs_action\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled_interviews/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "scheduled_interviews",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "83749adc-a43c-4baf-9b8d-019c4044400e",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "742f0686-3a60-4e1a-8cfe-82e5e3e0f18d",
+                  "name": "Updated.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<integer>\",\n  \"application_id\": \"<integer>\",\n  \"interview\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"starts_at\": \"<dateTime>\",\n  \"ends_at\": \"<dateTime>\",\n  \"location\": \"<string>\",\n  \"video_conferencing_url\": \"<uri>\",\n  \"status\": \"scheduled\",\n  \"interviewers\": [\n    {\n      \"user_id\": \"<integer>\",\n      \"response_status\": \"declined\"\n    },\n    {\n      \"user_id\": \"<integer>\",\n      \"response_status\": \"needs_action\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/scheduled_interviews/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "scheduled_interviews",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:51:38.000Z",
+                  "updatedAt": "2026-07-28T01:51:38.000Z",
+                  "uid": "35240-742f0686-3a60-4e1a-8cfe-82e5e3e0f18d"
+                },
+                {
+                  "id": "382eb1bc-c154-44ba-b9d1-19dbf4b2c722",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<integer>\",\n  \"application_id\": \"<integer>\",\n  \"interview\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"starts_at\": \"<dateTime>\",\n  \"ends_at\": \"<dateTime>\",\n  \"location\": \"<string>\",\n  \"video_conferencing_url\": \"<uri>\",\n  \"status\": \"scheduled\",\n  \"interviewers\": [\n    {\n      \"user_id\": \"<integer>\",\n      \"response_status\": \"declined\"\n    },\n    {\n      \"user_id\": \"<integer>\",\n      \"response_status\": \"needs_action\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/scheduled_interviews/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "scheduled_interviews",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:38.000Z",
+                  "updatedAt": "2026-07-28T01:51:38.000Z",
+                  "uid": "35240-382eb1bc-c154-44ba-b9d1-19dbf4b2c722"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:38.000Z",
+              "updatedAt": "2026-07-28T01:51:38.000Z",
+              "uid": "35240-047fe548-c787-498d-bd91-828727a1a3de"
+            },
+            {
+              "name": "Delete Scheduled Interview",
+              "id": "da42988d-bee2-4a0b-bbbb-deb4a70cdc93",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled_interviews/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "scheduled_interviews",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d4473492-079e-4af1-9aae-31990b9aa5c8",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "583e96e4-661a-4594-9917-4738d678e7fc",
+                  "name": "Deleted.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/scheduled_interviews/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "scheduled_interviews",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:51:38.000Z",
+                  "updatedAt": "2026-07-28T01:51:38.000Z",
+                  "uid": "35240-583e96e4-661a-4594-9917-4738d678e7fc"
+                },
+                {
+                  "id": "4e0d62dc-8a0e-49a9-8e56-70dfd5b49416",
+                  "name": "Error response.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                        "key": "On-Behalf-Of",
+                        "value": "<integer>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/scheduled_interviews/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "scheduled_interviews",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:51:38.000Z",
+                  "updatedAt": "2026-07-28T01:51:38.000Z",
+                  "uid": "35240-4e0d62dc-8a0e-49a9-8e56-70dfd5b49416"
+                }
+              ],
+              "createdAt": "2026-07-28T01:51:38.000Z",
+              "updatedAt": "2026-07-28T01:51:38.000Z",
+              "uid": "35240-da42988d-bee2-4a0b-bbbb-deb4a70cdc93"
+            }
+          ],
+          "id": "227d6898-fcd8-4468-89af-3f2c5a487e2f",
+          "createdAt": "2026-07-28T01:51:38.000Z",
+          "updatedAt": "2026-07-28T01:51:38.000Z",
+          "uid": "35240-227d6898-fcd8-4468-89af-3f2c5a487e2f"
+        },
+        {
+          "name": "List Scheduled Interviews",
+          "id": "73e0e8d3-581a-4d46-b6c6-3613e2d78ab3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/scheduled_interviews?page=1&per_page=100&starts_after=<dateTime>&starts_before=<dateTime>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "scheduled_interviews"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "description": "Default 100, max 500.",
+                  "key": "per_page",
+                  "value": "100"
+                },
+                {
+                  "key": "starts_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "key": "starts_before",
+                  "value": "<dateTime>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0ced27e7-68d0-4961-ab81-8467d1fd7574",
+              "name": "Scheduled interviews.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled_interviews?page=1&per_page=100&starts_after=<dateTime>&starts_before=<dateTime>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "scheduled_interviews"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Default 100, max 500.",
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "starts_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "starts_before",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"application_id\": \"<integer>\",\n    \"interview\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    \"starts_at\": \"<dateTime>\",\n    \"ends_at\": \"<dateTime>\",\n    \"location\": \"<string>\",\n    \"video_conferencing_url\": \"<uri>\",\n    \"status\": \"scheduled\",\n    \"interviewers\": [\n      {\n        \"user_id\": \"<integer>\",\n        \"response_status\": \"needs_action\"\n      },\n      {\n        \"user_id\": \"<integer>\",\n        \"response_status\": \"accepted\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<integer>\",\n    \"application_id\": \"<integer>\",\n    \"interview\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    \"starts_at\": \"<dateTime>\",\n    \"ends_at\": \"<dateTime>\",\n    \"location\": \"<string>\",\n    \"video_conferencing_url\": \"<uri>\",\n    \"status\": \"complete\",\n    \"interviewers\": [\n      {\n        \"user_id\": \"<integer>\",\n        \"response_status\": \"needs_action\"\n      },\n      {\n        \"user_id\": \"<integer>\",\n        \"response_status\": \"declined\"\n      }\n    ]\n  }\n]",
+              "createdAt": "2026-07-28T01:51:38.000Z",
+              "updatedAt": "2026-07-28T01:51:38.000Z",
+              "uid": "35240-0ced27e7-68d0-4961-ab81-8467d1fd7574"
+            },
+            {
+              "id": "5a4040dc-b057-4dd3-a31d-3e4b2f083fd6",
+              "name": "Error response.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled_interviews?page=1&per_page=100&starts_after=<dateTime>&starts_before=<dateTime>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "scheduled_interviews"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Default 100, max 500.",
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "starts_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "starts_before",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:38.000Z",
+              "updatedAt": "2026-07-28T01:51:38.000Z",
+              "uid": "35240-5a4040dc-b057-4dd3-a31d-3e4b2f083fd6"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:38.000Z",
+          "updatedAt": "2026-07-28T01:51:38.000Z",
+          "uid": "35240-73e0e8d3-581a-4d46-b6c6-3613e2d78ab3"
+        },
+        {
+          "name": "Create Scheduled Interview",
+          "id": "d4d3ea7c-9e9e-45d4-b18b-ee6e5f7db11d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                "key": "On-Behalf-Of",
+                "value": "<integer>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"application_id\": \"<integer>\",\n  \"interview\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"starts_at\": \"<dateTime>\",\n  \"ends_at\": \"<dateTime>\",\n  \"location\": \"<string>\",\n  \"video_conferencing_url\": \"<uri>\",\n  \"status\": \"scheduled\",\n  \"interviewers\": [\n    {\n      \"user_id\": \"<integer>\",\n      \"response_status\": \"declined\"\n    },\n    {\n      \"user_id\": \"<integer>\",\n      \"response_status\": \"needs_action\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/scheduled_interviews",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "scheduled_interviews"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "89b496b1-65ae-4f07-9e53-55c927ad78b9",
+              "name": "Created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"application_id\": \"<integer>\",\n  \"interview\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"starts_at\": \"<dateTime>\",\n  \"ends_at\": \"<dateTime>\",\n  \"location\": \"<string>\",\n  \"video_conferencing_url\": \"<uri>\",\n  \"status\": \"scheduled\",\n  \"interviewers\": [\n    {\n      \"user_id\": \"<integer>\",\n      \"response_status\": \"declined\"\n    },\n    {\n      \"user_id\": \"<integer>\",\n      \"response_status\": \"needs_action\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled_interviews",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "scheduled_interviews"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:51:38.000Z",
+              "updatedAt": "2026-07-28T01:51:38.000Z",
+              "uid": "35240-89b496b1-65ae-4f07-9e53-55c927ad78b9"
+            },
+            {
+              "id": "4783075a-c12b-4232-8026-d6c743ac2d9d",
+              "name": "Error response.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"application_id\": \"<integer>\",\n  \"interview\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"starts_at\": \"<dateTime>\",\n  \"ends_at\": \"<dateTime>\",\n  \"location\": \"<string>\",\n  \"video_conferencing_url\": \"<uri>\",\n  \"status\": \"scheduled\",\n  \"interviewers\": [\n    {\n      \"user_id\": \"<integer>\",\n      \"response_status\": \"declined\"\n    },\n    {\n      \"user_id\": \"<integer>\",\n      \"response_status\": \"needs_action\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled_interviews",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "scheduled_interviews"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:51:38.000Z",
+              "updatedAt": "2026-07-28T01:51:38.000Z",
+              "uid": "35240-4783075a-c12b-4232-8026-d6c743ac2d9d"
+            }
+          ],
+          "createdAt": "2026-07-28T01:51:38.000Z",
+          "updatedAt": "2026-07-28T01:51:38.000Z",
+          "uid": "35240-d4d3ea7c-9e9e-45d4-b18b-ee6e5f7db11d"
+        }
+      ],
+      "id": "a2b47e61-c71d-4a6f-a446-80f9fd54f12d",
+      "createdAt": "2026-07-28T01:51:38.000Z",
+      "updatedAt": "2026-07-28T01:51:38.000Z",
+      "uid": "35240-a2b47e61-c71d-4a6f-a446-80f9fd54f12d"
+    },
+    {
+      "name": "applications",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "scheduled_interviews",
+              "item": [
+                {
+                  "name": "List Application Scheduled Interviews",
+                  "id": "4b791585-4101-4ce0-a318-2e427988ea7a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/applications/:id/scheduled_interviews",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "applications",
+                        ":id",
+                        "scheduled_interviews"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e001d0e0-f4e7-4a8f-a560-1547de4b94d2",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "a0717dc8-a366-4005-83be-dd6173485e1d",
+                      "name": "Scheduled interviews.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/applications/:id/scheduled_interviews",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "applications",
+                            ":id",
+                            "scheduled_interviews"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"application_id\": \"<integer>\",\n    \"interview\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    \"starts_at\": \"<dateTime>\",\n    \"ends_at\": \"<dateTime>\",\n    \"location\": \"<string>\",\n    \"video_conferencing_url\": \"<uri>\",\n    \"status\": \"scheduled\",\n    \"interviewers\": [\n      {\n        \"user_id\": \"<integer>\",\n        \"response_status\": \"needs_action\"\n      },\n      {\n        \"user_id\": \"<integer>\",\n        \"response_status\": \"accepted\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<integer>\",\n    \"application_id\": \"<integer>\",\n    \"interview\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    \"starts_at\": \"<dateTime>\",\n    \"ends_at\": \"<dateTime>\",\n    \"location\": \"<string>\",\n    \"video_conferencing_url\": \"<uri>\",\n    \"status\": \"complete\",\n    \"interviewers\": [\n      {\n        \"user_id\": \"<integer>\",\n        \"response_status\": \"needs_action\"\n      },\n      {\n        \"user_id\": \"<integer>\",\n        \"response_status\": \"declined\"\n      }\n    ]\n  }\n]",
+                      "createdAt": "2026-07-28T01:51:38.000Z",
+                      "updatedAt": "2026-07-28T01:51:38.000Z",
+                      "uid": "35240-a0717dc8-a366-4005-83be-dd6173485e1d"
+                    },
+                    {
+                      "id": "7ed42025-3053-42da-90b6-5de11a11ab70",
+                      "name": "Error response.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/applications/:id/scheduled_interviews",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "applications",
+                            ":id",
+                            "scheduled_interviews"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:51:38.000Z",
+                      "updatedAt": "2026-07-28T01:51:38.000Z",
+                      "uid": "35240-7ed42025-3053-42da-90b6-5de11a11ab70"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:38.000Z",
+                  "updatedAt": "2026-07-28T01:51:38.000Z",
+                  "uid": "35240-4b791585-4101-4ce0-a318-2e427988ea7a"
+                }
+              ],
+              "id": "76803815-8515-498c-98c3-7f9fd539ecd2",
+              "createdAt": "2026-07-28T01:51:38.000Z",
+              "updatedAt": "2026-07-28T01:51:38.000Z",
+              "uid": "35240-76803815-8515-498c-98c3-7f9fd539ecd2"
+            }
+          ],
+          "id": "e9468572-0c0b-4f26-857a-346d9c502910",
+          "createdAt": "2026-07-28T01:51:38.000Z",
+          "updatedAt": "2026-07-28T01:51:38.000Z",
+          "uid": "35240-e9468572-0c0b-4f26-857a-346d9c502910"
+        }
+      ],
+      "id": "c41c6b2c-da02-4bc5-827e-a2bd73ea572f",
+      "createdAt": "2026-07-28T01:51:38.000Z",
+      "updatedAt": "2026-07-28T01:51:38.000Z",
+      "uid": "35240-c41c6b2c-da02-4bc5-827e-a2bd73ea572f"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "partner_host",
+      "value": "partner.example.com"
+    },
+    {
+      "key": "base_path",
+      "value": "greenhouse-assessment"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{partner_host}}/{{base_path}}"
+    }
+  ]
+}
