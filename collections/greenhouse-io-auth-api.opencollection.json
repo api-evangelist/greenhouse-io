@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Assessment Partner ActivityFeed Auth API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Issue Audit Log Access Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{partner_host}/{base_path}/jwt_access_token"
+          },
+          "docs": "Exchanges a Harvest API key (HTTP Basic) for a JWT bearer token valid for 24 hours."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

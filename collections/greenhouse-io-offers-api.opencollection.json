@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Assessment Partner ActivityFeed Offers API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Offers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Offers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{partner_host}/{base_path}/offers",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Default 100, max 500."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Offers"
+        },
+        {
+          "info": {
+            "name": "Retrieve Offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{partner_host}/{base_path}/offers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Offer"
+        },
+        {
+          "info": {
+            "name": "Update Current Offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{partner_host}/{base_path}/offers/:id/current",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Current Offer"
+        },
+        {
+          "info": {
+            "name": "List Application Offers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{partner_host}/{base_path}/applications/:id/offers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Application Offers"
+        },
+        {
+          "info": {
+            "name": "Retrieve Current Application Offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{partner_host}/{base_path}/applications/:id/offers/current",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Current Application Offer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

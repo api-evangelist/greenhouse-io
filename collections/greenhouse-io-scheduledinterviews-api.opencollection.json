@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Assessment Partner ActivityFeed ScheduledInterviews API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ScheduledInterviews",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Scheduled Interviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{partner_host}/{base_path}/scheduled_interviews",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Default 100, max 500."
+              },
+              {
+                "name": "starts_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "starts_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Scheduled Interviews"
+        },
+        {
+          "info": {
+            "name": "Create Scheduled Interview",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{partner_host}/{base_path}/scheduled_interviews",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Scheduled Interview"
+        },
+        {
+          "info": {
+            "name": "Retrieve Scheduled Interview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{partner_host}/{base_path}/scheduled_interviews/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Scheduled Interview"
+        },
+        {
+          "info": {
+            "name": "Update Scheduled Interview",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{partner_host}/{base_path}/scheduled_interviews/:id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Scheduled Interview"
+        },
+        {
+          "info": {
+            "name": "Delete Scheduled Interview",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{partner_host}/{base_path}/scheduled_interviews/:id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Scheduled Interview"
+        },
+        {
+          "info": {
+            "name": "List Application Scheduled Interviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{partner_host}/{base_path}/applications/:id/scheduled_interviews",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Application Scheduled Interviews"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

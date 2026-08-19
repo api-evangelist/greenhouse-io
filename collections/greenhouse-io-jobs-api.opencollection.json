@@ -1,0 +1,212 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Assessment Partner ActivityFeed Jobs API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Partner Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{partner_host}/{base_path}/jobs",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "List jobs visible to the integrated user."
+        },
+        {
+          "info": {
+            "name": "Create Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{partner_host}/{base_path}/jobs",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Job"
+        },
+        {
+          "info": {
+            "name": "Retrieve Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{partner_host}/{base_path}/jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Job"
+        },
+        {
+          "info": {
+            "name": "Update Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{partner_host}/{base_path}/jobs/:id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Job"
+        },
+        {
+          "info": {
+            "name": "Retrieve Job Hiring Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{partner_host}/{base_path}/jobs/:id/hiring_team",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Job Hiring Team"
+        },
+        {
+          "info": {
+            "name": "Replace Job Hiring Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{partner_host}/{base_path}/jobs/:id/hiring_team",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace Job Hiring Team"
+        },
+        {
+          "info": {
+            "name": "Add Hiring Team Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{partner_host}/{base_path}/jobs/:id/hiring_team_members",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add Hiring Team Member"
+        },
+        {
+          "info": {
+            "name": "Remove Hiring Team Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{partner_host}/{base_path}/jobs/:id/hiring_team_members/:user_id",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove Hiring Team Member"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

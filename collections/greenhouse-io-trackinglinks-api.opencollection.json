@@ -1,0 +1,46 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Assessment Partner ActivityFeed TrackingLinks API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TrackingLinks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Tracking Link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{partner_host}/{base_path}/tracking_link",
+            "headers": [
+              {
+                "name": "On-Behalf-Of",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a branded tracking link tied to the partner and an optional job."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Assessment Partner ActivityFeed TestDelivery API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TestDelivery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Test To Candidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{partner_host}/{base_path}/send_test",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Greenhouse calls this when a candidate reaches the assessment stage; partner returns a unique partner_interview_id."
+        },
+        {
+          "info": {
+            "name": "Get Test Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{partner_host}/{base_path}/test_status",
+            "params": [
+              {
+                "name": "partner_interview_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Greenhouse polls hourly (or partner triggers via PATCH) to retrieve completion + results."
+        },
+        {
+          "info": {
+            "name": "Report Validation Errors",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{partner_host}/{base_path}/response_error",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Greenhouse sends validation error details so the partner can resolve issues."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

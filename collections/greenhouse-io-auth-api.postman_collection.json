@@ -1,0 +1,148 @@
+{
+  "item": [
+    {
+      "id": "13dedc59-55eb-4276-9921-815b3a261cd4",
+      "name": "Auth",
+      "description": {
+        "content": "JWT access token issuance.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "70caf0c9-f276-464d-81c5-4a2e6298f135",
+          "name": "Issue Audit Log Access Token",
+          "request": {
+            "name": "Issue Audit Log Access Token",
+            "description": {
+              "content": "Exchanges a Harvest API key (HTTP Basic) for a JWT bearer token valid for 24 hours.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "auth",
+                "jwt_access_token"
+              ],
+              "host": [
+                "harvest",
+                "greenhouse",
+                "io"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST"
+          },
+          "response": [
+            {
+              "id": "50e39284-d7c1-4a9d-a3a4-216bbaa4bdd0",
+              "name": "Token issued.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "auth",
+                    "jwt_access_token"
+                  ],
+                  "host": [
+                    "harvest",
+                    "greenhouse",
+                    "io"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"string\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 4030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "partner.example.com",
+      "key": "partner_host"
+    },
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "greenhouse-assessment",
+      "key": "base_path"
+    },
+    {
+      "type": "string",
+      "value": "https://{{partner_host}}/{{base_path}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1c7ce69b-41ea-458b-984e-46ce26fd39a5",
+    "name": "Greenhouse Assessment Partner ActivityFeed Auth API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+      "type": "text/plain"
+    }
+  }
+}

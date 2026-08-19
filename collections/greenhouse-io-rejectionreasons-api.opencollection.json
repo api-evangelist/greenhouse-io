@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Assessment Partner ActivityFeed RejectionReasons API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RejectionReasons",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Rejection Reasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{partner_host}/{base_path}/rejection_reasons"
+          },
+          "docs": "List Rejection Reasons"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

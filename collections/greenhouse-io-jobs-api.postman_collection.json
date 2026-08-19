@@ -1,0 +1,1794 @@
+{
+  "item": [
+    {
+      "id": "b2bdfc31-9a4e-4ecd-970d-30c30e5ad1f3",
+      "name": "Jobs",
+      "description": {
+        "content": "List jobs visible to the integrated user.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "41c2212f-2fe4-47ce-a09d-7d8340f1b66c",
+          "name": "List Partner Jobs",
+          "request": {
+            "name": "List Partner Jobs",
+            "description": {
+              "content": "List jobs visible to the integrated user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{partner_host}}",
+                  "key": "partner_host"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{base_path}}",
+                  "key": "base_path"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                "key": "On-Behalf-Of",
+                "value": "<email>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "398f0def-d928-4daf-bc9f-760848f801e4",
+              "name": "Visible jobs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{partner_host}}",
+                      "key": "partner_host"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{base_path}}",
+                      "key": "base_path"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.",
+                    "key": "On-Behalf-Of",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 9751,\n    \"name\": \"string\",\n    \"requisition_id\": \"string\"\n  },\n  {\n    \"id\": 9054,\n    \"name\": \"string\",\n    \"requisition_id\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "570d4bdd-6aaa-4daa-b00c-e02fa87aee13",
+          "name": "Create Job",
+          "request": {
+            "name": "Create Job",
+            "description": {},
+            "url": {
+              "path": [
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{partner_host}}",
+                  "key": "partner_host"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{base_path}}",
+                  "key": "base_path"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                "key": "On-Behalf-Of",
+                "value": "<integer>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"template_job_id\": \"<integer>\",\n  \"requisition_id\": \"<string>\",\n  \"department_id\": \"<integer>\",\n  \"office_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"number_of_openings\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1955702a-aec5-4840-9a96-5c86f2fc419c",
+              "name": "Created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{partner_host}}",
+                      "key": "partner_host"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{base_path}}",
+                      "key": "base_path"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"template_job_id\": \"<integer>\",\n  \"requisition_id\": \"<string>\",\n  \"department_id\": \"<integer>\",\n  \"office_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"number_of_openings\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 673,\n  \"name\": \"string\",\n  \"requisition_id\": \"string\",\n  \"notes\": \"string\",\n  \"confidential\": true,\n  \"status\": \"closed\",\n  \"created_at\": \"2017-01-27T16:15:27.527Z\",\n  \"opened_at\": \"1992-12-17T14:06:14.464Z\",\n  \"closed_at\": \"1974-02-12T02:58:23.099Z\",\n  \"updated_at\": \"1965-05-10T20:58:24.561Z\",\n  \"departments\": [\n    {\n      \"id\": 5621,\n      \"name\": \"string\",\n      \"parent_id\": 8471,\n      \"parent_department_external_id\": \"string\",\n      \"child_ids\": [\n        2686,\n        7915\n      ],\n      \"external_id\": \"string\"\n    },\n    {\n      \"id\": 9991,\n      \"name\": \"string\",\n      \"parent_id\": 4035,\n      \"parent_department_external_id\": \"string\",\n      \"child_ids\": [\n        546,\n        4323\n      ],\n      \"external_id\": \"string\"\n    }\n  ],\n  \"offices\": [\n    {\n      \"id\": 1366,\n      \"name\": \"string\",\n      \"location\": {\n        \"name\": \"string\"\n      },\n      \"parent_id\": 2442,\n      \"child_ids\": [\n        1553,\n        5324\n      ],\n      \"external_id\": \"string\"\n    },\n    {\n      \"id\": 8724,\n      \"name\": \"string\",\n      \"location\": {\n        \"name\": \"string\"\n      },\n      \"parent_id\": 6223,\n      \"child_ids\": [\n        5755,\n        4391\n      ],\n      \"external_id\": \"string\"\n    }\n  ],\n  \"hiring_team\": {\n    \"hiring_managers\": [\n      {\n        \"id\": 9323,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      },\n      {\n        \"id\": 4150,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      }\n    ],\n    \"recruiters\": [\n      {\n        \"id\": 1830,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      },\n      {\n        \"id\": 9344,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      }\n    ],\n    \"coordinators\": [\n      {\n        \"id\": 2061,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      },\n      {\n        \"id\": 6688,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      }\n    ],\n    \"sourcers\": [\n      {\n        \"id\": 2588,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      },\n      {\n        \"id\": 1403,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      }\n    ]\n  },\n  \"custom_fields\": {\n    \"key_0\": 5223.629581516456\n  },\n  \"openings\": [\n    {\n      \"id\": 7155,\n      \"opening_id\": \"string\",\n      \"status\": \"closed\",\n      \"opened_at\": \"1983-09-07T03:04:06.023Z\",\n      \"closed_at\": \"2013-08-15T10:59:19.734Z\",\n      \"application_id\": 2521,\n      \"close_reason\": {\n        \"id\": 8730,\n        \"name\": \"string\"\n      },\n      \"custom_fields\": {\n        \"key_0\": 1291.7206549792816,\n        \"key_1\": \"string\"\n      }\n    },\n    {\n      \"id\": 7859,\n      \"opening_id\": \"string\",\n      \"status\": \"open\",\n      \"opened_at\": \"1977-05-03T03:40:23.593Z\",\n      \"closed_at\": \"1978-10-04T04:02:23.119Z\",\n      \"application_id\": 4823,\n      \"close_reason\": {\n        \"id\": 7174,\n        \"name\": \"string\"\n      },\n      \"custom_fields\": {\n        \"key_0\": 4495.629881647106,\n        \"key_1\": \"string\",\n        \"key_2\": 489,\n        \"key_3\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa702922-48b2-4fa0-8ac3-42f6c3303d9b",
+              "name": "Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{partner_host}}",
+                      "key": "partner_host"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{base_path}}",
+                      "key": "base_path"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"template_job_id\": \"<integer>\",\n  \"requisition_id\": \"<string>\",\n  \"department_id\": \"<integer>\",\n  \"office_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"number_of_openings\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "15dbdea7-d238-4c49-9907-b65cbf08b3e6",
+          "name": "Retrieve Job",
+          "request": {
+            "name": "Retrieve Job",
+            "description": {},
+            "url": {
+              "path": [
+                "jobs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{partner_host}}",
+                  "key": "partner_host"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{base_path}}",
+                  "key": "base_path"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac0ac22f-0e8f-4aa7-a665-556c8609bf0a",
+              "name": "A single job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{partner_host}}",
+                      "key": "partner_host"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{base_path}}",
+                      "key": "base_path"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 673,\n  \"name\": \"string\",\n  \"requisition_id\": \"string\",\n  \"notes\": \"string\",\n  \"confidential\": true,\n  \"status\": \"closed\",\n  \"created_at\": \"2017-01-27T16:15:27.527Z\",\n  \"opened_at\": \"1992-12-17T14:06:14.464Z\",\n  \"closed_at\": \"1974-02-12T02:58:23.099Z\",\n  \"updated_at\": \"1965-05-10T20:58:24.561Z\",\n  \"departments\": [\n    {\n      \"id\": 5621,\n      \"name\": \"string\",\n      \"parent_id\": 8471,\n      \"parent_department_external_id\": \"string\",\n      \"child_ids\": [\n        2686,\n        7915\n      ],\n      \"external_id\": \"string\"\n    },\n    {\n      \"id\": 9991,\n      \"name\": \"string\",\n      \"parent_id\": 4035,\n      \"parent_department_external_id\": \"string\",\n      \"child_ids\": [\n        546,\n        4323\n      ],\n      \"external_id\": \"string\"\n    }\n  ],\n  \"offices\": [\n    {\n      \"id\": 1366,\n      \"name\": \"string\",\n      \"location\": {\n        \"name\": \"string\"\n      },\n      \"parent_id\": 2442,\n      \"child_ids\": [\n        1553,\n        5324\n      ],\n      \"external_id\": \"string\"\n    },\n    {\n      \"id\": 8724,\n      \"name\": \"string\",\n      \"location\": {\n        \"name\": \"string\"\n      },\n      \"parent_id\": 6223,\n      \"child_ids\": [\n        5755,\n        4391\n      ],\n      \"external_id\": \"string\"\n    }\n  ],\n  \"hiring_team\": {\n    \"hiring_managers\": [\n      {\n        \"id\": 9323,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      },\n      {\n        \"id\": 4150,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      }\n    ],\n    \"recruiters\": [\n      {\n        \"id\": 1830,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      },\n      {\n        \"id\": 9344,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      }\n    ],\n    \"coordinators\": [\n      {\n        \"id\": 2061,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      },\n      {\n        \"id\": 6688,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      }\n    ],\n    \"sourcers\": [\n      {\n        \"id\": 2588,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      },\n      {\n        \"id\": 1403,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      }\n    ]\n  },\n  \"custom_fields\": {\n    \"key_0\": 5223.629581516456\n  },\n  \"openings\": [\n    {\n      \"id\": 7155,\n      \"opening_id\": \"string\",\n      \"status\": \"closed\",\n      \"opened_at\": \"1983-09-07T03:04:06.023Z\",\n      \"closed_at\": \"2013-08-15T10:59:19.734Z\",\n      \"application_id\": 2521,\n      \"close_reason\": {\n        \"id\": 8730,\n        \"name\": \"string\"\n      },\n      \"custom_fields\": {\n        \"key_0\": 1291.7206549792816,\n        \"key_1\": \"string\"\n      }\n    },\n    {\n      \"id\": 7859,\n      \"opening_id\": \"string\",\n      \"status\": \"open\",\n      \"opened_at\": \"1977-05-03T03:40:23.593Z\",\n      \"closed_at\": \"1978-10-04T04:02:23.119Z\",\n      \"application_id\": 4823,\n      \"close_reason\": {\n        \"id\": 7174,\n        \"name\": \"string\"\n      },\n      \"custom_fields\": {\n        \"key_0\": 4495.629881647106,\n        \"key_1\": \"string\",\n        \"key_2\": 489,\n        \"key_3\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba7e6566-f54b-4c49-b104-f4f43cecc671",
+              "name": "Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{partner_host}}",
+                      "key": "partner_host"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{base_path}}",
+                      "key": "base_path"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ce4575b-1af1-4772-9bd1-955e1b740815",
+          "name": "Update Job",
+          "request": {
+            "name": "Update Job",
+            "description": {},
+            "url": {
+              "path": [
+                "jobs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{partner_host}}",
+                  "key": "partner_host"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{base_path}}",
+                  "key": "base_path"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                "key": "On-Behalf-Of",
+                "value": "<integer>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"requisition_id\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"status\": \"<string>\",\n  \"department_id\": \"<integer>\",\n  \"office_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"custom_fields\": {\n    \"key_0\": 1750.270025165782\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e13f89a7-7b95-4028-9837-a5087361bde4",
+              "name": "Updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{partner_host}}",
+                      "key": "partner_host"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{base_path}}",
+                      "key": "base_path"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"requisition_id\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"status\": \"<string>\",\n  \"department_id\": \"<integer>\",\n  \"office_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"custom_fields\": {\n    \"key_0\": 8547.966630454908\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 673,\n  \"name\": \"string\",\n  \"requisition_id\": \"string\",\n  \"notes\": \"string\",\n  \"confidential\": true,\n  \"status\": \"closed\",\n  \"created_at\": \"2017-01-27T16:15:27.527Z\",\n  \"opened_at\": \"1992-12-17T14:06:14.464Z\",\n  \"closed_at\": \"1974-02-12T02:58:23.099Z\",\n  \"updated_at\": \"1965-05-10T20:58:24.561Z\",\n  \"departments\": [\n    {\n      \"id\": 5621,\n      \"name\": \"string\",\n      \"parent_id\": 8471,\n      \"parent_department_external_id\": \"string\",\n      \"child_ids\": [\n        2686,\n        7915\n      ],\n      \"external_id\": \"string\"\n    },\n    {\n      \"id\": 9991,\n      \"name\": \"string\",\n      \"parent_id\": 4035,\n      \"parent_department_external_id\": \"string\",\n      \"child_ids\": [\n        546,\n        4323\n      ],\n      \"external_id\": \"string\"\n    }\n  ],\n  \"offices\": [\n    {\n      \"id\": 1366,\n      \"name\": \"string\",\n      \"location\": {\n        \"name\": \"string\"\n      },\n      \"parent_id\": 2442,\n      \"child_ids\": [\n        1553,\n        5324\n      ],\n      \"external_id\": \"string\"\n    },\n    {\n      \"id\": 8724,\n      \"name\": \"string\",\n      \"location\": {\n        \"name\": \"string\"\n      },\n      \"parent_id\": 6223,\n      \"child_ids\": [\n        5755,\n        4391\n      ],\n      \"external_id\": \"string\"\n    }\n  ],\n  \"hiring_team\": {\n    \"hiring_managers\": [\n      {\n        \"id\": 9323,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      },\n      {\n        \"id\": 4150,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      }\n    ],\n    \"recruiters\": [\n      {\n        \"id\": 1830,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      },\n      {\n        \"id\": 9344,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      }\n    ],\n    \"coordinators\": [\n      {\n        \"id\": 2061,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      },\n      {\n        \"id\": 6688,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      }\n    ],\n    \"sourcers\": [\n      {\n        \"id\": 2588,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      },\n      {\n        \"id\": 1403,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"employee_id\": \"string\"\n      }\n    ]\n  },\n  \"custom_fields\": {\n    \"key_0\": 5223.629581516456\n  },\n  \"openings\": [\n    {\n      \"id\": 7155,\n      \"opening_id\": \"string\",\n      \"status\": \"closed\",\n      \"opened_at\": \"1983-09-07T03:04:06.023Z\",\n      \"closed_at\": \"2013-08-15T10:59:19.734Z\",\n      \"application_id\": 2521,\n      \"close_reason\": {\n        \"id\": 8730,\n        \"name\": \"string\"\n      },\n      \"custom_fields\": {\n        \"key_0\": 1291.7206549792816,\n        \"key_1\": \"string\"\n      }\n    },\n    {\n      \"id\": 7859,\n      \"opening_id\": \"string\",\n      \"status\": \"open\",\n      \"opened_at\": \"1977-05-03T03:40:23.593Z\",\n      \"closed_at\": \"1978-10-04T04:02:23.119Z\",\n      \"application_id\": 4823,\n      \"close_reason\": {\n        \"id\": 7174,\n        \"name\": \"string\"\n      },\n      \"custom_fields\": {\n        \"key_0\": 4495.629881647106,\n        \"key_1\": \"string\",\n        \"key_2\": 489,\n        \"key_3\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "529c0e2e-fa41-49f6-85e1-e63dba7a57a3",
+              "name": "Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{partner_host}}",
+                      "key": "partner_host"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{base_path}}",
+                      "key": "base_path"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"requisition_id\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"status\": \"<string>\",\n  \"department_id\": \"<integer>\",\n  \"office_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"custom_fields\": {\n    \"key_0\": 8547.966630454908\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "594b5fcd-b523-47fb-9f10-ae189fad8ccb",
+          "name": "Retrieve Job Hiring Team",
+          "request": {
+            "name": "Retrieve Job Hiring Team",
+            "description": {},
+            "url": {
+              "path": [
+                "jobs",
+                ":id",
+                "hiring_team"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{partner_host}}",
+                  "key": "partner_host"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{base_path}}",
+                  "key": "base_path"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "02c11914-553f-414f-8e91-37f77e068788",
+              "name": "Hiring team.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":id",
+                    "hiring_team"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{partner_host}}",
+                      "key": "partner_host"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{base_path}}",
+                      "key": "base_path"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hiring_managers\": [\n    {\n      \"id\": 5790,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    },\n    {\n      \"id\": 7702,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    }\n  ],\n  \"recruiters\": [\n    {\n      \"id\": 1469,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    },\n    {\n      \"id\": 3285,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    }\n  ],\n  \"coordinators\": [\n    {\n      \"id\": 4060,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    },\n    {\n      \"id\": 3930,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    }\n  ],\n  \"sourcers\": [\n    {\n      \"id\": 6215,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    },\n    {\n      \"id\": 4425,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c63aff6-ee06-46ef-8145-57b40a63d843",
+              "name": "Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":id",
+                    "hiring_team"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{partner_host}}",
+                      "key": "partner_host"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{base_path}}",
+                      "key": "base_path"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b48b0b84-2866-4499-9759-fdeb6deb8cea",
+          "name": "Replace Job Hiring Team",
+          "request": {
+            "name": "Replace Job Hiring Team",
+            "description": {},
+            "url": {
+              "path": [
+                "jobs",
+                ":id",
+                "hiring_team"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{partner_host}}",
+                  "key": "partner_host"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{base_path}}",
+                  "key": "base_path"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                "key": "On-Behalf-Of",
+                "value": "<integer>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"hiring_managers\": [\n    {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"name\": \"<string>\",\n      \"employee_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"name\": \"<string>\",\n      \"employee_id\": \"<string>\"\n    }\n  ],\n  \"recruiters\": [\n    {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"name\": \"<string>\",\n      \"employee_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"name\": \"<string>\",\n      \"employee_id\": \"<string>\"\n    }\n  ],\n  \"coordinators\": [\n    {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"name\": \"<string>\",\n      \"employee_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"name\": \"<string>\",\n      \"employee_id\": \"<string>\"\n    }\n  ],\n  \"sourcers\": [\n    {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"name\": \"<string>\",\n      \"employee_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"name\": \"<string>\",\n      \"employee_id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4831b080-5710-4dd2-ab9e-ce7c6a25a2ef",
+              "name": "Replaced.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":id",
+                    "hiring_team"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{partner_host}}",
+                      "key": "partner_host"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{base_path}}",
+                      "key": "base_path"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hiring_managers\": [\n    {\n      \"id\": 7347,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    },\n    {\n      \"id\": 9022,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    }\n  ],\n  \"recruiters\": [\n    {\n      \"id\": 90,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    },\n    {\n      \"id\": 2890,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    }\n  ],\n  \"coordinators\": [\n    {\n      \"id\": 7375,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    },\n    {\n      \"id\": 6597,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    }\n  ],\n  \"sourcers\": [\n    {\n      \"id\": 7651,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    },\n    {\n      \"id\": 9470,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hiring_managers\": [\n    {\n      \"id\": 5790,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    },\n    {\n      \"id\": 7702,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    }\n  ],\n  \"recruiters\": [\n    {\n      \"id\": 1469,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    },\n    {\n      \"id\": 3285,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    }\n  ],\n  \"coordinators\": [\n    {\n      \"id\": 4060,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    },\n    {\n      \"id\": 3930,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    }\n  ],\n  \"sourcers\": [\n    {\n      \"id\": 6215,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    },\n    {\n      \"id\": 4425,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0732c7c-7391-43d8-a1ca-cdfbc7841561",
+              "name": "Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":id",
+                    "hiring_team"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{partner_host}}",
+                      "key": "partner_host"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{base_path}}",
+                      "key": "base_path"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hiring_managers\": [\n    {\n      \"id\": 7347,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    },\n    {\n      \"id\": 9022,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    }\n  ],\n  \"recruiters\": [\n    {\n      \"id\": 90,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    },\n    {\n      \"id\": 2890,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    }\n  ],\n  \"coordinators\": [\n    {\n      \"id\": 7375,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    },\n    {\n      \"id\": 6597,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    }\n  ],\n  \"sourcers\": [\n    {\n      \"id\": 7651,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    },\n    {\n      \"id\": 9470,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"employee_id\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b00d66a-fe54-4dda-8c04-8bf27d62444e",
+          "name": "Add Hiring Team Member",
+          "request": {
+            "name": "Add Hiring Team Member",
+            "description": {},
+            "url": {
+              "path": [
+                "jobs",
+                ":id",
+                "hiring_team_members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{partner_host}}",
+                  "key": "partner_host"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{base_path}}",
+                  "key": "base_path"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                "key": "On-Behalf-Of",
+                "value": "<integer>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": \"<integer>\",\n  \"role\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "83643746-b701-4d6c-a24c-320b8f04c362",
+              "name": "Added.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":id",
+                    "hiring_team_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{partner_host}}",
+                      "key": "partner_host"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{base_path}}",
+                      "key": "base_path"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_id\": \"<integer>\",\n  \"role\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7d3e8af0-4a48-4c09-a553-1a7257cd3b3e",
+              "name": "Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":id",
+                    "hiring_team_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{partner_host}}",
+                      "key": "partner_host"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{base_path}}",
+                      "key": "base_path"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_id\": \"<integer>\",\n  \"role\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5157378c-d6be-45b9-ae04-3fa1b0258610",
+          "name": "Remove Hiring Team Member",
+          "request": {
+            "name": "Remove Hiring Team Member",
+            "description": {},
+            "url": {
+              "path": [
+                "jobs",
+                ":id",
+                "hiring_team_members",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{partner_host}}",
+                  "key": "partner_host"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{base_path}}",
+                  "key": "base_path"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                "key": "On-Behalf-Of",
+                "value": "<integer>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3672ecae-d754-43bf-8a57-74360730b4fc",
+              "name": "Removed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":id",
+                    "hiring_team_members",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{partner_host}}",
+                      "key": "partner_host"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{base_path}}",
+                      "key": "base_path"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "51e9535e-9d5b-4ae4-9df3-3fa141bc13e6",
+              "name": "Error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":id",
+                    "hiring_team_members",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{partner_host}}",
+                      "key": "partner_host"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{base_path}}",
+                      "key": "base_path"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The ID of the Greenhouse user the request is being made on behalf of.",
+                    "key": "On-Behalf-Of",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "partner.example.com",
+      "key": "partner_host"
+    },
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "greenhouse-assessment",
+      "key": "base_path"
+    },
+    {
+      "type": "string",
+      "value": "https://{{partner_host}}/{{base_path}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b8c1da65-874c-45f7-ad8b-699cd2556516",
+    "name": "Greenhouse Assessment Partner ActivityFeed Jobs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Assessment Partner API defines the contract that assessment vendors implement so\nGreenhouse can list available tests, send a test to a candidate, and retrieve the\ncandidate's results. Endpoints are hosted by the partner (not Greenhouse) and are\nsecured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from\nthe partner with completed test status; otherwise it polls `test_status` hourly for\nup to 8 weeks. API keys must be fewer than 171 characters.\n\n\nContact Support:\n Name: Greenhouse Software\n Email: developers@greenhouse.io",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Greenhouse Assessment Partner ActivityFeed Events API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Audit Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{partner_host}/{base_path}/events",
+            "params": [
+              {
+                "name": "before_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "after_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "magic_time",
+                "value": "",
+                "type": "query",
+                "description": "Relative time keyword (e.g. last_24_hours, last_7_days)."
+              },
+              {
+                "name": "performer_ids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "performer_types",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "performer_ip_addresses",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "event_types",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "event_target_ids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "event_target_types",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "request_ids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "request_types",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paging",
+                "value": "",
+                "type": "query",
+                "description": "Opaque pagination cursor returned by a previous response."
+              }
+            ]
+          },
+          "docs": "Returns audit events filtered by performer, target, event type, request, and time range."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
