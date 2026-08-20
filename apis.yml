@@ -4,6 +4,10 @@ apis:
 - aid: greenhouse-io:greenhouse-recruiting-webhooks
   name: Greenhouse Recruiting Webhooks
   tags:
+  - Webhook
+  - Event
+  - Recruiting
+  tags_raw:
   - Webhooks
   - Events
   - Recruiting
@@ -49,6 +53,11 @@ apis:
 - aid: greenhouse-io:greenhouse-onboarding-webhooks
   name: Greenhouse Onboarding Webhooks
   tags:
+  - Webhook
+  - Event
+  - Onboarding
+  - Beta
+  tags_raw:
   - Webhooks
   - Events
   - Onboarding
@@ -76,6 +85,8 @@ apis:
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - Activity Feed
+  tags_raw:
   - ActivityFeed
   properties:
   - type: OpenAPI
@@ -126,6 +137,8 @@ apis:
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - Application
+  tags_raw:
   - Applications
   properties:
   - type: OpenAPI
@@ -222,6 +235,8 @@ apis:
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -318,6 +333,8 @@ apis:
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - Custom Fields
+  tags_raw:
   - CustomFields
   properties:
   - type: OpenAPI
@@ -414,6 +431,8 @@ apis:
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -510,6 +529,8 @@ apis:
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - Job Openings
+  tags_raw:
   - JobOpenings
   properties:
   - type: OpenAPI
@@ -558,6 +579,8 @@ apis:
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - Job Posts
+  tags_raw:
   - JobPosts
   properties:
   - type: OpenAPI
@@ -606,6 +629,8 @@ apis:
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
@@ -1182,6 +1207,8 @@ apis:
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - Tracking Links
+  tags_raw:
   - TrackingLinks
   properties:
   - type: OpenAPI
@@ -1230,6 +1257,8 @@ apis:
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -1274,6 +1303,14 @@ apis:
     url: https://developers.greenhouse.io/assessment.html
 name: Greenhouse
 tags:
+- ATS
+- Recruiting
+- Hiring
+- Talent Acquisition
+- Enterprise Saas
+- Human Resources
+- Onboarding
+tags_raw:
 - ATS
 - Recruiting
 - Hiring
