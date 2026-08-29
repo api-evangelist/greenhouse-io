@@ -1,17 +1,19 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Greenhouse Assessment Partner ActivityFeed GraphQL API
-  description: 'The Assessment Partner API defines the contract that assessment vendors implement so
+  title: Greenhouse Onboarding Graph QL API
+  description: 'The Greenhouse Onboarding (GHO) API is a single GraphQL endpoint exposing employee,
 
-    Greenhouse can list available tests, send a test to a candidate, and retrieve the
+    department, location, custom field, and team data along with mutations for creating
 
-    candidate''s results. Endpoints are hosted by the partner (not Greenhouse) and are
+    and updating departments, locations, pending hires, and employee profiles.
 
-    secured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from
+    Authentication uses HTTP Basic with an Onboarding Access Key (username) and Secret
 
-    the partner with completed test status; otherwise it polls `test_status` hourly for
+    Key (password); only Super Admins can issue or revoke keys. Rate limiting is enforced
 
-    up to 8 weeks. API keys must be fewer than 171 characters.
+    by both request count (100 per window) and per-query complexity (max 2500 points);
+
+    clients should inspect the `rateLimit` GraphQL field to track remaining budget.
 
     '
   version: 1.0.0
@@ -20,13 +22,8 @@ info:
     url: https://www.greenhouse.com
     email: developers@greenhouse.io
 servers:
-- url: https://{partner_host}/{base_path}
-  description: Partner-hosted endpoint
-  variables:
-    partner_host:
-      default: partner.example.com
-    base_path:
-      default: greenhouse-assessment
+- url: https://onboarding-api.greenhouse.io
+  description: Onboarding GraphQL endpoint host.
 security:
 - BasicAuth: []
 tags:
@@ -85,18 +82,6 @@ paths:
           description: See documentation.
 components:
   schemas:
-    GraphQLRequest:
-      type: object
-      required:
-      - query
-      properties:
-        query:
-          type: string
-        operationName:
-          type: string
-        variables:
-          type: object
-          additionalProperties: true
     GraphQLResponse:
       type: object
       properties:
@@ -139,8 +124,20 @@ components:
                 resetAt:
                   type: string
                   format: date-time
+    GraphQLRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+        operationName:
+          type: string
+        variables:
+          type: object
+          additionalProperties: true
   securitySchemes:
     BasicAuth:
       type: http
       scheme: basic
-      description: HTTP Basic; the API key is Base64-encoded and used as the username (key must be <171 chars).
+      description: HTTP Basic with the Onboarding Access Key as username and Secret Key as password.

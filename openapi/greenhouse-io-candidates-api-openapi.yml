@@ -1,34 +1,17 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Greenhouse Assessment Partner ActivityFeed Candidates API
-  description: 'The Assessment Partner API defines the contract that assessment vendors implement so
-
-    Greenhouse can list available tests, send a test to a candidate, and retrieve the
-
-    candidate''s results. Endpoints are hosted by the partner (not Greenhouse) and are
-
-    secured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from
-
-    the partner with completed test status; otherwise it polls `test_status` hourly for
-
-    up to 8 weeks. API keys must be fewer than 171 characters.
-
-    '
+  title: Greenhouse Io Candidates API
   version: 1.0.0
   contact:
     name: Greenhouse Software
     url: https://www.greenhouse.com
     email: developers@greenhouse.io
+  description: 'Operations tagged Candidates across 2 of this provider''s published API definitions: greenhouse-candidate-ingestion-api-openapi.yml, greenhouse-harvest-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://{partner_host}/{base_path}
-  description: Partner-hosted endpoint
-  variables:
-    partner_host:
-      default: partner.example.com
-    base_path:
-      default: greenhouse-assessment
-security:
-- BasicAuth: []
+- url: https://api.greenhouse.io/v1/partner
+  description: Production Partner API
+- url: https://harvest.greenhouse.io/v1
+  description: Production Harvest API
 tags:
 - name: Candidates
   description: Create or retrieve candidates / prospects in the customer's Greenhouse account.
@@ -67,6 +50,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PartnerCandidate'
+      security:
+      - OAuth2:
+        - partner
+      - BasicAuth: []
     post:
       tags:
       - Candidates
@@ -88,6 +75,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartnerCandidate'
+      security:
+      - OAuth2:
+        - partner
+      - BasicAuth: []
     delete:
       tags:
       - Candidates
@@ -100,6 +91,13 @@ paths:
           description: Deleted.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - OAuth2:
+        - partner
+      - BasicAuth: []
+    servers:
+    - url: https://api.greenhouse.io/v1/partner
+      description: Production Partner API
   /candidates/{id}:
     parameters:
     - $ref: '#/components/parameters/Id'
@@ -117,6 +115,8 @@ paths:
                 $ref: '#/components/schemas/Candidate'
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
     patch:
       tags:
       - Candidates
@@ -139,6 +139,11 @@ paths:
                 $ref: '#/components/schemas/Candidate'
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /candidates/{id}/attachments:
     post:
       tags:
@@ -159,6 +164,11 @@ paths:
           description: Attached.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /candidates/{id}/notes:
     post:
       tags:
@@ -194,6 +204,11 @@ paths:
           description: Note added.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /candidates/{id}/email_notes:
     post:
       tags:
@@ -225,6 +240,11 @@ paths:
           description: Email note recorded.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /candidates/{id}/education:
     post:
       tags:
@@ -245,6 +265,11 @@ paths:
           description: Education added.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /candidates/{id}/education/{education_id}:
     delete:
       tags:
@@ -264,6 +289,11 @@ paths:
           description: Deleted.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /candidates/{id}/employment:
     post:
       tags:
@@ -284,6 +314,11 @@ paths:
           description: Employment added.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /candidates/{id}/employment/{employment_id}:
     delete:
       tags:
@@ -303,6 +338,11 @@ paths:
           description: Deleted.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /candidates/{id}/prospect:
     post:
       tags:
@@ -317,6 +357,11 @@ paths:
           description: Converted to prospect.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /candidates/{id}/anonymize:
     put:
       tags:
@@ -331,6 +376,11 @@ paths:
           description: Anonymized.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /candidates/{id}/merge:
     put:
       tags:
@@ -358,21 +408,13 @@ paths:
           description: Merged.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
 components:
   parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-    OnBehalfOf_2:
-      name: On-Behalf-Of
-      in: header
-      required: false
-      description: The ID of the Greenhouse user the request is being made on behalf of.
-      schema:
-        type: integer
     OnBehalfOf:
       name: On-Behalf-Of
       in: header
@@ -381,155 +423,58 @@ components:
       schema:
         type: string
         format: email
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+    PerPage:
+      name: per_page
+      in: query
+      description: Default 100, max 500.
+      schema:
+        type: integer
+        default: 100
+        maximum: 500
+    CreatedAfter:
+      name: created_after
+      in: query
+      schema:
+        type: string
+        format: date-time
+    UpdatedBefore:
+      name: updated_before
+      in: query
+      schema:
+        type: string
+        format: date-time
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    CreatedBefore:
+      name: created_before
+      in: query
+      schema:
+        type: string
+        format: date-time
+    UpdatedAfter:
+      name: updated_after
+      in: query
+      schema:
+        type: string
+        format: date-time
+    OnBehalfOf_2:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
   schemas:
-    UserRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        first_name:
-          type: string
-        last_name:
-          type: string
-        name:
-          type: string
-        employee_id:
-          type: string
-          nullable: true
-    Candidate:
-      type: object
-      properties:
-        id:
-          type: integer
-        first_name:
-          type: string
-        last_name:
-          type: string
-        company:
-          type: string
-          nullable: true
-        title:
-          type: string
-          nullable: true
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        last_activity:
-          type: string
-          format: date-time
-        is_private:
-          type: boolean
-        photo_url:
-          type: string
-          nullable: true
-        emails:
-          type: array
-          items:
-            type: object
-            properties:
-              value:
-                type: string
-                format: email
-              type:
-                type: string
-        phone_numbers:
-          type: array
-          items:
-            type: object
-            properties:
-              value:
-                type: string
-              type:
-                type: string
-        addresses:
-          type: array
-          items:
-            type: object
-            properties:
-              value:
-                type: string
-              type:
-                type: string
-        social_media_addresses:
-          type: array
-          items:
-            type: object
-            properties:
-              value:
-                type: string
-        recruiter:
-          $ref: '#/components/schemas/UserRef'
-        coordinator:
-          $ref: '#/components/schemas/UserRef'
-        tags:
-          type: array
-          items:
-            type: string
-        applications:
-          type: array
-          items:
-            $ref: '#/components/schemas/Application'
-        educations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Education'
-        employments:
-          type: array
-          items:
-            $ref: '#/components/schemas/Employment'
-        custom_fields:
-          type: object
-          additionalProperties: true
-    Employment:
-      type: object
-      properties:
-        company_name:
-          type: string
-        title:
-          type: string
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-    Attachment:
-      type: object
-      required:
-      - filename
-      - type
-      properties:
-        filename:
-          type: string
-        url:
-          type: string
-          format: uri
-        type:
-          type: string
-          enum:
-          - resume
-          - cover_letter
-          - admin_only
-          - public
-          - offer_letter
-          - take_home_test
-          - offer_packet
-        content:
-          type: string
-          description: Base64 file content.
-        content_type:
-          type: string
     PartnerCandidate:
       type: object
       required:
@@ -621,6 +566,21 @@ components:
               url:
                 type: string
                 format: uri
+    UserRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        name:
+          type: string
+        employee_id:
+          type: string
+          nullable: true
     Error:
       type: object
       properties:
@@ -635,37 +595,6 @@ components:
                 type: string
               message:
                 type: string
-    Education:
-      type: object
-      properties:
-        school_name:
-          type: string
-        degree:
-          type: string
-        discipline:
-          type: string
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-    CandidateUpdate:
-      type: object
-      properties:
-        first_name:
-          type: string
-        last_name:
-          type: string
-        company:
-          type: string
-        title:
-          type: string
-        is_private:
-          type: boolean
-        custom_fields:
-          type: object
-          additionalProperties: true
     Application:
       type: object
       properties:
@@ -748,8 +677,243 @@ components:
         custom_fields:
           type: object
           additionalProperties: true
+    CandidateUpdate:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        company:
+          type: string
+        title:
+          type: string
+        is_private:
+          type: boolean
+        custom_fields:
+          type: object
+          additionalProperties: true
+    Candidate:
+      type: object
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        company:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        last_activity:
+          type: string
+          format: date-time
+        is_private:
+          type: boolean
+        photo_url:
+          type: string
+          nullable: true
+        emails:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                format: email
+              type:
+                type: string
+        phone_numbers:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+              type:
+                type: string
+        addresses:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+              type:
+                type: string
+        social_media_addresses:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+        recruiter:
+          $ref: '#/components/schemas/UserRef'
+        coordinator:
+          $ref: '#/components/schemas/UserRef'
+        tags:
+          type: array
+          items:
+            type: string
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
+        educations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Education'
+        employments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employment'
+        custom_fields:
+          type: object
+          additionalProperties: true
+    CandidateCreate:
+      type: object
+      required:
+      - first_name
+      - last_name
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        company:
+          type: string
+        title:
+          type: string
+        phone_numbers:
+          type: array
+          items:
+            type: object
+        addresses:
+          type: array
+          items:
+            type: object
+        emails:
+          type: array
+          items:
+            type: object
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationCreate'
+    Attachment:
+      type: object
+      required:
+      - filename
+      - type
+      properties:
+        filename:
+          type: string
+        url:
+          type: string
+          format: uri
+        type:
+          type: string
+          enum:
+          - resume
+          - cover_letter
+          - admin_only
+          - public
+          - offer_letter
+          - take_home_test
+          - offer_packet
+        content:
+          type: string
+          description: Base64 file content.
+        content_type:
+          type: string
+    Employment:
+      type: object
+      properties:
+        company_name:
+          type: string
+        title:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+    ApplicationCreate:
+      type: object
+      required:
+      - job_id
+      properties:
+        job_id:
+          type: integer
+        source_id:
+          type: integer
+        initial_stage_id:
+          type: integer
+        referrer:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - outside
+              - id
+              - email
+            value:
+              type: string
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+    Education:
+      type: object
+      properties:
+        school_name:
+          type: string
+        degree:
+          type: string
+        discipline:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.greenhouse.io/oauth/authorize
+          tokenUrl: https://app.greenhouse.io/oauth/token
+          scopes:
+            partner: Partner integration scope.
+        clientCredentials:
+          tokenUrl: https://app.greenhouse.io/oauth/token
+          scopes:
+            partner: Partner integration scope.
     BasicAuth:
       type: http
       scheme: basic
-      description: HTTP Basic; the API key is Base64-encoded and used as the username (key must be <171 chars).
+      description: HTTP Basic with the Partner API key as the username and an empty password.
+x-refined-from:
+- greenhouse-candidate-ingestion-api-openapi.yml
+- greenhouse-harvest-api-openapi.yml

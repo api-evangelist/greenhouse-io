@@ -1,17 +1,15 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Greenhouse Assessment Partner ActivityFeed Events API
-  description: 'The Assessment Partner API defines the contract that assessment vendors implement so
+  title: Greenhouse Audit Log Events API
+  description: 'The Audit Log API exposes a record of important events that occurred in Greenhouse
 
-    Greenhouse can list available tests, send a test to a candidate, and retrieve the
+    during the prior 30 days, including who performed each event, the event target,
 
-    candidate''s results. Endpoints are hosted by the partner (not Greenhouse) and are
+    and supporting request metadata. Authentication uses a short-lived JWT obtained
 
-    secured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from
+    from POST https://harvest.greenhouse.io/auth/jwt_access_token using a Harvest API key.
 
-    the partner with completed test status; otherwise it polls `test_status` hourly for
-
-    up to 8 weeks. API keys must be fewer than 171 characters.
+    Rate limits: 50 requests / 10s on standard reads, 3 requests / 30s on paginated reads.
 
     '
   version: 1.0.0
@@ -20,15 +18,12 @@ info:
     url: https://www.greenhouse.com
     email: developers@greenhouse.io
 servers:
-- url: https://{partner_host}/{base_path}
-  description: Partner-hosted endpoint
-  variables:
-    partner_host:
-      default: partner.example.com
-    base_path:
-      default: greenhouse-assessment
+- url: https://auditlog.us.greenhouse.io
+  description: US Production
+- url: https://harvest.greenhouse.io/auth
+  description: JWT token issuer (Harvest)
 security:
-- BasicAuth: []
+- BearerAuth: []
 tags:
 - name: Events
   description: Audit log events.
@@ -214,7 +209,10 @@ components:
               old_value: {}
               new_value: {}
   securitySchemes:
-    BasicAuth:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    HarvestBasic:
       type: http
       scheme: basic
-      description: HTTP Basic; the API key is Base64-encoded and used as the username (key must be <171 chars).

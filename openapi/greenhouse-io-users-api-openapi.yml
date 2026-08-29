@@ -1,34 +1,17 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Greenhouse Assessment Partner ActivityFeed Users API
-  description: 'The Assessment Partner API defines the contract that assessment vendors implement so
-
-    Greenhouse can list available tests, send a test to a candidate, and retrieve the
-
-    candidate''s results. Endpoints are hosted by the partner (not Greenhouse) and are
-
-    secured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from
-
-    the partner with completed test status; otherwise it polls `test_status` hourly for
-
-    up to 8 weeks. API keys must be fewer than 171 characters.
-
-    '
+  title: Greenhouse Io Users API
   version: 1.0.0
   contact:
     name: Greenhouse Software
     url: https://www.greenhouse.com
     email: developers@greenhouse.io
+  description: 'Operations tagged Users across 2 of this provider''s published API definitions: greenhouse-candidate-ingestion-api-openapi.yml, greenhouse-harvest-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://{partner_host}/{base_path}
-  description: Partner-hosted endpoint
-  variables:
-    partner_host:
-      default: partner.example.com
-    base_path:
-      default: greenhouse-assessment
-security:
-- BasicAuth: []
+- url: https://api.greenhouse.io/v1/partner
+  description: Production Partner API
+- url: https://harvest.greenhouse.io/v1
+  description: Production Harvest API
 tags:
 - name: Users
   description: Inspect the current authenticated user.
@@ -56,6 +39,13 @@ paths:
                   email:
                     type: string
                     format: email
+      security:
+      - OAuth2:
+        - partner
+      - BasicAuth: []
+    servers:
+    - url: https://api.greenhouse.io/v1/partner
+      description: Production Partner API
   /users:
     get:
       tags:
@@ -80,6 +70,8 @@ paths:
                   $ref: '#/components/schemas/User'
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
     post:
       tags:
       - Users
@@ -98,6 +90,11 @@ paths:
           description: Created.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /users/{id}:
     parameters:
     - $ref: '#/components/parameters/Id'
@@ -115,6 +112,8 @@ paths:
                 $ref: '#/components/schemas/User'
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
     patch:
       tags:
       - Users
@@ -133,6 +132,11 @@ paths:
           description: Updated.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /users/{id}/email_addresses:
     post:
       tags:
@@ -161,29 +165,13 @@ paths:
           description: Added.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
 components:
   parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-    PerPage:
-      name: per_page
-      in: query
-      description: Default 100, max 500.
-      schema:
-        type: integer
-        default: 100
-        maximum: 500
-    OnBehalfOf_2:
-      name: On-Behalf-Of
-      in: header
-      required: false
-      description: The ID of the Greenhouse user the request is being made on behalf of.
-      schema:
-        type: integer
     OnBehalfOf:
       name: On-Behalf-Of
       in: header
@@ -192,12 +180,33 @@ components:
       schema:
         type: string
         format: email
+    PerPage:
+      name: per_page
+      in: query
+      description: Default 100, max 500.
+      schema:
+        type: integer
+        default: 100
+        maximum: 500
     Page:
       name: page
       in: query
       schema:
         type: integer
         default: 1
+    OnBehalfOf_2:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
   responses:
     ErrorResponse:
       description: Error response.
@@ -206,6 +215,20 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     User:
       type: object
       properties:
@@ -242,22 +265,23 @@ components:
           type: array
           items:
             type: integer
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
   securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.greenhouse.io/oauth/authorize
+          tokenUrl: https://app.greenhouse.io/oauth/token
+          scopes:
+            partner: Partner integration scope.
+        clientCredentials:
+          tokenUrl: https://app.greenhouse.io/oauth/token
+          scopes:
+            partner: Partner integration scope.
     BasicAuth:
       type: http
       scheme: basic
-      description: HTTP Basic; the API key is Base64-encoded and used as the username (key must be <171 chars).
+      description: HTTP Basic with the Partner API key as the username and an empty password.
+x-refined-from:
+- greenhouse-candidate-ingestion-api-openapi.yml
+- greenhouse-harvest-api-openapi.yml

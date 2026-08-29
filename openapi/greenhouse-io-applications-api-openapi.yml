@@ -1,34 +1,21 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Greenhouse Assessment Partner ActivityFeed Applications API
-  description: 'The Assessment Partner API defines the contract that assessment vendors implement so
-
-    Greenhouse can list available tests, send a test to a candidate, and retrieve the
-
-    candidate''s results. Endpoints are hosted by the partner (not Greenhouse) and are
-
-    secured with HTTP Basic over HTTPS. Greenhouse may also receive PATCH callbacks from
-
-    the partner with completed test status; otherwise it polls `test_status` hourly for
-
-    up to 8 weeks. API keys must be fewer than 171 characters.
-
-    '
+  title: Greenhouse Io Applications API
   version: 1.0.0
   contact:
     name: Greenhouse Software
     url: https://www.greenhouse.com
     email: developers@greenhouse.io
+  description: 'Operations tagged Applications across 2 of this provider''s published API definitions: greenhouse-harvest-api-openapi.yml, greenhouse-job-board-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://{partner_host}/{base_path}
-  description: Partner-hosted endpoint
+- url: https://harvest.greenhouse.io/v1
+  description: Production Harvest API
+- url: https://boards-api.greenhouse.io/v1/boards/{board_token}
+  description: Public Job Board API
   variables:
-    partner_host:
-      default: partner.example.com
-    base_path:
-      default: greenhouse-assessment
-security:
-- BasicAuth: []
+    board_token:
+      default: example
+      description: The customer's unique board token (e.g. "exampleco").
 tags:
 - name: Applications
   description: Candidate applications to specific jobs, including stage advancement, transfers, hires, rejections, and attachments.
@@ -72,6 +59,11 @@ paths:
                   $ref: '#/components/schemas/Application'
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /applications/{id}:
     parameters:
     - $ref: '#/components/parameters/Id'
@@ -89,6 +81,8 @@ paths:
                 $ref: '#/components/schemas/Application'
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
     patch:
       tags:
       - Applications
@@ -111,6 +105,8 @@ paths:
                 $ref: '#/components/schemas/Application'
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
     delete:
       tags:
       - Applications
@@ -123,6 +119,11 @@ paths:
           description: Deleted.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /candidates/{id}/applications:
     post:
       tags:
@@ -147,6 +148,11 @@ paths:
                 $ref: '#/components/schemas/Application'
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /applications/{id}/advance:
     post:
       tags:
@@ -162,6 +168,11 @@ paths:
           description: Advanced.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /applications/{id}/move:
     post:
       tags:
@@ -191,6 +202,11 @@ paths:
           description: Moved.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /applications/{id}/transfer_to_job:
     post:
       tags:
@@ -218,6 +234,11 @@ paths:
           description: Transferred.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /applications/{id}/convert_prospect:
     patch:
       tags:
@@ -243,6 +264,11 @@ paths:
           description: Converted.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /applications/{id}/attachments:
     post:
       tags:
@@ -263,6 +289,11 @@ paths:
           description: Attached.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /applications/{id}/hire:
     post:
       tags:
@@ -288,6 +319,11 @@ paths:
           description: Hired.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /applications/{id}/reject:
     post:
       tags:
@@ -312,6 +348,8 @@ paths:
           description: Rejected.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
     patch:
       tags:
       - Applications
@@ -335,6 +373,11 @@ paths:
           description: Updated rejection.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /applications/{id}/unreject:
     post:
       tags:
@@ -349,6 +392,11 @@ paths:
           description: Unrejected.
         4XX:
           $ref: '#/components/responses/ErrorResponse'
+      security:
+      - BasicAuth: []
+    servers:
+    - url: https://harvest.greenhouse.io/v1
+      description: Production Harvest API
   /jobs/{id}:
     post:
       tags:
@@ -383,120 +431,15 @@ paths:
                 properties:
                   success:
                     type: string
+    servers:
+    - url: https://boards-api.greenhouse.io/v1/boards/{board_token}
+      description: Public Job Board API
+      variables:
+        board_token:
+          default: example
+          description: The customer's unique board token (e.g. "exampleco").
 components:
-  parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-    PerPage:
-      name: per_page
-      in: query
-      description: Default 100, max 500.
-      schema:
-        type: integer
-        default: 100
-        maximum: 500
-    CreatedAfter:
-      name: created_after
-      in: query
-      schema:
-        type: string
-        format: date-time
-    OnBehalfOf:
-      name: On-Behalf-Of
-      in: header
-      required: false
-      description: The ID of the Greenhouse user the request is being made on behalf of.
-      schema:
-        type: integer
-    UpdatedBefore:
-      name: updated_before
-      in: query
-      schema:
-        type: string
-        format: date-time
-    Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-    CreatedBefore:
-      name: created_before
-      in: query
-      schema:
-        type: string
-        format: date-time
-    UpdatedAfter:
-      name: updated_after
-      in: query
-      schema:
-        type: string
-        format: date-time
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    UserRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        first_name:
-          type: string
-        last_name:
-          type: string
-        name:
-          type: string
-        employee_id:
-          type: string
-          nullable: true
-    ApplicationSubmission:
-      type: object
-      required:
-      - first_name
-      - last_name
-      - email
-      properties:
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        location:
-          type: string
-          description: City, State / Country.
-        resume_text:
-          type: string
-        resume_text_file:
-          type: string
-          description: Base64-encoded resume file content.
-        resume_content_filename:
-          type: string
-        resume_content_type:
-          type: string
-        cover_letter_text:
-          type: string
-        cover_letter_content:
-          type: string
-          description: Base64-encoded cover letter.
-        cover_letter_content_filename:
-          type: string
-        question_id:
-          type: string
-          description: Greenhouse-defined custom question identifiers; multiple entries allowed.
     ApplicationCreate:
       type: object
       required:
@@ -523,46 +466,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Attachment'
-    ApplicationUpdate:
+    UserRef:
       type: object
+      nullable: true
       properties:
-        source_id:
+        id:
           type: integer
-        prospect_owner_id:
-          type: integer
-        prospect_pool_id:
-          type: integer
-        prospect_stage_id:
-          type: integer
-        custom_fields:
-          type: object
-          additionalProperties: true
-    Attachment:
-      type: object
-      required:
-      - filename
-      - type
-      properties:
-        filename:
+        first_name:
           type: string
-        url:
+        last_name:
           type: string
-          format: uri
-        type:
+        name:
           type: string
-          enum:
-          - resume
-          - cover_letter
-          - admin_only
-          - public
-          - offer_letter
-          - take_home_test
-          - offer_packet
-        content:
+        employee_id:
           type: string
-          description: Base64 file content.
-        content_type:
-          type: string
+          nullable: true
     Error:
       type: object
       properties:
@@ -577,6 +495,20 @@ components:
                 type: string
               message:
                 type: string
+    ApplicationUpdate:
+      type: object
+      properties:
+        source_id:
+          type: integer
+        prospect_owner_id:
+          type: integer
+        prospect_pool_id:
+          type: integer
+        prospect_stage_id:
+          type: integer
+        custom_fields:
+          type: object
+          additionalProperties: true
     Application:
       type: object
       properties:
@@ -659,8 +591,134 @@ components:
         custom_fields:
           type: object
           additionalProperties: true
+    Attachment:
+      type: object
+      required:
+      - filename
+      - type
+      properties:
+        filename:
+          type: string
+        url:
+          type: string
+          format: uri
+        type:
+          type: string
+          enum:
+          - resume
+          - cover_letter
+          - admin_only
+          - public
+          - offer_letter
+          - take_home_test
+          - offer_packet
+        content:
+          type: string
+          description: Base64 file content.
+        content_type:
+          type: string
+    ApplicationSubmission:
+      type: object
+      required:
+      - first_name
+      - last_name
+      - email
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        location:
+          type: string
+          description: City, State / Country.
+        resume_text:
+          type: string
+        resume_text_file:
+          type: string
+          description: Base64-encoded resume file content.
+        resume_content_filename:
+          type: string
+        resume_content_type:
+          type: string
+        cover_letter_text:
+          type: string
+        cover_letter_content:
+          type: string
+          description: Base64-encoded cover letter.
+        cover_letter_content_filename:
+          type: string
+        question_id:
+          type: string
+          description: Greenhouse-defined custom question identifiers; multiple entries allowed.
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    CreatedAfter:
+      name: created_after
+      in: query
+      schema:
+        type: string
+        format: date-time
+    UpdatedAfter:
+      name: updated_after
+      in: query
+      schema:
+        type: string
+        format: date-time
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+    PerPage:
+      name: per_page
+      in: query
+      description: Default 100, max 500.
+      schema:
+        type: integer
+        default: 100
+        maximum: 500
+    CreatedBefore:
+      name: created_before
+      in: query
+      schema:
+        type: string
+        format: date-time
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+    UpdatedBefore:
+      name: updated_before
+      in: query
+      schema:
+        type: string
+        format: date-time
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
   securitySchemes:
     BasicAuth:
       type: http
       scheme: basic
-      description: HTTP Basic; the API key is Base64-encoded and used as the username (key must be <171 chars).
+      description: HTTP Basic with the Harvest API key as the username and an empty password (Base64 encoded).
+x-refined-from:
+- greenhouse-harvest-api-openapi.yml
+- greenhouse-job-board-api-openapi.yml

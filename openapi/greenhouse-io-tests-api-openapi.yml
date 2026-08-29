@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Greenhouse Assessment Partner ActivityFeed Tests API
+  title: Greenhouse Assessment Partner Tests API
   description: 'The Assessment Partner API defines the contract that assessment vendors implement so
 
     Greenhouse can list available tests, send a test to a candidate, and retrieve the
