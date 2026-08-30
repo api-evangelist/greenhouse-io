@@ -85,7 +85,7 @@ apis:
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
-  - Activity Feed
+  - ActivityFeed
   tags_raw:
   - ActivityFeed
   properties:
@@ -529,7 +529,7 @@ apis:
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
-  - Job Openings
+  - JobOpenings
   tags_raw:
   - JobOpenings
   properties:
@@ -579,7 +579,7 @@ apis:
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
-  - Job Posts
+  - JobPosts
   tags_raw:
   - JobPosts
   properties:
@@ -679,6 +679,8 @@ apis:
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - Job stages
+  tags_raw:
   - JobStages
   properties:
   - type: OpenAPI
@@ -1307,7 +1309,7 @@ tags:
 - Recruiting
 - Hiring
 - Talent Acquisition
-- Enterprise Saas
+- Enterprise SaaS
 - Human Resources
 - Onboarding
 tags_raw:
