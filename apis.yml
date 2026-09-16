@@ -16,8 +16,7 @@ apis:
   - url: https://developers.greenhouse.io/webhooks.html
     type: Documentation
   - type: Authentication
-    name: >-
-      HMAC SHA-256 signature header verified against the secret key and JSON body (Unicode-escaped)
+    name: HMAC SHA-256 signature header verified against the secret key and JSON body (Unicode-escaped)
   - type: Retry
     name: Up to 7 retries over ~15h with exponential backoff
   - type: Events
@@ -44,12 +43,13 @@ apis:
     - job_post_created
     - department_deleted
     - office_deleted
-  description: >
-    Event-driven webhooks from Greenhouse Recruiting. Greenhouse POSTs JSON to your HTTPS
+  description: 'Event-driven webhooks from Greenhouse Recruiting. Greenhouse POSTs JSON to your HTTPS
 
     endpoint on each event; payloads carry a Greenhouse-Event-ID header for idempotency and
 
     HMAC SHA-256 signature verification.
+
+    '
 - aid: greenhouse-io:greenhouse-onboarding-webhooks
   name: Greenhouse Onboarding Webhooks
   tags:
@@ -73,12 +73,13 @@ apis:
   - type: Events
     data:
     - employee_updated
-  description: >
-    Event-driven webhooks from Greenhouse Onboarding (currently in beta and gated by
+  description: 'Event-driven webhooks from Greenhouse Onboarding (currently in beta and gated by
 
-    customer approval). Each event posts event_type, id, and payload to the customer's
+    customer approval). Each event posts event_type, id, and payload to the customer''s
 
     HTTPS endpoint; signatures use HMAC SHA-256 with a shared secret.
+
+    '
 - aid: greenhouse-io:greenhouse-io-activityfeed-api
   name: Greenhouse ActivityFeed API
   description: Per-candidate timeline of activity events.
@@ -131,9 +132,8 @@ apis:
     url: https://developers.greenhouse.io/assessment.html
 - aid: greenhouse-io:greenhouse-io-applications-api
   name: Greenhouse Applications API
-  description: >-
-    Candidate applications to specific jobs, including stage advancement, transfers, hires, rejections,
-    and attachments.
+  description: Candidate applications to specific jobs, including stage advancement, transfers, hires,
+    rejections, and attachments.
   humanURL: https://developers.greenhouse.io/harvest.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
@@ -1350,6 +1350,8 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/greenhouse-io.png
 access: 3rd-Party
 common:
+- type: Website
+  url: https://greenhouse.io
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/greenhouse/overview
 - type: AgenticAccess
@@ -1468,21 +1470,33 @@ common:
   - https://status.greenhouse.io
   updated: '2026-05-25'
 created: '2026-05-25T00:00:00.000Z'
-modified: '2026-05-25'
+modified: '2026-09-16'
 position: Producing
-description: |
-  Greenhouse Software is an enterprise applicant tracking system (ATS) and end-to-end
+description: 'Greenhouse Software is an enterprise applicant tracking system (ATS) and end-to-end
+
   hiring platform spanning sourcing, structured interviewing, offer management, hiring
+
   decisions, and new-hire onboarding. The company markets itself across early-stage,
+
   scaling, and enterprise tiers (Core, Plus, Pro) and lists customers including DoorDash,
+
   Betterment, MLB, Coupang, HelloFresh, Trivago, and the NFL. Greenhouse exposes a broad
+
   developer surface — Harvest (REST), Job Board, Audit Log (Pro), Candidate Ingestion
+
   (Partner), Onboarding (GraphQL), Assessment (partner-hosted), and Recruiting /
+
   Onboarding Webhooks — that powers hundreds of pre-built integrations across sourcing,
+
   assessment, background-check, video-interviewing, HRIS, payroll, SSO, and e-signature
+
   vendors. The platform recently acquired Ezra AI Labs to integrate conversational AI
+
   into the hiring workflow and continues to invest in fraud detection and identity
+
   verification through its Real Talent feature set.
+
+  '
 maintainers:
 - FN: Kin Lane
   email: info@apievangelist.com
