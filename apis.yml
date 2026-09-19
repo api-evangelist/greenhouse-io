@@ -1107,6 +1107,8 @@ apis:
   humanURL: https://developers.greenhouse.io/webhooks.html
   baseURL: https://harvest.greenhouse.io/v1
   tags:
+  - GraphQL
+  tags_raw:
   - Graph QL
   properties:
   - type: OpenAPI
