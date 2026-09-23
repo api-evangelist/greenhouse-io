@@ -440,75 +440,6 @@ paths:
           description: The customer's unique board token (e.g. "exampleco").
 components:
   schemas:
-    ApplicationCreate:
-      type: object
-      required:
-      - job_id
-      properties:
-        job_id:
-          type: integer
-        source_id:
-          type: integer
-        initial_stage_id:
-          type: integer
-        referrer:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - outside
-              - id
-              - email
-            value:
-              type: string
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/Attachment'
-    UserRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        first_name:
-          type: string
-        last_name:
-          type: string
-        name:
-          type: string
-        employee_id:
-          type: string
-          nullable: true
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-    ApplicationUpdate:
-      type: object
-      properties:
-        source_id:
-          type: integer
-        prospect_owner_id:
-          type: integer
-        prospect_pool_id:
-          type: integer
-        prospect_stage_id:
-          type: integer
-        custom_fields:
-          type: object
-          additionalProperties: true
     Application:
       type: object
       properties:
@@ -617,6 +548,75 @@ components:
           description: Base64 file content.
         content_type:
           type: string
+    ApplicationUpdate:
+      type: object
+      properties:
+        source_id:
+          type: integer
+        prospect_owner_id:
+          type: integer
+        prospect_pool_id:
+          type: integer
+        prospect_stage_id:
+          type: integer
+        custom_fields:
+          type: object
+          additionalProperties: true
+    UserRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        name:
+          type: string
+        employee_id:
+          type: string
+          nullable: true
+    ApplicationCreate:
+      type: object
+      required:
+      - job_id
+      properties:
+        job_id:
+          type: integer
+        source_id:
+          type: integer
+        initial_stage_id:
+          type: integer
+        referrer:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - outside
+              - id
+              - email
+            value:
+              type: string
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     ApplicationSubmission:
       type: object
       required:
@@ -655,55 +655,21 @@ components:
         question_id:
           type: string
           description: Greenhouse-defined custom question identifiers; multiple entries allowed.
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
-    CreatedAfter:
-      name: created_after
-      in: query
-      schema:
-        type: string
-        format: date-time
     UpdatedAfter:
       name: updated_after
       in: query
       schema:
         type: string
         format: date-time
-    Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-    PerPage:
-      name: per_page
-      in: query
-      description: Default 100, max 500.
-      schema:
-        type: integer
-        default: 100
-        maximum: 500
     CreatedBefore:
       name: created_before
       in: query
       schema:
         type: string
         format: date-time
-    OnBehalfOf:
-      name: On-Behalf-Of
-      in: header
-      required: false
-      description: The ID of the Greenhouse user the request is being made on behalf of.
-      schema:
-        type: integer
-    UpdatedBefore:
-      name: updated_before
+    CreatedAfter:
+      name: created_after
       in: query
       schema:
         type: string
@@ -714,6 +680,40 @@ components:
       required: true
       schema:
         type: integer
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      in: query
+      description: Default 100, max 500.
+      schema:
+        type: integer
+        default: 100
+        maximum: 500
+    UpdatedBefore:
+      name: updated_before
+      in: query
+      schema:
+        type: string
+        format: date-time
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     BasicAuth:
       type: http

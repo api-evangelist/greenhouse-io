@@ -7,13 +7,7 @@ info:
 
     approvals, scheduled interviews, scorecards, sources, tags, custom fields, prospect pools,
 
-    and the activity feed. Harvest uses HTTP Basic authentication with a per-permission API key,
-
-    RFC-5988 Link-header pagination (default 100, max 500 per page), and a per-token rate limit
-
-    of N requests per 10 seconds returned in the X-RateLimit-Limit header.
-
-    '
+    and the activity feed.'
   version: 1.0.0
   contact:
     name: Greenhouse Software

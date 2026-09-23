@@ -11,9 +11,7 @@ info:
 
     the partner with completed test status; otherwise it polls `test_status` hourly for
 
-    up to 8 weeks. API keys must be fewer than 171 characters.
-
-    '
+    up to 8 weeks. API keys must be fewer than 171 characters.'
   version: 1.0.0
   contact:
     name: Greenhouse Software

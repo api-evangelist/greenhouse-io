@@ -7,13 +7,7 @@ info:
 
     approvals, scheduled interviews, scorecards, sources, tags, custom fields, prospect pools,
 
-    and the activity feed. Harvest uses HTTP Basic authentication with a per-permission API key,
-
-    RFC-5988 Link-header pagination (default 100, max 500 per page), and a per-token rate limit
-
-    of N requests per 10 seconds returned in the X-RateLimit-Limit header.
-
-    '
+    and the activity feed.'
   version: 1.0.0
   contact:
     name: Greenhouse Software
@@ -88,6 +82,34 @@ paths:
         4XX:
           $ref: '#/components/responses/ErrorResponse'
 components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      in: query
+      description: Default 100, max 500.
+      schema:
+        type: integer
+        default: 100
+        maximum: 500
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Scorecard:
       type: object
@@ -134,20 +156,6 @@ components:
                 type: string
               answer:
                 type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
     UserRef:
       type: object
       nullable: true
@@ -163,34 +171,20 @@ components:
         employee_id:
           type: string
           nullable: true
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    PerPage:
-      name: per_page
-      in: query
-      description: Default 100, max 500.
-      schema:
-        type: integer
-        default: 100
-        maximum: 500
-    Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
   securitySchemes:
     BasicAuth:
       type: http

@@ -260,6 +260,19 @@ components:
       schema:
         type: string
         format: date-time
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    OnBehalfOf_2:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
     PerPage:
       name: per_page
       in: query
@@ -274,148 +287,27 @@ components:
       schema:
         type: integer
         default: 1
-    OnBehalfOf_2:
-      name: On-Behalf-Of
-      in: header
-      required: false
-      description: The ID of the Greenhouse user the request is being made on behalf of.
-      schema:
-        type: integer
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
   schemas:
-    Department:
+    JobCreate:
       type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        parent_id:
-          type: integer
-          nullable: true
-        parent_department_external_id:
-          type: string
-          nullable: true
-        child_ids:
-          type: array
-          items:
-            type: integer
-        external_id:
-          type: string
-          nullable: true
-    UserRef:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: integer
-        first_name:
-          type: string
-        last_name:
-          type: string
-        name:
-          type: string
-        employee_id:
-          type: string
-          nullable: true
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-    Office:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        location:
-          type: object
-          properties:
-            name:
-              type: string
-        parent_id:
-          type: integer
-          nullable: true
-        child_ids:
-          type: array
-          items:
-            type: integer
-        external_id:
-          type: string
-          nullable: true
-    JobUpdate:
-      type: object
+      required:
+      - name
+      - template_job_id
       properties:
         name:
           type: string
+        template_job_id:
+          type: integer
         requisition_id:
           type: string
-        notes:
-          type: string
-        status:
-          type: string
-          enum:
-          - open
-          - closed
-          - draft
         department_id:
           type: integer
         office_ids:
           type: array
           items:
             type: integer
-        custom_fields:
-          type: object
-          additionalProperties: true
-    Opening:
-      type: object
-      properties:
-        id:
+        number_of_openings:
           type: integer
-        opening_id:
-          type: string
-        status:
-          type: string
-          enum:
-          - open
-          - closed
-        opened_at:
-          type: string
-          format: date-time
-        closed_at:
-          type: string
-          format: date-time
-          nullable: true
-        application_id:
-          type: integer
-          nullable: true
-        close_reason:
-          type: object
-          nullable: true
-          properties:
-            id:
-              type: integer
-            name:
-              type: string
-        custom_fields:
-          type: object
-          additionalProperties: true
     Job:
       type: object
       properties:
@@ -467,6 +359,50 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Opening'
+    Department:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        parent_id:
+          type: integer
+          nullable: true
+        parent_department_external_id:
+          type: string
+          nullable: true
+        child_ids:
+          type: array
+          items:
+            type: integer
+        external_id:
+          type: string
+          nullable: true
+    JobUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        requisition_id:
+          type: string
+        notes:
+          type: string
+        status:
+          type: string
+          enum:
+          - open
+          - closed
+          - draft
+        department_id:
+          type: integer
+        office_ids:
+          type: array
+          items:
+            type: integer
+        custom_fields:
+          type: object
+          additionalProperties: true
     HiringTeam:
       type: object
       properties:
@@ -486,33 +422,51 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserRef'
-    JobCreate:
+    Opening:
       type: object
-      required:
-      - name
-      - template_job_id
       properties:
-        name:
+        id:
+          type: integer
+        opening_id:
           type: string
-        template_job_id:
-          type: integer
-        requisition_id:
+        status:
           type: string
-        department_id:
+          enum:
+          - open
+          - closed
+        opened_at:
+          type: string
+          format: date-time
+        closed_at:
+          type: string
+          format: date-time
+          nullable: true
+        application_id:
           type: integer
-        office_ids:
-          type: array
-          items:
-            type: integer
-        number_of_openings:
-          type: integer
-    BoardDepartment:
+          nullable: true
+        close_reason:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        custom_fields:
+          type: object
+          additionalProperties: true
+    Office:
       type: object
       properties:
         id:
           type: integer
         name:
           type: string
+        location:
+          type: object
+          properties:
+            name:
+              type: string
         parent_id:
           type: integer
           nullable: true
@@ -520,10 +474,38 @@ components:
           type: array
           items:
             type: integer
-        jobs:
+        external_id:
+          type: string
+          nullable: true
+    UserRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        name:
+          type: string
+        employee_id:
+          type: string
+          nullable: true
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
           type: array
           items:
-            $ref: '#/components/schemas/BoardJob'
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     BoardJob:
       type: object
       properties:
@@ -598,6 +580,24 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BoardDepartment'
+    BoardDepartment:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        parent_id:
+          type: integer
+          nullable: true
+        child_ids:
+          type: array
+          items:
+            type: integer
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/BoardJob'
   responses:
     ErrorResponse:
       description: Error response.

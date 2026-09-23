@@ -7,13 +7,7 @@ info:
 
     approvals, scheduled interviews, scorecards, sources, tags, custom fields, prospect pools,
 
-    and the activity feed. Harvest uses HTTP Basic authentication with a per-permission API key,
-
-    RFC-5988 Link-header pagination (default 100, max 500 per page), and a per-token rate limit
-
-    of N requests per 10 seconds returned in the X-RateLimit-Limit header.
-
-    '
+    and the activity feed.'
   version: 1.0.0
   contact:
     name: Greenhouse Software
@@ -28,13 +22,13 @@ servers:
 security:
 - BasicAuth: []
 tags:
-- name: CustomFields
+- name: Custom Fields
   description: Org-defined custom fields and their options.
 paths:
   /custom_fields:
     get:
       tags:
-      - CustomFields
+      - Custom Fields
       summary: List Custom Fields
       operationId: listCustomFields
       responses:
@@ -50,7 +44,7 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
     post:
       tags:
-      - CustomFields
+      - Custom Fields
       summary: Create Custom Field
       operationId: createCustomField
       parameters:
@@ -71,7 +65,7 @@ paths:
     - $ref: '#/components/parameters/Id'
     get:
       tags:
-      - CustomFields
+      - Custom Fields
       summary: Retrieve Custom Field
       operationId: getCustomField
       responses:
@@ -85,7 +79,7 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
     patch:
       tags:
-      - CustomFields
+      - Custom Fields
       summary: Update Custom Field
       operationId: updateCustomField
       parameters:
@@ -103,7 +97,7 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
     delete:
       tags:
-      - CustomFields
+      - Custom Fields
       summary: Delete Custom Field
       operationId: deleteCustomField
       parameters:
@@ -118,7 +112,7 @@ paths:
     - $ref: '#/components/parameters/Id'
     get:
       tags:
-      - CustomFields
+      - Custom Fields
       summary: List Custom Field Options
       operationId: listCustomFieldOptions
       responses:
@@ -134,7 +128,7 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
     post:
       tags:
-      - CustomFields
+      - Custom Fields
       summary: Create Custom Field Option
       operationId: createCustomFieldOption
       parameters:
@@ -160,7 +154,7 @@ paths:
         type: integer
     patch:
       tags:
-      - CustomFields
+      - Custom Fields
       summary: Update Custom Field Option
       operationId: updateCustomFieldOption
       parameters:
@@ -178,7 +172,7 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
     delete:
       tags:
-      - CustomFields
+      - Custom Fields
       summary: Delete Custom Field Option
       operationId: deleteCustomFieldOption
       parameters:
@@ -190,6 +184,18 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
 components:
   schemas:
+    CustomFieldOption:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        priority:
+          type: integer
+        external_id:
+          type: string
+          nullable: true
     CustomField:
       type: object
       properties:
@@ -247,26 +253,13 @@ components:
                 type: string
               message:
                 type: string
-    CustomFieldOption:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        priority:
-          type: integer
-        external_id:
-          type: string
-          nullable: true
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
     OnBehalfOf:
       name: On-Behalf-Of
       in: header
@@ -274,12 +267,13 @@ components:
       description: The ID of the Greenhouse user the request is being made on behalf of.
       schema:
         type: integer
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     BasicAuth:
       type: http

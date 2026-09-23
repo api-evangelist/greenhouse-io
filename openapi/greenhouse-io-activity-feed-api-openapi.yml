@@ -7,13 +7,7 @@ info:
 
     approvals, scheduled interviews, scorecards, sources, tags, custom fields, prospect pools,
 
-    and the activity feed. Harvest uses HTTP Basic authentication with a per-permission API key,
-
-    RFC-5988 Link-header pagination (default 100, max 500 per page), and a per-token rate limit
-
-    of N requests per 10 seconds returned in the X-RateLimit-Limit header.
-
-    '
+    and the activity feed.'
   version: 1.0.0
   contact:
     name: Greenhouse Software
@@ -28,13 +22,13 @@ servers:
 security:
 - BasicAuth: []
 tags:
-- name: ActivityFeed
+- name: Activity Feed
   description: Per-candidate timeline of activity events.
 paths:
   /candidates/{id}/activity_feed:
     get:
       tags:
-      - ActivityFeed
+      - Activity Feed
       summary: List Candidate Activity Feed
       operationId: getCandidateActivityFeed
       parameters:
@@ -49,14 +43,34 @@ paths:
         4XX:
           $ref: '#/components/responses/ErrorResponse'
 components:
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    ActivityFeed:
+      type: object
+      properties:
+        activities:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              created_at:
+                type: string
+                format: date-time
+              subject:
+                type: string
+              body:
+                type: string
+              user:
+                $ref: '#/components/schemas/UserRef'
+        notes:
+          type: array
+          items:
+            type: object
+        emails:
+          type: array
+          items:
+            type: object
     UserRef:
       type: object
       nullable: true
@@ -86,33 +100,6 @@ components:
                 type: string
               message:
                 type: string
-    ActivityFeed:
-      type: object
-      properties:
-        activities:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: integer
-              created_at:
-                type: string
-                format: date-time
-              subject:
-                type: string
-              body:
-                type: string
-              user:
-                $ref: '#/components/schemas/UserRef'
-        notes:
-          type: array
-          items:
-            type: object
-        emails:
-          type: array
-          items:
-            type: object
   parameters:
     Id:
       name: id
@@ -120,6 +107,13 @@ components:
       required: true
       schema:
         type: integer
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     BasicAuth:
       type: http

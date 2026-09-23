@@ -140,24 +140,6 @@ components:
                 type: string
               message:
                 type: string
-    BoardDepartment:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        parent_id:
-          type: integer
-          nullable: true
-        child_ids:
-          type: array
-          items:
-            type: integer
-        jobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/BoardJob'
     BoardJob:
       type: object
       properties:
@@ -212,6 +194,24 @@ components:
             $ref: '#/components/schemas/BoardOffice'
         content:
           type: string
+    BoardDepartment:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        parent_id:
+          type: integer
+          nullable: true
+        child_ids:
+          type: array
+          items:
+            type: integer
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/BoardJob'
     BoardOffice:
       type: object
       properties:
@@ -232,14 +232,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BoardDepartment'
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
     OnBehalfOf:
       name: On-Behalf-Of
       in: header
@@ -247,12 +246,13 @@ components:
       description: The ID of the Greenhouse user the request is being made on behalf of.
       schema:
         type: integer
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     BasicAuth:
       type: http

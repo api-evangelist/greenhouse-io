@@ -9,9 +9,7 @@ info:
 
     from POST https://harvest.greenhouse.io/auth/jwt_access_token using a Harvest API key.
 
-    Rate limits: 50 requests / 10s on standard reads, 3 requests / 30s on paginated reads.
-
-    '
+    Rate limits: 50 requests / 10s on standard reads, 3 requests / 30s on paginated reads.'
   version: 1.0.0
   contact:
     name: Greenhouse Software

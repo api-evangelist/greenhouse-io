@@ -7,13 +7,7 @@ info:
 
     approvals, scheduled interviews, scorecards, sources, tags, custom fields, prospect pools,
 
-    and the activity feed. Harvest uses HTTP Basic authentication with a per-permission API key,
-
-    RFC-5988 Link-header pagination (default 100, max 500 per page), and a per-token rate limit
-
-    of N requests per 10 seconds returned in the X-RateLimit-Limit header.
-
-    '
+    and the activity feed.'
   version: 1.0.0
   contact:
     name: Greenhouse Software
@@ -137,41 +131,6 @@ paths:
         4XX:
           $ref: '#/components/responses/ErrorResponse'
 components:
-  responses:
-    ErrorResponse:
-      description: Error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    PerPage:
-      name: per_page
-      in: query
-      description: Default 100, max 500.
-      schema:
-        type: integer
-        default: 100
-        maximum: 500
-    Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-    OnBehalfOf:
-      name: On-Behalf-Of
-      in: header
-      required: false
-      description: The ID of the Greenhouse user the request is being made on behalf of.
-      schema:
-        type: integer
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
   schemas:
     Offer:
       type: object
@@ -221,6 +180,41 @@ components:
                 type: string
               message:
                 type: string
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      in: query
+      description: Default 100, max 500.
+      schema:
+        type: integer
+        default: 100
+        maximum: 500
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+  responses:
+    ErrorResponse:
+      description: Error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     BasicAuth:
       type: http

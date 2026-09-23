@@ -35,7 +35,9 @@
     "greenhouse-io-tags-api-openapi.yml",
     "greenhouse-io-graphql-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 6 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -52,22 +54,24 @@
     "tag 'Users' spans 2 source specs (greenhouse-candidate-ingestion-api-openapi.yml, greenhouse-harvest-api-openapi.yml): per-path servers applied",
     "tag 'Applications' spans 2 source specs (greenhouse-harvest-api-openapi.yml, greenhouse-job-board-api-openapi.yml): per-path servers applied",
     "tag 'Departments' spans 2 source specs (greenhouse-harvest-api-openapi.yml, greenhouse-job-board-api-openapi.yml): per-path servers applied",
-    "tag 'Offices' spans 2 source specs (greenhouse-harvest-api-openapi.yml, greenhouse-job-board-api-openapi.yml): per-path servers applied"
+    "tag 'Offices' spans 2 source specs (greenhouse-harvest-api-openapi.yml, greenhouse-job-board-api-openapi.yml): per-path servers applied",
+    "superseded outputs removed: greenhouse-io-activity-feed-api-openapi.yml, greenhouse-io-custom-fields-api-openapi.yml, greenhouse-io-graph-ql-api-openapi.yml, greenhouse-io-job-openings-api-openapi.yml, greenhouse-io-job-stages-api-openapi.yml \u2026",
+    "apis.yml register: written (+6 apis, 27 total)"
   ],
   "skipped": [
-    "greenhouse-io-activityfeed-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "greenhouse-io-activity-feed-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-io-applications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-io-approvals-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-io-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-io-candidates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "greenhouse-io-customfields-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "greenhouse-io-custom-fields-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-io-departments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-io-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "greenhouse-io-graphql-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "greenhouse-io-jobopenings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "greenhouse-io-graph-ql-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "greenhouse-io-job-openings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "greenhouse-io-job-stages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-io-jobposts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-io-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "greenhouse-io-jobstages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-io-offers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-io-offices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-io-prospectpools-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -78,7 +82,7 @@
     "greenhouse-io-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-io-testdelivery-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-io-tests-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "greenhouse-io-trackinglinks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "greenhouse-io-tracking-links-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "greenhouse-io-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }

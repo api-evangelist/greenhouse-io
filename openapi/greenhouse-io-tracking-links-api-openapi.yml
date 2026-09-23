@@ -9,9 +9,7 @@ info:
 
     Authentication is OAuth 2.0 (Authorization Code or Client Credentials) or HTTP Basic
 
-    with a Partner API key plus an On-Behalf-Of header carrying a Greenhouse user email.
-
-    '
+    with a Partner API key plus an On-Behalf-Of header carrying a Greenhouse user email.'
   version: 1.0.0
   contact:
     name: Greenhouse Software
@@ -25,13 +23,13 @@ security:
   - partner
 - BasicAuth: []
 tags:
-- name: TrackingLinks
+- name: Tracking Links
   description: Generate branded tracking links for sourcing campaigns.
 paths:
   /tracking_link:
     post:
       tags:
-      - TrackingLinks
+      - Tracking Links
       summary: Create Tracking Link
       description: Generate a branded tracking link tied to the partner and an optional job.
       operationId: createTrackingLink

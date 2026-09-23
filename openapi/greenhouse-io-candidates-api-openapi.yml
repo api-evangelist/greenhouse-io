@@ -414,66 +414,6 @@ paths:
     - url: https://harvest.greenhouse.io/v1
       description: Production Harvest API
 components:
-  parameters:
-    OnBehalfOf:
-      name: On-Behalf-Of
-      in: header
-      required: true
-      description: Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.
-      schema:
-        type: string
-        format: email
-    Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-    PerPage:
-      name: per_page
-      in: query
-      description: Default 100, max 500.
-      schema:
-        type: integer
-        default: 100
-        maximum: 500
-    CreatedAfter:
-      name: created_after
-      in: query
-      schema:
-        type: string
-        format: date-time
-    UpdatedBefore:
-      name: updated_before
-      in: query
-      schema:
-        type: string
-        format: date-time
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-    CreatedBefore:
-      name: created_before
-      in: query
-      schema:
-        type: string
-        format: date-time
-    UpdatedAfter:
-      name: updated_after
-      in: query
-      schema:
-        type: string
-        format: date-time
-    OnBehalfOf_2:
-      name: On-Behalf-Of
-      in: header
-      required: false
-      description: The ID of the Greenhouse user the request is being made on behalf of.
-      schema:
-        type: integer
   schemas:
     PartnerCandidate:
       type: object
@@ -566,35 +506,35 @@ components:
               url:
                 type: string
                 format: uri
-    UserRef:
+    Employment:
       type: object
-      nullable: true
       properties:
-        id:
-          type: integer
+        company_name:
+          type: string
+        title:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+    CandidateUpdate:
+      type: object
+      properties:
         first_name:
           type: string
         last_name:
           type: string
-        name:
+        company:
           type: string
-        employee_id:
+        title:
           type: string
-          nullable: true
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
+        is_private:
+          type: boolean
+        custom_fields:
+          type: object
+          additionalProperties: true
     Application:
       type: object
       properties:
@@ -677,22 +617,88 @@ components:
         custom_fields:
           type: object
           additionalProperties: true
-    CandidateUpdate:
+    Attachment:
+      type: object
+      required:
+      - filename
+      - type
+      properties:
+        filename:
+          type: string
+        url:
+          type: string
+          format: uri
+        type:
+          type: string
+          enum:
+          - resume
+          - cover_letter
+          - admin_only
+          - public
+          - offer_letter
+          - take_home_test
+          - offer_packet
+        content:
+          type: string
+          description: Base64 file content.
+        content_type:
+          type: string
+    Education:
       type: object
       properties:
+        school_name:
+          type: string
+        degree:
+          type: string
+        discipline:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+    UserRef:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
         first_name:
           type: string
         last_name:
           type: string
-        company:
+        name:
           type: string
-        title:
+        employee_id:
           type: string
-        is_private:
-          type: boolean
-        custom_fields:
+          nullable: true
+    ApplicationCreate:
+      type: object
+      required:
+      - job_id
+      properties:
+        job_id:
+          type: integer
+        source_id:
+          type: integer
+        initial_stage_id:
+          type: integer
+        referrer:
           type: object
-          additionalProperties: true
+          properties:
+            type:
+              type: string
+              enum:
+              - outside
+              - id
+              - email
+            value:
+              type: string
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
     Candidate:
       type: object
       properties:
@@ -780,6 +786,20 @@ components:
         custom_fields:
           type: object
           additionalProperties: true
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     CandidateCreate:
       type: object
       required:
@@ -810,86 +830,66 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ApplicationCreate'
-    Attachment:
-      type: object
-      required:
-      - filename
-      - type
-      properties:
-        filename:
-          type: string
-        url:
-          type: string
-          format: uri
-        type:
-          type: string
-          enum:
-          - resume
-          - cover_letter
-          - admin_only
-          - public
-          - offer_letter
-          - take_home_test
-          - offer_packet
-        content:
-          type: string
-          description: Base64 file content.
-        content_type:
-          type: string
-    Employment:
-      type: object
-      properties:
-        company_name:
-          type: string
-        title:
-          type: string
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-    ApplicationCreate:
-      type: object
-      required:
-      - job_id
-      properties:
-        job_id:
-          type: integer
-        source_id:
-          type: integer
-        initial_stage_id:
-          type: integer
-        referrer:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - outside
-              - id
-              - email
-            value:
-              type: string
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/Attachment'
-    Education:
-      type: object
-      properties:
-        school_name:
-          type: string
-        degree:
-          type: string
-        discipline:
-          type: string
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
+  parameters:
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: true
+      description: Email of the Greenhouse user the request is made on behalf of (Basic auth) or implied from the OAuth token.
+      schema:
+        type: string
+        format: email
+    OnBehalfOf_2:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      in: query
+      description: Default 100, max 500.
+      schema:
+        type: integer
+        default: 100
+        maximum: 500
+    CreatedBefore:
+      name: created_before
+      in: query
+      schema:
+        type: string
+        format: date-time
+    UpdatedAfter:
+      name: updated_after
+      in: query
+      schema:
+        type: string
+        format: date-time
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+    CreatedAfter:
+      name: created_after
+      in: query
+      schema:
+        type: string
+        format: date-time
+    UpdatedBefore:
+      name: updated_before
+      in: query
+      schema:
+        type: string
+        format: date-time
   responses:
     ErrorResponse:
       description: Error response.

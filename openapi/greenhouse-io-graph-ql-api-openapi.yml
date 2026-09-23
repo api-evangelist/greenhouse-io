@@ -5,17 +5,7 @@ info:
 
     department, location, custom field, and team data along with mutations for creating
 
-    and updating departments, locations, pending hires, and employee profiles.
-
-    Authentication uses HTTP Basic with an Onboarding Access Key (username) and Secret
-
-    Key (password); only Super Admins can issue or revoke keys. Rate limiting is enforced
-
-    by both request count (100 per window) and per-query complexity (max 2500 points);
-
-    clients should inspect the `rateLimit` GraphQL field to track remaining budget.
-
-    '
+    and updating departments, locations, pending hires, and employee profiles.'
   version: 1.0.0
   contact:
     name: Greenhouse Software
@@ -27,13 +17,13 @@ servers:
 security:
 - BasicAuth: []
 tags:
-- name: GraphQL
+- name: Graph QL
   description: Single GraphQL endpoint for all Onboarding operations.
 paths:
   /graphql:
     post:
       tags:
-      - GraphQL
+      - Graph QL
       summary: Execute Onboarding GraphQL
       description: 'Execute a GraphQL query or mutation against the Greenhouse Onboarding schema.
 
@@ -45,9 +35,7 @@ paths:
 
         Errors use the GraphQL `errors` array with codes: Authentication, Validation,
 
-        NotFound, Server, RateLimit.
-
-        '
+        NotFound, Server, RateLimit.'
       operationId: executeOnboardingGraphQL
       requestBody:
         required: true
@@ -69,19 +57,29 @@ paths:
   /graphql/introspection:
     get:
       tags:
-      - GraphQL
+      - Graph QL
       summary: Onboarding GraphQL Schema (Documentation Pointer)
       description: 'GraphQL schema is discovered via introspection by POSTing a standard introspection
 
-        query to /graphql. This path is documentation-only and not an additional HTTP route.
-
-        '
+        query to /graphql. This path is documentation-only and not an additional HTTP route.'
       operationId: getOnboardingIntrospectionDocs
       responses:
         '200':
           description: See documentation.
 components:
   schemas:
+    GraphQLRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+        operationName:
+          type: string
+        variables:
+          type: object
+          additionalProperties: true
     GraphQLResponse:
       type: object
       properties:
@@ -124,18 +122,6 @@ components:
                 resetAt:
                   type: string
                   format: date-time
-    GraphQLRequest:
-      type: object
-      required:
-      - query
-      properties:
-        query:
-          type: string
-        operationName:
-          type: string
-        variables:
-          type: object
-          additionalProperties: true
   securitySchemes:
     BasicAuth:
       type: http

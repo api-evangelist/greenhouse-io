@@ -7,13 +7,7 @@ info:
 
     approvals, scheduled interviews, scorecards, sources, tags, custom fields, prospect pools,
 
-    and the activity feed. Harvest uses HTTP Basic authentication with a per-permission API key,
-
-    RFC-5988 Link-header pagination (default 100, max 500 per page), and a per-token rate limit
-
-    of N requests per 10 seconds returned in the X-RateLimit-Limit header.
-
-    '
+    and the activity feed.'
   version: 1.0.0
   contact:
     name: Greenhouse Software
@@ -143,6 +137,20 @@ paths:
         4XX:
           $ref: '#/components/responses/ErrorResponse'
 components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    OnBehalfOf:
+      name: On-Behalf-Of
+      in: header
+      required: false
+      description: The ID of the Greenhouse user the request is being made on behalf of.
+      schema:
+        type: integer
   responses:
     ErrorResponse:
       description: Error response.
@@ -151,6 +159,13 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
     Error:
       type: object
       properties:
@@ -165,27 +180,6 @@ components:
                 type: string
               message:
                 type: string
-    Tag:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-  parameters:
-    OnBehalfOf:
-      name: On-Behalf-Of
-      in: header
-      required: false
-      description: The ID of the Greenhouse user the request is being made on behalf of.
-      schema:
-        type: integer
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
   securitySchemes:
     BasicAuth:
       type: http
